@@ -1,0 +1,152 @@
+database DarkHeresy
+%%
+enumtable Caracteristique(
+	CapaciteCombat,CapaciteTir,Force,Endurance,Agilite,Intelligence, Perception,ForceMentale,Sociabilite
+)
+enumtable CaracteristiqueCompetence(
+	CapaciteCombat,CapaciteTir,Force,Endurance,Agilite,Intelligence, Perception,ForceMentale,Sociabilite, Divers
+)
+enumtable RegistreCompetence(
+	Mouvement, Interaction, Artisanat, Operateur, Combat
+)
+enumtable AbrCaracteristique(
+	CC,CT,F,E,Ag,Int,Per,FM,Soc
+)
+enumtable GroupeArme(
+	Base, CaC, Jet, Poing, Lourde
+)
+enumtable TypeDegat (
+	Energie, Explosif, Impact, Penetrant
+)
+enumtable Disponibilite (
+	Banal,TresCourant,Courant,AssezCourant,Inhabituel,Rare,TresRare
+)
+enumtable LocalisationCorps (
+	Tete, Corps, Bras, Jambe
+)
+enumtable Action (
+	DemiAction,Action,Gratuite,Reaction, Etendue
+)
+enumTable UniteDistance(
+	Metre, KiloMetre,Illimite
+)
+enumTable DisciplinePsy (
+	Mineur, Biomancie, Divination, Pyromancie, Telekinesie,Telepathie
+)
+%%
+%%
+datatable Monde (
+	%Model:
+	
+)
+database Carriere (
+	%Model:
+)
+database Divination (
+	%Model:
+	%Description:
+		Text Resultat
+)
+database Promotion (
+	%Model:
+		Ref(Carriere) Carriere,
+		Ref(Promotion) Parente,
+		int xpNecessaire
+)
+database AmeliorationCaracteristique (
+	enum(Caracteristique) Caracteristique,
+	Ref(Carriere) Carriere,
+	int Simple,
+	int Intermediaire,
+	int Qualifie,
+	int Expert
+)
+database Ameliorations abstract (
+	Ref(Promotion) Promotion,
+	int Cout
+)
+database AmeliorationCompetence [Ameliorations] (
+	Ref(Competence) Competence,
+	int niveau
+)
+database AmeliorationTalent [Ameliorations] (
+	Ref(Talent) Talent
+)
+database Competence (
+	%Model:
+		bool Avancee,
+		enum(CaracteristiqueCompetence) Caracteristique,
+		enum(RegistreCompetence) Registres [0-*]
+	%Exemplar:
+		int NiveauFormation
+)
+database Talent (
+	Ref(Condition) Condition [0-*]
+	%description:
+		Text Avantage
+)
+database Condition abstract ()
+database ConditionCarriere [Condition] (
+	Ref(Carriere) Carriere
+)
+database ConditionCaracteristique [Condition] (
+	enum(Caracteristique) Caracteristique,
+	int Minimum
+)
+database ConditionAmelioration [Condition] (
+	Ref(AmeliorationTalent) Amelioration
+)
+database AttributArme (
+)
+database Objet (
+	%Model:
+		decimal poids,
+		int prix,
+		enum(Disponibilite) Disponibilite
+)
+database Arme [Objet] (
+	%Model:
+		enum(GroupeArme) Groupe,
+		int Portee,
+		int DegatD10,
+		int DegatBonus,
+		enum(TypeDegat) TypeDegat,
+		int Penetration,
+		Ref(AttributArme) Attributs [0-*]
+)
+database ArmeDistance [Arme] (
+	%Model:
+		bool CoupParCoup,
+		int SemiAuto,
+		int Auto,
+		int AutonomieTir,
+		enum(Action) ActionRecharge,
+		int FacteurRecharge
+)
+database Munitions [Objet] (
+	%Model:
+		int Quantite,
+		Ref(Arme) Utilisations [0-*]
+)
+database Armure [Objet] (
+	%Model:
+		enum(LocalisationCorps) Localisations [0-*],
+		int Protection
+)
+database PouvoirPsy (
+	%Model:
+		int Seuil,
+		enum(Action) TempsFocalisation,
+		int FacteurTempsFocalisation,
+		bool Prolongeable,
+		int FacteurPortee,
+		enum(UniteDistance) UnitePortee,
+		enum(DisciplinePsy) Discipline
+)
+database Crtique (
+	%Model:
+		int degat,
+		enum(LocalisationCorps) Localisation,
+		enum(TypeDegat) Type
+)
+%%

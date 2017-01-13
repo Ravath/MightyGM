@@ -1,0 +1,340 @@
+Database StarWars
+enumtable Faces []&[](
+	 (:) Triomphe [;] 
+	 (:) Succes [;] 
+	 (:) Avantage [;] 
+	 (:) Desastre [;] 
+	 (:) Echec [;] 
+	 (:) Menace [;] 
+	 (:) Neutre [;] 
+)
+enumtable TypeObject []&[](
+	 (:) Communication [;] 
+	 (:) Detection [;] 
+	 (:) Medical [;] 
+	 (:) Survie [;] 
+	 (:) Outil [;] 
+	 (:) Explosif [;] 
+	 (:) Kit [;] 
+	 (:) Armure [;] 
+	 (:) Arme [;] 
+	 (:) Cybernetique [;] 
+	 (:) Substance [;] 
+	 (:) Divertissement [;] 
+	 (:) Securite [;] 
+	 (:) Divers [;] 
+)
+enumtable TypeArme []&[](
+	 (:) Energetique [;] 
+	 (:) Percussion [;] 
+	 (:) Grenade [;] 
+	 (:) Missile [;] 
+	 (:) Pugilat [;] 
+	 (:) CaC [;] 
+	 (:) Jet [;] 
+	 (:) Autres [;] 
+)
+enumtable Portee []&[](
+	 (:) Cac [;] 
+	 (:) Courte [;] 
+	 (:) Moyenne [;] 
+	 (:) Longue [;] 
+	 (:) Exteme [;] 
+)
+enumtable CompetenceDeCombat []&[](
+	 (:) Pugilat [;] 
+	 (:) Cac [;] 
+	 (:) Legere [;] 
+	 (:) Lourde [;] 
+	 (:) Artillerie [;] 
+)
+enumtable TypeCompetence []&[](
+	 (:) Generale [;] 
+	 (:) Connaissance [;] 
+	 (:) Combat [;] 
+)
+enumtable Caracteristique []&[](
+	 (:) Vigueur [;] 
+	 (:) Agilite [;] 
+	 (:) Intelligence [;] 
+	 (:) Ruse [;] 
+	 (:) Volonte [;] 
+	 (:) Presence [;] 
+	 (:) Force [;] 
+)
+enumtable TypeKit []&[](
+	 (:) Arme [;] 
+	 (:) Armure [;] 
+	 (:) Vehicule [;] 
+	 (:) ArmeVehicule [;] 
+)
+enumtable Endomagement []&[](
+	 (:) Intact [;] 
+	 (:) Legers [;] 
+	 (:) Moderes [;] 
+	 (:) Graves [;] 
+	 (:) Detruit [;] 
+)
+enumtable Action []&[](
+	 (:) Aucune [;] 
+	 (:) Broutille [;] 
+	 (:) Manoeuvre [;] 
+	 (:) Action [;] 
+)
+enumtable ArcTir []&[](
+	 (:) Avant [;] 
+	 (:) Arriere [;] 
+	 (:) Cotes [;] 
+	 (:) Babord [;] 
+	 (:) Tribord [;] 
+	 (:) Tous [;] 
+	 (:) BabordAvant [;] 
+	 (:) BabordArriere [;] 
+	 (:) TribordAvant [;] 
+	 (:) TribordArriere [;] 
+)
+enumTable TypeCapaciteForce []&[](
+	 (:) Base [;] 
+	 (:) Puissance [;] 
+	 (:) Amplitude [;] 
+	 (:) Duree [;] 
+	 (:) Portee [;] 
+	 (:) Controle [;] 
+)
+dicetable Fortune []&[](
+	 (2:) Neutre [;] 
+	 (1:) Avantage [;] 
+	 (1:) Succes [;] 
+	 (1:) SuccesAvantage [;] 
+	 (1:) DoubleSucces [;] 
+)
+dicetable Desavantage []&[](
+	 (2:) Neutre [;] 
+	 (2:) Menace [;] 
+	 (2:) Echec [;] 
+)
+dicetable Aptitude []&[](
+	 (1:) Neutre [;] 
+	 (2:) Avantage [;] 
+	 (2:) Succes [;] 
+	 (1:) SuccesAvantage [;] 
+	 (1:) DoubleSucces [;] 
+	 (1:) DoubleAvantage [;] 
+)
+dicetable Difficulte []&[](
+	 (1:) Neutre [;] 
+	 (3:) Menace [;] 
+	 (1:) Echec [;] 
+	 (1:) DoubleEchec [;] 
+	 (1:) DoubleMenace [;] 
+	 (1:) EchecMenace [;] 
+)
+dicetable Maitrise []&[](
+	 (1:) Neutre [;] 
+	 (1:) Avantage [;] 
+	 (2:) Succes [;] 
+	 (3:) SuccesAvantage [;] 
+	 (2:) DoubleSucces [;] 
+	 (2:) DoubleAvantage [;] 
+	 (1:) Triomphe [;] 
+)
+dicetable Defi []&[](
+	 (1:) Neutre [;] 
+	 (2:) Menace [;] 
+	 (2:) Echec [;] 
+	 (2:) DoubleEchec [;] 
+	 (2:) DoubleMenace [;] 
+	 (2:) EchecMenace [;] 
+	 (1:) Desastre [;] 
+)
+dataTable Obligations []&[](
+)
+datatable Race []&[](
+	Model (int:) Vigueur [;] 
+	Model (int:) Agilite [;] 
+	Model (int:) Intelligence [;] 
+	Model (int:) Ruse [;] 
+	Model (int:) Volonte [;] 
+	Model (int:) Presence [;] 
+	Model (int:) b_blessure [;] 
+	Model (int:) b_stress [;] 
+	Model (int:) xp_depart [;] 
+	Model (Ref:Capacite) Capacites [1;*] 
+	Description (Text:) Psychologie [;] 
+	Description (Text:) Societe [;] 
+	Description (Text:) MondeNatal [;] 
+	Description (Text:) Langue [;] 
+	Description (Text:) Campagne [;] 
+)
+datatable Capacite []&[](
+)
+datatable CapaciteDeCompetence [Capacite]&[](
+	 (Ref:Competence) Competence [;] 
+)
+datatable Carriere []&[](
+	Model (Ref:Competence) Competences [1;*] 
+	Model (Ref:Specialite) Specialites [1;*] Carriere
+	Model (Ref:HistoireDeCarriere) Histoires [1;*] Carriere
+)
+Datatable HistoireDeCarriere []&[](
+	 (Ref:Carriere) Carriere [;] Histoires
+)
+datatable Specialite []&[](
+	Model (varchar:40) SousTitre [;] 
+	Model (Ref:Competence) Competences [1;*] 
+	Model (Ref:Carriere) Carriere [;] Specialites
+	Model (Ref:ArborescenceDeSpecialite) Arborescence [;] Specialite
+)
+structTable ArborescenceDeSpecialite []&[](
+	 (Ref:Specialite) Specialite [;] Arborescence
+	 (Ref:CaseArborescenceDeSpecialite) Cases [1;*] 
+)
+structtable CaseArborescenceDeSpecialite []&[](
+	 (int:) colonne [;] 
+	 (int:) ligne [;] 
+	 (bool:) linkBas [;] 
+	 (bool:) linkDroite [;] 
+	 (Ref:Talent) Talent [;] 
+)
+datatable Competence []&[](
+	Model (enum:Caracteristique) Caracteristique [;] 
+	Model (enum:TypeCompetence) TypeCompetence [;] 
+	Exemplar (int:) Maitrise [;] 
+	Description (Text:) ExempleUtilisation [0;*] 
+	Description (Text:) ConstitutionPool [;] 
+	Description (Text:) UtilisationSucces [;] 
+	Description (Text:) UtilisationAvantages [;] 
+	Description (Text:) UtilisationMenaces [;] 
+	Description (Text:) UtilisationEchecs [;] 
+	Description (Text:) UtilisationTriomphes [;] 
+	Description (Text:) UtilisationDesastres [;] 
+)
+datatable Talent []&[](
+	Model (bool:) Rangs [;] 
+	Model (enum:Action) Action [;] 
+	Model (Ref:ArborescenceDeSpecialite) Arborescences [0;*] 
+	Exemplar (int:) Rang [;] 
+)
+datatable Object []&[](
+	Model (int:) prix [;] 
+	Model (int:) Rarete [;] 
+	Model (enum:TypeObject) Type [;] 
+	Model (bool:) Interdit [;] 
+	Model (int:) Encombrement [;] 
+	Model (varchar:40) Modeles [0;*] 
+	Exemplar (enum:Endomagement) Dommages [;] 
+	Exemplar (varchar:40) Modele [;] 
+	Description (Text:) Reglementation [;] 
+)
+datatable Arme [Object]&[](
+	Model (int:) Degats [;] 
+	Model (int:) Critique [;] 
+	Model (enum:TypeArme) TypeArme [;] 
+	Model (enum:Portee) Portee [;] 
+	Model (int:) Emplacements [;] 
+	Model (enum:CompetenceDeCombat) Competence [;] 
+	Model (Refex:AttributArme) Attributs [0;*] 
+	Exemplar (Refex:Kit) Kits [0;*] 
+)
+datatable AttributArme []&[](
+	Model (bool:) Declenche [;] 
+	Model (bool:) Hasrangs [;] 
+	Exemplar (int:) Rang [;] 
+)
+datatable Armure [Object]&[](
+	Model (int:) Defense [;] 
+	Model (int:) Encaissement [;] 
+	Model (int:) Emplacements [;] 
+)
+datatable Kit [Object]&[](
+	Model (int:) Emplacement [;] 
+	Model (enum:TypeKit) TypeKit [;] 
+	Model (Text:) Effet [;] 
+	Model (Ref:Mod) ModsPossibles [0;*] 
+	Exemplar (Refex:Mod) ModsInstalles [0;*] 
+)
+dataTable Mod []&[abstract](
+	 (int:) RangMax [;] 
+	Exemplar (int:) Rang [;] 
+)
+structTable ModDegat [Mod]&[](
+	 (int:) Degats [;] 
+)
+structTable ModAttribut [Mod]&[](
+	 (Ref:AttributArme) Attribut [;] 
+)
+structTable ModTalent [Mod]&[](
+	 (Ref:Talent) Talent [;] 
+)
+structTable ModCompetence [Mod]&[](
+	 (Ref:Competence) Competence [;] 
+)
+structTable ModCaracteristique [Mod]&[](
+	 (Enum:Caracteristique) Caracteristique [;] 
+)
+structTable ModSpecial [Mod]&[](
+	 (Ref:Capacite) Special [;] 
+)
+enumtable TypeVehicule []&[](
+	 (:) Airspeeder [;] 
+	 (:) Landspeeder [;] 
+	 (:) VehiculeARoue [;] 
+	 (:) Marcheur [;] 
+	 (:) Chasseur [;] 
+	 (:) Cargo [;] 
+	 (:) Capital [;] 
+)
+dataTable Vehicule []&[](
+	 (int:) Gabarit [;] 
+	 (int:) Vitesse [;] 
+	 (int:) Maniabilite [;] 
+	 (int:) DefenseAvant [;] 
+	 (int:) DefenseArriere [;] 
+	 (int:) DefenseBabord [0;1] 
+	 (int:) DefenseTribord [0;1] 
+	 (int:) Blindage [;] 
+	 (int:) SeuilDommage [;] 
+	 (int:) SeuilStressMecanique [;] 
+	 (enum:TypeVehicule) Type [;] 
+	 (varchar:40) Modele [;] 
+	 (varchar:40) Constructeur [;] 
+	 (enum:Portee) PorteeSenseurs [;] 
+	 (int:) ChargeUtileMin [;] 
+	 (int:) ChargUtileMax [;] 
+	 (int:) Cout [;] 
+	 (int:) Rarete [;] 
+	 (bool:) Interdit [;] 
+	 (int:) Emplacements [;] 
+	 (Refex:ArmeDeVehicule) Armement [0;*] 
+	 (Refex:Equipage) Equipage [0;*] 
+)
+dataTable Equipage []&[](
+	exemplar (int:) Max [;] 
+)
+dataTable ArmeDeVehicule [Arme]&[](
+	Exemplar (enum:ArcTir) ArcDeTir [;] 
+)
+dataTable PouvoirForce []&[](
+	Description (Text:) PouvoirDeBase [;] 
+	Description (Ref:AmeliorationDeControle) Controles [0;*] 
+	Description (Text:) AmeliorationDePuissance [;] 
+	Description (Text:) AmeliorationDeDuree [;] 
+	Description (Text:) AmeliorationDePortee [;] 
+	Description (Text:) AmeliorationDeAmplitude [;] 
+)
+StructTable AmeliorationDeControle []&[](
+	 (Text:) Description [;] 
+)
+StructTable CaseArborescenceForce []&[](
+	 (int:) colonne [;] 
+	 (int:) ligne [;] 
+	 (int:) largeur [;] 
+	 (enum:TypeCapaciteForce) Type [;] 
+	 (int:) cout [;] 
+	 (Ref:AmeliorationDeControle) Controle [0;1] 
+)
+StructTable RelationArborescenceForce []&[](
+	 (bool:) horizontal [;] 
+	 (int:) ligne [;] 
+	 (int:) colonne [;] 
+)

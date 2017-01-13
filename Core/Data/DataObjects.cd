@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Core.Data.DataDescription&lt;Ref&gt;" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAARAAAgCAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Data\DataDescription.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Core.Data.DataExemplaire&lt;Ref&gt;" Collapsed="true">
+    <Position X="9.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAARAAAgCAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Data\DataExemplaire.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Core.Data.DataModel" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\DataModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Data.DataObject" Collapsed="true">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAACBAAQBAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\DataObject.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Core.Data.DataRelation&lt;T, U&gt;" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAsAAAAACAAAGAQAIAAAAAEAAAAAABQAAAAA=</HashCode>
+      <FileName>Data\DataRelation.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Core.Data.DataValue&lt;F, V&gt;" Collapsed="true">
+    <Position X="7.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAEAAQAAAAAFAAgAAAAAAgQCAAEAA=</HashCode>
+      <FileName>Data\DataValue.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Core.Data.IDataDescription" Collapsed="true">
+    <Position X="1.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\DataDescription.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Core.Data.IDataExemplaire" Collapsed="true">
+    <Position X="6.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\DataExemplaire.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Core.Data.IDataObject" Collapsed="true">
+    <Position X="5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAACAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\DataObject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Core.Data.IDataRelation" Collapsed="true">
+    <Position X="8.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAMAAAAACAAAGAAAAAAAAAEAAAAAAAQAAAAA=</HashCode>
+      <FileName>Data\DataRelation.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Core.Data.IDataValue" Collapsed="true">
+    <Position X="4" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAEAAQAAAAAFAAAAAAAAAgAAAAEAA=</HashCode>
+      <FileName>Data\DataValue.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Core.Data.IReferencesModel" Collapsed="true">
+    <Position X="4" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Data\DataExemplaire.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

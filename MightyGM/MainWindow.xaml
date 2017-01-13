@@ -1,0 +1,24 @@
+﻿<Window x:Class="MightyGM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MightyGM"
+        mc:Ignorable="d"
+        Icon="Ressources/icon.ico"
+        Title="MightyGM" Height="350" Width="525" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <DockPanel>
+        <TabControl>
+            <TabItem Header="Parametres" x:Name="xParameters"/>
+            <TabItem Header="Raw Data" x:Name="xRawData"/>
+            <TabItem Header="Fiches" x:Name="xFiches"/>
+            <TabItem Header="Creators" x:Name="xCreators"/>
+            <TabItem Header="Scenarii" x:Name="xScenarii"/>
+            <TabItem Header="Tabletop" x:Name="xTabletop"/>
+            <TabItem Header="Audio" x:Name="xAudio"/>
+                <!--Musique, micro-->
+            <TabItem Header="Network" x:Name="xNetwork"/>
+                <!--groupe, maj, BDs en ligne, torrent-->
+        </TabControl>
+    </DockPanel>
+</Window>

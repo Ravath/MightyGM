@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Prop Data full</Title>
+      <Author>Ravath</Author>
+      <Description>A full property with ColumnAttribute.</Description>
+      <Shortcut>propdb</Shortcut>
+    </Header>
+    <Snippet>
+      <Code Language="CSharp">
+        <![CDATA[
+            private $PropType$ _$ColName$;
+            /// <summary>
+            /// 
+            /// </summary>
+            [Column(Name="$ColName$",Storage="_$ColName$")]
+            public $PropType$ $PropName${
+              get{ return _$ColName$;}
+              set{ _$ColName$ = value;}
+            }]]>
+      </Code>
+      <Imports>
+          <Import>
+             <Namespace>LinqToDB.Mapping</Namespace>
+          </Import>
+      </Imports>
+      <Declarations>
+          <Literal>
+              <ID>ColName</ID>
+              <ToolTip>Le nom de la colonne en DB.</ToolTip>
+              <Default>name</Default>
+          </Literal>
+          <Literal>
+              <ID>PropName</ID>
+              <ToolTip>Le nom de la propriété.</ToolTip>
+              <Default>Name</Default>
+          </Literal>
+          <Literal>
+              <ID>PropType</ID>
+              <ToolTip>Le type de la propriété.</ToolTip>
+              <Default>int</Default>
+          </Literal>
+      </Declarations>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Prop Data</Title>
+      <Author>Ravath</Author>
+      <Description>A property with ColumnAttribute.</Description>
+      <Shortcut>dbs</Shortcut>
+    </Header>
+    <Snippet>
+      <Code Language="CSharp">
+        <![CDATA[
+            /// <summary>
+            /// $PropName$ d'un .
+            /// </summary>
+            [Column( Name="$ColName$")]
+            public $PropType$ $PropName${get;set;}]]>
+      </Code>
+      <Imports>
+        <Import>
+          <Namespace>LinqToDB.Mapping</Namespace>
+        </Import>
+      </Imports>
+      <Declarations>
+        <Literal>
+          <ID>ColName</ID>
+          <ToolTip>Le nom de la colonne en DB.</ToolTip>
+          <Default>name</Default>
+        </Literal>
+        <Literal>
+          <ID>PropName</ID>
+          <ToolTip>Le nom de la propriété.</ToolTip>
+          <Default>Name</Default>
+        </Literal>
+        <Literal>
+          <ID>PropType</ID>
+          <ToolTip>Le type de la propriété.</ToolTip>
+          <Default>int</Default>
+        </Literal>
+      </Declarations>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
