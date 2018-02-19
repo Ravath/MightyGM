@@ -1,0 +1,19 @@
+﻿<Window x:Class="MightyGmWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MightyGmWpf"
+        mc:Ignorable="d"
+        Icon="Ressources/icon.ico"
+        Title="MightyGM" Height="350" Width="525" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <DockPanel>
+        <TabControl>
+            <TabItem Header="Parametres" x:Name="xParameters"/>
+            <TabItem Header="Raw Data" x:Name="xRawData"/>
+            <TabItem Header="Fiches" x:Name="xFiches"/>
+            <TabItem Header="Creators" x:Name="xCreators"/>
+            <TabItem Header="Ressources" x:Name="xRessources"/>
+        </TabControl>
+    </DockPanel>
+</Window>

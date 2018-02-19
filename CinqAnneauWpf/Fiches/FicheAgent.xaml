@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="CinqAnneauxWpf.Fiches.FicheAgent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CinqAnneauxWpf.Fiches"
+             xmlns:core="clr-namespace:CoreWpf.UI;assembly=CoreWPF"
+             mc:Ignorable="d">
+    <StackPanel x:Name="xList" Height="1000">
+        <StackPanel Orientation="Horizontal">
+            <local:FicheAttributs x:Name="xAttributs"/>
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="Initiative  "/>
+                    <local:RKPoolControleur x:Name="xInitiative"/>
+                </StackPanel>
+                <local:FicheVie x:Name="xVie"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal" x:Name="xArmure" Margin="5"/>
+                <local:FicheListeAttaques x:Name="xAttaques"/>
+            </StackPanel>
+            </StackPanel>
+        <local:FicheListeCompetences x:Name="xCompetences" MinHeight="100"/>
+    </StackPanel>
+</UserControl>

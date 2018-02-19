@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="CinqAnneauxWpf.Fiches.FicheListeSorts"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CinqAnneauxWpf.Fiches"
+             xmlns:data="clr-namespace:CinqAnneaux.Data"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ListView Grid.Column="0" Name="xSorts" SelectionChanged="xSorts_SelectionChanged">
+            <ListView.ItemTemplate>
+                <DataTemplate DataType="data:AbsSortModel">
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackPanel Grid.Column="1" Name="xViewSort" Visibility="Collapsed" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="13"/>
+                </Style>
+            </StackPanel.Resources>
+            <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="15"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Element}"/>
+                <TextBlock Text="{Binding Maitrise, StringFormat=' - {0}'}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Portee:"/>
+                <TextBlock Text="{Binding FacteurPortee}" Margin="5,0,0,0" FontSize="13">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="0">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+                <TextBlock Text="{Binding Portee}" Margin="5,0,0,0"/>
+                <TextBlock Text=" x Rang" Visibility="Collapsed" Margin="5,0,0,0" x:Name="xRgPortee"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Zone d'effet:"/>
+                <TextBlock Text="{Binding FacteurZone}" Margin="5,0,0,0" FontSize="13">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="0">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+                <TextBlock Text="{Binding ZoneEffet}" Margin="5,0,0,0"/>
+                <TextBlock Text=" x Rang" Visibility="Collapsed" Margin="5,0,0,0" x:Name="xRgZone"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Duree:"/>
+                <TextBlock Text="{Binding FacteurDuree}" Margin="5,0,0,0" FontSize="13">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="0">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+                <TextBlock Text="{Binding Duree}" Margin="5,0,0,0" Name="xDuree"/>
+                <TextBlock Text="+" Margin="5,0,0,0" Name="xDureeAndConcentation"/>
+                <TextBlock Text="x Rang" Visibility="Collapsed" Margin="5,0,0,0" x:Name="xRgDuree"/>
+                <TextBlock Text="Concentration" Visibility="Collapsed" Margin="5,0,0,0" x:Name="xRgConcentration"/>
+            </StackPanel>
+            <TextBlock Text="{Binding Description.Description}" Margin="5" TextWrapping="Wrap"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="CinqAnneauxWpf.Fiches.FicheAvantageDesavantage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:trait="clr-namespace:CinqAnneaux.JdrCore.Traits;assembly=CinqAnneaux"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.Resources>
+            <DataTemplate DataType="{x:Type trait:Avantage}" x:Key="tAvantage">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" FontSize="13" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding SousType, StringFormat=' [{0}]'}" FontSize="13" FontWeight="Bold"/>
+                    </StackPanel>
+                    <TextBlock Text="{Binding Cout, StringFormat='Cout: {0}'}" FontSize="13"/>
+                    <TextBlock Text="{Binding RangMax, StringFormat='Rang Max: {0}'}" FontSize="13" x:Name="xRngMax">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="Rang Max: 0">
+                                        <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock Text="{Binding Groupe.Description.Description}" FontSize="13" Margin="5,7,5,0" TextWrapping="Wrap">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock Text="{Binding Description.Description}" FontSize="13" Margin="10,5" TextWrapping="Wrap"/>
+                </StackPanel>
+            </DataTemplate>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Column="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <ListView x:Name="xAvantages" Grid.Column="0" SelectionChanged="xAvantages_Selected">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <ItemsControl ItemTemplate="{StaticResource tAvantage}" 
+                              x:Name="xAvantage" Grid.Column="1">
+                </ItemsControl>
+            </Grid>
+        </DockPanel>
+        <DockPanel Grid.Column="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <ListView x:Name="xDesavantages" Grid.Column="0" SelectionChanged="xDesavantages_Selected">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <ItemsControl ItemTemplate="{StaticResource tAvantage}" 
+                              x:Name="xDesavantage" Grid.Column="1"/>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</UserControl>

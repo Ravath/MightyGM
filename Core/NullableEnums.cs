@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MightyGM.GUIcore {
+namespace MightyGmCtrl.GUIcore {
 
 	/// <summary>
 	/// Classe faisant la liaison entre les valeurs utiles et affichées pour la combobox des Nullable Enum.

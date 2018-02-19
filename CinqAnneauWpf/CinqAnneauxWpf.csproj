@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{54CF52CB-5F2F-4F18-9555-CDE6AC660479}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CinqAnneauxWpf</RootNamespace>
+    <AssemblyName>CinqAnneauxWpf</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="linq2db, Version=1.10.2.0, Culture=neutral, PublicKeyToken=f19f8aed7feff67e, processorArchitecture=MSIL">
+      <HintPath>..\packages\linq2db.1.10.2\lib\net45\linq2db.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CreationPersonnage\ConstructeurPersonnages.cs" />
+    <Compile Include="CreationPersonnage\FicheGestionPersonnage.xaml.cs">
+      <DependentUpon>FicheGestionPersonnage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CreationPersonnage\InitStep.cs" />
+    <Compile Include="CreationPersonnage\ParametresCreationPJ.cs" />
+    <Compile Include="CreationPersonnage\StepClan.cs" />
+    <Compile Include="CreationPersonnage\StepExperience.cs" />
+    <Compile Include="Fiches\FicheAgent.xaml.cs">
+      <DependentUpon>FicheAgent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fiches\FicheAttaques.xaml.cs">
+      <DependentUpon>FicheAttaques.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fiches\FicheAttributs.xaml.cs">
+      <DependentUpon>FicheAttributs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fiches\FicheCandidateAllObjets.xaml.cs">
+      <DependentUpon>FicheCandidateAllObjets.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fiches\FicheCandidateAvantageDesavantage.xaml.cs">
+      <DependentUpon>FicheCandidateAvantageDesavantage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fiches\FicheCandidateCapacites.xaml.cs">
+      <DependentUpon>FicheCandidateCapacites.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fiches\FicheCandidateClanFamilleEcole.cs" />
+    <Compile Include="Fiches\FicheCandidateCompetences.xaml.cs">
+      <DependentUpon>FicheCandidateCompetences.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fiches\FicheCandidateSortsMahou.xaml.cs">
+      <DependentUpon>FicheCandidateSortsMahou.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fiches\FicheClan.xaml.cs">
+      <DependentUpon>FicheClan.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fiches\FicheEcole.xaml.cs">
+      <DependentUpon>FicheEcole.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fiches\FicheFamille.xaml.cs">
+      <DependentUpon>FicheFamille.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fiches\FicheHonneur.xaml.cs">
+      <DependentUpon>FicheHonneur.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fiches\FicheListCreaturePouvoir.cs" />
+    <Compile Include="Fiches\FicheListeArmes.xaml.cs">
+      <DependentUpon>FicheListeArmes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fiches\FicheListeArmures.xaml.cs">
+      <DependentUpon>FicheListeArmures.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fiches\FicheListeAttaques.cs" />
+    <Compile Include="Fiches\FicheListeCompetences.xaml.cs">
+      <DependentUpon>FicheListeCompetences.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fiches\FicheListeKatas.xaml.cs">
+      <DependentUpon>FicheListeKatas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fiches\FicheListeKihos.xaml.cs">
+      <DependentUpon>FicheListeKihos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fiches\FicheListeObjets.xaml.cs">
+      <DependentUpon>FicheListeObjets.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fiches\FicheListePouvoirOutremonde.xaml.cs">
+      <DependentUpon>FicheListePouvoirOutremonde.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fiches\FicheListeSorts.xaml.cs">
+      <DependentUpon>FicheListeSorts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fiches\FicheVie.xaml.cs">
+      <DependentUpon>FicheVie.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fiches\RKPoolControleur.cs" />
+    <Compile Include="Langues\Fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="LocalContextUI.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CinqAnneaux\CinqAnneaux.csproj">
+      <Project>{4216a40e-5304-484b-85b7-c31dceeaf5d2}</Project>
+      <Name>CinqAnneaux</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoreWPF\CoreWpf.csproj">
+      <Project>{891e0a5a-e23c-4f88-9f35-c37d496c5b61}</Project>
+      <Name>CoreWpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{93418f01-3e81-43f0-b93b-3c84ce60b40a}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="CreationPersonnage\FicheGestionPersonnage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Fiches\FicheAgent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Fiches\FicheAttaques.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Fiches\FicheAttributs.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Fiches\FicheCandidateAllObjets.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Fiches\FicheCandidateAvantageDesavantage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Fiches\FicheCandidateCapacites.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Fiches\FicheCandidateCompetences.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Fiches\FicheCandidateSortsMahou.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Fiches\FicheClan.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Fiches\FicheEcole.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Fiches\FicheFamille.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Fiches\FicheHonneur.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Fiches\FicheListeArmes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Fiches\FicheListeArmures.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Fiches\FicheListeCompetences.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Fiches\FicheListeKatas.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Fiches\FicheListeKihos.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Fiches\FicheListeObjets.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Fiches\FicheListePouvoirOutremonde.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Fiches\FicheListeSorts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Fiches\FicheVie.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Langues\Fr.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

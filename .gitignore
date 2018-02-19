@@ -1,0 +1,11 @@
+*.g.i.cs
+*.cache
+packages/*
+*/bin/*
+*/obj/*
+Test*
+.vs/*
+*.lnk
+*.cd
+*.exe
+*.dll

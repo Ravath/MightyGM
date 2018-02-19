@@ -12,7 +12,7 @@ namespace Core.Gestion {
 		[PrimaryKey, Identity, Column(Name = "id"), SequenceName("joueur_id_seq")]
 		public new int Id { get; set; }
 
-		[Column(Name = "nom")]
+		[Column(Name = "name")]
 		public string Nom { get; set; }
 
 		[Column(Name = "prenom")]

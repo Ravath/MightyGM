@@ -15,7 +15,7 @@ namespace Core.Gestion {
 		[PrimaryKey, Identity, Column(Name = "id"), SequenceName("jdr_id_seq")]
 		public int Id { get; set; }
 
-		[Column(Name ="nom")]
+		[Column(Name ="name")]
 		public string Nom { get; set; }
 
 		public IEnumerable<Manuel> GetManuels() {

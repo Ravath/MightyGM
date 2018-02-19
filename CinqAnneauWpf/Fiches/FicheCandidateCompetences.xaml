@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="CinqAnneauxWpf.Fiches.FicheCandidateCompetences"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CinqAnneauxWpf.Fiches"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="130"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ListView Grid.Column="0" x:Name="xCompetences" SelectionChanged="xCompetences_SelectionChanged">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackPanel Grid.Column="1" x:Name="xCompetenceView" Visibility="Collapsed">
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="13"/>
+                </Style>
+            </StackPanel.Resources>
+            <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="15"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Groupe: " FontWeight="Bold"/>
+                <TextBlock Text="{Binding Groupe}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Trait: " FontWeight="Bold"/>
+                <TextBlock x:Name="xTrait"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Mots-Clefs: " FontWeight="Bold"/>
+                <TextBlock Margin="5,0,0,0" Text="Noble" x:Name="xNoble"/>
+                <TextBlock Margin="5,0,0,0" Text="Degradante" x:Name="xDegradante"/>
+                <TextBlock Margin="5,0,0,0" Text="Martiale" x:Name="xMartiale"/>
+                <TextBlock Margin="5,0,0,0" Text="Sociale" x:Name="xSociale"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Visibility="Collapsed" x:Name="xListeSousTypes">
+                <TextBlock Text="Sous Types: " FontWeight="Bold"/>
+                <StackPanel x:Name="xSousTypes"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Visibility="Collapsed" x:Name="xListeExpertises">
+                <TextBlock Text="Expertises: " FontWeight="Bold"/>
+                <StackPanel x:Name="xExpertises"/>
+            </StackPanel>
+            <DockPanel Visibility="Collapsed" x:Name="xListeMaitrises">
+                <TextBlock Text="Maitrises: " FontWeight="Bold" DockPanel.Dock="Left"/>
+                <StackPanel x:Name="xMaitrises"/>
+            </DockPanel>
+            <TextBlock Text="{Binding Description}" Margin="5" TextWrapping="Wrap"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,60 @@
+TYPES de TABLE
+database [nomdatabase] : le nom de la database. Toujours au début du fichier, 1! occurence.
+
+datatable : table avec model/exemplaire/description
+ Indicateurs de section de datatable
+	%Model:
+	%Exemplar:
+	%Description:
+
+dicetable : Table de définition de dé: [nomFace nombreFaces]
+enumtable : Table de définition d'une énumeration
+structtable : table de données similaire à une datatable, mais sans séparation model/exemplaire/description
+
+%% : délimiteur sans valeur sémantique. A utiliser pour structurer le fichier.
+
+TYPES de DONNEES
+ext : ?
+int : un integer
+varchar([taille]) : une chaine de caractère
+bool : un booléen
+enum([nomEnum]) : une énumeration
+decimal : une valeur décimale
+real : une valeur réelle
+range : une paire de valeur [min-max]
+time : une durée [Val-unite]
+distance : une distance [Val-unite]
+ref([NomTable]) : une référence vers une datatableModel ou une structtable
+refex([NomDataTable]) : une référence vers une datatableExemplaire
+
+MOTS-CLEFS
+&[[mots-clefs*]] : une série de mots clefs pour des comportements spécifiques
+-abstract : la table de donnée est abstraite.
+-pj : indique que la table permet de sauvegarder les données d'unPJ. Rajoute notamment une référence vers un joueur.
+
+Règles de langage:
+Les mots clefs ne sont pas sensibles à la casse.
+fichier:
+	database [nom]
+	[une ou plusieurs tables]
+NOTE : le fichier doit se terminer par la paranthèse fermante de la dernière table définie.
+
+EnumTable:
+	enumtable([motclef][,motclef]*)
+DiceTable:
+	enumtable([motclef] [nbr]([,motclef] [nbr])*)
+StructTable:
+	structtable [nomstructableParente]? ( ([ligneDonnee]) (,[ligneDonnee])* )
+DataTable:
+	datatable [nomdatatableParente]?(&[[UnOuPlusieursMotsClefs]])? ( 
+		([ligneDonnee]) (,[ligneDonnee])* 
+		(%Model:
+		 ([ligneDonnee]) (,[ligneDonnee])*)? 
+		(%Exemplar:
+		 ([ligneDonnee]) (,[ligneDonnee])* )?
+		(%Description:
+		 ([ligneDonnee]) (,[ligneDonnee])*)?
+	)
+	
+ligneDonnee:
+	Type nom ((reference))? ([[cardmin]-[CadMax]])?

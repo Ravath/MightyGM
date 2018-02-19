@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="CinqAnneauxWpf.Fiches.FicheListeArmes"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CinqAnneauxWpf.Fiches"
+             xmlns:data="clr-namespace:CinqAnneaux.Data;assembly=CinqAnneaux"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TreeView Grid.Column="0" x:Name="xArmes" SelectedItemChanged="xArmes_SelectedItemChanged">
+            <TreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type local:ArmesParCategories}" ItemsSource="{Binding Armes}">
+                    <TextBlock Text="{Binding Type}"/>
+                </HierarchicalDataTemplate>
+                <DataTemplate  DataType="{x:Type data:ArmeModel}">
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </TreeView.Resources>
+        </TreeView>
+        <StackPanel Grid.Column="1" x:Name="xArmeView" Visibility="Collapsed">
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="13"/>
+                </Style>
+            </StackPanel.Resources>
+            <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
+            <TextBlock Text="{Binding Taille, StringFormat='Taille: {0}'}"/>
+            <StackPanel Orientation="Horizontal" Name="xDegats">
+                <TextBlock Text="{Binding RollVD, StringFormat='Degats: {0}'}"/>
+                <TextBlock Text="{Binding KeepVD, StringFormat='g{0}'}"/>
+            </StackPanel>
+            <TextBlock Text="{Binding Portee, StringFormat='Portee: {0}'}" Name="xPortee"/>
+            <TextBlock Text="{Binding Force, StringFormat='Force: {0}'}" Name="xForce"/>
+            <TextBlock Text="{Binding ForceRequise, StringFormat='Force requise: {0}'}" Name="xForceReq"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Cout, StringFormat='Cout: {0}'}" Margin="0,0,5,0" Name="xCout"/>
+                <TextBlock Text="{Binding Monnaie}" Name="xMonnaie"/>
+            </StackPanel>
+            <TextBlock Text="Mots-Clefs: "/>
+            <TextBlock Text="Samurai" Margin="15,0,0,0" Visibility="Collapsed" Name="xMcSamurai"/>
+            <TextBlock Text="Paysan" Margin="15,0,0,0"  Visibility="Collapsed" Name="xMcPaysan"/>
+            <TextBlock Text="{Binding Description.Description}" Margin="5" TextWrapping="Wrap"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

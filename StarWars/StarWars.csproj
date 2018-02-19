@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F4D2140A-A721-41DB-9BA8-51F6A6AF1B9C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>StarWars</RootNamespace>
+    <AssemblyName>StarWars</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="linq2db, Version=1.10.2.0, Culture=neutral, PublicKeyToken=f19f8aed7feff67e, processorArchitecture=MSIL">
+      <HintPath>..\packages\linq2db.1.10.2\lib\net45\linq2db.dll</HintPath>
+    </Reference>
+    <Reference Include="Npgsql">
+      <HintPath>..\..\JDR_Data\packages\Npgsql.3.0.5\lib\net45\Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CaracterConstructor\ChoixCarriere.cs" />
+    <Compile Include="CaracterConstructor\ChoixRace.cs" />
+    <Compile Include="CaracterConstructor\ChoixSpecialite.cs" />
+    <Compile Include="CaracterConstructor\ConstructeurPersonnage.cs" />
+    <Compile Include="CaracterConstructor\EditionEtatCivil.cs" />
+    <Compile Include="CaracterConstructor\FicheGestionPersonnage.xaml.cs">
+      <DependentUpon>FicheGestionPersonnage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CaracterConstructor\InitStep.cs" />
+    <Compile Include="CaracterConstructor\ObligationStep.cs" />
+    <Compile Include="CaracterConstructor\SWCaracterBuild.cs" />
+    <Compile Include="Generated\Adversaire.cs" />
+    <Compile Include="Generated\AmeliorationDeControle.cs" />
+    <Compile Include="Generated\Arborescence.cs" />
+    <Compile Include="Generated\ArborescenceDeForce.cs" />
+    <Compile Include="Generated\ArborescenceDeSpecialite.cs" />
+    <Compile Include="Generated\Arme.cs" />
+    <Compile Include="Generated\ArmeDeVehicule.cs" />
+    <Compile Include="Generated\Armure.cs" />
+    <Compile Include="Generated\AttributArme.cs" />
+    <Compile Include="Generated\BlessureCritique.cs" />
+    <Compile Include="Generated\BrancheArborescence.cs" />
+    <Compile Include="Generated\Capacite.cs" />
+    <Compile Include="Generated\CapaciteDeCompetence.cs" />
+    <Compile Include="Generated\Carriere.cs" />
+    <Compile Include="Generated\CaseArborescence.cs" />
+    <Compile Include="Generated\CaseArborescenceDeSpecialite.cs" />
+    <Compile Include="Generated\CaseArborescenceForce.cs" />
+    <Compile Include="Generated\Competence.cs" />
+    <Compile Include="Generated\Enum.cs" />
+    <Compile Include="Generated\Equipage.cs" />
+    <Compile Include="Generated\HistoireDeCarriere.cs" />
+    <Compile Include="Generated\Jointures.cs" />
+    <Compile Include="Generated\Kit.cs" />
+    <Compile Include="Generated\Mod.cs" />
+    <Compile Include="Generated\ModAttribut.cs" />
+    <Compile Include="Generated\ModCaracteristique.cs" />
+    <Compile Include="Generated\ModCompetence.cs" />
+    <Compile Include="Generated\ModDegat.cs" />
+    <Compile Include="Generated\ModSpecial.cs" />
+    <Compile Include="Generated\ModTalent.cs" />
+    <Compile Include="Generated\Object.cs" />
+    <Compile Include="Generated\Obligations.cs" />
+    <Compile Include="Generated\Personnage.cs" />
+    <Compile Include="Generated\PJ.cs" />
+    <Compile Include="Generated\PouvoirForce.cs" />
+    <Compile Include="Generated\Race.cs" />
+    <Compile Include="Generated\Specialite.cs" />
+    <Compile Include="Generated\Talent.cs" />
+    <Compile Include="Generated\Vehicule.cs" />
+    <Compile Include="LocalContext.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CaracterConstructor\Adversaire.cs" />
+    <Compile Include="UserMade\AmeliorationDeControle.cs" />
+    <Compile Include="UserMade\Arborescence.cs" />
+    <Compile Include="UserMade\ArborescenceDeForce.cs" />
+    <Compile Include="UserMade\ArborescenceDeSpecialite.cs" />
+    <Compile Include="UserMade\Arme.cs" />
+    <Compile Include="UserMade\ArmeDeVehicule.cs" />
+    <Compile Include="UserMade\Armure.cs" />
+    <Compile Include="UserMade\AttributArme.cs" />
+    <Compile Include="UserMade\BlessureCritique.cs" />
+    <Compile Include="UserMade\BrancheArborescence.cs" />
+    <Compile Include="UserMade\Capacite.cs" />
+    <Compile Include="UserMade\CapaciteDeCompetence.cs" />
+    <Compile Include="UserMade\Carriere.cs" />
+    <Compile Include="UserMade\CaseArborescence.cs" />
+    <Compile Include="UserMade\CaseArborescenceDeSpecialite.cs" />
+    <Compile Include="UserMade\CaseArborescenceForce.cs" />
+    <Compile Include="UserMade\Competence.cs" />
+    <Compile Include="UserMade\Equipage.cs" />
+    <Compile Include="UserMade\HistoireDeCarriere.cs" />
+    <Compile Include="UserMade\Kit.cs" />
+    <Compile Include="UserMade\Mod.cs" />
+    <Compile Include="UserMade\ModAttribut.cs" />
+    <Compile Include="UserMade\ModCaracteristique.cs" />
+    <Compile Include="UserMade\ModCompetence.cs" />
+    <Compile Include="UserMade\ModDegat.cs" />
+    <Compile Include="UserMade\ModSpecial.cs" />
+    <Compile Include="UserMade\ModTalent.cs" />
+    <Compile Include="UserMade\Object.cs" />
+    <Compile Include="UserMade\Obligations.cs" />
+    <Compile Include="CaracterConstructor\Personnage.cs" />
+    <Compile Include="CaracterConstructor\PJ.cs" />
+    <Compile Include="UserMade\PouvoirForce.cs" />
+    <Compile Include="UserMade\Race.cs" />
+    <Compile Include="UserMade\Specialite.cs" />
+    <Compile Include="UserMade\Talent.cs" />
+    <Compile Include="UserMade\Vehicule.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="CaracterConstructor\FicheGestionPersonnage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{93418f01-3e81-43f0-b93b-3c84ce60b40a}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

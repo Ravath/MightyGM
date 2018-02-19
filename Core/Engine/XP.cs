@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Core.Engine {
+	/// <summary>
+	/// Deprecated for uselessness and not using Values
+	/// </summary>
 	public class XPaPoints {
 		private int _totalXp, _xpDepense;
 

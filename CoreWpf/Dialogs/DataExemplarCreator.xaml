@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="CoreWpf.Dialogs.DataExemplarCreator"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CoreWpf.Dialogs"
+             xmlns:ui="clr-namespace:CoreWpf.UI"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" MinWidth="100"/>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="Auto" MinWidth="100"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <ui:Fiche x:Name="xExemplar" Grid.Column="0"/>
+        <ListView x:Name="xListModels" Grid.Column="1"
+                  SelectionChanged="xListModels_SelectionChanged"/>
+        <ui:Fiche x:Name="xModel" Grid.Column="2"/>
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal">
+            <Button Content="_Cancel" Click="Cancel" Margin="2,0,0,0"/>
+            <Button Content="_Done" Click="Done" Margin="2,0,0,0"/>
+            <Button Content="Add_New" Click="Create" Margin="2,0,0,0"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

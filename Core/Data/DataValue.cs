@@ -12,7 +12,12 @@ namespace Core.Data {
 		Type ValueType { get; }
 		PropertyInfo ValueProperty { get; }
 	}
-
+	/// <summary>
+	/// Used for the relation From[1]-[*]Value.
+	/// That is : Many elementary values.
+	/// </summary>
+	/// <typeparam name="F"></typeparam>
+	/// <typeparam name="V"></typeparam>
 	public class DataValue<F,V> : DataObject, IDataValue where F : DataObject{
 		private F _from;
 		public F From {

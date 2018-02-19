@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9B4620A6-63D4-4FB1-B685-C415E9C804D5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DD3_5</RootNamespace>
+    <AssemblyName>DD3.5</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="linq2db, Version=1.10.2.0, Culture=neutral, PublicKeyToken=f19f8aed7feff67e, processorArchitecture=MSIL">
+      <HintPath>..\packages\linq2db.1.10.2\lib\net45\linq2db.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Generated\AbsArme.cs" />
+    <Compile Include="Generated\AbsClasse.cs" />
+    <Compile Include="Generated\AbsDV.cs" />
+    <Compile Include="Generated\Anneaux.cs" />
+    <Compile Include="Generated\Archetype.cs" />
+    <Compile Include="Generated\Arme.cs" />
+    <Compile Include="Generated\ArmeMagique.cs" />
+    <Compile Include="Generated\ArmeNaturelle.cs" />
+    <Compile Include="Generated\Armure.cs" />
+    <Compile Include="Generated\ArmureMagique.cs" />
+    <Compile Include="Generated\AttaqueSpeciale.cs" />
+    <Compile Include="Generated\Baton.cs" />
+    <Compile Include="Generated\Classe.cs" />
+    <Compile Include="Generated\ClassePrestige.cs" />
+    <Compile Include="Generated\Competence.cs" />
+    <Compile Include="Generated\Deplacement.cs" />
+    <Compile Include="Generated\Divinite.cs" />
+    <Compile Include="Generated\Domaine.cs" />
+    <Compile Include="Generated\Don.cs" />
+    <Compile Include="Generated\EnchantementObjet.cs" />
+    <Compile Include="Generated\EnchArme.cs" />
+    <Compile Include="Generated\EnchArmure.cs" />
+    <Compile Include="Generated\Enum.cs" />
+    <Compile Include="Generated\Environnement.cs" />
+    <Compile Include="Generated\Jointures.cs" />
+    <Compile Include="Generated\Langue.cs" />
+    <Compile Include="Generated\ListeSort.cs" />
+    <Compile Include="Generated\Materiel.cs" />
+    <Compile Include="Generated\Monstre.cs" />
+    <Compile Include="Generated\ObjectMagique.cs" />
+    <Compile Include="Generated\Objet.cs" />
+    <Compile Include="Generated\ObjetMerveilleux.cs" />
+    <Compile Include="Generated\OrganisationSociale.cs" />
+    <Compile Include="Generated\Particularite.cs" />
+    <Compile Include="Generated\Piege.cs" />
+    <Compile Include="Generated\PouvoirClasse.cs" />
+    <Compile Include="Generated\PouvoirMonstrueux.cs" />
+    <Compile Include="Generated\PouvoirSpecial.cs" />
+    <Compile Include="Generated\Race.cs" />
+    <Compile Include="Generated\Sceptre.cs" />
+    <Compile Include="Generated\Sort.cs" />
+    <Compile Include="Generated\SortBaton.cs" />
+    <Compile Include="Generated\SousTypeCreature.cs" />
+    <Compile Include="Generated\SpecialArme.cs" />
+    <Compile Include="Generated\TypeCreature.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserMade\AbsArme.cs" />
+    <Compile Include="UserMade\AbsClasse.cs" />
+    <Compile Include="UserMade\AbsDV.cs" />
+    <Compile Include="UserMade\Anneaux.cs" />
+    <Compile Include="UserMade\Archetype.cs" />
+    <Compile Include="UserMade\Arme.cs" />
+    <Compile Include="UserMade\ArmeMagique.cs" />
+    <Compile Include="UserMade\ArmeNaturelle.cs" />
+    <Compile Include="UserMade\Armure.cs" />
+    <Compile Include="UserMade\ArmureMagique.cs" />
+    <Compile Include="UserMade\AttaqueSpeciale.cs" />
+    <Compile Include="UserMade\Baton.cs" />
+    <Compile Include="UserMade\Classe.cs" />
+    <Compile Include="UserMade\ClassePrestige.cs" />
+    <Compile Include="UserMade\Competence.cs" />
+    <Compile Include="UserMade\Deplacement.cs" />
+    <Compile Include="UserMade\Divinite.cs" />
+    <Compile Include="UserMade\Domaine.cs" />
+    <Compile Include="UserMade\Don.cs" />
+    <Compile Include="UserMade\EnchantementObjet.cs" />
+    <Compile Include="UserMade\EnchArme.cs" />
+    <Compile Include="UserMade\EnchArmure.cs" />
+    <Compile Include="UserMade\Environnement.cs" />
+    <Compile Include="UserMade\Langue.cs" />
+    <Compile Include="UserMade\ListeSort.cs" />
+    <Compile Include="UserMade\Materiel.cs" />
+    <Compile Include="UserMade\Monstre.cs" />
+    <Compile Include="UserMade\ObjectMagique.cs" />
+    <Compile Include="UserMade\Objet.cs" />
+    <Compile Include="UserMade\ObjetMerveilleux.cs" />
+    <Compile Include="UserMade\OrganisationSociale.cs" />
+    <Compile Include="UserMade\Particularite.cs" />
+    <Compile Include="UserMade\Piege.cs" />
+    <Compile Include="UserMade\PouvoirClasse.cs" />
+    <Compile Include="UserMade\PouvoirMonstrueux.cs" />
+    <Compile Include="UserMade\PouvoirSpecial.cs" />
+    <Compile Include="UserMade\Race.cs" />
+    <Compile Include="UserMade\Sceptre.cs" />
+    <Compile Include="UserMade\Sort.cs" />
+    <Compile Include="UserMade\SortBaton.cs" />
+    <Compile Include="UserMade\SousTypeCreature.cs" />
+    <Compile Include="UserMade\SpecialArme.cs" />
+    <Compile Include="UserMade\TypeCreature.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{93418f01-3e81-43f0-b93b-3c84ce60b40a}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="MightyGmWPF.Tabs.TabRawData"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MightyGmWPF.Tabs"
+             xmlns:mgui="clr-namespace:MightyGmWPF.GUIcore"
+             xmlns:cui="clr-namespace:CoreWpf.UI;assembly=CoreWPF"
+             xmlns:tk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1200">
+    <DockPanel>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+            <mgui:TablesComboBox x:Name="xDataList" SelectedTypeChanged="OnTableChoosed" Width="80"/>
+            <Button Content="Refresh" Click="OnRefreshButtonClick"/>
+            <Button Content="DeleteRows" Click="OnDeleteButtonClick"/>
+            <Button Content="Import all From Excel" Click="OnWholeExcelImport"/>
+            <Button Content="Import From Excel" Click="OnExcelImport"/>
+            <Button Content="Export all to Excel" Click="OnExcelExport"/>
+            <Button Content="Export to Word" Click="OnWordExport"/>
+            <Button Content="Check Excel Validity" Click="OnExcelCheck"/>
+            <Button Content="Export Model Joints" Click="OnExportModelJoints"/>
+            <Button Content="Import Model Joints" Click="OnImportModelJoints"/>
+        </StackPanel>
+        <Expander x:Name="xFicheExpander" Header="" HorizontalAlignment="Left" 
+                  Collapsed="xFicheExpander_Collapsed" Expanded="xFicheExpander_Expanded"
+                  MaxWidth="300">
+            <Grid Background="#FFE5E5E5" RenderTransformOrigin="0.5,0.5">
+                <StackPanel>
+                    <Grid x:Name="xReadModeCtrls" VerticalAlignment="Top">
+                        <Button Content="_New" Click="NewObject"/>
+                    </Grid>
+                    <StackPanel x:Name="xEditModeCtrls" Orientation="Horizontal" VerticalAlignment="Top">
+                        <Button Content="_Cancel" Click="CancelNewObject"/>
+                        <Button Content="_Add" Click="AddNewObject"/>
+                        <Button Content="A_ddNew" Click="AddNewObjectAndNewObject"/>
+                    </StackPanel>
+                    <cui:Fiche x:Name="xFiche" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                </StackPanel>
+            </Grid>
+        </Expander>
+        <mgui:MgDataGrid x:Name="xDataGrid" 
+                         SelectionUnit="FullRow" 
+                         RowEditEnding="RowEditEnding" 
+                         AutoGenerateColumns="True" 
+                         SelectionChanged="xDataGrid_SelectionChanged"/>
+    </DockPanel>
+</UserControl>

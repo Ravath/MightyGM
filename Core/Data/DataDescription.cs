@@ -21,25 +21,25 @@ namespace Core.Data {
 		/// L'id associé au modèle associé à cette description.
 		/// </summary>
 		[Category("Description")]//TODO : trouver un attribut pour ne pas l'afficher
-		[Column(Name = "fk_model")]
+		[Column(Name = "fk_model_id")]
 		[HiddenProperty]
-		public int ModelID { get { return _modelId; } set { _modelId = value; } }
+		public int ModelId { get { return _modelId; } set { _modelId = value; } }
 
 		/// <summary>
 		/// Le modèle associé à cette description.
 		/// </summary>
-		[Association(ThisKey = "fk_model", OtherKey = "id", CanBeNull = false)]
+		[Association(ThisKey = "fk_model_id", OtherKey = "id", CanBeNull = false)]
 		private Ref _model;
 		[HiddenProperty]
 		public Ref Model {
 			get {
 				if(_model == null) {
-					_model = LoadById<Ref>(ModelID);
+					_model = LoadById<Ref>(ModelId);
 				}
 				return _model;
 			}
 			set {
-				ModelID = value.Id;
+				ModelId = value.Id;
 				_model = value;
 			}
 		}
@@ -70,6 +70,11 @@ namespace Core.Data {
 
 		public override string ToString() {
 			return String.Format("{0}-Desc({1})", Id, Model.Name);
+		}
+
+		public override void SaveObject() {
+			ModelId = Model.Id;//has to be updated in case it changed during insertion.
+			base.SaveObject();
 		}
 	}
 }

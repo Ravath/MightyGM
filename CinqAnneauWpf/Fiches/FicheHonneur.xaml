@@ -1,0 +1,420 @@
+﻿<UserControl x:Class="CinqAnneauxWpf.Fiches.FicheHonneur"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CinqAnneauxWpf.Fiches"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <TabControl>
+        <TabControl.Resources>
+            
+        </TabControl.Resources>
+        <TabItem Header="Rangs">
+            <StackPanel Orientation="Horizontal" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                <StackPanel Margin="5,0" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <TextBlock Text="Gloire" FontWeight="Bold" FontSize="18"/>
+                    <!-- tableau rangs de Gloire -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="25"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Héros Légendaire"/>
+                        <TextBlock Grid.Column="1" Grid.Row="0" Text="10"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Champion d'Emeraude"/>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="8"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Champion de Clan"/>
+                        <TextBlock Grid.Column="1" Grid.Row="2" Text="8"/>
+                        <TextBlock Grid.Column="0" Grid.Row="3" Text="Champion de Jade"/>
+                        <TextBlock Grid.Column="1" Grid.Row="3" Text="7"/>
+                        <TextBlock Grid.Column="0" Grid.Row="4" Text="Héros de Guerre Renommé"/>
+                        <TextBlock Grid.Column="1" Grid.Row="4" Text="7"/>
+                        <TextBlock Grid.Column="0" Grid.Row="5" Text="Fameux Poète, Auteur, Artiste"/>
+                        <TextBlock Grid.Column="1" Grid.Row="5" Text="6"/>
+                        <TextBlock Grid.Column="0" Grid.Row="6" Text="Daimyo Familial d'un Clan Majeur"/>
+                        <TextBlock Grid.Column="1" Grid.Row="6" Text="6"/>
+                        <TextBlock Grid.Column="0" Grid.Row="7" Text="Fameux Artisan"/>
+                        <TextBlock Grid.Column="1" Grid.Row="7" Text="6"/>
+                        <TextBlock Grid.Column="0" Grid.Row="8" Text="Chancelier Impérial"/>
+                        <TextBlock Grid.Column="1" Grid.Row="8" Text="6"/>
+                        <TextBlock Grid.Column="0" Grid.Row="9" Text="Héraut Impérial"/>
+                        <TextBlock Grid.Column="1" Grid.Row="9" Text="6"/>
+                        <TextBlock Grid.Column="0" Grid.Row="10" Text="Shogun"/>
+                        <TextBlock Grid.Column="1" Grid.Row="10" Text="6"/>
+                        <TextBlock Grid.Column="0" Grid.Row="11" Text="Voix de l'Empereur"/>
+                        <TextBlock Grid.Column="1" Grid.Row="11" Text="6"/>
+                        <TextBlock Grid.Column="0" Grid.Row="12" Text="Rikugunshokan (commandant d'une armée)"/>
+                        <TextBlock Grid.Column="1" Grid.Row="12" Text="6"/>
+                        <TextBlock Grid.Column="0" Grid.Row="13" Text="Shireikan (commandant de plusieurs légions)"/>
+                        <TextBlock Grid.Column="1" Grid.Row="13" Text="5"/>
+                        <TextBlock Grid.Column="0" Grid.Row="14" Text="Héros de Guerre Victorieux"/>
+                        <TextBlock Grid.Column="1" Grid.Row="14" Text="5"/>
+                        <TextBlock Grid.Column="0" Grid.Row="15" Text="L'Empereur"/>
+                        <TextBlock Grid.Column="1" Grid.Row="15" Text="4"/>
+                        <TextBlock Grid.Column="0" Grid.Row="16" Text="L'Impératrice"/>
+                        <TextBlock Grid.Column="1" Grid.Row="16" Text="4"/>
+                        <TextBlock Grid.Column="0" Grid.Row="17" Text="Conseiller Impérial"/>
+                        <TextBlock Grid.Column="1" Grid.Row="17" Text="4"/>
+                        <TextBlock Grid.Column="0" Grid.Row="18" Text="Champion de Clan Mineur"/>
+                        <TextBlock Grid.Column="1" Grid.Row="18" Text="4"/>
+                        <TextBlock Grid.Column="0" Grid.Row="19" Text="Daimyo d'une Famille Impériale"/>
+                        <TextBlock Grid.Column="1" Grid.Row="19" Text="4"/>
+                        <TextBlock Grid.Column="0" Grid.Row="20" Text="Taisa (Commandant d'une Légion)"/>
+                        <TextBlock Grid.Column="1" Grid.Row="20" Text="4"/>
+                        <TextBlock Grid.Column="0" Grid.Row="21" Text="Héros de Guerre Vaincu (Honorablement)"/>
+                        <TextBlock Grid.Column="1" Grid.Row="21" Text="4"/>
+                        <TextBlock Grid.Column="0" Grid.Row="22" Text="Chui (Commandant d'une Compagnie)"/>
+                        <TextBlock Grid.Column="1" Grid.Row="22" Text="3"/>
+                        <TextBlock Grid.Column="0" Grid.Row="23" Text="Magistat d'Emeraude, Magistrat de Jade"/>
+                        <TextBlock Grid.Column="1" Grid.Row="23" Text="3"/>
+                        <TextBlock Grid.Column="0" Grid.Row="24" Text="Enfant de l'Empereur"/>
+                        <TextBlock Grid.Column="1" Grid.Row="24" Text="3"/>
+                        <TextBlock Grid.Column="0" Grid.Row="25" Text="Geisha"/>
+                        <TextBlock Grid.Column="1" Grid.Row="25" Text="3"/>
+                        <TextBlock Grid.Column="0" Grid.Row="26" Text="Gunsho (Commandant d'un Escadron)"/>
+                        <TextBlock Grid.Column="1" Grid.Row="26" Text="3"/>
+                        <TextBlock Grid.Column="0" Grid.Row="27" Text="Hatamoto (Chef des suivants d'un Daimyo)"/>
+                        <TextBlock Grid.Column="1" Grid.Row="27" Text="3"/>
+                        <TextBlock Grid.Column="0" Grid.Row="28" Text="Légionnaire Impérial, légionnaire de Jade"/>
+                        <TextBlock Grid.Column="1" Grid.Row="28" Text="3"/>
+                        <TextBlock Grid.Column="0" Grid.Row="29" Text="Gouverneur Provincial"/>
+                        <TextBlock Grid.Column="1" Grid.Row="29" Text="3"/>
+                        <TextBlock Grid.Column="0" Grid.Row="30" Text="Gouverneur d'une Cité"/>
+                        <TextBlock Grid.Column="1" Grid.Row="30" Text="2"/>
+                        <TextBlock Grid.Column="0" Grid.Row="31" Text="Magistrat de Clan"/>
+                        <TextBlock Grid.Column="1" Grid.Row="31" Text="2"/>
+                        <TextBlock Grid.Column="0" Grid.Row="32" Text="Karo (Conseiller d'un gouverneur ou d'une famille)"/>
+                        <TextBlock Grid.Column="1" Grid.Row="32" Text="2"/>
+                        <TextBlock Grid.Column="0" Grid.Row="33" Text="Nikutai (premier officier d'un Gunso)"/>
+                        <TextBlock Grid.Column="1" Grid.Row="33" Text="2"/>
+                        <TextBlock Grid.Column="0" Grid.Row="34" Text="Messager Impérial"/>
+                        <TextBlock Grid.Column="1" Grid.Row="34" Text="2"/>
+                        <TextBlock Grid.Column="0" Grid.Row="35" Text="Daimyo d'une Famille Vassale"/>
+                        <TextBlock Grid.Column="1" Grid.Row="35" Text="2"/>
+                        <TextBlock Grid.Column="0" Grid.Row="36" Text="Artiste, Marchand, Diplomate"/>
+                        <TextBlock Grid.Column="1" Grid.Row="36" Text="1"/>
+                        <TextBlock Grid.Column="0" Grid.Row="37" Text="Administrateur d'un Domaine, Hohei (soldat)"/>
+                        <TextBlock Grid.Column="1" Grid.Row="37" Text="1"/>
+                        <TextBlock Grid.Column="0" Grid.Row="38" Text="Soldat, Paysan, Guerrier Paysan"/>
+                        <TextBlock Grid.Column="1" Grid.Row="38" Text="0.5"/>
+                        <TextBlock Grid.Column="0" Grid.Row="39" Text="Membre Influent d'un Village, Samurai Vassal"/>
+                        <TextBlock Grid.Column="1" Grid.Row="39" Text="0.5"/>
+                    </Grid>
+                </StackPanel>
+                <StackPanel Margin="5,0" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <TextBlock Text="Infamie" FontWeight="Bold" FontSize="18"/>
+                    <!-- tableau rangs d'Infamie -->
+                    <Grid Margin="5,0" VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="25"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="0" Grid.Row="0" Text="Bandit"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0" Text="1"/>
+                    <TextBlock Grid.Column="0" Grid.Row="1" Text="Meurtrier"/>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Text="2"/>
+                    <TextBlock Grid.Column="0" Grid.Row="2" Text="Exilé"/>
+                    <TextBlock Grid.Column="1" Grid.Row="2" Text="4"/>
+                    <TextBlock Grid.Column="0" Grid.Row="3" Text="Conquérant (Héros de guerre impitoyable)"/>
+                    <TextBlock Grid.Column="1" Grid.Row="3" Text="4"/>
+                    <TextBlock Grid.Column="0" Grid.Row="4" Text="Gaijin (diplomate)"/>
+                    <TextBlock Grid.Column="1" Grid.Row="4" Text="5"/>
+                    <TextBlock Grid.Column="0" Grid.Row="5" Text="Gaijin (tout autre)"/>
+                    <TextBlock Grid.Column="1" Grid.Row="5" Text="6"/>
+                    <TextBlock Grid.Column="0" Grid.Row="6" Text="Maho-Tsukai"/>
+                    <TextBlock Grid.Column="1" Grid.Row="6" Text="8"/>
+                    <TextBlock Grid.Column="0" Grid.Row="7" Text="Ninja"/>
+                    <TextBlock Grid.Column="1" Grid.Row="7" Text="8"/>
+                    <TextBlock Grid.Column="0" Grid.Row="8" Text="Sombre Seigneur de l'Outremonde"/>
+                    <TextBlock Grid.Column="1" Grid.Row="8" Text="10"/>
+                    </Grid>
+                </StackPanel>
+                <StackPanel Margin="5,0" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <TextBlock Text="Statut" FontWeight="Bold" FontSize="18"/>
+                    <!-- tableau rangs de Statut -->
+                    <Grid Margin="5,0" VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="25"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="0" Grid.Row="0" Text="M'Empereur"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0" Text="10"/>
+                    <TextBlock Grid.Column="0" Grid.Row="1" Text="L'Impératrice"/>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Text="9.9"/>
+                    <TextBlock Grid.Column="0" Grid.Row="2" Text="La Voix de l'Empereur"/>
+                    <TextBlock Grid.Column="1" Grid.Row="2" Text="9.5"/>
+                    <TextBlock Grid.Column="0" Grid.Row="3" Text="Enfant de l'Empereur"/>
+                    <TextBlock Grid.Column="1" Grid.Row="3" Text="9.4"/>
+                    <TextBlock Grid.Column="0" Grid.Row="4" Text="Daimyo des Familles Miya, Otomo, et Seppun"/>
+                    <TextBlock Grid.Column="1" Grid.Row="4" Text="9.3"/>
+                    <TextBlock Grid.Column="0" Grid.Row="5" Text="Champion d'Emeraude, de Jade, Shogun"/>
+                    <TextBlock Grid.Column="1" Grid.Row="5" Text="9"/>
+                    <TextBlock Grid.Column="0" Grid.Row="6" Text="Chancelier Impérial, Conseiller Impérial"/>
+                    <TextBlock Grid.Column="1" Grid.Row="6" Text="9"/>
+                    <TextBlock Grid.Column="0" Grid.Row="7" Text="Champion de Clan Majeur"/>
+                    <TextBlock Grid.Column="1" Grid.Row="7" Text="8"/>
+                    <TextBlock Grid.Column="0" Grid.Row="8" Text="Champion de Clan Mineur"/>
+                    <TextBlock Grid.Column="1" Grid.Row="8" Text="7.5"/>
+                    <TextBlock Grid.Column="0" Grid.Row="9" Text="Héraut Impérial"/>
+                    <TextBlock Grid.Column="1" Grid.Row="9" Text="7"/>
+                    <TextBlock Grid.Column="0" Grid.Row="10" Text="Trésorier Impérial"/>
+                    <TextBlock Grid.Column="1" Grid.Row="10" Text="7"/>
+                    <TextBlock Grid.Column="0" Grid.Row="11" Text="Daimyo des Familles des Clans Majeurs"/>
+                    <TextBlock Grid.Column="1" Grid.Row="11" Text="7"/>
+                    <TextBlock Grid.Column="0" Grid.Row="12" Text="Rikugunshokan (commandant d'une armée)"/>
+                    <TextBlock Grid.Column="1" Grid.Row="12" Text="7"/>
+                    <TextBlock Grid.Column="0" Grid.Row="13" Text="Hatamoto (Chef des suivants d'un Daimyo)"/>
+                    <TextBlock Grid.Column="1" Grid.Row="13" Text="6"/>
+                    <TextBlock Grid.Column="0" Grid.Row="14" Text="Gouverneur Provincial"/>
+                    <TextBlock Grid.Column="1" Grid.Row="14" Text="6"/>
+                    <TextBlock Grid.Column="0" Grid.Row="15" Text="Shireikan (commandant de plusieurs légions)"/>
+                    <TextBlock Grid.Column="1" Grid.Row="15" Text="6"/>
+                    <TextBlock Grid.Column="0" Grid.Row="16" Text="Gouverneur  d'une Cité"/>
+                    <TextBlock Grid.Column="1" Grid.Row="16" Text="5"/>
+                    <TextBlock Grid.Column="0" Grid.Row="17" Text="Taisa (Commandant d'une Légion)"/>
+                    <TextBlock Grid.Column="1" Grid.Row="17" Text="5.5"/>
+                    <TextBlock Grid.Column="0" Grid.Row="18" Text="Chui (Commandant d'une compagnie)"/>
+                    <TextBlock Grid.Column="1" Grid.Row="18" Text="5"/>
+                    <TextBlock Grid.Column="0" Grid.Row="19" Text="Daimyo d'une Famille Vassale"/>
+                    <TextBlock Grid.Column="1" Grid.Row="19" Text="5"/>
+                    <TextBlock Grid.Column="0" Grid.Row="20" Text="Karo (Conseiller d'un gouverneur ou d'une famille)"/>
+                    <TextBlock Grid.Column="1" Grid.Row="20" Text="4.7"/>
+                    <TextBlock Grid.Column="0" Grid.Row="21" Text="Magistat d'Emeraude ou de Jade"/>
+                    <TextBlock Grid.Column="1" Grid.Row="21" Text="4.5+"/>
+                    <TextBlock Grid.Column="0" Grid.Row="22" Text="Magistat de Clan"/>
+                    <TextBlock Grid.Column="1" Grid.Row="22" Text="4+"/>
+                    <TextBlock Grid.Column="0" Grid.Row="23" Text="Gunso (Commandant d'un Escadron)"/>
+                    <TextBlock Grid.Column="1" Grid.Row="23" Text="3"/>
+                    <TextBlock Grid.Column="0" Grid.Row="24" Text="Samurai Standard d'une Famille Impériale"/>
+                    <TextBlock Grid.Column="1" Grid.Row="24" Text="3"/>
+                    <TextBlock Grid.Column="0" Grid.Row="25" Text="Diplomate, Gokenin (responsable d'un domaine)"/>
+                    <TextBlock Grid.Column="1" Grid.Row="25" Text="2"/>
+                    <TextBlock Grid.Column="0" Grid.Row="26" Text="Shisha (messager impérial)"/>
+                    <TextBlock Grid.Column="1" Grid.Row="26" Text="2"/>
+                    <TextBlock Grid.Column="0" Grid.Row="27" Text="Nikutai (premier officier d'un Gunso)"/>
+                    <TextBlock Grid.Column="1" Grid.Row="27" Text="1.5"/>
+                    <TextBlock Grid.Column="0" Grid.Row="28" Text="Samurai Standard d'un Clan Majeur ou Mineur"/>
+                    <TextBlock Grid.Column="1" Grid.Row="28" Text="1"/>
+                    <TextBlock Grid.Column="0" Grid.Row="29" Text="Hohei (soldat)"/>
+                    <TextBlock Grid.Column="1" Grid.Row="29" Text="3"/>
+                    <TextBlock Grid.Column="0" Grid.Row="30" Text="Moine standard de la Confrérie de Shinsei"/>
+                    <TextBlock Grid.Column="1" Grid.Row="30" Text="1"/>
+                    <TextBlock Grid.Column="0" Grid.Row="31" Text="Ji-Samurai (familles vassales)"/>
+                    <TextBlock Grid.Column="1" Grid.Row="31" Text="0.5"/>
+                    <TextBlock Grid.Column="0" Grid.Row="32" Text="Ronin"/>
+                    <TextBlock Grid.Column="1" Grid.Row="32" Text="0"/>
+                    <TextBlock Grid.Column="0" Grid.Row="33" Text="Ashigaru (soldat paysan)"/>
+                    <TextBlock Grid.Column="1" Grid.Row="33" Text="0.4"/>
+                    <TextBlock Grid.Column="0" Grid.Row="34" Text="Doshin (officier de village)"/>
+                    <TextBlock Grid.Column="1" Grid.Row="34" Text="0.3"/>
+                    <TextBlock Grid.Column="0" Grid.Row="35" Text="Budoka (Guerrier paysan)"/>
+                    <TextBlock Grid.Column="1" Grid.Row="35" Text="0.2"/>
+                    <TextBlock Grid.Column="0" Grid.Row="36" Text="Artisan, Marchands"/>
+                    <TextBlock Grid.Column="1" Grid.Row="36" Text="0.1"/>
+                    <TextBlock Grid.Column="0" Grid.Row="37" Text="Conscrit, Paysan"/>
+                    <TextBlock Grid.Column="1" Grid.Row="37" Text="0"/>
+                    <TextBlock Grid.Column="0" Grid.Row="38" Text="Saltimbanque, Geisha"/>
+                    <TextBlock Grid.Column="1" Grid.Row="38" Text="-1"/>
+                    <TextBlock Grid.Column="0" Grid.Row="39" Text="Travailleur de Cuir, Boucher"/>
+                    <TextBlock Grid.Column="1" Grid.Row="39" Text="-4"/>
+                    <TextBlock Grid.Column="0" Grid.Row="40" Text="Bourreau"/>
+                    <TextBlock Grid.Column="1" Grid.Row="40" Text="-5"/>
+                    <TextBlock Grid.Column="0" Grid.Row="41" Text="Fossoyeur"/>
+                    <TextBlock Grid.Column="1" Grid.Row="41" Text="-8"/>
+                    <TextBlock Grid.Column="0" Grid.Row="42" Text="Ninja"/>
+                    <TextBlock Grid.Column="1" Grid.Row="42" Text="-10"/>
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="Gains Honneur">
+            <StackPanel Orientation="Horizontal" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                <StackPanel Margin="5,0" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left">
+                    <TextBlock Text="Honneur" FontWeight="Bold" FontSize="18"/>
+                    <!-- Gains et pertes d'Honneur -->
+                    <DockPanel>
+                    <StackPanel DockPanel.Dock="Left" Name="xGainHonneurActe" Margin="5,0">
+                        <TextBlock Text="Acte" FontWeight="Bold"/>
+                    </StackPanel>
+                    <Grid Name="xGainHonneurGrid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width="25"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock FontWeight="Bold" TextAlignment="Center" Grid.Column="0" Text="0"/>
+                        <TextBlock FontWeight="Bold" TextAlignment="Center" Grid.Column="1" Text="1-2"/>
+                        <TextBlock FontWeight="Bold" TextAlignment="Center" Grid.Column="2" Text="3-4"/>
+                        <TextBlock FontWeight="Bold" TextAlignment="Center" Grid.Column="3" Text="5-6"/>
+                        <TextBlock FontWeight="Bold" TextAlignment="Center" Grid.Column="4" Text="7-8"/>
+                        <TextBlock FontWeight="Bold" TextAlignment="Center" Grid.Column="5" Text="9-10"/>
+                    </Grid>
+                    </DockPanel>
+                    <Border>
+                        
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="Gains Gloire">
+            <StackPanel Margin="5,0" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left">
+                <TextBlock Text="Gloire" FontWeight="Bold" FontSize="18"/>
+                <!-- Gains et Pertes de Gloire -->
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Left" Margin="5,0">
+                        <TextBlock Text="Accomplir une Quête"/>
+                        <TextBlock Text="Apprentissage"/>
+                        <TextBlock Text="Artisanat"/>
+                        <TextBlock Text="Défaite"/>
+                        <TextBlock Text="Déshonneur Familial"/>
+                        <TextBlock Text="Duels"/>
+                        <TextBlock Text="Escarmouches"/>
+                        <TextBlock Text="Guerre"/>
+                        <TextBlock Text="Immortalité"/>
+                        <TextBlock Text="Indifférence"/>
+                        <TextBlock Text="Mariage"/>
+                        <TextBlock Text="Oisiveté"/>
+                        <TextBlock Text="Présents"/>
+                        <TextBlock Text="Pris à Mentir"/>
+                        <TextBlock Text="Reconnaissance"/>
+                        <TextBlock Text="Romance"/>
+                        <TextBlock Text="Se Vanter en Public"/>
+                        <TextBlock Text="Statut"/>
+                        <TextBlock Text="Vendetta"/>
+                        <TextBlock Text="Voler la Gloire"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock Text="Gains de Points de Gloire égaux à la moitié du Rang de Gloire du samurai qui ordonne la quête."/>
+                        <TextBlock Text="Gain de un Rang de Gloire lors du gain de un Rang de Réputation."/>
+                        <TextBlock Text="Gain de un Point de Gloire pour chaque Augmentation obtenue lors de la création d'un objet."/>
+                        <TextBlock Text="Perte d'un nombre de Points de Gloire égal au Rang de Gloire de l'adversaire pour un officier qui perd une bataille ou pour un duelliste qui perd un duel."/>
+                        <TextBlock Text="Perte de un Rang de Gloire si un parent proche accomplit un acte justifiant le seppuku."/>
+                        <TextBlock Text="Gagner honorablement un duel rapporte un nombre de Points de Gloire égal à 1/3 du Statut ou de la Gloire de l'adversaire (plus bas des 2)."/>
+                        <TextBlock Text="Gain de 1 Point de Gloire pour avoir vaincu des bandits, des ronin..."/>
+                        <TextBlock Text="Gain de 3 Points de Gloire pour avoir survécu à une bataille, ou gain de 6 Points si le Personnage se trouve du côté du vainqueur."/>
+                        <TextBlock Text="Après la création d'une oeuvre d'art, gain d'un nombre de Points de Gloire égal au Rang de Gloire du plus notable des admirateurs."/>
+                        <TextBlock Text="Etre volontairement ignoré en raison d'anciennes mauvaises actions implique que les gains de Gloire sont réduits de 1 Point et que les Pertes sont augmentées de 2."/>
+                        <TextBlock Text="Augmentation du Rang de Gloire du moins glorieuc des 2 époux à un Rang de moins que le Rang du plus glorieux."/>
+                        <TextBlock Text="Perte de un Point de Gloire pour chaque semaine passée sans gain de Gloire."/>
+                        <TextBlock Text="Gain d'un nombre de Points de Gloire égal au Statut ou à la Gloire (plus bas des deux) de la personne qui offre si elle possède un status plus élevé que celui du personnage."/>
+                        <TextBlock Text="Perte du double des Points de Gloire normalement gagnés pour l'acte sur lequel le samurai a été pris  mentir."/>
+                        <TextBlock Text="Reconnaissance publique d'un individu de Statut 7+, gain de 1 Rang de Gloire."/>
+                        <TextBlock Text="Un Point de Gloire pour déclarer être amoureux publiquement (sans révéler l'identité de l'ête aimé)."/>
+                        <TextBlock Text="Après avoir gagné de la Gloire, s'en vanter en public permet d'en gagner 1 Point de plus."/>
+                        <TextBlock Text="Gain d'un nombre de Points de Gloire égal au nombre de Points de Statut gagnés."/>
+                        <TextBlock Text="Se venger d'un ennemi rapporte des Points de Gloire équivalent au Statut ou à la Gloire (plus bas des deux) de ce dernier."/>
+                        <TextBlock Text="Gain du montant de Gloire normalement gagné dans l'accomplissement de l'acte usurpé."/>
+                    </StackPanel>
+                </DockPanel>
+            </StackPanel>
+        </TabItem>
+    </TabControl>
+</UserControl>

@@ -7,7 +7,7 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAgAAAAAAAAARAAAgCAAAAAAAgAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAgAAAEAgAAABAAAgCAAAAAAAgAAAAAAAA=</HashCode>
       <FileName>Data\DataDescription.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -15,7 +15,7 @@
   <Class Name="Core.Data.DataExemplaire&lt;Ref&gt;" Collapsed="true">
     <Position X="9.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAgAAARAAAgCAAAAAAAgAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEAgAAABAAAgCAAAAAAAgAAAAAAAA=</HashCode>
       <FileName>Data\DataExemplaire.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -23,14 +23,14 @@
   <Class Name="Core.Data.DataModel" Collapsed="true">
     <Position X="0.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAQQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AACAAAAAAAAgAAAEACIAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Data\DataModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Core.Data.DataObject" Collapsed="true">
     <Position X="5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAACBAAQBAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAACGAAAAAAAAAAEACJAAABoAAABABAAAAAgAAABAAA=</HashCode>
       <FileName>Data\DataObject.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -38,7 +38,7 @@
   <Class Name="Core.Data.DataRelation&lt;T, U&gt;" Collapsed="true">
     <Position X="2.75" Y="1.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAsAAAAACAAAGAQAIAAAAAEAAAAAABQAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAsAAAAAGAAAGAAAIAAAAAEAAAAAABQAAAAQ=</HashCode>
       <FileName>Data\DataRelation.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -68,14 +68,14 @@
   <Interface Name="Core.Data.IDataObject" Collapsed="true">
     <Position X="5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAACAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAACAAAAAAAAAAAAACIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Data\DataObject.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Core.Data.IDataRelation" Collapsed="true">
     <Position X="8.25" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAMAAAAACAAAGAAAAAAAAAEAAAAAAAQAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAMAAAAACAAAGAAAAAAAAAEAAAAAAAQAAAAQ=</HashCode>
       <FileName>Data\DataRelation.cs</FileName>
     </TypeIdentifier>
   </Interface>

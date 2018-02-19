@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="CinqAnneauxWpf.Fiches.FicheEcole"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CinqAnneauxWpf.Fiches"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid x:Name="spParent">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="xName" FontSize="13" FontWeight="Bold"/>
+                <TextBlock x:Name="xType" FontSize="13" Margin="5,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Bonus: " FontWeight="Bold"/>
+                <TextBlock x:Name="xBonusTrait" FontWeight="Bold"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" x:Name="xMoine">
+                <TextBlock Text="Devotion: " FontWeight="Bold"/>
+                <TextBlock x:Name="xDevotion"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" x:Name="xShugenja">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Affinite: " FontWeight="Bold"/>
+                    <TextBlock x:Name="xAffinite"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Deficience: " FontWeight="Bold"/>
+                    <TextBlock x:Name="xDeficience"/>
+                </StackPanel>
+            </StackPanel>
+            <TextBlock x:Name="xDescription" TextWrapping="Wrap"/>
+        </StackPanel>
+        <ListView x:Name="xTechniques" Grid.Row="1"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                  ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Gray" Margin="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <StackPanel CanHorizontallyScroll="False">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontWeight="Bold" FontSize="12" Text="{Binding Rank, StringFormat='- {0} - '}"/>
+                                <TextBlock FontWeight="Bold" FontSize="12" Text="{Binding Name}"/>
+                            </StackPanel>
+                            <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</UserControl>

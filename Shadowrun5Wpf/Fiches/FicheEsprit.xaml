@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="Shadowrun5Wpf.Fiches.FicheEsprit"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Shadowrun5Wpf.Fiches"
+             xmlns:tk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+             xmlns:core="clr-namespace:CoreWpf.UI;assembly=CoreWPF"
+             mc:Ignorable="d">
+    <StackPanel Margin="5">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock x:Name="xName" FontSize="13.333" TextDecorations="Underline" FontWeight="Bold" MinWidth="200"/>
+            <TextBlock Text="Puissance: " VerticalAlignment="Center" Margin="10,0,0,0"/>
+            <core:ValueModifier x:Name="xPuissance" VerticalAlignment="Center"/>
+        </StackPanel>
+        <local:FicheAttributs x:Name="cfAttributs"/>
+        <local:FicheCollectionCompetences x:Name="cfCompetences" MinHeight="200"/>
+    </StackPanel>
+</UserControl>

@@ -1,20 +1,16 @@
-﻿using LinqToDB.Mapping;
-using NPOI.SS.UserModel;
-using NPOI.XSSF.UserModel;
-using NPOI.XWPF.UserModel;
+﻿using Core.Contexts;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Data {
 	public class DllData {
 		#region Members
 		private Assembly _assembly;
-		private List<Type> _RawData = new List<Type>();
+		private List<Type> _rawData = new List<Type>();
+		private List<Type> _jointData = new List<Type>();
+		private List<Type> _jointVal = new List<Type>();
 		#endregion
 		#region Properties
 		/// <summary>
@@ -25,11 +21,12 @@ namespace Core.Data {
 			set {
 				_assembly = value;
 				ParseAssembly();
-                if(OnAssemblyChanged != null)
-					OnAssemblyChanged(this, value);
+				OnAssemblyChanged?.Invoke(this, value);
 			}
 		}
-		public IEnumerable<Type> RawDataTables { get { return _RawData; } }
+		public IEnumerable<Type> RawDataTables { get { return _rawData; } }
+		public IEnumerable<Type> JointDataTables { get { return _jointData; } }
+		public IEnumerable<Type> JointValueTables { get { return _jointVal; } }
 		#endregion
 
 		public delegate void AssemblyChanged( DllData sender, Assembly newAssembly );
@@ -41,75 +38,100 @@ namespace Core.Data {
 			ParseAssembly();
         }
 		private void ParseAssembly() {
-			initCoreDataList();
+			InitCoreDataList();
 		}
-		private void initCoreDataList() {
-			_RawData.Clear();
-			if(_assembly == null)
+		private void InitCoreDataList() {
+
+			// vider les listes de types
+			_rawData.Clear();
+			_jointData.Clear();
+			_jointVal.Clear();
+
+			// vérifier validité
+			if (_assembly == null)
 				return;
-			foreach(var tca in _assembly.GetTypes().Where(t => typeof(DataObject).IsAssignableFrom(t))) {
+
+			// Précalculer listes de types
+			//CoreData
+			foreach(var tca in GetDllTypes<DataObject>()) {
 				foreach(var att in tca.GetCustomAttributes(true))//récupérer les dataObject qui ont un attribut CoreData
 					if(att is CoreDataAttribute) {
-						_RawData.Add(tca);
+						_rawData.Add(tca);
 						break;
 					}
 			}
+			//Jointures
+			_jointData.AddRange(GetDllTypes<IDataRelation>());
+			_jointVal.AddRange(GetDllTypes<IDataValue>());
+		}
+
+		public void SetAssembly(string assemblyPath)
+		{
+			Assembly ass = Assembly.LoadFrom(assemblyPath);
+			Assembly = ass;
 		}
 		#endregion
 
 		/// <summary>
+		/// Récupère parmis les types définis dans la DLL, ceux qui héritent du type donné.
+		/// Types à privilégier (et/ou leurs interfaces):
+		///  - DataObject
+		///   - DataModel
+		///   - DataDescription<T:DataModel>
+		///   - DataExemplaire<T:DataModel>
+		///   - DataRelation<T:DataObject U:DataObject>
+		///   - DataValue<F:DataObject val>
+		/// </summary>
+		/// <typeparam name="T">Type parent à rechercher.</typeparam>
+		/// <returns></returns>
+		public IEnumerable<Type> GetDllTypes<T>()
+		{
+			return _assembly.GetTypes().Where(t => typeof(T).IsAssignableFrom(t));
+		}
+
+		/// <summary>
 		/// le premier context local trouvé dans l'assembly.
 		/// </summary>
-		public ILocalContext LocalContext( IGlobalContext gc ) {
-			ILocalContext _local;
+		/// <param name="gc">Le GlobalContext à associer.</param>
+		/// <returns>Le local context de cette Dll.</returns>
+		public IJdrContext GetJdrContext( IGlobalContext gc ) {
+			IJdrContext _local;
             if(_assembly == null)
 				_local = null;
-			else {//instancier un contexte local
+			else {
+				//instancier un contexte local
 				//prendre le premier implémentant ILocalContext
-				Type t = _assembly.GetTypes().Where(ty => typeof(ILocalContext).IsAssignableFrom(ty)).FirstOrDefault();
+				Type t = _assembly.GetTypes().Where(ty => typeof(IJdrContext).IsAssignableFrom(ty)).FirstOrDefault();
 				if(t == null) { _local = null; return _local; }
 				ConstructorInfo ci = t.GetConstructor(new Type[] { typeof(IGlobalContext) });
 				if(ci != null) {//essayer avec constructeur prenant le Contexte Global.
-					_local = (ILocalContext)ci.Invoke(new object[] { gc });
-				} else {//Sinon, constructeur par défaut.
-					ci = t.GetConstructor(Type.EmptyTypes);
-					_local = (ILocalContext)ci.Invoke(new object[] { });
-					_local.Context = gc;
+					_local = (IJdrContext)ci.Invoke(new object[] { gc });
+				} else {//Sinon, rien.
+					_local = null;
 				}
 			}
 			return _local;
 		}
 
-		public bool ExportModeleDataToExcel( Database db, string outputFilePath ) {
-			try {
-				using(FileStream file = new FileStream(outputFilePath, FileMode.Create, FileAccess.Write)) {
-					IWorkbook workbook = new XSSFWorkbook();
-
-					foreach(Type ty in RawDataTables) {
-						ImportExcel.CreateSheet(workbook, db, ty);
+		public IJdrContextUI GetUiContext(string assemblyPath, IGlobalContext gc)
+		{
+			Assembly ass = Assembly.LoadFrom(assemblyPath);
+			if(ass != null)
+			{
+				var types = _assembly.GetTypes();
+				Type t = ass.GetTypes().FirstOrDefault(ty => typeof(IJdrContextUI).IsAssignableFrom(ty));
+				if (t!= null)
+				{
+					ConstructorInfo ci = t.GetConstructor(new Type[] { typeof(IGlobalContext) });
+					if (ci != null)
+					{
+						//essayer avec constructeur prenant le Contexte Global.
+						return (IJdrContextUI)ci.Invoke(new object[] { gc });
 					}
-
-					workbook.Write(file);
-                }
-			} catch(IOException) {
-				return false;
-			}
-
-			return true;
-		}
-
-
-		public bool ExportModeleDataToWord( Type t, Database db, string outputFilePath ) {
-			try {
-				XWPFDocument doc =  ImportExcel.WriteDocument(t, db);
-				using(FileStream out1 = new FileStream(outputFilePath, FileMode.Create)) {
-					doc.Write(out1);
 				}
-			} catch(IOException) {
-				return false;
 			}
-
-			return true;
+			gc.ReportMessageRef(MessageType.ERROR, "UI_DLL_NOT_LOADED", assemblyPath);
+			return null;
 		}
 	}
 }

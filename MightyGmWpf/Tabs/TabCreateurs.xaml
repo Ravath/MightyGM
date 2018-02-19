@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="MightyGmWPF.Tabs.TabCreateurs"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:tk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+             xmlns:local="clr-namespace:MightyGmWPF.Tabs"
+             xmlns:gui="clr-namespace:TableTop.GUI;assembly=TableTop"
+             mc:Ignorable="d" 
+             d:DesignHeight="735" d:DesignWidth="1040">
+    <DockPanel KeyDown="DockPanel_KeyDown" KeyUp="DockPanel_KeyUp">
+        <TabControl DockPanel.Dock="Left" MaxWidth="250">
+            <TabItem Header="Map" x:Name="tiMap">
+                <StackPanel ScrollViewer.VerticalScrollBarVisibility="Auto" CanVerticallyScroll="True">
+                    <WrapPanel Orientation="Horizontal" Height="20">
+                        <TextBlock Text="Name " VerticalAlignment="Center"/>
+                        <TextBox MinWidth="100" HorizontalContentAlignment="Center"/>
+                    </WrapPanel>
+                    <GroupBox Header="Map Type" Margin="0,5,0,0">
+                        <StackPanel>
+                            <RadioButton Content="Continuous"/>
+                            <RadioButton Content="Square"/>
+                            <RadioButton Content="Hexagonal"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <WrapPanel Margin="0,5,0,0">
+                        <TextBlock Text="Size:" VerticalAlignment="Center"/>
+                        <tk:IntegerUpDown Minimum="1"/>
+                        <TextBlock Text="x" VerticalAlignment="Center"/>
+                        <tk:IntegerUpDown Minimum="1"/>
+                    </WrapPanel>
+                    <WrapPanel Margin="0,5,0,0">
+                        <tk:IntegerUpDown Minimum="1"/>
+                        <ComboBox SelectionChanged="ComboBox_SelectionChanged" MinWidth="40"/>
+                        <TextBlock Text="/Square" VerticalAlignment="Center"/>
+                    </WrapPanel>
+                    <WrapPanel Margin="0,5,0,0">
+                        <TextBlock Text="Show Grid "/>
+                        <CheckBox/>
+                    </WrapPanel>
+                    <WrapPanel Margin="0,5,0,0">
+                        <TextBlock Text="Grid Color " VerticalAlignment="Center"/>
+                        <tk:ColorPicker MinWidth="50"/>
+                    </WrapPanel>
+                    <Button Content="Print" Click="Print_Click"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Wall" x:Name="tiWalls">
+                <StackPanel>
+                    <GroupBox Header="Tools">
+                        <StackPanel>
+                            <Button Content="Walls" Click="WallTool_Click"/>
+                            <Button Content="Void" Click="VoidTool_Click"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Brush">
+                        <StackPanel>
+                            <tk:IntegerUpDown Minimum="1" Value="{Binding Brush.Radius}"/>
+                            <ComboBox SelectedValue ="{Binding Brush.Shape}" x:Name="cbBrushShapes"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Reset">
+                        <StackPanel>
+                            <Button Content="SetEmpty" Click="SetEmpty_Click"/>
+                            <Button Content="SetFloor" Click="SetFloor_Click"/>
+                            <Button Content="SetWall" Click="SetWall_Click"/>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Objects" x:Name="tiObjects" />
+        </TabControl>
+        <ToolBarTray  DockPanel.Dock="Top">
+            <ToolBar HorizontalAlignment="Left">
+                <Button Content="Resize" BorderThickness="1" BorderBrush="Black" Click="Resize_Click"/>
+                <Button Content="Grab" BorderThickness="1" BorderBrush="Black" Click="GrabTool_Click"/>
+                <Button Content="Scale" BorderThickness="1" BorderBrush="Black" Click="ScaleTool_Click"/>
+            </ToolBar>
+        </ToolBarTray>
+        <DockPanel>
+            <ToolBarTray DockPanel.Dock="Top" x:Name="spToolBar"/>
+            <UserControl x:Name="CanvasContainer" SizeChanged="CanvasContainer_SizeChanged" 
+                         MouseDown="cvMap_MouseDown" MouseUp="cvMap_MouseUp" MouseMove="cvMap_MouseMove" 
+                         Background="Transparent">
+                <!--<gui:WpfAdapter x:Name="_display" Width="400" Height="400"/>-->
+                <Canvas x:Name="cvMap"/>
+            </UserControl>
+        </DockPanel>
+    </DockPanel>
+</UserControl>

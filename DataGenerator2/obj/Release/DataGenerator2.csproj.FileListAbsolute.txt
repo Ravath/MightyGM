@@ -1,4 +1,0 @@
-C:\Users\Ehlion\Documents\Visual Studio 2015\Projects\MightyGM\DataGenerator2\bin\Release\DataGenerator2.exe
-C:\Users\Ehlion\Documents\Visual Studio 2015\Projects\MightyGM\DataGenerator2\bin\Release\DataGenerator2.pdb
-C:\Users\Ehlion\Documents\Visual Studio 2015\Projects\MightyGM\DataGenerator2\obj\Release\DataGenerator2.exe
-C:\Users\Ehlion\Documents\Visual Studio 2015\Projects\MightyGM\DataGenerator2\obj\Release\DataGenerator2.pdb

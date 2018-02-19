@@ -1,5 +1,0 @@
-C:\Users\Ehlion\Documents\Visual Studio 2015\Projects\MightyGM\DataGenerator2\bin\Debug\DataGenerator2.exe
-C:\Users\Ehlion\Documents\Visual Studio 2015\Projects\MightyGM\DataGenerator2\bin\Debug\DataGenerator2.pdb
-C:\Users\Ehlion\Documents\Visual Studio 2015\Projects\MightyGM\DataGenerator2\obj\Debug\DataGenerator2.csprojResolveAssemblyReference.cache
-C:\Users\Ehlion\Documents\Visual Studio 2015\Projects\MightyGM\DataGenerator2\obj\Debug\DataGenerator2.exe
-C:\Users\Ehlion\Documents\Visual Studio 2015\Projects\MightyGM\DataGenerator2\obj\Debug\DataGenerator2.pdb

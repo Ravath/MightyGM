@@ -171,11 +171,15 @@ namespace Core.Data {
 			IEnumerable<Res> _erase = old.Except(save).ToList();
 			IEnumerable<Res> _insert = save.Except(old).ToList();
 			IEnumerable<Res> _keep = save.Intersect(old).ToList();
+
+			Jointure[] oldData = (from q in Data.GetTable<Jointure>() select q).ToArray();
+
 			foreach(Res item in _erase) {//enlever ceux qui ne servent plus
-				var q = from c in Data.GetTable<Jointure>()
-					    where (saveToLeft ? c.Object1Id : c.Object2Id) == item.Id
-						select c;
-				foreach(Jointure ji in q.ToArray()) {
+				Jointure[] q = oldData.Where(c => (saveToLeft ? c.Object1Id : c.Object2Id) == item.Id).ToArray();
+				//var q = from c in Data.GetTable<Jointure>()
+				//	    where (saveToLeft ? c.Object1Id : c.Object2Id) == item.Id
+				//		select c;
+				foreach(Jointure ji in q) {
 					ji.DeleteObject();
 				}
 			}
@@ -222,15 +226,22 @@ namespace Core.Data {
 		}
 		protected void SaveDataValue<DV,V>( IEnumerable<V> old, IEnumerable<V> save )
 				where DV : class, IDataValue, new()
-                where V : IEquatable<V> {
+                 {
+			if(old == null) { old = new List<V>(); }
+
 			IEnumerable<V> _erase = old.Except(save).ToList();
 			IEnumerable<V> _insert = save.Except(old).ToList();
 			IEnumerable<V> _keep = save.Intersect(old).ToList();
-			var oldData = from c in Data.GetTable<DV>()
-					where c.FromId == Id
-					select c;
+
+			IEnumerable<DV> oldData = (from q in Data.GetTable<DV>() select q).ToArray().Where(p => p.FromId == Id);
+
+			//var oldData = (from c in Data.GetTable<DV>()
+			//		where c.FromId == Id
+			//		select c).ToList();
+
 			foreach(V val in _erase) {//enlever ceux qui ne servent plus
-				oldData.Single(p => p.Value.Equals(val)).DeleteObject();
+				DV d = oldData.Single(p => p.Value.Equals(val));
+				d.DeleteObject();
 			}
 			foreach(V item in _insert) {//rajouter les nouveaux
 				DV j = new DV();
@@ -241,10 +252,14 @@ namespace Core.Data {
 		}
 		protected void DeleteDataValue<DV>() 
 				where DV : class, IDataValue {
-			var q = from c in Data.GetTable<DV>()
-					where c.FromId == Id
-					select c;
-			foreach(DV j in q.ToArray()) {
+
+			DV[] dv = (from c in Data.GetTable<DV>() select c).ToArray();
+
+			//var q = from c in Data.GetTable<DV>()
+			//		where c.FromId == Id
+			//		select c;
+
+			foreach(DV j in dv.Where(p => p.FromId == Id)) {
 				j.DeleteObject();
 			}
 		}

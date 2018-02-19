@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="Shadowrun5Wpf.Fiches.FicheGrunt"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Shadowrun5Wpf.Fiches"
+             xmlns:tk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+             xmlns:core="clr-namespace:CoreWpf.UI;assembly=Core"
+             mc:Ignorable="d">
+    <TabControl>
+        <TabItem Header="Grunt">
+            <StackPanel Margin="5">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="xgName" FontSize="13.333" TextDecorations="Underline" FontWeight="Bold" MinWidth="150"/>
+                    <TextBlock Text="Metatype: " VerticalAlignment="Center" Margin="10,0,0,0"/>
+                    <ComboBox x:Name="xgMetatype" VerticalAlignment="Center" MinWidth="100" SelectionChanged="xgMetatype_SelectionChanged"/>
+                </StackPanel>
+                <local:FicheAttributs x:Name="cfgAttributs"/>
+                <local:FicheCollectionCompetences x:Name="cfgCompetences" MinHeight="200"/>
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="Lieutenant">
+            <StackPanel Margin="5">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="xlName" FontSize="13.333" TextDecorations="Underline" FontWeight="Bold" MinWidth="150"/>
+                    <TextBlock Text="Metatype: " VerticalAlignment="Center" Margin="10,0,0,0"/>
+                    <ComboBox x:Name="xlMetatype" VerticalAlignment="Center" MinWidth="100" SelectionChanged="xlMetatype_SelectionChanged"/>
+                </StackPanel>
+                <local:FicheAttributs x:Name="cflAttributs"/>
+                <local:FicheCollectionCompetences x:Name="cflCompetences" MinHeight="200"/>
+            </StackPanel>
+        </TabItem>
+    </TabControl>
+</UserControl>
