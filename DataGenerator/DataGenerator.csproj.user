@@ -2,8 +2,8 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <StartAction>Program</StartAction>
-    <StartProgram>C:\Users\Ehlion\Documents\Visual Studio 2015\Projects\MightyGM\DataGenerator2\bin\Debug\DataGenerator2.exe</StartProgram>
-    <StartWorkingDirectory>C:\Users\Ehlion\Documents\Visual Studio 2015\Projects\MightyGM\DataGenerator2\bin\Debug\</StartWorkingDirectory>
+    <StartProgram>C:\Users\Ehlion\source\repos\MightyGM\DataGenerator\bin\Debug\DataGenerator.exe</StartProgram>
+    <StartWorkingDirectory>C:\Users\Ehlion\source\repos\MightyGM\DataGenerator\bin\Debug\</StartWorkingDirectory>
     <StartArguments>test.txt</StartArguments>
   </PropertyGroup>
 </Project>

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace DataGenerator.CSharp
 {
 	/// <summary>
-	/// A Collection of CSAnnotations.
+	/// A Collection of C# Annotations.
 	/// </summary>
 	public class CSAnnotationCollection
 	{

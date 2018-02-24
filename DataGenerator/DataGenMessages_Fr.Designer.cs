@@ -61,7 +61,25 @@ namespace DataGenerator {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Table {0} : Attribute {1} : {2} value is not expected but one was found.
+        ///   Recherche une chaîne localisée semblable à Table {0} : Attribute {1} : Can&apos;t find Enum {2}.
+        /// </summary>
+        internal static string ATT_ENUM_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("ATT_ENUM_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Table {0} : {1} is a forbidden name.
+        /// </summary>
+        internal static string ATT_FORBIDDEN_NAME {
+            get {
+                return ResourceManager.GetString("ATT_FORBIDDEN_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Table {0} : Attribute {1} : {2} value is not expected but &apos;{3}&apos; was found.
         /// </summary>
         internal static string ATT_FOUND {
             get {
@@ -84,6 +102,42 @@ namespace DataGenerator {
         internal static string ATT_NOT_FOUND {
             get {
                 return ResourceManager.GetString("ATT_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Table {0} : Attribute {1} : Can&apos;t find the attribute {2} of table {3}.
+        /// </summary>
+        internal static string ATT_REF_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("ATT_REF_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Table {0} : Attribute {1} : expected the attribute {2} of table {3} to be a reference.
+        /// </summary>
+        internal static string ATT_REF_NOT_REF {
+            get {
+                return ResourceManager.GetString("ATT_REF_NOT_REF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Table {0} : Attribute {1} : A Refex can&apos;t reference a struct.
+        /// </summary>
+        internal static string ATT_REFEX_TO_STRUCT_ERROR {
+            get {
+                return ResourceManager.GetString("ATT_REFEX_TO_STRUCT_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Table {0} : Attribute {1} : Can&apos;t find Table {2}.
+        /// </summary>
+        internal static string ATT_TABLE_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("ATT_TABLE_NOT_FOUND", resourceCulture);
             }
         }
         
@@ -115,11 +169,29 @@ namespace DataGenerator {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Entity tag {0} doesn&apos;t exists.
+        ///   Recherche une chaîne localisée semblable à Entity &apos;{0}&apos; doesn&apos;t exists.
         /// </summary>
         internal static string ENTITY_UNKNOWN_TAG {
             get {
                 return ResourceManager.GetString("ENTITY_UNKNOWN_TAG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à {0} : The name {1} has been found twice.
+        /// </summary>
+        internal static string ERR_DUPLICATE {
+            get {
+                return ResourceManager.GetString("ERR_DUPLICATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Table {0} : Attribute {1} : Type {2} and Type {3} are incompatible.
+        /// </summary>
+        internal static string GEN_REL_TYPES {
+            get {
+                return ResourceManager.GetString("GEN_REL_TYPES", resourceCulture);
             }
         }
         
@@ -142,6 +214,15 @@ namespace DataGenerator {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Table {0} is a forbidden name.
+        /// </summary>
+        internal static string TABLE_FORBIDDEN_NAME {
+            get {
+                return ResourceManager.GetString("TABLE_FORBIDDEN_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Table {0} : Musn&apos;t have a Major Tag.
         /// </summary>
         internal static string TABLE_MAJOR_TAG_FOUND {
@@ -151,11 +232,38 @@ namespace DataGenerator {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Table without Name has been found.
+        /// </summary>
+        internal static string TABLE_NO_NAME {
+            get {
+                return ResourceManager.GetString("TABLE_NO_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Table {0} : Can&apos;t find table {1}.
         /// </summary>
-        internal static string TABLE_NOT_FOUND_PARENT {
+        internal static string TABLE_NOT_FOUND {
             get {
-                return ResourceManager.GetString("TABLE_NOT_FOUND_PARENT", resourceCulture);
+                return ResourceManager.GetString("TABLE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Table {0} : tag {1} is duplicated.
+        /// </summary>
+        internal static string TAG_DUPLICATE {
+            get {
+                return ResourceManager.GetString("TAG_DUPLICATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Table {0} : tag {2} is forbidden for tables of type {2}.
+        /// </summary>
+        internal static string TAG_FORBIDDEN {
+            get {
+                return ResourceManager.GetString("TAG_FORBIDDEN", resourceCulture);
             }
         }
         

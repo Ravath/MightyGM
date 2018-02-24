@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
-namespace DataGenerator.CSharp {
+namespace DataGenerator.CSharp
+{
 	/// <summary>
 	/// Sort of specialized string builder for writing code, with indentations (see 't' and 'ut')
 	/// </summary>
@@ -15,41 +12,80 @@ namespace DataGenerator.CSharp {
 			this.sb = sb;
 			this.ic = ic;
 		}
-
+		/// <summary>
+		/// Add some text after the necessary indentation and return to a new line.
+		/// </summary>
+		/// <param name="line">Text to Add.</param>
+		/// <returns></returns>
 		public CodeWriter AddIndLine( string line ) {
 			sb.AppendLine(ic + line);
 			return this;
 		}
+		/// <summary>
+		/// Add some text after the necessary indentation.
+		/// </summary>
+		/// <param name="line">Text to Add.</param>
+		/// <returns></returns>
 		public CodeWriter AddInd( string line ) {
 			sb.Append(ic + line);
 			return this;
 		}
+		/// <summary>
+		/// Add text.
+		/// </summary>
+		/// <param name="line">Text to Add.</param>
+		/// <returns></returns>
 		public CodeWriter Add( string line ) {
 			sb.Append(line);
 			return this;
 		}
+		/// <summary>
+		/// Add text and return to a new line.
+		/// </summary>
+		/// <param name="line">Text to Add.</param>
+		/// <returns></returns>
 		public CodeWriter AddLine( string line ) {
 			sb.AppendLine(line);
 			return this;
 		}
+		/// <summary>
+		/// New Line.
+		/// </summary>
+		/// <returns></returns>
 		public CodeWriter nl() {
 			sb.AppendLine();
 			return this;
 		}
+		/// <summary>
+		/// New Line and increase Tabulation.
+		/// </summary>
+		/// <returns></returns>
 		public CodeWriter nlt() {
 			sb.AppendLine();
 			ic.Count++;
 			return this;
 		}
+		/// <summary>
+		/// New Line and decrease Tabulation.
+		/// </summary>
+		/// <returns></returns>
 		public CodeWriter nlut() {
 			sb.AppendLine();
 			ic.Count--;
 			return this;
 		}
+		/// <summary>
+		/// Decrease Tabulation.
+		/// </summary>
+		/// <returns></returns>
 		public CodeWriter ut() {
 			ic.Count--;
 			return this;
 		}
+		/// <summary>
+		/// Increase Tabulation.
+		/// </summary>
+		/// <returns></returns>
 		public CodeWriter t() {
 			ic.Count++;
 			return this;
@@ -105,7 +141,6 @@ namespace DataGenerator.CSharp {
 		public CodeWriter Foreach( string parenthese, string block ) {
 			ForeachStart(parenthese);
 			return AddBlock(block).nl().EndBlock().nl();
-            //return NamedBlock("foreach",parenthese, block);
 		}
 		public CodeWriter ForeachStart( string parenthese ) {
 			return NamedBlockStart("foreach", parenthese );

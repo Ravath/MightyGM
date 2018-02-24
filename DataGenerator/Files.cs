@@ -1,12 +1,12 @@
-﻿using System;
+﻿using DataGenerator.CSharp;
+using DataGenerator.SQL;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using DataGenerator.SQL;
-using DataGenerator.CSharp;
 
-namespace DataGenerator {
+namespace DataGenerator
+{
 	/// <summary>
 	/// A file with specific content to be writen.
 	/// </summary>

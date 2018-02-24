@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DataGenerator.DataModel.Model;
 using DataGenerator.SQL;
-using DataGenerator.DataModel;
+using System.Collections.Generic;
+using System.Text;
 
-namespace DataGenerator.CSharp {
-
+namespace DataGenerator.CSharp
+{
+	/// <summary>
+	/// A C# Attribute, with a property, some private members, annotations, and eventualy the associated SQL column.
+	/// </summary>
 	public abstract class CSAttribute {
 		#region members
 		private string _name;
@@ -57,41 +56,22 @@ namespace DataGenerator.CSharp {
 
 		#region Init
 		public CSAttribute( string name ) { Name = name; }
-		public CSAttribute( ValueAttribute att ) {
+		public CSAttribute(AbsDataStructAttribute att)
+		{
 			Name = att.Name;
-			IsNullable = att.CardMin == Number.Opt;
-			IsCollection = att.CardMax == Number.Many;
-			if(att.Type.Type == AttributeTypeEnum.Text)
-				Annotations.AddAnnotation("LargeText");
+			IsNullable = att.CanBeNull;
+			IsCollection = att.IsCollection;
 		}
 		#endregion
 
+		private List<SQLAttribute> _sqlAttributes = new List<SQLAttribute>();
 		public void AddRelationToSQLAttribute( SQLAttribute sa ) {
 			Annotations.AddAnnotation(new CSColumnAnnotation(Name, sa.Name));
+			_sqlAttributes.Add(sa);
 		}
-
-		public static CSValueEnum ConvertAttributeType( AttributeTypeEnum t ) {
-			switch(t) {
-				case AttributeTypeEnum.Int: return CSValueEnum.Int;
-				case AttributeTypeEnum.Text:
-				return CSValueEnum.String;
-				case AttributeTypeEnum.Varchar:
-				return CSValueEnum.String;
-				case AttributeTypeEnum.Bool:
-				return CSValueEnum.Bool;
-				case AttributeTypeEnum.Enum:
-				return CSValueEnum.Int;
-				case AttributeTypeEnum.Real:
-				return CSValueEnum.Double;
-				case AttributeTypeEnum.Decimal:
-				return CSValueEnum.Decimal;
-				case AttributeTypeEnum.Refex:
-				return CSValueEnum.Int;
-				case AttributeTypeEnum.Ref:
-				return CSValueEnum.Int;
-				default:
-				return CSValueEnum.Int;
-			}
+		public IEnumerable<SQLAttribute> GetSQLAttributes()
+		{
+			return _sqlAttributes;
 		}
 
 		public abstract void CreateString( StringBuilder sb, IndentationCount indentation );
@@ -118,7 +98,7 @@ namespace DataGenerator.CSharp {
 
 	public abstract class AbstractCSValueAttribute : CSAttribute {
 		public AbstractCSValueAttribute( string name ) : base(name) { }
-		public AbstractCSValueAttribute( ValueAttribute att ) : base(att) { }
+		public AbstractCSValueAttribute(AbsDataStructAttribute att) : base(att){ }
 		public abstract CSValueEnum Type {
 			get; set;
 		}
@@ -131,6 +111,7 @@ namespace DataGenerator.CSharp {
 
 		#region Members
 		private CSValueEnum _type;
+		private AbsDataStructAttribute att;
 		#endregion
 
 		#region Properties
@@ -142,9 +123,7 @@ namespace DataGenerator.CSharp {
 
 		#region Init
 		public CSValueAttribute( string name ) : base(name) { }
-		public CSValueAttribute( ValueAttribute att ) : base(att) {
-			Type = ConvertAttributeType(att.Type.Type);
-		}
+		public CSValueAttribute(AbsDataStructAttribute att) : base(att){}
 		#endregion
 
 		#region String Generation
@@ -188,15 +167,20 @@ namespace DataGenerator.CSharp {
 			sb.Append(indentation + "}");
 		}
 		#endregion
+
 	}
 	/// <summary>
 	/// Specific CSValueAttribute for Enumerations.
 	/// </summary>
 	public class CSEnumAttribute : CSValueAttribute {
+
 		public CSEnum Enumeration { get; set; }
 		public CSEnumAttribute( string name ) : base(name) { }
-		public CSEnumAttribute( ValueAttribute vat, CSEnum enumeration ) : base(vat) {
+
+		public CSEnumAttribute(AbsDataStructAttribute att, CSEnum enumeration) : base(att)
+		{
 			Enumeration = enumeration;
+			Type = CSValueEnum.Int;
 		}
 
 		protected override string StringType( CSValueEnum type ) {
@@ -317,7 +301,6 @@ namespace DataGenerator.CSharp {
 			Annotations.CreateString(sb, ind);
 			//Propriété
 			sb.AppendLine(ind + "public " + className + " " + PascalCaseName + "{");
-			//TODO ajouter une relation dans le cas OneToOne
 			sb.AppendFormat(
 @"{5}	get {0}
 {5}		if({2} == null) {0}
@@ -411,7 +394,6 @@ namespace DataGenerator.CSharp {
 			Annotations.CreateString(sb, ind);
 			//Propriété
 			sb.AppendLine(ind + "public " + className + " " + PascalCaseName + "{");
-			//TODO ajouter une relation dans cas OneToOne
 			sb.AppendFormat(
 @"{5}	get {0}
 {5}		if({2} == null) {0}
@@ -471,26 +453,10 @@ namespace DataGenerator.CSharp {
 	public class CSDescriptionAttribute : CSReferenceClass {
 
 		#region Init
-		public CSDescriptionAttribute( CSClass reference, string name ) : base(reference, name) { }
+		public CSDescriptionAttribute( CSClass reference ) : base(reference, "Description") { }
 		#endregion
 
 		public override void CreateString( StringBuilder sb, IndentationCount ind ) {
-			//private ObjectDescription _obj;
-			//public override IDataDescription Description {
-			//	get {
-			//		if(_obj == null) {
-			//			IEnumerable<ObjectDescription> id = GetModelReferencer<ObjectDescription>();
-			//			if(id.Count() == 0) {
-			//				_obj = new ObjectDescription();
-			//				_obj.Model = this;
-			//				_obj.SaveObject();
-			//			} else {
-			//				_obj = id.ElementAt(0);
-			//			}
-			//		}
-			//		return _obj;
-			//	}
-			//}
 			CodeWriter cw = new CodeWriter(sb, ind).
 				AddIndLine("private " + ReferencedClass.Name + " _obj;");
 			Annotations.CreateString(sb, ind);

@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DataGenerator.CSharp {
-
+namespace DataGenerator.CSharp
+{
+	/// <summary>
+	/// A C# annotation.
+	/// </summary>
 	public class CSAnnotation {
 		#region Members
 		private Dictionary<string, object> _args = new Dictionary<string, object>();

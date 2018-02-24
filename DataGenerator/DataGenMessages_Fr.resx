@@ -117,9 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ATT_ENUM_NOT_FOUND" xml:space="preserve">
+    <value>Table {0} : Attribute {1} : Can't find Enum {2}</value>
+    <comment>tableName, attributeName, referencedEnumName</comment>
+  </data>
+  <data name="ATT_FORBIDDEN_NAME" xml:space="preserve">
+    <value>Table {0} : {1} is a forbidden name</value>
+    <comment>tableName, attributeName</comment>
+  </data>
   <data name="ATT_FOUND" xml:space="preserve">
-    <value>Table {0} : Attribute {1} : {2} value is not expected but one was found</value>
-    <comment>tableName, attributeName, attributeTypeName</comment>
+    <value>Table {0} : Attribute {1} : {2} value is not expected but '{3}' was found</value>
+    <comment>tableName, attributeName, attributeTypeName, foundValue</comment>
   </data>
   <data name="ATT_NOT_FOUND" xml:space="preserve">
     <value>Table {0} : Attribute {1} : {2} value is expected but not found</value>
@@ -128,6 +136,22 @@
   <data name="ATT_NO_NAME" xml:space="preserve">
     <value>Table {0} : Attribute without name</value>
     <comment>tableName</comment>
+  </data>
+  <data name="ATT_REFEX_TO_STRUCT_ERROR" xml:space="preserve">
+    <value>Table {0} : Attribute {1} : A Refex can't reference a struct</value>
+    <comment>tableName, attributeName</comment>
+  </data>
+  <data name="ATT_REF_NOT_FOUND" xml:space="preserve">
+    <value>Table {0} : Attribute {1} : Can't find the attribute {2} of table {3}</value>
+    <comment>tableName, attributeName, referencedTableName, referencedRefName</comment>
+  </data>
+  <data name="ATT_REF_NOT_REF" xml:space="preserve">
+    <value>Table {0} : Attribute {1} : expected the attribute {2} of table {3} to be a reference</value>
+    <comment>tableName, attributeName, referencedTableName, referencedRefName</comment>
+  </data>
+  <data name="ATT_TABLE_NOT_FOUND" xml:space="preserve">
+    <value>Table {0} : Attribute {1} : Can't find Table {2}</value>
+    <comment>tableName, attributeName, referencedRefName</comment>
   </data>
   <data name="ATT_UNKNOWN_TYPE" xml:space="preserve">
     <value>Table {0} : Attribute {1} : {2} value is unknown type</value>
@@ -142,8 +166,16 @@
     <comment>tableName, attributeName, attributeValue</comment>
   </data>
   <data name="ENTITY_UNKNOWN_TAG" xml:space="preserve">
-    <value>Entity tag {0} doesn't exists</value>
-    <comment>entityTag</comment>
+    <value>Entity '{0}' doesn't exists</value>
+    <comment>entityName</comment>
+  </data>
+  <data name="ERR_DUPLICATE" xml:space="preserve">
+    <value>{0} : The name {1} has been found twice</value>
+    <comment>contextName, duplicateName</comment>
+  </data>
+  <data name="GEN_REL_TYPES" xml:space="preserve">
+    <value>Table {0} : Attribute {1} : Type {2} and Type {3} are incompatible</value>
+    <comment>tableName, attributeName, type1Name, type2Name</comment>
   </data>
   <data name="NO_TAGS_EXPECTED" xml:space="preserve">
     <value>Table {0} didn't expect any tag</value>
@@ -153,13 +185,29 @@
     <value>Table {0} : Name is already used</value>
     <comment>tableName</comment>
   </data>
+  <data name="TABLE_FORBIDDEN_NAME" xml:space="preserve">
+    <value>Table {0} is a forbidden name</value>
+    <comment>tableName</comment>
+  </data>
   <data name="TABLE_MAJOR_TAG_FOUND" xml:space="preserve">
     <value>Table {0} : Musn't have a Major Tag</value>
     <comment>tableName</comment>
   </data>
-  <data name="TABLE_NOT_FOUND_PARENT" xml:space="preserve">
+  <data name="TABLE_NOT_FOUND" xml:space="preserve">
     <value>Table {0} : Can't find table {1}</value>
-    <comment>tableName, parentTableName</comment>
+    <comment>tableName, expectedTableName</comment>
+  </data>
+  <data name="TABLE_NO_NAME" xml:space="preserve">
+    <value>Table without Name has been found</value>
+    <comment>_</comment>
+  </data>
+  <data name="TAG_DUPLICATE" xml:space="preserve">
+    <value>Table {0} : tag {1} is duplicated</value>
+    <comment>tableName, tagName</comment>
+  </data>
+  <data name="TAG_FORBIDDEN" xml:space="preserve">
+    <value>Table {0} : tag {2} is forbidden for tables of type {2}</value>
+    <comment>tableName, tagName, tableTypeName</comment>
   </data>
   <data name="UNKNOWN_SECTION" xml:space="preserve">
     <value>Table {0} : Section {1} is unknown</value>

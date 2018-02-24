@@ -58,34 +58,35 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataGenMessages_Fr.resx</DependentUpon>
     </Compile>
-    <Compile Include="DataModel2\AttributeCheck.cs">
-      <Generator>ResXFileCodeGenerator</Generator>
-    </Compile>
-    <Compile Include="DataModel2\AttributeConverter\AbsAttributeCardinalityConverter.cs" />
-    <Compile Include="DataModel2\AttributeConverter\AbsAttributeNameConverter.cs" />
-    <Compile Include="DataModel2\AttributeConverter\AbsAttributeReflexReferenceConverter.cs" />
-    <Compile Include="DataModel2\AttributeConverter\AbsAttributeTypeConverter.cs" />
-    <Compile Include="DataModel2\AttributeConverter\AttributeConverter.cs" />
-    <Compile Include="DataModel2\AttributeConverter\AttributeSectionConverter.cs" />
-    <Compile Include="DataModel2\Converter.cs" />
-    <Compile Include="DataModel2\EntityConverter\EntityNameConverter.cs" />
-    <Compile Include="DataModel2\Model\DataAttribute.cs" />
-    <Compile Include="DataModel2\Model\DataEntity.cs" />
-    <Compile Include="DataModel2\Model\DataDice.cs" />
-    <Compile Include="DataModel2\Model\DataEnum.cs" />
-    <Compile Include="DataModel2\DataModel.cs" />
-    <Compile Include="DataModel2\Model\DataObject.cs" />
-    <Compile Include="DataModel2\Model\DataStruct.cs" />
-    <Compile Include="DataModel2\EntityConverter\DataConverter.cs" />
-    <Compile Include="DataModel2\EntityConverter\DataObjectConverter.cs" />
-    <Compile Include="DataModel2\EntityConverter\DataStructConverter.cs" />
-    <Compile Include="DataModel2\EntityConverter\DiceConverter.cs" />
-    <Compile Include="DataModel2\EntityConverter\AbsEntityConverter.cs" />
-    <Compile Include="DataModel2\EntityConverter\EnumConverter.cs" />
-    <Compile Include="DataModel2\EntityConverter\TagConverter.cs" />
-    <Compile Include="DataModel2\KeyWordEnum.cs" />
-    <Compile Include="DataModel2\Model\PredefinedDataObjectAttributes.cs" />
-    <Compile Include="Generation.cs" />
+    <Compile Include="DataModel\AttributeConvert\CardinalityConverter.cs" />
+    <Compile Include="DataModel\AttributeConvert\AbsAttributeConverter.cs" />
+    <Compile Include="DataModel\AttributeConvert\NameConverter.cs" />
+    <Compile Include="DataModel\AttributeConvert\TargetConverter.cs" />
+    <Compile Include="DataModel\AttributeConvert\TypeConverter.cs" />
+    <Compile Include="DataModel\AttributeConvert\AttributeConverter.cs" />
+    <Compile Include="DataModel\AttributeConvert\SectionConverter.cs" />
+    <Compile Include="DataModel\Converter.cs" />
+    <Compile Include="DataModel\EntityConvert\MajorTagConverter.cs" />
+    <Compile Include="DataModel\EntityConvert\EntityNameConverter.cs" />
+    <Compile Include="DataModel\Generation.cs" />
+    <Compile Include="DataModel\Model\AbsDataStruct.cs" />
+    <Compile Include="DataModel\Model\AttributeCollection.cs" />
+    <Compile Include="DataModel\Model\DataEntity.cs" />
+    <Compile Include="DataModel\Model\DataDice.cs" />
+    <Compile Include="DataModel\Model\DataEnum.cs" />
+    <Compile Include="DataModel\DatabaseModel.cs" />
+    <Compile Include="DataModel\Model\DataObject.cs" />
+    <Compile Include="DataModel\Model\AbsDataStructAttribute.cs" />
+    <Compile Include="DataModel\Model\DataObjectReferenceAttributes.cs" />
+    <Compile Include="DataModel\Model\DataObjectSimpleAttributes.cs" />
+    <Compile Include="DataModel\Model\DataStruct.cs" />
+    <Compile Include="DataModel\EntityConvert\DataObjectConverter.cs" />
+    <Compile Include="DataModel\EntityConvert\DataStructConverter.cs" />
+    <Compile Include="DataModel\EntityConvert\DataDiceConverter.cs" />
+    <Compile Include="DataModel\EntityConvert\AbsEntityConverter.cs" />
+    <Compile Include="DataModel\EntityConvert\DataEnumConverter.cs" />
+    <Compile Include="DataModel\EntityConvert\MinorTagConverter.cs" />
+    <Compile Include="DataModel\Model\DataObjectComplexeAttributes.cs" />
     <Compile Include="Parser\DataParser.cs" />
     <Compile Include="Parser\DataParserGenerated.cs" />
     <Compile Include="Parser\GplexBuffers.cs" />
@@ -93,20 +94,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Parser\RawTable.cs" />
     <Compile Include="Parser\ShiftReduceParserCode.cs" />
-    <Compile Include="DataModel\ValueType.cs" />
     <Compile Include="CSharp\CSAnnotation.cs" />
     <Compile Include="CSharp\CSEntity.cs" />
     <Compile Include="CSharp\CSAttribute.cs" />
     <Compile Include="CSharp\CSNamespace.cs" />
-    <Compile Include="DataModel\Database.cs" />
-    <Compile Include="DataModel\DataConstructor.cs" />
-    <Compile Include="DataModel\Attributes.cs" />
-    <Compile Include="DataModel\DetailedTables.cs" />
     <Compile Include="ErrorManager.cs" />
     <Compile Include="Files.cs" />
     <Compile Include="IndentationCount.cs" />
-    <Compile Include="CSharp\IWriteCsAttribute.cs" />
-    <Compile Include="ModelGenerator.cs" />
     <Compile Include="Repertory.cs" />
     <Compile Include="SQL\PredefinedAttributes.cs" />
     <Compile Include="SQL\PredefinedConstraints.cs" />
@@ -114,16 +108,10 @@
     <Compile Include="SQL\SQLConstraint.cs" />
     <Compile Include="SQL\SQLSchema.cs" />
     <Compile Include="SQL\SQLTable.cs" />
-    <Compile Include="DataModel\DataTable.cs" />
-    <Compile Include="DataModel\AbsTable.cs" />
-    <Compile Include="DataModel\DiceTable.cs" />
-    <Compile Include="DataModel\EnumTable.cs" />
-    <Compile Include="DataModel\StructTable.cs" />
     <Compile Include="SQL\SQLTypeEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="CSharp\CSharp.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

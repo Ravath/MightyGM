@@ -1,10 +1,5 @@
-﻿using DataGenerator.DataModel;
-using DataGenerator.SQL;
+﻿using DataGenerator.SQL;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataGenerator.CSharp
 {
@@ -22,43 +17,45 @@ namespace DataGenerator.CSharp
 		{
 			Parent = DataObject;
 			//table sql
-			SQLTable sql = new SQLTable(name);
-			sql.Schema = schema;
-			sql.Parent = sqlDataObject;
+			SQLTable sql = new SQLTable(name)
+			{
+				Schema = schema,
+				Parent = sqlDataObject
+			};
 			AddRelationToSqlTable(sql);
 		}
 	}
 
 	public class CSStruct : CSDataObject
 	{
-		public CSStruct(StructTable table, SQLSchema schema) : base(table.Name, schema)
+		public CSStruct(string name, SQLSchema schema, bool isAbstract) : base(name, schema)
 		{
-			Abstract = table.IsAbstract;
+			Abstract = isAbstract;
 			Partial = true;
-			if (!table.IsAbstract)
+			if (!Abstract)
 				Annotations.AddAnnotation(new CSAnnotation() { Name = "CoreData" });
 		}
 	}
 
 	public class CSDataModel : CSDataObject
 	{
-		public CSDataModel(DataTable table, SQLSchema schema) : base(ModelGenerator.ClassNameFromTableName(table.Name, Section.Model), schema)
+		public CSDataModel(String tableName, SQLSchema schema, bool isAbstract) : base(tableName+"Model", schema)
 		{
 			Parent = ModelClass;
-			Abstract = table.IsAbstract;
+			Abstract = isAbstract;
 			Partial = true;
-			if (!table.IsAbstract)
+			if (!isAbstract)
 				Annotations.AddAnnotation(new CSAnnotation() { Name = "CoreData" });
 		}
 		public static readonly CSClass ModelClass = new CSClass("DataModel");
 	}
 
-	public class CSDataExemplaire : CSDataObject
+	public class CSDataExemplar : CSDataObject
 	{
-		public CSDataExemplaire(DataTable table, SQLSchema schema) : base(ModelGenerator.ClassNameFromTableName(table.Name, Section.Exemplar), schema)
+		public CSDataExemplar(String tableName, SQLSchema schema, bool isAbstract) : base(tableName+"Exemplar", schema)
 		{
 			Parent = ExemplarClass;
-			Abstract = table.IsAbstract;
+			Abstract = isAbstract;
 			Partial = true;
 		}
 		public static readonly CSClass ExemplarClass = new CSClass("DataExemplaire");
@@ -66,10 +63,10 @@ namespace DataGenerator.CSharp
 
 	public class CSDataDescription : CSDataObject
 	{
-		public CSDataDescription(DataTable table, SQLSchema schema) : base(ModelGenerator.ClassNameFromTableName(table.Name, Section.Description), schema)
+		public CSDataDescription(String tableName, SQLSchema schema, bool isAbstract) : base(tableName+"Description", schema)
 		{
 			Parent = DescriptionClass;
-			Abstract = table.IsAbstract;
+			Abstract = isAbstract;
 			Partial = true;
 		}
 		public static readonly CSClass DescriptionClass = new CSClass("DataDescription");
@@ -99,7 +96,7 @@ namespace DataGenerator.CSharp
 		#endregion
 		public CSRelationClass(CSClass c1, CSClass c2, SQLSchema schema, string cplName) : base(c1.Name + "To" + c2.Name + "_" + cplName, schema)
 		{
-			create(c1, c2);
+			Create(c1, c2);
 			/* if the jointure is a self reference, 
 				must differentiate the names by using the attribute name, 
 				because class names aren't enought */
@@ -111,7 +108,7 @@ namespace DataGenerator.CSharp
 		}
 		public CSRelationClass(CSClass c1, CSClass c2, SQLSchema schema, string att1, string att2) : base(c1.Name + att1 + "To" + c2.Name + att2, schema)
 		{
-			create(c1, c2);
+			Create(c1, c2);
 			/* if the jointure is a self reference, 
 				must differentiate the names by using the attributes names, 
 				because class names aren't enought */
@@ -123,7 +120,7 @@ namespace DataGenerator.CSharp
 				_k1.Name += att2;
 			}
 		}
-		private void create(CSClass c1, CSClass c2)
+		private void Create(CSClass c1, CSClass c2)
 		{
 			//creation classe et table
 			_c1 = c1;
@@ -160,7 +157,7 @@ namespace DataGenerator.CSharp
 		public AbstractCSValueAttribute ValueAttribute { get { return _att; } }
 		public CSDataValueReferenceToClass Conteneur { get { return _classReference; } }
 
-		public CSDataValueClass(CSClass from, CSValueAttribute value, SQLAttribute sqlValue, SQLSchema schema)
+		public CSDataValueClass(CSClass from, CSValueAttribute value, SQLSchema schema)
 				: base(value.Name + "From" + from.Name, schema)
 		{
 			_class = from;
@@ -172,7 +169,6 @@ namespace DataGenerator.CSharp
 			SQLForeignKeyAttribute sqlForeignKey = new SQLForeignKeyAttribute(from, "from");
 			//SQLTable.AddAttribute(new SQLID());
 			SQLTable.AddAttribute(sqlForeignKey);
-			SQLTable.AddAttribute(sqlValue);
 			//attributs de la classe C#
 			//référence vers le conteneur
 			CSDataValueForeignKey foreignKey = new CSDataValueForeignKey(sqlForeignKey, from.Name);

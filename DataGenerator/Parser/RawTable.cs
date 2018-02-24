@@ -22,6 +22,12 @@ namespace DataGenerator.Parser {
 		public string MajorTag;
 		public List<string> MinorTags = new List<string>();
 		public List<RawAttribute> Attributes = new List<RawAttribute>();
+
+		public RawAttribute FindRawAttributeByName(string name)
+		{
+			string ln = name.ToLower();
+			return Attributes.SingleOrDefault(a => a.Name.ToLower() == ln);
+		}
 	}
 	/// <summary>
 	/// The raw description of the attribute of a table to create.

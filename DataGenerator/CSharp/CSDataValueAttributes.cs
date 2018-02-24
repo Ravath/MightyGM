@@ -1,10 +1,11 @@
 ﻿using DataGenerator.SQL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
-namespace DataGenerator.CSharp {
+namespace DataGenerator.CSharp
+{
+	/// <summary>
+	/// 
+	/// </summary>
 	public class CSDataValueProperty : AbstractCSValueAttribute {
 		private CSValueAttribute _valueAttribute;
 		public CSDataValueProperty( CSValueAttribute va ) : base(va.Name){
@@ -27,6 +28,10 @@ namespace DataGenerator.CSharp {
 		}
 	}
 
+
+	/// <summary>
+	/// 
+	/// </summary>
 	public class CSDataValueCollectionReference : CSReferenceClass {
 		private CSDataValueReferenceToClass _conteneur;
 		public CSDataValueReferenceToClass Conteneur { get { return _conteneur; } }
@@ -64,15 +69,12 @@ namespace DataGenerator.CSharp {
 				EndBlock().nl().
 				SetStart().
 					AddIndLine("SaveDataValue<" + ReferencedClass.Name + ", " + valType + ">("+ privName+", value);").
-					//Foreach("var item in " + privName,
-					//		"item.From = null;").nl().
-					//AddIndLine(privName + " = value;").
-					//Foreach("var item in value",
-					//		"item.From = this;").nl().
 				EndBlock().nl().
 			EndBlock();
         }
 	}
+
+
 	/// <summary>
 	/// 
 	/// </summary>
@@ -93,6 +95,8 @@ namespace DataGenerator.CSharp {
 				);
 		}
 	}
+
+
 	/// <summary>
 	/// 
 	/// </summary>

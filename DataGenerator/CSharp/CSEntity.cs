@@ -1,11 +1,11 @@
-﻿using System;
+﻿using DataGenerator.SQL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using DataGenerator.SQL;
-using DataGenerator.DataModel;
 
-namespace DataGenerator.CSharp {
+namespace DataGenerator.CSharp
+{
 
 	public abstract class CSEntity {
 		public string Name { get; protected set; }

@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace DataGenerator.SQL {
+namespace DataGenerator.SQL
+{
+	/// <summary>
+	/// A SQL Schema.
+	/// </summary>
 	public class SQLSchema {
 		#region Members
 		private string _name;

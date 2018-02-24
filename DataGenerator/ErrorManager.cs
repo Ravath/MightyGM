@@ -1,6 +1,7 @@
 ﻿using System;
 
-namespace DataGenerator {
+namespace DataGenerator
+{
 	/// <summary>
 	/// The error log static manager.
 	/// </summary>
@@ -10,16 +11,6 @@ namespace DataGenerator {
 		/// Counts the number of errors.
 		/// </summary>
 		private static int nbrErrors = 0;
-
-		/// <summary>
-		/// Displays an error message.
-		/// </summary>
-		/// <param name="message">The message to display.</param>
-		public static void Error( string message ) {
-			nbrErrors++;
-			Console.Error.WriteLine(message);
-			//TODO remove and only use 'ErrorRef'.
-		}
 
 		/// <summary>
 		/// Displays the error message corresponding to the given reference.
@@ -38,7 +29,7 @@ namespace DataGenerator {
 		/// <returns>True if no error occured.</returns>
 		public static bool Conclude()
 		{
-			if (nbrErrors!=0)
+			if (nbrErrors==0)
 			{
 				Console.Out.WriteLine("Ended without error");
 				return true;

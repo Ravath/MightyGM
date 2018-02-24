@@ -2,7 +2,8 @@
 using System.Linq;
 using System.Text;
 
-namespace DataGenerator.SQL {
+namespace DataGenerator.SQL
+{
 	/// <summary>
 	/// The constraint on one or more SQL Attributes of a SqlTable.
 	/// </summary>

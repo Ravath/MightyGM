@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataGenerator;
-using QUT.Gppg;
-using DataGenerator.Parser;
-using DataGenerator.DataModel;
+﻿using DataGenerator.DataModel;
+using System;
 
-namespace DataGenerator {
+namespace DataGenerator
+{
 	public static class MainClass {
 		static void Main( string[] args ) {
 			Parser.Parser parser = new Parser.Parser();
 
+			//Get File
 			System.IO.TextReader reader;
 			if(args.Length > 0)
 				reader = new System.IO.StreamReader(args[0]);
@@ -21,20 +16,19 @@ namespace DataGenerator {
 				return;
 			}
 
+			//Parse File
 			parser.Scanner = new Parser.Parser.Lexer(reader);
-
-			try {
-				if(parser.Parse()) {
-					Console.WriteLine();
+			Console.WriteLine();
+			try
+			{
+				if (parser.Parse()) {
 					Console.WriteLine("Parsing ended without problem...");
 				} else {
-					Console.WriteLine();
 					Console.WriteLine("Parsing ended with problem...");
 					Console.In.ReadLine();
 					return;
 				}
 			} catch(Exception lex) {
-				Console.WriteLine();
 				Console.WriteLine(lex.Message);
 				Console.WriteLine(lex.StackTrace);
 				Console.WriteLine("Parsing abouted with an error and stopped the generation.");
@@ -44,17 +38,15 @@ namespace DataGenerator {
 #if !DEBUG
 			try {
 #endif
-				Database db = new Database(parser.RawData);
-				Console.WriteLine("Model elaborated...");
-				if(db.CheckIntegrity()) {
-					Console.WriteLine("Integrity checked...");
-					DetailedTables dt;
-					dt = db.FinalTables;
-					ModelGenerator mg = new ModelGenerator();
-					mg.GenererProjet(dt);
-					Console.WriteLine("Generation Done.");
-				} else {
-					Console.WriteLine("Some errors has been found and the data will not be generated.");
+			//Create model
+			DatabaseModel dm = Converter.Convert(parser.RawData);
+			dm.Print(Console.Out);
+			if (ErrorManager.Conclude())
+			{
+				DataModel.Generation gn = new DataModel.Generation();
+				gn.Generate(dm);
+
+				Console.WriteLine("Generation Done.");
 			}
 #if !DEBUG
 			} catch(Exception ex) {
@@ -63,7 +55,9 @@ namespace DataGenerator {
 				Console.WriteLine(ex.StackTrace);
 			}
 #endif
+#if DEBUG
 			Console.In.ReadLine();
+#endif
 		}
 	}
 }
