@@ -9,3 +9,5 @@ Test*
 *.cd
 *.exe
 *.dll
+*.xlsx
+*.xls

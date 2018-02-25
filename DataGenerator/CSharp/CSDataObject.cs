@@ -164,7 +164,7 @@ namespace DataGenerator.CSharp
 			_att = new CSDataValueProperty(value);
 			Parent = rParent;
 			AddParentTemplate(from);
-			AddParentTemplate(value.Type);
+			AddParentTemplate(value.GetStringType());
 			//attributs de la table sql
 			SQLForeignKeyAttribute sqlForeignKey = new SQLForeignKeyAttribute(from, "from");
 			//SQLTable.AddAttribute(new SQLID());

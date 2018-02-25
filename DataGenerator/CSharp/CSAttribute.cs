@@ -103,6 +103,10 @@ namespace DataGenerator.CSharp
 			get; set;
 		}
 
+		public virtual string GetStringType()
+		{
+			return StringType(Type);
+		}
 	}
 	/// <summary>
 	 /// A property of basic type.

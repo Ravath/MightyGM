@@ -107,7 +107,7 @@ namespace CinqAnneaux.Data {
 
 		private IEnumerable < MotClefSort > _motClefs;
 		[Association(ThisKey = "Id",CanBeNull = true,Storage = "MotClefs",OtherKey = "AbsSortModel")]
-		public IEnumerable <MotClefSort> MotClefs{
+		public IEnumerable < MotClefSort > MotClefs{
 			get{
 				if( _motClefs == null ){
 					_motClefs = LoadFromDataValue<MotClefsFromAbsSortModel, MotClefSort>();

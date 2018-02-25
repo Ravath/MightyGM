@@ -4,7 +4,7 @@ using System.Text;
 namespace DataGenerator.CSharp
 {
 	/// <summary>
-	/// 
+	/// Property of the specific DataValueClass referencing a DataValue.
 	/// </summary>
 	public class CSDataValueProperty : AbstractCSValueAttribute {
 		private CSValueAttribute _valueAttribute;
@@ -22,15 +22,20 @@ namespace DataGenerator.CSharp
 			_valueAttribute.Annotations.CreateString(sb, indentation);
 			Annotations.CreateString(sb, indentation);
 			CodeWriter cw = new CodeWriter(sb, indentation).
-				Property(StringType(Type), _valueAttribute.Name,
+				Property(_valueAttribute.GetStringType(), _valueAttribute.Name,
                     "return Value;",
 					"Value = value;");
+		}
+
+		public override string GetStringType()
+		{
+			return _valueAttribute.GetStringType();
 		}
 	}
 
 
 	/// <summary>
-	/// 
+	/// Property of the specific DataValueClass referencing a DataValue Collection.
 	/// </summary>
 	public class CSDataValueCollectionReference : CSReferenceClass {
 		private CSDataValueReferenceToClass _conteneur;
@@ -54,9 +59,8 @@ namespace DataGenerator.CSharp
 			//		SaveDataValue<machinsFromCarriereModel, string>(_machins,value);
 			//	}
 			//}
-			string valType = StringType(((CSDataValueClass)ReferencedClass).ValueAttribute.Type);
+			string valType = ((CSDataValueClass)ReferencedClass).ValueAttribute.GetStringType();
             string privName = "_" + CamelCaseName;
-			//string type = "IEnumerable < "+ReferencedClass.Name+" >";
 			string type = "IEnumerable < " + valType + " >";
 			CodeWriter cs = new CodeWriter(sb, indentation).nl();
 			cs.AddIndLine("private "+ type + " " + privName+";");
@@ -76,7 +80,7 @@ namespace DataGenerator.CSharp
 
 
 	/// <summary>
-	/// 
+	/// Property of the specific DataValueClass referencing a Foreign Key.
 	/// </summary>
 	public class CSDataValueForeignKey : CSForeignKey {
 		public CSDataValueForeignKey( SQLForeignKeyAttribute sfa, string name ) : base(sfa, name) { }
@@ -98,7 +102,7 @@ namespace DataGenerator.CSharp
 
 
 	/// <summary>
-	/// 
+	/// Property of the specific DataValueClass referencing a Reference a unique class.
 	/// </summary>
 	public class CSDataValueReferenceToClass : CSReferenceToUniqueClass {
 		public CSDataValueReferenceToClass( CSClass refer, CSDataValueForeignKey key, string name ) : base(refer, key, name) {

@@ -25,7 +25,7 @@ namespace DataGenerator.CSharp
 		private List<CSAttribute> _attributes = new List<CSAttribute>();
 		private CSAnnotationCollection _annotations = new CSAnnotationCollection();
 		private List<string> _interface = new List<string>();
-		private List<CSClass> _parentTemplate = new List<CSClass>();
+		private List<CSEntity> _parentTemplate = new List<CSEntity>();
 		private SQLTable _sqltable;
 		private List<Tuple<CSOneToManyJoint, CSClass>> _jointsReferences = new List<Tuple<CSOneToManyJoint, CSClass>>();
 		private List<CSDataValueClass> _datavalReferences = new List<CSDataValueClass>();
@@ -111,13 +111,13 @@ namespace DataGenerator.CSharp
 		#endregion
 
 		#region Collection ParentTemplate
-		public void AddParentTemplate( CSClass template ) {
+		public void AddParentTemplate(CSEntity template ) {
 			_parentTemplate.Add(template);
 		}
-		public void AddParentTemplate( CSValueEnum type ) {
-			_parentTemplate.Add(new CSClass(type.ToString().ToLower()));
+		public void AddParentTemplate( string typeName ) {
+			_parentTemplate.Add(new CSClass(typeName));
 		}
-		public IEnumerable<CSClass> ParentTemplate {
+		public IEnumerable<CSEntity> ParentTemplate {
 			get { return _parentTemplate; }
 		}
 		#endregion

@@ -111,10 +111,10 @@ namespace CinqAnneaux.Data {
 		}
 	}
 	[Table(Schema = "cinqanneaux",Name = "motclefsfromabssortmodel")]
-	public class MotClefsFromAbsSortModel : DataValue<AbsSortModel, int> {
+	public class MotClefsFromAbsSortModel : DataValue<AbsSortModel, MotClefSort> {
 
 		[Column(Storage = "MotClefs",Name = "motclefs")]
-		public int MotClefs{
+		public MotClefSort MotClefs{
 			get{
 				return Value;
 			}
