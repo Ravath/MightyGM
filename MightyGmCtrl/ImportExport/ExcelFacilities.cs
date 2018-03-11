@@ -1,7 +1,9 @@
-﻿using NPOI.SS.UserModel;
+﻿using Core.Data.Schema;
+using NPOI.SS.UserModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -95,7 +97,13 @@ namespace MightyGmCtrl.ImportExport
 			}
 			else if (t.IsAssignableFrom(typeof(string)))
 			{
-				return currentCell.StringCellValue;
+				if(currentCell.CellType == CellType.String)
+					return currentCell.StringCellValue;
+				else
+				{
+					string result = currentCell.ToString();
+					return result;
+				}
 			}
 			else if (t.IsEnum)
 			{
@@ -270,6 +278,15 @@ namespace MightyGmCtrl.ImportExport
 				}
 			}
 			return -1;
+		}
+
+		public static IEnumerable<PropertyInfo> GetExportableProperties(this Type type)
+		{
+			//Filter properties
+			IEnumerable<PropertyInfo> properties = type.GetProperties().Reverse();
+
+			//Remove Hidden properties
+			return properties.Where(tp => tp.GetCustomAttribute(typeof(HiddenPropertyAttribute)) == null);
 		}
 	}
 }

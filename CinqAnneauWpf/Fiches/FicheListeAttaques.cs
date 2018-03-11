@@ -49,11 +49,11 @@ namespace CinqAnneauxWpf.Fiches {
 				//create ItemDisplay
 				StackPanel sp = new StackPanel() { Orientation = Orientation.Horizontal };
 				RKPoolControleur jatt = new RKPoolControleur() {
-					RkPool = att.JetAttaque,
+					RollPool = att.JetAttaque,
 					Margin = new System.Windows.Thickness(5, 0, 5, 0)
 				};
 				RKPoolControleur datt = new RKPoolControleur() {
-					RkPool = att.Degats,
+					RollPool = att.Degats,
 					Margin = new System.Windows.Thickness(5, 0, 5, 0)
 				};
 				sp.Children.Add(new TextBlock() {

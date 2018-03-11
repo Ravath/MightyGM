@@ -15,8 +15,8 @@ namespace CinqAnneaux.JdrCore.Objets {
 		public void SetObject( AbsObjetModel model ) {
 			Name = model.Name;
 			Description = model.Description.Description;
-			Valeur.Value = model.Cout;
-			Valeur.Unity = model.Monnaie;
+			Valeur.Value = model.CoutVal;
+			Valeur.Unity = model.CoutUnit;
 		}
 	}
 }

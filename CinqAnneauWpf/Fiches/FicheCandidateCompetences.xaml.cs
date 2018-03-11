@@ -48,11 +48,6 @@ namespace CinqAnneauxWpf.Fiches {
 				ic.SetCompetence(item);
 				cp.Add(ic);
 			}
-			foreach(CompetenceGlobaleModel item in _data.GetTable<CompetenceGlobaleModel>().ToArray()) {
-				ModelCompetence ic = new ModelCompetence();
-				ic.SetCompetenceGlobale(item);
-				cp.Add(ic);
-			}
 			xCompetences.ItemsSource = cp.OrderBy(n => n.Groupe).ThenBy(n => n.Name);
 		}
 
@@ -83,25 +78,12 @@ namespace CinqAnneauxWpf.Fiches {
 				//Expertises
 				xListeExpertises.Visibility = c.Specialisations.Count() > 0 ? Visibility.Visible : Visibility.Collapsed;
 				xExpertises.Children.Clear();
-				foreach(CinqAnneaux.JdrCore.Competences.Specialisation im in c.Specialisations) {
+				foreach(Specialisation im in c.Specialisations) {
 					StackPanel sp = new StackPanel() { Orientation = Orientation.Horizontal };
 					sp.Children.Add(new TextBlock() { Text = im.Nom + " " });
 					if(im.Degradante)
 						sp.Children.Add(new TextBlock() { Text = "[Degradante]" });
 					xExpertises.Children.Add(sp);
-				}
-				//SousTypes
-				xListeSousTypes.Visibility = c.SousTypes.Count() > 0 ? Visibility.Visible : Visibility.Collapsed;
-				xSousTypes.Children.Clear();
-				foreach(var im in c.SousTypes) {
-					StackPanel sp = new StackPanel() { Orientation = Orientation.Horizontal };
-					sp.Children.Add(new TextBlock() { Text = im.Nom+" - " });
-					sp.Children.Add(new TextBlock() { Text = im.TraitAssocie+" " });
-					if(im.Degradante)
-						sp.Children.Add(new TextBlock() { Text = "[Degradante]" });
-                    if(im.Noble)
-						sp.Children.Add(new TextBlock() { Text = "[Noble]" });
-                    xSousTypes.Children.Add(sp);
 				}
 			}
 		}
@@ -111,7 +93,6 @@ namespace CinqAnneauxWpf.Fiches {
 			private string _nom;
 			private List<CinqAnneaux.JdrCore.Competences.Specialisation> _specialite = new List<CinqAnneaux.JdrCore.Competences.Specialisation>();
 			private List<Maitrise> _maitrise = new List<Maitrise>();
-			private List<SousTypeGlobal> _sousTypes = new List<SousTypeGlobal>();
 			private GroupeCompetence _groupe;
 			#endregion
 
@@ -147,15 +128,19 @@ namespace CinqAnneauxWpf.Fiches {
 			public IEnumerable<Maitrise> Maitrises {
 				get { return _maitrise; }
 			}
-			public IEnumerable<SousTypeGlobal> SousTypes {
-				get { return _sousTypes; }
-			}
 			#endregion
 
 			#region Model Setters
 			public void SetCompetence( CompetenceModel model ) {
 				/* val de base */
-				Name = model.Name;
+				if (model.Global != null)
+				{
+					Name = model.Global.Name + "(" + model.Name + ")";
+				}
+				else
+				{
+					Name = model.Name;
+				}
 				Degradante = model.Degradante;
 				Sociale = model.Sociale;
 				Martiale = model.Martiale;
@@ -176,22 +161,7 @@ namespace CinqAnneauxWpf.Fiches {
 					spe.SetSpecialisation(item);
 					_specialite.Add(spe);
                 }
-				/* sous types */
-				_sousTypes.Clear();
             }
-			public void SetCompetenceGlobale( CompetenceGlobaleModel model ) {
-				Name = model.Name;
-				Trait = model.TraitAssocie;
-				Groupe = model.Groupe;
-				Description = model.Description.Description;
-				_specialite.Clear();
-				_maitrise.Clear();
-				/* ajouter les SousTypeGlobaux */
-				_sousTypes.Clear();
-				foreach(var item in model.Specialisations) {
-					_sousTypes.Add(item);
-                }
-			}
 			#endregion
 		}
 	}

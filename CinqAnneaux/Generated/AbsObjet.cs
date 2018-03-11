@@ -12,40 +12,56 @@ namespace CinqAnneaux.Data {
 	[Table(Schema = "cinqanneaux",Name = "absobjetmodel")]
 	public abstract partial class AbsObjetModel : DataModel {
 
-		private Monnaie _monnaie;
-		[Column(Storage = "Monnaie",Name = "monnaie")]
-		public Monnaie Monnaie{
-			get{ return _monnaie;}
-			set{_monnaie = value;}
-		}
-
-		private int _cout;
-		[Column(Storage = "Cout",Name = "cout")]
-		public int Cout{
-			get{ return _cout;}
-			set{_cout = value;}
-		}
-
-		private int _specialId;
-		[Column(Storage = "SpecialId",Name = "fk_specialobjet_special")]
-		[HiddenProperty]
-		public int SpecialId{
-			get{ return _specialId;}
-			set{_specialId = value;}
-		}
-
-		private SpecialObjet _special;
-		public SpecialObjet Special{
+		[Column(Name = "cout_val", Storage="CoutVal")]
+		public int CoutVal{
 			get{
-				if( _special == null)
-					_special = LoadById<SpecialObjet>(SpecialId);
-				return _special;
-			} set {
-				if(_special == value){return;}
-				_special = value;
-				if( value != null)
-					SpecialId = value.Id;
+				return Cout.Value;
 			}
+			set{
+				Cout.Value = value;
+			}
+		}
+
+		[Column(Name = "cout_unit", Storage="CoutUnit")]
+		public Monnaie CoutUnit{
+			get{
+				return Cout.Unity;
+			}
+			set{
+				Cout.Unity = value;
+			}
+		}
+
+		private UnitValue<int,Monnaie> _cout = new UnitValue<int,Monnaie>();
+		[HiddenProperty]
+		public UnitValue<int,Monnaie> Cout{
+			get{
+				return _cout;
+			}
+			set{
+				_cout = value;
+			}
+		}
+
+
+
+		private IEnumerable<SpecialObjetExemplar> _special;
+		[Association(ThisKey = "Id",CanBeNull = false,Storage = "Special",OtherKey = "AbsObjetModelId")]
+		public IEnumerable <SpecialObjetExemplar> Special{
+			get{
+				if( _special == null ){
+					_special = LoadFromJointure<SpecialObjetExemplar,AbsObjetModelToSpecialObjetExemplar_Special>(false);
+				}
+				return _special;
+			}
+			set{
+				SaveToJointure<SpecialObjetExemplar, AbsObjetModelToSpecialObjetExemplar_Special> (_special, value,false);
+				_special = value;
+			}
+		}
+		public override void DeleteObject() {
+			DeleteJoins<AbsObjetModel,AbsObjetModelToSpecialObjetExemplar_Special>(true);
+			base.DeleteObject();
 		}
 	}
 	[Table(Schema = "cinqanneaux",Name = "absobjetdescription")]

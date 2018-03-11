@@ -27,6 +27,8 @@ namespace CinqAnneauxWpf
 		private IFicheCandidate FicheRangsHonneur;
 		private IFicheCandidate FicheCapacites;
 		private IFicheCandidate FicheCompetences;
+		private IFicheCandidate FicheMassCombat;
+		private IFicheCandidate FicheAncetres;
 		#endregion
 
 		#region Init
@@ -42,6 +44,8 @@ namespace CinqAnneauxWpf
 			FicheRangsHonneur = new FicheHonneur();
 			FicheCapacites = new FicheCandidateCapacites();
 			FicheCompetences = new FicheCandidateCompetences();
+			FicheMassCombat = new FicheMassCombat();
+			FicheAncetres = new FicheListeAncetres();
 			AddFiche(FicheClanFamilleEcole);
 			AddFiche(FicheAvantages);
 			AddFiche(FicheObjets);
@@ -51,6 +55,8 @@ namespace CinqAnneauxWpf
 			AddFiche(FicheCompetences);
 			AddFiche(FicheGestionPersonnage);
 			AddFiche(FicheAgent);
+			AddFiche(FicheMassCombat);
+			AddFiche(FicheAncetres);
 
 		}
 

@@ -142,6 +142,15 @@ namespace MightyGmCtrl.Langues {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Il faut d&apos;abor sélectionner un type pour pouvoir effectuer cette opération..
+        /// </summary>
+        internal static string MUST_SELECT_TYPE {
+            get {
+                return ResourceManager.GetString("MUST_SELECT_TYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Le nom &quot;{0}&quot; existe déjà dans la base de donnée pour le type {1}.
         /// </summary>
         internal static string NAME_ALREADY_IN_DATABASE {

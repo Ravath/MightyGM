@@ -89,6 +89,7 @@ namespace MightyGmCtrl.ImportExport
 				IRow firstRow = sheet.GetRow(sheet.FirstRowNum);
 				foreach (var cell in firstRow.Cells)
 				{
+					if(cell == null) { continue; }
 					/* check all column headers have a name */
 					if (String.IsNullOrWhiteSpace(cell.StringCellValue))
 					{
@@ -99,7 +100,8 @@ namespace MightyGmCtrl.ImportExport
 					{
 						for (int ir = 1; ir <= sheet.LastRowNum; ir++)
 						{
-							var nameCell = sheet.GetRow(ir).GetCell(cell.ColumnIndex);
+							var nameCell = sheet.GetRow(ir)?.GetCell(cell.ColumnIndex);
+							if(nameCell == null) { continue; }
 							/* check all data names has length <=40 */
 							if (nameCell.StringCellValue.Length > 40)
 							{
@@ -109,8 +111,8 @@ namespace MightyGmCtrl.ImportExport
 							/* look for duplicates */
 							for (int jr = ir + 1; jr <= sheet.LastRowNum; jr++)
 							{
-								var iCell = sheet.GetRow(jr).GetCell(cell.ColumnIndex);
-								if (nameCell.StringCellValue.ToLower() == iCell.StringCellValue.ToLower())
+								var iCell = sheet.GetRow(jr)?.GetCell(cell.ColumnIndex);
+								if (iCell!=null && nameCell.StringCellValue?.ToLower() == iCell?.StringCellValue?.ToLower())
 								{
 									AddError(sheet, jr, cell.ColumnIndex, "Duplicate name of " + PositionName(cell.ColumnIndex, ir));
 									fatalFound = true;
@@ -119,11 +121,11 @@ namespace MightyGmCtrl.ImportExport
 						}
 					}
 					/*check all tag specific verifications */
-					if (cell.StringCellValue.ToLower() == "tag")
+					if (cell.StringCellValue?.ToLower() == "tag")
 					{
 						for (int ir = 1; ir <= sheet.LastRowNum; ir++)
 						{
-							var nameCell = sheet.GetRow(ir).GetCell(cell.ColumnIndex);
+							var nameCell = sheet.GetRow(ir)?.GetCell(cell.ColumnIndex);
 							if (nameCell == null)
 							{
 								AddError(sheet, ir, cell.ColumnIndex, "tag is missing");
@@ -138,7 +140,7 @@ namespace MightyGmCtrl.ImportExport
 							/* look for duplicates */
 							for (int jr = ir + 1; jr <= sheet.LastRowNum; jr++)
 							{
-								var iCell = sheet.GetRow(jr).GetCell(cell.ColumnIndex);
+								var iCell = sheet?.GetRow(jr)?.GetCell(cell.ColumnIndex);
 								if (iCell == null) { continue; }
 								if (nameCell.StringCellValue.ToLower() == iCell.StringCellValue.ToLower())
 								{

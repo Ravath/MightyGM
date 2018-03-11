@@ -1,0 +1,54 @@
+SQL : ajouter "DROP SCHEMA if exists {0} CASCADE
+datatable&export : add sort by TAG
+
+DB
+	Clean/Restart DB
+	Get available TAGs
+
+FICHES
+- Ecole : compétence, equipement, honneur, argent,...
+- Pouvoirs créatures : compléments
+- Type de Kihos (+Atemi?)
+- Arbre des compétences : spécialisations
+- Ecoles Avancées
+- Techniques alternatives
+
+Ecoles Avancées
+Techniques alternatives
+
+- PJs : 
+	spécialisations choisies
+	Equipement
+	Sorts
+	Katas
+	Kihos
+	Av/Dv
+	Ecole&Techniques (+ Clan)
+	pouvoirs outremonde
+	
+PROCESS
+ - Creation de personnage / Créatures / PNJ (Enregistrer paramètres en XML)
+ - Creation Clan/Famille/Ecole(+Av&Alt) // Sort/Kiho/Kata // Monstre(Cf précédent)
+ 
+MOTEUR
+	Escarmouche
+	Bataille rangée
+	
+Generateur
+	personnage
+		E1 : Choix Clan/Famille/Ecole
+		E2 : Choix cpt/obj/necessaireVoyage de l'école (si école)
+		E3 : Choix Sorts si shugenja ou Kiho si moines
+		E4 : Fiche Dépense XP Normale + Av/Dv à Volonté + Obj à Volonté + Ancêtres si autorisé
+	intrigue
+	
+Fiches dépense Xp / Achat
+	- utiliser un boolean "is MJ"
+	- utiliser un boolean "Creation" + Filtre supplémentaire
+	- prévoir les bonus de shugenja/moine pour montée de niveau. (Sorts/Kihos) => utiliser un bouton "Monter de Rang". permet aussi de gérer les voies alternatives. si niveau >5, ajouter les voies avancées
+
+2DDataTable ( mass Combat Results )
+mq Ancetre.Description.Exigence à Import/Export Excel
+
+DICE
+	formula parsing

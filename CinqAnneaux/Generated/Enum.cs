@@ -20,7 +20,7 @@ namespace CinqAnneaux.Data {
 	public enum TraitCompetence{
 		Reflexes, Intuition, Agilite, Intelligence, Perception, Force, Volonte, Constitution, Vide}
 
-	public enum MotClefEcole{
+	public enum BaliseEcole{
 		Bushi, Courtisan, Shugenja, Ninja, Moine, Artisan}
 
 	public enum GroupeCompetence{
@@ -37,9 +37,6 @@ namespace CinqAnneaux.Data {
 
 	public enum Duree{
 		Instantane, Permanent, Rounds, Minutes, Heures, Jours, Semaine, DeuxSemaine, Mois, Annee, Special, Indefinie}
-
-	public enum TypeAugmentationSort{
-		Portee, Duree, Zone, Cible, Special}
 
 	public enum TypeArme{
 		Fleche, Arc, Chaine, Hast, Ninjutsu, Lourde, Baton, Couteau, Eventail, Lance, Sabre}

@@ -19,7 +19,7 @@ namespace Core.Data {
 		/// L'id associé au modèle associé à cet exemplaire.
 		/// </summary>
 		[Column(Name = "fk_model_id")]
-		[Category("Exemplaire")]//TODO : trouver un attribut pour ne pas l'afficher
+		[Category("Exemplaire")]
 		[HiddenProperty]
 		public int ModelId { get { return _modelId; } set { _modelId = value; } }
 
@@ -39,9 +39,7 @@ namespace Core.Data {
 			set {
 				if(value == _model) { return; }
 				_model = value;
-				if(_model != null) {
-					_modelId = _model.Id;
-				}
+				_modelId = _model?.Id ?? 0;
 			}
 		}
 

@@ -9,6 +9,17 @@ using Core.Data;
 using Core.Data.Schema;
 using LinqToDB.Mapping;
 namespace CinqAnneaux.Data {
-	public partial class SpecialObjet {
+	public partial class SpecialObjetModel
+	{
+	}
+	public partial class SpecialObjetExemplar
+	{
+		public override string ToString()
+		{
+			return String.Format(Model.Description.Description,Complement.Split(';'));
+		}
+	}
+	public partial class SpecialObjetDescription
+	{
 	}
 }

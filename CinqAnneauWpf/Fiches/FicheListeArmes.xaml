@@ -45,6 +45,16 @@
             <TextBlock Text="Samurai" Margin="15,0,0,0" Visibility="Collapsed" Name="xMcSamurai"/>
             <TextBlock Text="Paysan" Margin="15,0,0,0"  Visibility="Collapsed" Name="xMcPaysan"/>
             <TextBlock Text="{Binding Description.Description}" Margin="5" TextWrapping="Wrap"/>
+            <ListView Margin="15" ItemsSource="{Binding Special}" x:Name="xSpecList" FontSize="12" BorderThickness="0"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding StringFormat=' - {0}'}" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackPanel>
     </Grid>
 </UserControl>

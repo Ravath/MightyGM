@@ -81,6 +81,16 @@
                 <TextBlock Text="Concentration" Visibility="Collapsed" Margin="5,0,0,0" x:Name="xRgConcentration"/>
             </StackPanel>
             <TextBlock Text="{Binding Description.Description}" Margin="5" TextWrapping="Wrap"/>
+            <ListView Margin="15" ItemsSource="{Binding Augmentations}" x:Name="xAugList" FontSize="12" BorderThickness="0"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding StringFormat=' - {0}'}" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackPanel>
     </Grid>
 </UserControl>

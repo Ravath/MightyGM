@@ -57,11 +57,11 @@ namespace CinqAnneaux.Data {
 			}
 		}
 
-		private MotClefEcole _motClef;
-		[Column(Storage = "MotClef",Name = "motclef")]
-		public MotClefEcole MotClef{
-			get{ return _motClef;}
-			set{_motClef = value;}
+		private BaliseEcole _balise;
+		[Column(Storage = "Balise",Name = "balise")]
+		public BaliseEcole Balise{
+			get{ return _balise;}
+			set{_balise = value;}
 		}
 
 		private TraitCompetence _bonusInitial;
@@ -85,18 +85,33 @@ namespace CinqAnneaux.Data {
 			set{_argentInitial = value;}
 		}
 
-		private IEnumerable<CompetenceExemplar> _competences;
+		private IEnumerable<CompetenceStatus> _competences;
 		[Association(ThisKey = "Id",CanBeNull = false,Storage = "Competences",OtherKey = "EcoleModelId")]
-		public IEnumerable <CompetenceExemplar> Competences{
+		public IEnumerable <CompetenceStatus> Competences{
 			get{
 				if( _competences == null ){
-					_competences = LoadFromJointure<CompetenceExemplar,EcoleModelToCompetenceExemplar_Competences>(false);
+					_competences = LoadFromJointure<CompetenceStatus,EcoleModelToCompetenceStatus_Competences>(false);
 				}
 				return _competences;
 			}
 			set{
-				SaveToJointure<CompetenceExemplar, EcoleModelToCompetenceExemplar_Competences> (_competences, value,false);
+				SaveToJointure<CompetenceStatus, EcoleModelToCompetenceStatus_Competences> (_competences, value,false);
 				_competences = value;
+			}
+		}
+
+		private IEnumerable<ApprentissageOptionnelExemplar> _competencesOpt;
+		[Association(ThisKey = "Id",CanBeNull = false,Storage = "CompetencesOpt",OtherKey = "EcoleModelId")]
+		public IEnumerable <ApprentissageOptionnelExemplar> CompetencesOpt{
+			get{
+				if( _competencesOpt == null ){
+					_competencesOpt = LoadFromJointure<ApprentissageOptionnelExemplar,EcoleModelToApprentissageOptionnelExemplar_CompetencesOpt>(false);
+				}
+				return _competencesOpt;
+			}
+			set{
+				SaveToJointure<ApprentissageOptionnelExemplar, EcoleModelToApprentissageOptionnelExemplar_CompetencesOpt> (_competencesOpt, value,false);
+				_competencesOpt = value;
 			}
 		}
 
@@ -113,6 +128,28 @@ namespace CinqAnneaux.Data {
 				SaveToJointure<AbsObjetModel, EcoleModelToAbsObjetModel_Equipement> (_equipement, value,false);
 				_equipement = value;
 			}
+		}
+
+		private IEnumerable<EquipementOptionnelExemplar> _equipementsOpt;
+		[Association(ThisKey = "Id",CanBeNull = false,Storage = "EquipementsOpt",OtherKey = "EcoleModelId")]
+		public IEnumerable <EquipementOptionnelExemplar> EquipementsOpt{
+			get{
+				if( _equipementsOpt == null ){
+					_equipementsOpt = LoadFromJointure<EquipementOptionnelExemplar,EcoleModelToEquipementOptionnelExemplar_EquipementsOpt>(false);
+				}
+				return _equipementsOpt;
+			}
+			set{
+				SaveToJointure<EquipementOptionnelExemplar, EcoleModelToEquipementOptionnelExemplar_EquipementsOpt> (_equipementsOpt, value,false);
+				_equipementsOpt = value;
+			}
+		}
+
+		private bool _necessaireDeVoyage;
+		[Column(Storage = "NecessaireDeVoyage",Name = "necessairedevoyage")]
+		public bool NecessaireDeVoyage{
+			get{ return _necessaireDeVoyage;}
+			set{_necessaireDeVoyage = value;}
 		}
 
 		private IEnumerable<TechniqueModel> _techniques;
@@ -192,8 +229,10 @@ namespace CinqAnneaux.Data {
 			set{_devotion = value;}
 		}
 		public override void DeleteObject() {
-			DeleteJoins<EcoleModel,EcoleModelToCompetenceExemplar_Competences>(true);
+			DeleteJoins<EcoleModel,EcoleModelToCompetenceStatus_Competences>(true);
+			DeleteJoins<EcoleModel,EcoleModelToApprentissageOptionnelExemplar_CompetencesOpt>(true);
 			DeleteJoins<EcoleModel,EcoleModelToAbsObjetModel_Equipement>(true);
+			DeleteJoins<EcoleModel,EcoleModelToEquipementOptionnelExemplar_EquipementsOpt>(true);
 			base.DeleteObject();
 		}
 	}

@@ -45,24 +45,24 @@ namespace CinqAnneaux.Data {
 			set{_rang = value;}
 		}
 
-		private MotClefEcole? _motClef;
-		[Column(Storage = "MotClef",Name = "motclef")]
-		public MotClefEcole? MotClef{
-			get{ return _motClef;}
-			set{_motClef = value;}
+		private BaliseEcole? _balise;
+		[Column(Storage = "Balise",Name = "balise")]
+		public BaliseEcole? Balise{
+			get{ return _balise;}
+			set{_balise = value;}
 		}
 
-		private IEnumerable<CompetenceExemplar> _competencesRequises;
+		private IEnumerable<CompetenceStatus> _competencesRequises;
 		[Association(ThisKey = "Id",CanBeNull = false,Storage = "CompetencesRequises",OtherKey = "VoieAlternativeModelId")]
-		public IEnumerable <CompetenceExemplar> CompetencesRequises{
+		public IEnumerable <CompetenceStatus> CompetencesRequises{
 			get{
 				if( _competencesRequises == null ){
-					_competencesRequises = LoadFromJointure<CompetenceExemplar,VoieAlternativeModelToCompetenceExemplar_CompetencesRequises>(false);
+					_competencesRequises = LoadFromJointure<CompetenceStatus,VoieAlternativeModelToCompetenceStatus_CompetencesRequises>(false);
 				}
 				return _competencesRequises;
 			}
 			set{
-				SaveToJointure<CompetenceExemplar, VoieAlternativeModelToCompetenceExemplar_CompetencesRequises> (_competencesRequises, value,false);
+				SaveToJointure<CompetenceStatus, VoieAlternativeModelToCompetenceStatus_CompetencesRequises> (_competencesRequises, value,false);
 				_competencesRequises = value;
 			}
 		}
@@ -81,8 +81,30 @@ namespace CinqAnneaux.Data {
 				_conditions = value;
 			}
 		}
+
+		private int _clanRequisId;
+		[Column(Storage = "ClanRequisId",Name = "fk_clanmodel_clanrequis")]
+		[HiddenProperty]
+		public int ClanRequisId{
+			get{ return _clanRequisId;}
+			set{_clanRequisId = value;}
+		}
+
+		private ClanModel _clanRequis;
+		public ClanModel ClanRequis{
+			get{
+				if( _clanRequis == null)
+					_clanRequis = LoadById<ClanModel>(ClanRequisId);
+				return _clanRequis;
+			} set {
+				if(_clanRequis == value){return;}
+				_clanRequis = value;
+				if( value != null)
+					ClanRequisId = value.Id;
+			}
+		}
 		public override void DeleteObject() {
-			DeleteJoins<VoieAlternativeModel,VoieAlternativeModelToCompetenceExemplar_CompetencesRequises>(true);
+			DeleteJoins<VoieAlternativeModel,VoieAlternativeModelToCompetenceStatus_CompetencesRequises>(true);
 			DeleteJoins<VoieAlternativeModel,VoieAlternativeModelToConditionExemplar_Conditions>(true);
 			base.DeleteObject();
 		}

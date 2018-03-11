@@ -57,7 +57,6 @@ namespace CinqAnneauxWpf.Fiches {
 			/* trier les compétences par catégories */
 			foreach(GroupeCompetence sc in Enum.GetValues(typeof(GroupeCompetence))) {
 				/* Initialize lc with all the skills of the category */
-				lc.Clear();
 				lc.AddRange(_liste.Competences.Where(c => c.Groupe == sc));
 				if(lc.Count() == 0) { continue; }
 				/* Initialize the category node */
@@ -70,6 +69,7 @@ namespace CinqAnneauxWpf.Fiches {
 				foreach(Competence cpt in lc) {
 					AddCompetence(catNode, cpt);
 				}
+				catNode.IsExpanded = true;
 				lc.Clear();
 			}
 		}
@@ -79,7 +79,7 @@ namespace CinqAnneauxWpf.Fiches {
 			tv.Items.Add(competenceNode);
 			competenceNode.Header = sp;
 			/* name */
-			TextBlock cpName = new TextBlock() { Text = cp.Nom, MinWidth = 100 };
+			TextBlock cpName = new TextBlock() { Text = cp.Nom, MinWidth = 120 };
 			/* name : ajouter '*' ou '#' si dégradante ou noble */
 			if(cp.Noble)
 				cpName.Text += "^";
@@ -89,12 +89,12 @@ namespace CinqAnneauxWpf.Fiches {
 			/* attribut */
 			sp.Children.Add(new TextBlock() {
 				Text = cp.Trait.ToString(),
-				Width = 50,
+				Width = 60,
 				Margin = new Thickness(5, 0, 5, 0),
 				HorizontalAlignment = HorizontalAlignment.Center
 			});
 			/* dice pool */
-			sp.Children.Add(new ValueControler() { Value = cp.Pool.NumberValue });
+			sp.Children.Add(new ValueControler() { Value = cp.Pool.RollValue });
 			sp.Children.Add(new TextBlock() { Text = "g" });
 			sp.Children.Add(new ValueControler() { Value = cp.Pool.KeepValue });
 			// todo : spécialisations

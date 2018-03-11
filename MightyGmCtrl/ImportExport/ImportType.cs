@@ -17,6 +17,7 @@ namespace MightyGmCtrl.ImportExport
 		private List<IDataObject> _instances = new List<IDataObject>();
 		private List<ImportRelation> _relations = new List<ImportRelation>();
 		private List<CollectionValue> _collections = new List<CollectionValue>();
+		private List<IDataObject> _lateSaves = new List<IDataObject>();
 
 		public Type ModelType
 		{
@@ -29,7 +30,7 @@ namespace MightyGmCtrl.ImportExport
 		}
 
 		/// <summary>
-		/// Create a new instance of the managed type, and store it in the imported data.
+		/// Create a new instance of the managed type, and stores it in the imported data.
 		/// </summary>
 		/// <returns>The new instance</returns>
 		public IDataObject CreateInstance()
@@ -76,7 +77,7 @@ namespace MightyGmCtrl.ImportExport
 				}
 				else
 				{//bidule aléatoire
-					IDataObject dtobject = (IDataObject)temp;
+					IDataObject dtobject = temp;
 					dtobject.Id = 0;
 					dtobject.SaveObject();
 				}
@@ -114,7 +115,7 @@ namespace MightyGmCtrl.ImportExport
 			}
 		}
 
-		internal void AddCollectionValue(IDataObject newObj, PropertyInfo prop, IEnumerable il)
+		public void AddCollectionValue(IDataObject newObj, PropertyInfo prop, IEnumerable il)
 		{
 			_collections.Add(
 				new CollectionValue()
@@ -125,7 +126,7 @@ namespace MightyGmCtrl.ImportExport
 				});
 		}
 
-		internal void AddTagReference(IDataObject instance, PropertyInfo pi, string tag, Type refType)
+		public void AddTagReference(IDataObject instance, PropertyInfo pi, string tag, Type refType)
 		{
 			_relations.Add(new ImportRelation()
 			{
@@ -134,6 +135,19 @@ namespace MightyGmCtrl.ImportExport
 				refProperty = pi,
 				refType = refType
 			});
+		}
+
+		public void AddLateSave(IDataObject val)
+		{
+			_lateSaves.Add(val);
+		}
+
+		public void SaveLateDatas(Database data)
+		{
+			foreach (IDataObject item in _lateSaves)
+			{
+				item.SaveObject();
+			}
 		}
 
 		public void SaveData(Database data)

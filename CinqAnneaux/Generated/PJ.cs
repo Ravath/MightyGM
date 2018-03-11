@@ -162,6 +162,21 @@ namespace CinqAnneaux.Data {
 			}
 		}
 
+		private IEnumerable<CompetenceExemplar> _competences;
+		[Association(ThisKey = "Id",CanBeNull = false,Storage = "Competences",OtherKey = "PJModelId")]
+		public IEnumerable <CompetenceExemplar> Competences{
+			get{
+				if( _competences == null ){
+					_competences = LoadFromJointure<CompetenceExemplar,PJModelToCompetenceExemplar_Competences>(false);
+				}
+				return _competences;
+			}
+			set{
+				SaveToJointure<CompetenceExemplar, PJModelToCompetenceExemplar_Competences> (_competences, value,false);
+				_competences = value;
+			}
+		}
+
 		private IEnumerable<SortModel> _sorts;
 		[Association(ThisKey = "Id",CanBeNull = false,Storage = "Sorts",OtherKey = "PJModelId")]
 		public IEnumerable <SortModel> Sorts{
@@ -317,12 +332,27 @@ namespace CinqAnneaux.Data {
 					FamilleId = value.Id;
 			}
 		}
+
+		private int _xpTotal;
+		[Column(Storage = "XpTotal",Name = "xptotal")]
+		public int XpTotal{
+			get{ return _xpTotal;}
+			set{_xpTotal = value;}
+		}
+
+		private int _xpDepense;
+		[Column(Storage = "XpDepense",Name = "xpdepense")]
+		public int XpDepense{
+			get{ return _xpDepense;}
+			set{_xpDepense = value;}
+		}
 		public override void DeleteObject() {
 			DeleteJoins<PJModel,PJModelToCompetenceExemplar_Armes>(true);
 			DeleteJoins<PJModel,PJModelToObjetExemplar_Inventaire>(true);
 			DeleteJoins<PJModel,PJModelToEcoleExemplar_Ecoles>(true);
 			DeleteJoins<PJModel,PJModelToAvantageExemplar_Avantages>(true);
 			DeleteJoins<PJModel,PJModelToDesavantageExemplar_Desavantages>(true);
+			DeleteJoins<PJModel,PJModelToCompetenceExemplar_Competences>(true);
 			DeleteJoins<PJModel,PJModelToSortModel_Sorts>(true);
 			DeleteJoins<PJModel,PJModelToMahouModel_Mahou>(true);
 			DeleteJoins<PJModel,PJModelToEcoleAvanceeExemplar_EcolesAvancees>(true);

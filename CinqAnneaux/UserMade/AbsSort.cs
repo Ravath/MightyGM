@@ -8,6 +8,8 @@ using Core.Types;
 using Core.Data;
 using Core.Data.Schema;
 using LinqToDB.Mapping;
+using CinqAnneaux.JdrCore.Capacites;
+
 namespace CinqAnneaux.Data {
 	public partial class AbsSortModel {
 	}

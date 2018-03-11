@@ -17,10 +17,10 @@ namespace MightyGmCtrl.Controleurs
 		{
 		}
 
-		public bool ExportDataToExcel(string outputFilePath, IEnumerable<Type> types)
+		public bool ExportDataToExcel(string outputFilePath, IEnumerable<Type> types, bool onlyHeader = false)
 		{
 			bool success = false;
-			// 1Etape/type + enregistrement fichier
+			// 1Step/type + File Save
 			SetNbrEtapes(types.Count()+1);
 
 			try
@@ -28,34 +28,34 @@ namespace MightyGmCtrl.Controleurs
 				//Create excel document
 				IWorkbook workbook = new XSSFWorkbook();
 
-				//créer le style de cellule du header
+				//Create header cell style
 				ICellStyle HeaderCellStyle = workbook.CreateCellStyle();
 				HeaderCellStyle.FillForegroundColor = NPOI.HSSF.Util.HSSFColor.Grey40Percent.Index;
 				IFont boldFont = workbook.CreateFont();
 				boldFont.IsBold = true;
 				HeaderCellStyle.SetFont(boldFont);
 
-				//créer le sommaire
+				//Create Summary
 				ISheet sommaire = workbook.CreateSheet(GlobalContext.GetMessageRessource("SUMMARY"));
 
-				//ajouter les types
+				//Add types
 				for (int i = 0; i < types.Count(); i++)
 				{
-					//nouvelle feuille
+					//New Sheet
 					string sheetName = "D" + i;
 					ISheet newSheet = workbook.CreateSheet(sheetName);
 
-					//maj sommaire : nouvelle ligne
+					//Summary update : new line
 					IRow rs = sommaire.CreateRow(i);
 					rs.CreateCell(1).SetCellValue(types.ElementAt(i).Name);
 					rs.CreateCell(0).SetCellValue(sheetName);
-					//maj sommaire : Creation hyperlien
+					//Summary update : hyperlink Creation
 					XSSFHyperlink link2 = new XSSFHyperlink(HyperlinkType.Document);
 					link2.Address = sheetName+"!A1";
 					rs.GetCell(0).Hyperlink = link2;
 
-					//Creation feuille
-					ExportExcel.CreateSheet(newSheet, HeaderCellStyle, GlobalContext.Data, types.ElementAt(i));
+					//Sheet Creation
+					ExportExcel.CreateSheet(newSheet, HeaderCellStyle, (onlyHeader ? null : GlobalContext.Data), types.ElementAt(i));
 					SetFinEtape();
 				}
 
@@ -82,7 +82,7 @@ namespace MightyGmCtrl.Controleurs
 		public bool ExportModeleDataToWord(Type t, string outputFilePath)
 		{
 			bool success = false;
-			// Ecriture document + sauvegarde
+			// Write document + save
 			SetNbrEtapes(2);
 
 			try

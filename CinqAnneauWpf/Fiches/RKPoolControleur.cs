@@ -10,7 +10,7 @@ using System.Windows.Controls;
 namespace CinqAnneauxWpf.Fiches {
 	public class RKPoolControleur : UserControl {
 
-		private AbsRKPool _pool;
+		private RollAndKeep _pool;
 		private ValueControler _vcr = new ValueControler();
 		private ValueControler _vck = new ValueControler();
 
@@ -25,15 +25,15 @@ namespace CinqAnneauxWpf.Fiches {
 			Content = sp;
 		}
 
-		public void SetRKPool( AbsRKPool pool ) {
+		public void SetRollPool(RollAndKeep pool ) {
 			_pool = pool;
-			_vcr.Value = pool.NumberIValue;
-			_vck.Value = pool.KeepIValue;
+			_vcr.Value = pool.RollValue;
+			_vck.Value = pool.KeepValue;
 		}
 
-		public AbsRKPool RkPool {
+		public RollAndKeep RollPool {
 			get { return _pool; }
-			set { SetRKPool(value); }
+			set { SetRollPool(value); }
 		}
 	}
 }

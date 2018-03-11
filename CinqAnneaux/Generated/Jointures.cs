@@ -2,8 +2,8 @@ using Core.Data;
 using Core.Data.Schema;
 using LinqToDB.Mapping;
 namespace CinqAnneaux.Data {
-	[Table(Schema = "cinqanneaux",Name = "ecolemodeltocompetenceexemplar_competences")]
-	public class EcoleModelToCompetenceExemplar_Competences : DataRelation<EcoleModel, CompetenceExemplar> {
+	[Table(Schema = "cinqanneaux",Name = "ecolemodeltocompetencestatus_competences")]
+	public class EcoleModelToCompetenceStatus_Competences : DataRelation<EcoleModel, CompetenceStatus> {
 
 		[Column(Name = "fk_ecolemodel_join", Storage = "EcoleModelId")]
 		[HiddenProperty]
@@ -17,14 +17,41 @@ namespace CinqAnneaux.Data {
 			set { Object1 = value; }
 		}
 
-		[Column(Name = "fk_competenceexemplar_join", Storage = "CompetenceExemplarId")]
+		[Column(Name = "fk_competencestatus_join", Storage = "CompetenceStatusId")]
 		[HiddenProperty]
-		public int CompetenceExemplarId {
+		public int CompetenceStatusId {
 			get { return Object2Id; }
 			set { Object2Id= value; }
 		}
-		[Association(ThisKey = "CompetenceExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "CompetenceExemplar")]
-		public CompetenceExemplar CompetenceExemplar {
+		[Association(ThisKey = "CompetenceStatusId", OtherKey = "Id", CanBeNull = false, Storage = "CompetenceStatus")]
+		public CompetenceStatus CompetenceStatus {
+			get { return Object2; }
+			set { Object2 = value; }
+		}
+	}
+	[Table(Schema = "cinqanneaux",Name = "ecolemodeltoapprentissageoptionnelexemplar_competencesopt")]
+	public class EcoleModelToApprentissageOptionnelExemplar_CompetencesOpt : DataRelation<EcoleModel, ApprentissageOptionnelExemplar> {
+
+		[Column(Name = "fk_ecolemodel_join", Storage = "EcoleModelId")]
+		[HiddenProperty]
+		public int EcoleModelId {
+			get { return Object1Id; }
+			set { Object1Id= value; }
+		}
+		[Association(ThisKey = "EcoleModelId", OtherKey = "Id", CanBeNull = false, Storage = "EcoleModel")]
+		public EcoleModel EcoleModel {
+			get { return Object1; }
+			set { Object1 = value; }
+		}
+
+		[Column(Name = "fk_apprentissageoptionnelexemplar_join", Storage = "ApprentissageOptionnelExemplarId")]
+		[HiddenProperty]
+		public int ApprentissageOptionnelExemplarId {
+			get { return Object2Id; }
+			set { Object2Id= value; }
+		}
+		[Association(ThisKey = "ApprentissageOptionnelExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "ApprentissageOptionnelExemplar")]
+		public ApprentissageOptionnelExemplar ApprentissageOptionnelExemplar {
 			get { return Object2; }
 			set { Object2 = value; }
 		}
@@ -56,8 +83,35 @@ namespace CinqAnneaux.Data {
 			set { Object2 = value; }
 		}
 	}
-	[Table(Schema = "cinqanneaux",Name = "competenceexemplartospecialisation_specialisationschoisies")]
-	public class CompetenceExemplarToSpecialisation_SpecialisationsChoisies : DataRelation<CompetenceExemplar, Specialisation> {
+	[Table(Schema = "cinqanneaux",Name = "ecolemodeltoequipementoptionnelexemplar_equipementsopt")]
+	public class EcoleModelToEquipementOptionnelExemplar_EquipementsOpt : DataRelation<EcoleModel, EquipementOptionnelExemplar> {
+
+		[Column(Name = "fk_ecolemodel_join", Storage = "EcoleModelId")]
+		[HiddenProperty]
+		public int EcoleModelId {
+			get { return Object1Id; }
+			set { Object1Id= value; }
+		}
+		[Association(ThisKey = "EcoleModelId", OtherKey = "Id", CanBeNull = false, Storage = "EcoleModel")]
+		public EcoleModel EcoleModel {
+			get { return Object1; }
+			set { Object1 = value; }
+		}
+
+		[Column(Name = "fk_equipementoptionnelexemplar_join", Storage = "EquipementOptionnelExemplarId")]
+		[HiddenProperty]
+		public int EquipementOptionnelExemplarId {
+			get { return Object2Id; }
+			set { Object2Id= value; }
+		}
+		[Association(ThisKey = "EquipementOptionnelExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "EquipementOptionnelExemplar")]
+		public EquipementOptionnelExemplar EquipementOptionnelExemplar {
+			get { return Object2; }
+			set { Object2 = value; }
+		}
+	}
+	[Table(Schema = "cinqanneaux",Name = "competenceexemplartospecialisationmodel_specialisationschoisies")]
+	public class CompetenceExemplarToSpecialisationModel_SpecialisationsChoisies : DataRelation<CompetenceExemplar, SpecialisationModel> {
 
 		[Column(Name = "fk_competenceexemplar_join", Storage = "CompetenceExemplarId")]
 		[HiddenProperty]
@@ -71,20 +125,20 @@ namespace CinqAnneaux.Data {
 			set { Object1 = value; }
 		}
 
-		[Column(Name = "fk_specialisation_join", Storage = "SpecialisationId")]
+		[Column(Name = "fk_specialisationmodel_join", Storage = "SpecialisationModelId")]
 		[HiddenProperty]
-		public int SpecialisationId {
+		public int SpecialisationModelId {
 			get { return Object2Id; }
 			set { Object2Id= value; }
 		}
-		[Association(ThisKey = "SpecialisationId", OtherKey = "Id", CanBeNull = false, Storage = "Specialisation")]
-		public Specialisation Specialisation {
+		[Association(ThisKey = "SpecialisationModelId", OtherKey = "Id", CanBeNull = false, Storage = "SpecialisationModel")]
+		public SpecialisationModel SpecialisationModel {
 			get { return Object2; }
 			set { Object2 = value; }
 		}
 	}
-	[Table(Schema = "cinqanneaux",Name = "abssortmodeltoaugmentationsort_augmentations")]
-	public class AbsSortModelToAugmentationSort_Augmentations : DataRelation<AbsSortModel, AugmentationSort> {
+	[Table(Schema = "cinqanneaux",Name = "abssortmodeltoaugmentationsortexemplar_augmentations")]
+	public class AbsSortModelToAugmentationSortExemplar_Augmentations : DataRelation<AbsSortModel, AugmentationSortExemplar> {
 
 		[Column(Name = "fk_abssortmodel_join", Storage = "AbsSortModelId")]
 		[HiddenProperty]
@@ -98,14 +152,14 @@ namespace CinqAnneaux.Data {
 			set { Object1 = value; }
 		}
 
-		[Column(Name = "fk_augmentationsort_join", Storage = "AugmentationSortId")]
+		[Column(Name = "fk_augmentationsortexemplar_join", Storage = "AugmentationSortExemplarId")]
 		[HiddenProperty]
-		public int AugmentationSortId {
+		public int AugmentationSortExemplarId {
 			get { return Object2Id; }
 			set { Object2Id= value; }
 		}
-		[Association(ThisKey = "AugmentationSortId", OtherKey = "Id", CanBeNull = false, Storage = "AugmentationSort")]
-		public AugmentationSort AugmentationSort {
+		[Association(ThisKey = "AugmentationSortExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "AugmentationSortExemplar")]
+		public AugmentationSortExemplar AugmentationSortExemplar {
 			get { return Object2; }
 			set { Object2 = value; }
 		}
@@ -147,8 +201,35 @@ namespace CinqAnneaux.Data {
 		}
 
 	}
-	[Table(Schema = "cinqanneaux",Name = "ecoleavanceemodeltocompetenceexemplar_competencesrequises")]
-	public class EcoleAvanceeModelToCompetenceExemplar_CompetencesRequises : DataRelation<EcoleAvanceeModel, CompetenceExemplar> {
+	[Table(Schema = "cinqanneaux",Name = "absobjetmodeltospecialobjetexemplar_special")]
+	public class AbsObjetModelToSpecialObjetExemplar_Special : DataRelation<AbsObjetModel, SpecialObjetExemplar> {
+
+		[Column(Name = "fk_absobjetmodel_join", Storage = "AbsObjetModelId")]
+		[HiddenProperty]
+		public int AbsObjetModelId {
+			get { return Object1Id; }
+			set { Object1Id= value; }
+		}
+		[Association(ThisKey = "AbsObjetModelId", OtherKey = "Id", CanBeNull = false, Storage = "AbsObjetModel")]
+		public AbsObjetModel AbsObjetModel {
+			get { return Object1; }
+			set { Object1 = value; }
+		}
+
+		[Column(Name = "fk_specialobjetexemplar_join", Storage = "SpecialObjetExemplarId")]
+		[HiddenProperty]
+		public int SpecialObjetExemplarId {
+			get { return Object2Id; }
+			set { Object2Id= value; }
+		}
+		[Association(ThisKey = "SpecialObjetExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "SpecialObjetExemplar")]
+		public SpecialObjetExemplar SpecialObjetExemplar {
+			get { return Object2; }
+			set { Object2 = value; }
+		}
+	}
+	[Table(Schema = "cinqanneaux",Name = "ecoleavanceemodeltocompetencestatus_competencesrequises")]
+	public class EcoleAvanceeModelToCompetenceStatus_CompetencesRequises : DataRelation<EcoleAvanceeModel, CompetenceStatus> {
 
 		[Column(Name = "fk_ecoleavanceemodel_join", Storage = "EcoleAvanceeModelId")]
 		[HiddenProperty]
@@ -162,14 +243,14 @@ namespace CinqAnneaux.Data {
 			set { Object1 = value; }
 		}
 
-		[Column(Name = "fk_competenceexemplar_join", Storage = "CompetenceExemplarId")]
+		[Column(Name = "fk_competencestatus_join", Storage = "CompetenceStatusId")]
 		[HiddenProperty]
-		public int CompetenceExemplarId {
+		public int CompetenceStatusId {
 			get { return Object2Id; }
 			set { Object2Id= value; }
 		}
-		[Association(ThisKey = "CompetenceExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "CompetenceExemplar")]
-		public CompetenceExemplar CompetenceExemplar {
+		[Association(ThisKey = "CompetenceStatusId", OtherKey = "Id", CanBeNull = false, Storage = "CompetenceStatus")]
+		public CompetenceStatus CompetenceStatus {
 			get { return Object2; }
 			set { Object2 = value; }
 		}
@@ -201,8 +282,8 @@ namespace CinqAnneaux.Data {
 			set { Object2 = value; }
 		}
 	}
-	[Table(Schema = "cinqanneaux",Name = "voiealternativemodeltocompetenceexemplar_competencesrequises")]
-	public class VoieAlternativeModelToCompetenceExemplar_CompetencesRequises : DataRelation<VoieAlternativeModel, CompetenceExemplar> {
+	[Table(Schema = "cinqanneaux",Name = "voiealternativemodeltocompetencestatus_competencesrequises")]
+	public class VoieAlternativeModelToCompetenceStatus_CompetencesRequises : DataRelation<VoieAlternativeModel, CompetenceStatus> {
 
 		[Column(Name = "fk_voiealternativemodel_join", Storage = "VoieAlternativeModelId")]
 		[HiddenProperty]
@@ -216,14 +297,14 @@ namespace CinqAnneaux.Data {
 			set { Object1 = value; }
 		}
 
-		[Column(Name = "fk_competenceexemplar_join", Storage = "CompetenceExemplarId")]
+		[Column(Name = "fk_competencestatus_join", Storage = "CompetenceStatusId")]
 		[HiddenProperty]
-		public int CompetenceExemplarId {
+		public int CompetenceStatusId {
 			get { return Object2Id; }
 			set { Object2Id= value; }
 		}
-		[Association(ThisKey = "CompetenceExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "CompetenceExemplar")]
-		public CompetenceExemplar CompetenceExemplar {
+		[Association(ThisKey = "CompetenceStatusId", OtherKey = "Id", CanBeNull = false, Storage = "CompetenceStatus")]
+		public CompetenceStatus CompetenceStatus {
 			get { return Object2; }
 			set { Object2 = value; }
 		}
@@ -319,60 +400,6 @@ namespace CinqAnneaux.Data {
 		}
 
 	}
-	[Table(Schema = "cinqanneaux",Name = "personnagemodeltocompetenceexemplar_competences")]
-	public class PersonnageModelToCompetenceExemplar_Competences : DataRelation<PersonnageModel, CompetenceExemplar> {
-
-		[Column(Name = "fk_personnagemodel_join", Storage = "PersonnageModelId")]
-		[HiddenProperty]
-		public int PersonnageModelId {
-			get { return Object1Id; }
-			set { Object1Id= value; }
-		}
-		[Association(ThisKey = "PersonnageModelId", OtherKey = "Id", CanBeNull = false, Storage = "PersonnageModel")]
-		public PersonnageModel PersonnageModel {
-			get { return Object1; }
-			set { Object1 = value; }
-		}
-
-		[Column(Name = "fk_competenceexemplar_join", Storage = "CompetenceExemplarId")]
-		[HiddenProperty]
-		public int CompetenceExemplarId {
-			get { return Object2Id; }
-			set { Object2Id= value; }
-		}
-		[Association(ThisKey = "CompetenceExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "CompetenceExemplar")]
-		public CompetenceExemplar CompetenceExemplar {
-			get { return Object2; }
-			set { Object2 = value; }
-		}
-	}
-	[Table(Schema = "cinqanneaux",Name = "personnagemodeltocompetenceglobaleexemplar_competencesglobales")]
-	public class PersonnageModelToCompetenceGlobaleExemplar_CompetencesGlobales : DataRelation<PersonnageModel, CompetenceGlobaleExemplar> {
-
-		[Column(Name = "fk_personnagemodel_join", Storage = "PersonnageModelId")]
-		[HiddenProperty]
-		public int PersonnageModelId {
-			get { return Object1Id; }
-			set { Object1Id= value; }
-		}
-		[Association(ThisKey = "PersonnageModelId", OtherKey = "Id", CanBeNull = false, Storage = "PersonnageModel")]
-		public PersonnageModel PersonnageModel {
-			get { return Object1; }
-			set { Object1 = value; }
-		}
-
-		[Column(Name = "fk_competenceglobaleexemplar_join", Storage = "CompetenceGlobaleExemplarId")]
-		[HiddenProperty]
-		public int CompetenceGlobaleExemplarId {
-			get { return Object2Id; }
-			set { Object2Id= value; }
-		}
-		[Association(ThisKey = "CompetenceGlobaleExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "CompetenceGlobaleExemplar")]
-		public CompetenceGlobaleExemplar CompetenceGlobaleExemplar {
-			get { return Object2; }
-			set { Object2 = value; }
-		}
-	}
 	[Table(Schema = "cinqanneaux",Name = "creaturemodeltopouvoircreatureexemplar_pouvoirs")]
 	public class CreatureModelToPouvoirCreatureExemplar_Pouvoirs : DataRelation<CreatureModel, PouvoirCreatureExemplar> {
 
@@ -396,6 +423,33 @@ namespace CinqAnneaux.Data {
 		}
 		[Association(ThisKey = "PouvoirCreatureExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "PouvoirCreatureExemplar")]
 		public PouvoirCreatureExemplar PouvoirCreatureExemplar {
+			get { return Object2; }
+			set { Object2 = value; }
+		}
+	}
+	[Table(Schema = "cinqanneaux",Name = "creaturemodeltocompetencestatus_competences")]
+	public class CreatureModelToCompetenceStatus_Competences : DataRelation<CreatureModel, CompetenceStatus> {
+
+		[Column(Name = "fk_creaturemodel_join", Storage = "CreatureModelId")]
+		[HiddenProperty]
+		public int CreatureModelId {
+			get { return Object1Id; }
+			set { Object1Id= value; }
+		}
+		[Association(ThisKey = "CreatureModelId", OtherKey = "Id", CanBeNull = false, Storage = "CreatureModel")]
+		public CreatureModel CreatureModel {
+			get { return Object1; }
+			set { Object1 = value; }
+		}
+
+		[Column(Name = "fk_competencestatus_join", Storage = "CompetenceStatusId")]
+		[HiddenProperty]
+		public int CompetenceStatusId {
+			get { return Object2Id; }
+			set { Object2Id= value; }
+		}
+		[Association(ThisKey = "CompetenceStatusId", OtherKey = "Id", CanBeNull = false, Storage = "CompetenceStatus")]
+		public CompetenceStatus CompetenceStatus {
 			get { return Object2; }
 			set { Object2 = value; }
 		}
@@ -531,6 +585,33 @@ namespace CinqAnneaux.Data {
 		}
 		[Association(ThisKey = "DesavantageExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "DesavantageExemplar")]
 		public DesavantageExemplar DesavantageExemplar {
+			get { return Object2; }
+			set { Object2 = value; }
+		}
+	}
+	[Table(Schema = "cinqanneaux",Name = "pjmodeltocompetenceexemplar_competences")]
+	public class PJModelToCompetenceExemplar_Competences : DataRelation<PJModel, CompetenceExemplar> {
+
+		[Column(Name = "fk_pjmodel_join", Storage = "PJModelId")]
+		[HiddenProperty]
+		public int PJModelId {
+			get { return Object1Id; }
+			set { Object1Id= value; }
+		}
+		[Association(ThisKey = "PJModelId", OtherKey = "Id", CanBeNull = false, Storage = "PJModel")]
+		public PJModel PJModel {
+			get { return Object1; }
+			set { Object1 = value; }
+		}
+
+		[Column(Name = "fk_competenceexemplar_join", Storage = "CompetenceExemplarId")]
+		[HiddenProperty]
+		public int CompetenceExemplarId {
+			get { return Object2Id; }
+			set { Object2Id= value; }
+		}
+		[Association(ThisKey = "CompetenceExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "CompetenceExemplar")]
+		public CompetenceExemplar CompetenceExemplar {
 			get { return Object2; }
 			set { Object2 = value; }
 		}

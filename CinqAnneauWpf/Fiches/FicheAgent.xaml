@@ -7,8 +7,8 @@
              xmlns:core="clr-namespace:CoreWpf.UI;assembly=CoreWPF"
              mc:Ignorable="d">
     <StackPanel x:Name="xList" Height="1000">
-        <StackPanel Orientation="Horizontal">
-            <local:FicheAttributs x:Name="xAttributs"/>
+        <StackPanel Orientation="Horizontal" Margin="15,5,15,0">
+            <local:FicheAttributs x:Name="xAttributs" Margin="5,0"/>
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal" Margin="5">
                     <TextBlock Text="Initiative  "/>
@@ -20,7 +20,9 @@
                 <StackPanel Orientation="Horizontal" x:Name="xArmure" Margin="5"/>
                 <local:FicheListeAttaques x:Name="xAttaques"/>
             </StackPanel>
-            </StackPanel>
-        <local:FicheListeCompetences x:Name="xCompetences" MinHeight="100"/>
+        </StackPanel>
+        <local:FicheListeCompetences x:Name="xCompetences" MinHeight="100" Margin="15,5,15,0" Padding="5"/>
+        <DockPanel Name="xPouvoirsPanel" Margin="15,5,15,0" />
+        <TextBox TextWrapping="Wrap" Name="xDescription" Margin="15,5,15,0" Padding="5" BorderThickness="2" />
     </StackPanel>
 </UserControl>

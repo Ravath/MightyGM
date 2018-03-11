@@ -33,7 +33,7 @@ namespace CinqAnneauxWpf.Fiches {
 				xAttributs.Attributs = value.Attributs;
 				xCompetences.Liste = value.Competences;
                 xPouvoirsCreature.SelectedObject = value.TraitsCreature;
-				xInitiative.SetRKPool( value.Initiative );
+				xInitiative.SetRollPool( value.Initiative );
 				xVie.Vie = Agent.Vie;
 				xAttaques.SelectedAgent = value;
             }
@@ -47,7 +47,7 @@ namespace CinqAnneauxWpf.Fiches {
 				HorizontalAlignment = HorizontalAlignment.Stretch
 			};
 			//ajouter au stackpanel
-			xList.Children.Add(mco);
+			xPouvoirsPanel.Children.Add(mco);
         }
 
 		public object SelectedObject {
@@ -60,22 +60,32 @@ namespace CinqAnneauxWpf.Fiches {
 					Agent = (Agent)value;
 				} else if (value is PersonnageModel) {
 					Agent ag = Agent;
-					if(value is CreatureModel) {
+					if(value is CreatureModel cm) {
 						if(!(ag is Creature)) {
-							ag = new Creature();
-                        }
+							ag = new Creature(cm);
+						}
+						else
+						{
+							ag.SetPersonnage(cm);
+						}
 					} else {//value is PJModel
-						if(!(ag is Personnage)) {
-							ag = new Personnage();
+						PJModel perso = (PJModel)value;
+						if (!(ag is Personnage)) {
+							ag = new Personnage(perso);
+						}
+						else
+						{
+							ag.SetPersonnage(perso);
 						}
 					}
-					ag.SetPersonnage((PersonnageModel)value);
 					Agent = ag;
 					xCompetences.SetCompetences();
 					xVie.Vie = Agent.Vie;
 					xAttaques.RefreshList();
 					RefreshArmure();
-                }
+					// Description
+					xDescription.Text = Agent.EtatCivil.Description;
+				}
 			}
 		}
 		private void RefreshArmure() {

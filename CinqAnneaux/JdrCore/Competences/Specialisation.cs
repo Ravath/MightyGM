@@ -17,21 +17,25 @@ namespace CinqAnneaux.JdrCore.Competences {
 		public bool Degradante { get; set; }
 		public bool Noble { get; set; }
 		public TraitCompetence? Trait { get; set; }
+		public string Tag { get; private set; }
+
+		public Specialisation(SpecialisationModel model)
+		{
+			SetSpecialisation(model);
+		}
+		public Specialisation(){}
+
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="model"></param>
-		public void SetSpecialisation( Data.Specialisation model ) {
-			Nom = model.Nom;
+		public void SetSpecialisation( SpecialisationModel model ) {
+			Nom = model.Name;
 			Degradante = model.Degradante;
 			Noble = false;
 			Trait = null;
-        }
-		public void SetSousType( Data.SousTypeGlobal model ) {
-			Nom = model.Nom;
-			Degradante = model.Degradante;
-			Noble = model.Noble;
-			Trait = model.TraitAssocie;
+			Tag = model.Tag;
+
 		}
 	}
 }

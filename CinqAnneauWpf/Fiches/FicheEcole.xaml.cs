@@ -55,14 +55,14 @@ namespace CinqAnneauxWpf.Fiches {
             xTechniques.ItemsSource = ecole?.Techniques;
 			xType.Text = String.Format("[{0}]",ecole?.MotClef);
 			//moine
-			if(ecole?.MotClef == MotClefEcole.Moine) {
+			if(ecole?.MotClef == BaliseEcole.Moine) {
 				xMoine.Visibility = Visibility.Visible;
 				xDevotion.Text = ecole?.Devotion.ToString();
 			} else {
 				xMoine.Visibility = Visibility.Collapsed;
 			}
 			//shugenja
-			if(ecole?.MotClef == MotClefEcole.Shugenja) {
+			if(ecole?.MotClef == BaliseEcole.Shugenja) {
 				xShugenja.Visibility = Visibility.Visible;
 				xAffinite.Text = ecole?.Affinite.ToString();
 				xDeficience.Text = ecole?.Deficience.ToString();

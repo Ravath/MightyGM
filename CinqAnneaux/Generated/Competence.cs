@@ -73,6 +73,13 @@ namespace CinqAnneaux.Data {
 			set{_martiale = value;}
 		}
 
+		private bool _noble;
+		[Column(Storage = "Noble",Name = "noble")]
+		public bool Noble{
+			get{ return _noble;}
+			set{_noble = value;}
+		}
+
 		private IEnumerable<MaitriseModel> _maitrises;
 		public IEnumerable <MaitriseModel> Maitrises{
 			get{
@@ -120,21 +127,21 @@ namespace CinqAnneaux.Data {
 			}
 		}
 
-		private IEnumerable<Specialisation> _specialisations;
-		public IEnumerable <Specialisation> Specialisations{
+		private IEnumerable<SpecialisationModel> _specialisations;
+		public IEnumerable <SpecialisationModel> Specialisations{
 			get{
 				if( _specialisations == null ){
-					_specialisations = LoadByForeignKey<Specialisation>(p => p.CompetenceId, Id);
+					_specialisations = LoadByForeignKey<SpecialisationModel>(p => p.CompetenceId, Id);
 				}
 				return _specialisations;
 			}
 			set{
-				foreach( Specialisation item in _specialisations ){
+				foreach( SpecialisationModel item in _specialisations ){
 					item.Competence = null;
 
 				}
 				_specialisations = value;
-				foreach( Specialisation item in value ){
+				foreach( SpecialisationModel item in value ){
 					item.Competence = this;
 					item.SaveObject();
 				}
@@ -154,22 +161,22 @@ namespace CinqAnneaux.Data {
 			set{_rang = value;}
 		}
 
-		private IEnumerable<Specialisation> _specialisationsChoisies;
+		private IEnumerable<SpecialisationModel> _specialisationsChoisies;
 		[Association(ThisKey = "Id",CanBeNull = false,Storage = "SpecialisationsChoisies",OtherKey = "CompetenceExemplarId")]
-		public IEnumerable <Specialisation> SpecialisationsChoisies{
+		public IEnumerable <SpecialisationModel> SpecialisationsChoisies{
 			get{
 				if( _specialisationsChoisies == null ){
-					_specialisationsChoisies = LoadFromJointure<Specialisation,CompetenceExemplarToSpecialisation_SpecialisationsChoisies>(false);
+					_specialisationsChoisies = LoadFromJointure<SpecialisationModel,CompetenceExemplarToSpecialisationModel_SpecialisationsChoisies>(false);
 				}
 				return _specialisationsChoisies;
 			}
 			set{
-				SaveToJointure<Specialisation, CompetenceExemplarToSpecialisation_SpecialisationsChoisies> (_specialisationsChoisies, value,false);
+				SaveToJointure<SpecialisationModel, CompetenceExemplarToSpecialisationModel_SpecialisationsChoisies> (_specialisationsChoisies, value,false);
 				_specialisationsChoisies = value;
 			}
 		}
 		public override void DeleteObject() {
-			DeleteJoins<CompetenceExemplar,CompetenceExemplarToSpecialisation_SpecialisationsChoisies>(true);
+			DeleteJoins<CompetenceExemplar,CompetenceExemplarToSpecialisationModel_SpecialisationsChoisies>(true);
 			base.DeleteObject();
 		}
 	}

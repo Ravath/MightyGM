@@ -9,23 +9,39 @@ using Core.Data;
 using Core.Data.Schema;
 using LinqToDB.Mapping;
 namespace CinqAnneaux.Data {
-	[Table(Schema = "cinqanneaux",Name = "specialobjet")]
+	[Table(Schema = "cinqanneaux",Name = "specialobjetmodel")]
 	[CoreData]
-	public partial class SpecialObjet : DataObject {
+	public partial class SpecialObjetModel : DataModel {
 
-		private string _name = "";
-		[Column(Storage = "Name",Name = "name")]
-		public string Name{
-			get{ return _name;}
-			set{_name = value;}
+		private SpecialObjetDescription _obj;
+		public override IDataDescription Description{
+			get{
+				if(_obj == null){
+					IEnumerable<SpecialObjetDescription> id = GetModelReferencer<SpecialObjetDescription>();
+					if(id.Count() == 0) {
+						_obj = new SpecialObjetDescription();
+						_obj.Model = this;
+						_obj.SaveObject();
+					} else {
+						_obj = id.ElementAt(0);
+					}
+				}
+				return _obj;
+				
+			}
 		}
+	}
+	[Table(Schema = "cinqanneaux",Name = "specialobjetdescription")]
+	public partial class SpecialObjetDescription : DataDescription<SpecialObjetModel> {
+	}
+	[Table(Schema = "cinqanneaux",Name = "specialobjetexemplar")]
+	public partial class SpecialObjetExemplar : DataExemplaire<SpecialObjetModel> {
 
-		private string _description = "";
-		[LargeText]
-		[Column(Storage = "Description",Name = "description")]
-		public string Description{
-			get{ return _description;}
-			set{_description = value;}
+		private string _complement = "";
+		[Column(Storage = "Complement",Name = "complement")]
+		public string Complement{
+			get{ return _complement;}
+			set{_complement = value;}
 		}
 	}
 }

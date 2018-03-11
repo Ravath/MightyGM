@@ -9,6 +9,12 @@ using Core.Data;
 using Core.Data.Schema;
 using LinqToDB.Mapping;
 namespace CinqAnneaux.Data {
-	public partial class Specialisation {
+	public partial class SpecialisationModel {
+	}
+	public partial class SpecialisationExemplar
+	{
+	}
+	public partial class SpecialisationDDescription
+	{
 	}
 }

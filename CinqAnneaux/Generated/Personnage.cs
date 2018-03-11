@@ -67,41 +67,6 @@ namespace CinqAnneaux.Data {
 			get{ return _constitution;}
 			set{_constitution = value;}
 		}
-
-		private IEnumerable<CompetenceExemplar> _competences;
-		[Association(ThisKey = "Id",CanBeNull = false,Storage = "Competences",OtherKey = "PersonnageModelId")]
-		public IEnumerable <CompetenceExemplar> Competences{
-			get{
-				if( _competences == null ){
-					_competences = LoadFromJointure<CompetenceExemplar,PersonnageModelToCompetenceExemplar_Competences>(false);
-				}
-				return _competences;
-			}
-			set{
-				SaveToJointure<CompetenceExemplar, PersonnageModelToCompetenceExemplar_Competences> (_competences, value,false);
-				_competences = value;
-			}
-		}
-
-		private IEnumerable<CompetenceGlobaleExemplar> _competencesGlobales;
-		[Association(ThisKey = "Id",CanBeNull = false,Storage = "CompetencesGlobales",OtherKey = "PersonnageModelId")]
-		public IEnumerable <CompetenceGlobaleExemplar> CompetencesGlobales{
-			get{
-				if( _competencesGlobales == null ){
-					_competencesGlobales = LoadFromJointure<CompetenceGlobaleExemplar,PersonnageModelToCompetenceGlobaleExemplar_CompetencesGlobales>(false);
-				}
-				return _competencesGlobales;
-			}
-			set{
-				SaveToJointure<CompetenceGlobaleExemplar, PersonnageModelToCompetenceGlobaleExemplar_CompetencesGlobales> (_competencesGlobales, value,false);
-				_competencesGlobales = value;
-			}
-		}
-		public override void DeleteObject() {
-			DeleteJoins<PersonnageModel,PersonnageModelToCompetenceExemplar_Competences>(true);
-			DeleteJoins<PersonnageModel,PersonnageModelToCompetenceGlobaleExemplar_CompetencesGlobales>(true);
-			base.DeleteObject();
-		}
 	}
 	[Table(Schema = "cinqanneaux",Name = "personnagedescription")]
 	public abstract partial class PersonnageDescription : DataDescription<PersonnageModel> {

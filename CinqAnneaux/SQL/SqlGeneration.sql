@@ -1,7 +1,21 @@
+DROP SCHEMA if exists cinqanneaux CASCADE;
+
 CREATE SCHEMA cinqanneaux;
 create table cinqanneaux.dataobject(
 	id serial NOT NULL,
 	primary key(id));
+create table cinqanneaux.competencestatus(
+	fk_competencemodel_competence integer,
+	rang integer NOT NULL,
+	fk_specialisationmodel_specialite integer)INHERITS(cinqanneaux.dataobject);
+create table cinqanneaux.attaquecreature(
+	name character varying(20) NOT NULL,
+	xgdegats integer NOT NULL,
+	gxdegats integer NOT NULL,
+	xgtoucher integer NOT NULL,
+	gxtoucher integer NOT NULL,
+	action integer NOT NULL,
+	fk_creaturemodel_creature integer)INHERITS(cinqanneaux.dataobject);
 create table cinqanneaux.clanmodel(
 	name character varying(40) NOT NULL,
 	tag character varying(7) NOT NULL,
@@ -18,6 +32,7 @@ create table cinqanneaux.famillemodel(
 	tag character varying(7) NOT NULL,
 	bonusinitial integer NOT NULL,
 	fk_clanmodel_clan integer,
+	familledisparue bool NOT NULL,
 	unique(name),
 	unique(tag))INHERITS(cinqanneaux.dataobject);
 create table cinqanneaux.familledescription(
@@ -29,10 +44,11 @@ create table cinqanneaux.ecolemodel(
 	name character varying(40) NOT NULL,
 	tag character varying(7) NOT NULL,
 	fk_clanmodel_clan integer,
-	motclef integer NOT NULL,
+	balise integer NOT NULL,
 	bonusinitial integer NOT NULL,
 	honneur decimal NOT NULL,
 	argentinitial decimal NOT NULL,
+	necessairedevoyage bool NOT NULL,
 	affinite integer,
 	deficience integer,
 	nbrsortterre integer,
@@ -61,6 +77,28 @@ create table cinqanneaux.techniquedescription(
 	fk_model_id integer)INHERITS(cinqanneaux.dataobject);
 create table cinqanneaux.techniqueexemplar(
 	fk_model_id integer)INHERITS(cinqanneaux.dataobject);
+create table cinqanneaux.apprentissageoptionnelmodel(
+	name character varying(40) NOT NULL,
+	tag character varying(7) NOT NULL,
+	unique(name),
+	unique(tag))INHERITS(cinqanneaux.dataobject);
+create table cinqanneaux.apprentissageoptionneldescription(
+	description text NOT NULL,
+	fk_model_id integer)INHERITS(cinqanneaux.dataobject);
+create table cinqanneaux.apprentissageoptionnelexemplar(
+	fk_model_id integer,
+	nombre integer NOT NULL)INHERITS(cinqanneaux.dataobject);
+create table cinqanneaux.equipementoptionnelmodel(
+	name character varying(40) NOT NULL,
+	tag character varying(7) NOT NULL,
+	unique(name),
+	unique(tag))INHERITS(cinqanneaux.dataobject);
+create table cinqanneaux.equipementoptionneldescription(
+	description text NOT NULL,
+	fk_model_id integer)INHERITS(cinqanneaux.dataobject);
+create table cinqanneaux.equipementoptionnelexemplar(
+	fk_model_id integer,
+	nombre integer NOT NULL)INHERITS(cinqanneaux.dataobject);
 create table cinqanneaux.competencemodel(
 	name character varying(40) NOT NULL,
 	tag character varying(7) NOT NULL,
@@ -70,6 +108,7 @@ create table cinqanneaux.competencemodel(
 	degradante bool NOT NULL,
 	sociale bool NOT NULL,
 	martiale bool NOT NULL,
+	noble bool NOT NULL,
 	fk_competenceglobalemodel_global integer,
 	unique(name),
 	unique(tag))INHERITS(cinqanneaux.dataobject);
@@ -79,10 +118,18 @@ create table cinqanneaux.competencedescription(
 create table cinqanneaux.competenceexemplar(
 	fk_model_id integer,
 	rang integer NOT NULL)INHERITS(cinqanneaux.dataobject);
-create table cinqanneaux.specialisation(
-	nom character varying(30) NOT NULL,
+create table cinqanneaux.specialisationmodel(
+	name character varying(40) NOT NULL,
+	tag character varying(7) NOT NULL,
 	fk_competencemodel_competence integer,
-	degradante bool NOT NULL)INHERITS(cinqanneaux.dataobject);
+	degradante bool NOT NULL,
+	unique(name),
+	unique(tag))INHERITS(cinqanneaux.dataobject);
+create table cinqanneaux.specialisationdescription(
+	description text NOT NULL,
+	fk_model_id integer)INHERITS(cinqanneaux.dataobject);
+create table cinqanneaux.specialisationexemplar(
+	fk_model_id integer)INHERITS(cinqanneaux.dataobject);
 create table cinqanneaux.maitrisemodel(
 	name character varying(40) NOT NULL,
 	tag character varying(7) NOT NULL,
@@ -98,24 +145,13 @@ create table cinqanneaux.maitriseexemplar(
 create table cinqanneaux.competenceglobalemodel(
 	name character varying(40) NOT NULL,
 	tag character varying(7) NOT NULL,
-	groupe integer NOT NULL,
-	traitassocie integer NOT NULL,
 	unique(name),
 	unique(tag))INHERITS(cinqanneaux.dataobject);
 create table cinqanneaux.competenceglobaledescription(
 	description text NOT NULL,
 	fk_model_id integer)INHERITS(cinqanneaux.dataobject);
 create table cinqanneaux.competenceglobaleexemplar(
-	fk_model_id integer,
-	rang integer NOT NULL,
-	fk_soustypeglobal_specialisation integer)INHERITS(cinqanneaux.dataobject);
-create table cinqanneaux.soustypeglobal(
-	tag character varying(7) NOT NULL,
-	nom character varying(30) NOT NULL,
-	traitassocie integer NOT NULL,
-	degradante bool NOT NULL,
-	noble bool NOT NULL,
-	fk_competenceglobalemodel_competence integer)INHERITS(cinqanneaux.dataobject);
+	fk_model_id integer)INHERITS(cinqanneaux.dataobject);
 create table cinqanneaux.absavantagemodel(
 	name character varying(40) NOT NULL,
 	tag character varying(7) NOT NULL,
@@ -163,15 +199,22 @@ create table cinqanneaux.abssortdescription(
 	fk_model_id integer)INHERITS(cinqanneaux.dataobject);
 create table cinqanneaux.abssortexemplar(
 	fk_model_id integer)INHERITS(cinqanneaux.dataobject);
-create table cinqanneaux.augmentationsort(
-	type integer NOT NULL,
-	facteur decimal NOT NULL)INHERITS(cinqanneaux.dataobject);
+create table cinqanneaux.augmentationsortmodel(
+	name character varying(40) NOT NULL,
+	tag character varying(7) NOT NULL,
+	unique(name),
+	unique(tag))INHERITS(cinqanneaux.dataobject);
+create table cinqanneaux.augmentationsortdescription(
+	description text NOT NULL,
+	fk_model_id integer)INHERITS(cinqanneaux.dataobject);
+create table cinqanneaux.augmentationsortexemplar(
+	fk_model_id integer,
+	complement character varying(30) NOT NULL)INHERITS(cinqanneaux.dataobject);
 create table cinqanneaux.absobjetmodel(
 	name character varying(40) NOT NULL,
 	tag character varying(7) NOT NULL,
-	monnaie integer NOT NULL,
-	cout integer NOT NULL,
-	fk_specialobjet_special integer,
+	cout_unit integer NOT NULL,
+	cout_val integer NOT NULL,
 	unique(name),
 	unique(tag))INHERITS(cinqanneaux.dataobject);
 create table cinqanneaux.absobjetdescription(
@@ -179,9 +222,17 @@ create table cinqanneaux.absobjetdescription(
 	fk_model_id integer)INHERITS(cinqanneaux.dataobject);
 create table cinqanneaux.absobjetexemplar(
 	fk_model_id integer)INHERITS(cinqanneaux.dataobject);
-create table cinqanneaux.specialobjet(
-	name character varying(30) NOT NULL,
-	description text NOT NULL)INHERITS(cinqanneaux.dataobject);
+create table cinqanneaux.specialobjetmodel(
+	name character varying(40) NOT NULL,
+	tag character varying(7) NOT NULL,
+	unique(name),
+	unique(tag))INHERITS(cinqanneaux.dataobject);
+create table cinqanneaux.specialobjetdescription(
+	description text NOT NULL,
+	fk_model_id integer)INHERITS(cinqanneaux.dataobject);
+create table cinqanneaux.specialobjetexemplar(
+	fk_model_id integer,
+	complement character varying(30) NOT NULL)INHERITS(cinqanneaux.dataobject);
 create table cinqanneaux.ancetremodel(
 	name character varying(40) NOT NULL,
 	tag character varying(7) NOT NULL,
@@ -199,7 +250,7 @@ create table cinqanneaux.ecoleavanceemodel(
 	name character varying(40) NOT NULL,
 	tag character varying(7) NOT NULL,
 	fk_clanmodel_clan integer,
-	motclef integer NOT NULL,
+	balise integer NOT NULL,
 	unique(name),
 	unique(tag))INHERITS(cinqanneaux.dataobject);
 create table cinqanneaux.ecoleavanceedescription(
@@ -225,7 +276,8 @@ create table cinqanneaux.voiealternativemodel(
 	tag character varying(7) NOT NULL,
 	nomtechnique character varying(30) NOT NULL,
 	rang integer NOT NULL,
-	motclef integer,
+	balise integer,
+	fk_clanmodel_clanrequis integer,
 	unique(name),
 	unique(tag))INHERITS(cinqanneaux.dataobject);
 create table cinqanneaux.voiealternativedescription(
@@ -333,38 +385,39 @@ create table cinqanneaux.pouvoircreaturedescription(
 create table cinqanneaux.pouvoircreatureexemplar(
 	fk_model_id integer,
 	complement character varying(30) NOT NULL)INHERITS(cinqanneaux.dataobject);
-create table cinqanneaux.attaquecreature(
-	name character varying(20) NOT NULL,
-	xgdegats integer NOT NULL,
-	gxdegats integer NOT NULL,
-	xgtoucher integer NOT NULL,
-	gxtoucher integer NOT NULL,
-	action integer NOT NULL,
-	fk_creaturemodel_creature integer)INHERITS(cinqanneaux.dataobject);
-create table cinqanneaux.ecolemodeltocompetenceexemplar_competences(
+create table cinqanneaux.ecolemodeltocompetencestatus_competences(
 	fk_ecolemodel_join integer,
-	fk_competenceexemplar_join integer)INHERITS(cinqanneaux.dataobject);
+	fk_competencestatus_join integer)INHERITS(cinqanneaux.dataobject);
+create table cinqanneaux.ecolemodeltoapprentissageoptionnelexemplar_competencesopt(
+	fk_ecolemodel_join integer,
+	fk_apprentissageoptionnelexemplar_join integer)INHERITS(cinqanneaux.dataobject);
 create table cinqanneaux.ecolemodeltoabsobjetmodel_equipement(
 	fk_ecolemodel_join integer,
 	fk_absobjetmodel_join integer)INHERITS(cinqanneaux.dataobject);
-create table cinqanneaux.competenceexemplartospecialisation_specialisationschoisies(
+create table cinqanneaux.ecolemodeltoequipementoptionnelexemplar_equipementsopt(
+	fk_ecolemodel_join integer,
+	fk_equipementoptionnelexemplar_join integer)INHERITS(cinqanneaux.dataobject);
+create table cinqanneaux.competenceexemplartospecialisationmodel_specialisationschoisies(
 	fk_competenceexemplar_join integer,
-	fk_specialisation_join integer)INHERITS(cinqanneaux.dataobject);
-create table cinqanneaux.abssortmodeltoaugmentationsort_augmentations(
+	fk_specialisationmodel_join integer)INHERITS(cinqanneaux.dataobject);
+create table cinqanneaux.abssortmodeltoaugmentationsortexemplar_augmentations(
 	fk_abssortmodel_join integer,
-	fk_augmentationsort_join integer)INHERITS(cinqanneaux.dataobject);
+	fk_augmentationsortexemplar_join integer)INHERITS(cinqanneaux.dataobject);
 create table cinqanneaux.motclefsfromabssortmodel(
 	fk_abssortmodel_from integer,
 	motclefs integer)INHERITS(cinqanneaux.dataobject);
-create table cinqanneaux.ecoleavanceemodeltocompetenceexemplar_competencesrequises(
+create table cinqanneaux.absobjetmodeltospecialobjetexemplar_special(
+	fk_absobjetmodel_join integer,
+	fk_specialobjetexemplar_join integer)INHERITS(cinqanneaux.dataobject);
+create table cinqanneaux.ecoleavanceemodeltocompetencestatus_competencesrequises(
 	fk_ecoleavanceemodel_join integer,
-	fk_competenceexemplar_join integer)INHERITS(cinqanneaux.dataobject);
+	fk_competencestatus_join integer)INHERITS(cinqanneaux.dataobject);
 create table cinqanneaux.ecoleavanceemodeltoconditionexemplar_conditions(
 	fk_ecoleavanceemodel_join integer,
 	fk_conditionexemplar_join integer)INHERITS(cinqanneaux.dataobject);
-create table cinqanneaux.voiealternativemodeltocompetenceexemplar_competencesrequises(
+create table cinqanneaux.voiealternativemodeltocompetencestatus_competencesrequises(
 	fk_voiealternativemodel_join integer,
-	fk_competenceexemplar_join integer)INHERITS(cinqanneaux.dataobject);
+	fk_competencestatus_join integer)INHERITS(cinqanneaux.dataobject);
 create table cinqanneaux.voiealternativemodeltoconditionexemplar_conditions(
 	fk_voiealternativemodel_join integer,
 	fk_conditionexemplar_join integer)INHERITS(cinqanneaux.dataobject);
@@ -374,15 +427,12 @@ create table cinqanneaux.katamodeltoecolemodel_ecoles(
 create table cinqanneaux.acteursfromintriguemodel(
 	fk_intriguemodel_from integer,
 	acteurs character varying(60) NOT NULL)INHERITS(cinqanneaux.dataobject);
-create table cinqanneaux.personnagemodeltocompetenceexemplar_competences(
-	fk_personnagemodel_join integer,
-	fk_competenceexemplar_join integer)INHERITS(cinqanneaux.dataobject);
-create table cinqanneaux.personnagemodeltocompetenceglobaleexemplar_competencesglobales(
-	fk_personnagemodel_join integer,
-	fk_competenceglobaleexemplar_join integer)INHERITS(cinqanneaux.dataobject);
 create table cinqanneaux.creaturemodeltopouvoircreatureexemplar_pouvoirs(
 	fk_creaturemodel_join integer,
 	fk_pouvoircreatureexemplar_join integer)INHERITS(cinqanneaux.dataobject);
+create table cinqanneaux.creaturemodeltocompetencestatus_competences(
+	fk_creaturemodel_join integer,
+	fk_competencestatus_join integer)INHERITS(cinqanneaux.dataobject);
 create table cinqanneaux.pjmodeltocompetenceexemplar_armes(
 	fk_pjmodel_join integer,
 	fk_competenceexemplar_join integer)INHERITS(cinqanneaux.dataobject);
@@ -398,6 +448,9 @@ create table cinqanneaux.pjmodeltoavantageexemplar_avantages(
 create table cinqanneaux.pjmodeltodesavantageexemplar_desavantages(
 	fk_pjmodel_join integer,
 	fk_desavantageexemplar_join integer)INHERITS(cinqanneaux.dataobject);
+create table cinqanneaux.pjmodeltocompetenceexemplar_competences(
+	fk_pjmodel_join integer,
+	fk_competenceexemplar_join integer)INHERITS(cinqanneaux.dataobject);
 create table cinqanneaux.pjmodeltosortmodel_sorts(
 	fk_pjmodel_join integer,
 	fk_sortmodel_join integer)INHERITS(cinqanneaux.dataobject);
@@ -499,6 +552,8 @@ create table cinqanneaux.pjmodel(
 	fk_ancetremodel_ancetre integer,
 	fk_clanmodel_clan integer,
 	fk_famillemodel_famille integer,
+	xptotal integer NOT NULL,
+	xpdepense integer NOT NULL,
 	primary key(id))INHERITS(cinqanneaux.personnagemodel);
 create table cinqanneaux.pjdescription(
 	primary key(id))INHERITS(cinqanneaux.personnagedescription);

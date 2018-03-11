@@ -15,6 +15,7 @@ namespace Core.Engine {
 		public string Cheveux { get; set; }
 		public string Carrure { get; set; }
 		public string Yeux { get; set; }
+		public string Description { get; set; }
 	}
 
 	public class Famille<P> where P : PNJMineur {

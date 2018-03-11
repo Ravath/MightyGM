@@ -12,7 +12,7 @@ namespace CinqAnneaux.JdrCore.Ecoles {
 	public class Ecole : INamed {
 		public string Tag { get; private set; }
 		public string Name { get; private set; }
-		public MotClefEcole MotClef { get; private set; }
+		public BaliseEcole MotClef { get; private set; }
 		public Affinite? Affinite { get; private set; }
 		public Affinite? Deficience { get; private set; }
 		public Devotion? Devotion { get; private set; }
@@ -42,7 +42,7 @@ namespace CinqAnneaux.JdrCore.Ecoles {
 			RokuInitial = (int)model.ArgentInitial;
 			BuInitial = ((int)model.ArgentInitial * 10) % 10;
 			ZeniInitial = ((int)model.ArgentInitial * 100) % 10;
-			MotClef = model.MotClef;
+			MotClef = model.Balise;
 			Affinite = model.Affinite;
 			Deficience = model.Deficience;
 			Devotion = model.Devotion;

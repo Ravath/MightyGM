@@ -37,9 +37,9 @@ namespace CinqAnneaux.JdrCore.Agent {
 			Gloire = new RankedCarac(pointsGloire) { Label = "Gloire" };
 			Status = new RankedCarac(pointsStatus) { Label = "Status" };
 			/* linker l'initiative */
-			Initiative.KeepValue.AddModifier(Attributs.Reflexes);
-			Initiative.NumberValue.AddModifier(Attributs.Reflexes);
-			Initiative.NumberValue.AddModifier(Reputation);
+			IndirectValue initRoll = new IndirectValue(Attributs.Reflexes);
+			initRoll.AddModifier(Reputation);
+			Initiative = new RollAndKeep(initRoll, Attributs.Reflexes);
 			/* vie */
 			Vie = new SeuilViePJ(this);
 			//autres
@@ -47,11 +47,15 @@ namespace CinqAnneaux.JdrCore.Agent {
 			Clan = new Clan();
 			Ecoles = new ListeEcoles(this);
         }
+		public Personnage(PJModel model) : this()
+		{
+			SetPersonnage(model);
+		}
 		#endregion
 
-		public override void SetPersonnage( PersonnageModel perso ) {
-			base.SetPersonnage(perso);
-			PJModel model = (PJModel)perso;
+		public override void SetPersonnage(PJModel model)
+		{
+			base.SetPersonnage(model);
 			//TODO : init set pj
 			/* clear everything */
 			ClearAttaques();

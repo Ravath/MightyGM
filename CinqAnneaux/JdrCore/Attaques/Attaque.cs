@@ -9,8 +9,8 @@ using CinqAnneaux.JdrCore.Objets;
 
 namespace CinqAnneaux.JdrCore.Attaques {
 	public interface IAttaque {
-		AbsRKPool JetAttaque { get ;}
-		AbsRKPool Degats { get; }
+		RollAndKeep JetAttaque { get ;}
+		RollAndKeep Degats { get; }
 		Data.Action Action { get; }
 		string Name { get; }
 	}
@@ -18,28 +18,18 @@ namespace CinqAnneaux.JdrCore.Attaques {
 	public class AttaqueCreature : IAttaque {
 
 		public string Name { get; protected set; }
-		public AbsRKPool JetAttaque { get; private set; }
-		public AbsRKPool Degats { get; private set; }
+		public RollAndKeep JetAttaque { get; private set; }
+		public RollAndKeep Degats { get; private set; }
 		public Data.Action Action { get; private set; }
 
 		public AttaqueCreature(Data.AttaqueCreature att) {
-			JetAttaque = new RKPool();
-			Degats = new RKPool();
-			Degats.Keep = att.gxDegats;
-			Degats.Number = att.xgDegats;
-			JetAttaque.Keep = att.gxToucher;
-			JetAttaque.Number = att.xgToucher;
-			Action = att.Action;
-			Name = att.Name;
+			SetAttaqueCreature(att);
         }
 
-		public void SetAttaqueCreature( Data.AttaqueCreature att ) {
-			JetAttaque = new RKPool();
-			Degats = new RKPool();
-			Degats.Keep = att.gxDegats;
-			Degats.Number = att.xgDegats;
-			JetAttaque.Keep = att.gxToucher;
-			JetAttaque.Number = att.xgToucher;
+		public void SetAttaqueCreature( Data.AttaqueCreature att )
+		{
+			JetAttaque = new RollAndKeep(att.gxToucher, att.xgToucher);
+			Degats = new RollAndKeep(att.gxDegats, att.xgDegats);
 			Action = att.Action;
 			Name = att.Name;
 		}
@@ -50,8 +40,9 @@ namespace CinqAnneaux.JdrCore.Attaques {
 		public Arme Arme { get; private set; }
 
 		public string Name { get { return Arme.Name; } }
-		public AbsRKPool JetAttaque { get; private set; }
-		public AbsRKPool Degats { get { return Arme.Degats; } }
+		public Competence Competence { get; set; }
+		public RollAndKeep JetAttaque { get { return Competence.Pool; } }
+		public RollAndKeep Degats { get { return Arme.Degats; } }
 		public Data.Action Action { get; private set; }
 
 		public AttaqueArme() { }
@@ -60,8 +51,7 @@ namespace CinqAnneaux.JdrCore.Attaques {
 			Arme = arme;
 			Action = Data.Action.Complexe;
 			/* find used compétence */
-			Competence cpt = agent.Competences.GetCompetenceArme(arme.Type);
-			JetAttaque = new CompositeRKPool(cpt.Pool);
+			Competence = agent.Competences.GetCompetenceArme(arme.Type);
 			//TODO spécialisation compétence
 		}
 	}

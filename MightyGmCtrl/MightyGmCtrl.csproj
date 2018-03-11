@@ -95,7 +95,7 @@
     <Compile Include="ImportExport\ExcelFacilities.cs" />
     <Compile Include="ImportExport\ExcelPropDefault.cs" />
     <Compile Include="ImportExport\ExcelPropertyConverters.cs" />
-    <Compile Include="ImportExport\ExcelPropExemplar.cs" />
+    <Compile Include="ImportExport\ExcelRedirections.cs" />
     <Compile Include="ImportExport\ExportExcel.cs" />
     <Compile Include="ImportExport\ExportWord.cs" />
     <Compile Include="ImportExport\ImportChecker.cs" />

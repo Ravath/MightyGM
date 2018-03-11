@@ -150,8 +150,24 @@ namespace CinqAnneaux.Data {
 				_pouvoirs = value;
 			}
 		}
+
+		private IEnumerable<CompetenceStatus> _competences;
+		[Association(ThisKey = "Id",CanBeNull = false,Storage = "Competences",OtherKey = "CreatureModelId")]
+		public IEnumerable <CompetenceStatus> Competences{
+			get{
+				if( _competences == null ){
+					_competences = LoadFromJointure<CompetenceStatus,CreatureModelToCompetenceStatus_Competences>(false);
+				}
+				return _competences;
+			}
+			set{
+				SaveToJointure<CompetenceStatus, CreatureModelToCompetenceStatus_Competences> (_competences, value,false);
+				_competences = value;
+			}
+		}
 		public override void DeleteObject() {
 			DeleteJoins<CreatureModel,CreatureModelToPouvoirCreatureExemplar_Pouvoirs>(true);
+			DeleteJoins<CreatureModel,CreatureModelToCompetenceStatus_Competences>(true);
 			base.DeleteObject();
 		}
 	}

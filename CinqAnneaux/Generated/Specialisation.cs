@@ -9,15 +9,26 @@ using Core.Data;
 using Core.Data.Schema;
 using LinqToDB.Mapping;
 namespace CinqAnneaux.Data {
-	[Table(Schema = "cinqanneaux",Name = "specialisation")]
+	[Table(Schema = "cinqanneaux",Name = "specialisationmodel")]
 	[CoreData]
-	public partial class Specialisation : DataObject {
+	public partial class SpecialisationModel : DataModel {
 
-		private string _nom = "";
-		[Column(Storage = "Nom",Name = "nom")]
-		public string Nom{
-			get{ return _nom;}
-			set{_nom = value;}
+		private SpecialisationDescription _obj;
+		public override IDataDescription Description{
+			get{
+				if(_obj == null){
+					IEnumerable<SpecialisationDescription> id = GetModelReferencer<SpecialisationDescription>();
+					if(id.Count() == 0) {
+						_obj = new SpecialisationDescription();
+						_obj.Model = this;
+						_obj.SaveObject();
+					} else {
+						_obj = id.ElementAt(0);
+					}
+				}
+				return _obj;
+				
+			}
 		}
 
 		private int _competenceId;
@@ -52,5 +63,11 @@ namespace CinqAnneaux.Data {
 			get{ return _degradante;}
 			set{_degradante = value;}
 		}
+	}
+	[Table(Schema = "cinqanneaux",Name = "specialisationdescription")]
+	public partial class SpecialisationDescription : DataDescription<SpecialisationModel> {
+	}
+	[Table(Schema = "cinqanneaux",Name = "specialisationexemplar")]
+	public partial class SpecialisationExemplar : DataExemplaire<SpecialisationModel> {
 	}
 }

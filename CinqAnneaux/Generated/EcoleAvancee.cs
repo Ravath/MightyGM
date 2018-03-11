@@ -53,24 +53,24 @@ namespace CinqAnneaux.Data {
 			}
 		}
 
-		private MotClefEcole _motClef;
-		[Column(Storage = "MotClef",Name = "motclef")]
-		public MotClefEcole MotClef{
-			get{ return _motClef;}
-			set{_motClef = value;}
+		private BaliseEcole _balise;
+		[Column(Storage = "Balise",Name = "balise")]
+		public BaliseEcole Balise{
+			get{ return _balise;}
+			set{_balise = value;}
 		}
 
-		private IEnumerable<CompetenceExemplar> _competencesRequises;
+		private IEnumerable<CompetenceStatus> _competencesRequises;
 		[Association(ThisKey = "Id",CanBeNull = false,Storage = "CompetencesRequises",OtherKey = "EcoleAvanceeModelId")]
-		public IEnumerable <CompetenceExemplar> CompetencesRequises{
+		public IEnumerable <CompetenceStatus> CompetencesRequises{
 			get{
 				if( _competencesRequises == null ){
-					_competencesRequises = LoadFromJointure<CompetenceExemplar,EcoleAvanceeModelToCompetenceExemplar_CompetencesRequises>(false);
+					_competencesRequises = LoadFromJointure<CompetenceStatus,EcoleAvanceeModelToCompetenceStatus_CompetencesRequises>(false);
 				}
 				return _competencesRequises;
 			}
 			set{
-				SaveToJointure<CompetenceExemplar, EcoleAvanceeModelToCompetenceExemplar_CompetencesRequises> (_competencesRequises, value,false);
+				SaveToJointure<CompetenceStatus, EcoleAvanceeModelToCompetenceStatus_CompetencesRequises> (_competencesRequises, value,false);
 				_competencesRequises = value;
 			}
 		}
@@ -111,7 +111,7 @@ namespace CinqAnneaux.Data {
 			}
 		}
 		public override void DeleteObject() {
-			DeleteJoins<EcoleAvanceeModel,EcoleAvanceeModelToCompetenceExemplar_CompetencesRequises>(true);
+			DeleteJoins<EcoleAvanceeModel,EcoleAvanceeModelToCompetenceStatus_CompetencesRequises>(true);
 			DeleteJoins<EcoleAvanceeModel,EcoleAvanceeModelToConditionExemplar_Conditions>(true);
 			base.DeleteObject();
 		}

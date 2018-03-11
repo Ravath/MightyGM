@@ -19,8 +19,9 @@ namespace MightyGmCtrl.ImportExport
 		void ImportColumn(object newObj, PropertyInfo prop, IRow headerRow, IRow currentRow, ImportType impType);
 	}
 
+
 	/// <summary>
-	/// Export DatModel into 2 columns, suffixed _Tag and _Name.
+	/// Exports a collection into one column, with values separated by ';'.
 	/// </summary>
 	public class ExcelPropDefaultCollection : IExcelPropertyConverter
 	{
@@ -97,8 +98,9 @@ namespace MightyGmCtrl.ImportExport
 		}
 	}
 
+
 	/// <summary>
-	/// Export DatModel into 2 columns, suffixed _Tag and _Name.
+	/// Exports DatModel into 2 columns, suffixed _Tag and _Name.
 	/// </summary>
 	public class ExcelPropModel : IExcelPropertyConverter
 	{
@@ -132,49 +134,11 @@ namespace MightyGmCtrl.ImportExport
 			int i = headerRow.FindCell(prop.Name + "_Tag");
 			//Get Tag
 			IDataObject ido = (IDataObject)newObj;
-			PropertyInfo dataModelType = impType.ModelType.GetProperty(prop.Name+"Id");
+			PropertyInfo dataModelType = newObj.GetType().GetProperty(prop.Name+"Id");
 			ICell cell = currentRow.GetCell(i);
 			if(cell != null)
-				impType.AddTagReference(ido, dataModelType, cell.StringCellValue, prop.PropertyType);
-		}
-	}
-
-	/// <summary>
-	/// Works on DataDescriptions, and prefix description properties with "Desc_".
-	/// Notice this mechanic relies on the belief there will be only one Description per object.
-	/// </summary>
-	public class ExcelPropDescription : IExcelPropertyConverter
-	{
-		private static string DESC_PROP = "Desc_Description";
-
-		public bool CanConvertColumn(PropertyInfo prop, IRow header)
-		{
-			return header.FindCell(DESC_PROP) != -1;
-		}
-
-		public bool CanConvertProperty(PropertyInfo prop) { return typeof(IDataDescription).IsAssignableFrom(prop.PropertyType); }
-
-		public int CreateHeader(IRow headerRow, PropertyInfo prop, int columnOffset)
-		{
-			//create header
-			ICell headerCell = headerRow.CreateCell(columnOffset);
-			headerCell.SetCellValue(DESC_PROP);
-
-			return 1;
-		}
-		public void ExportProp(IRow row, object obj, PropertyInfo prop, int columnOffset)
-		{
-			ICell cell = row.CreateCell(columnOffset);
-			IDataDescription val = (IDataDescription)prop.GetValue(obj);
-			cell.SetCellValue(val.Description);
-		}
-
-		public void ImportColumn(object newObj, PropertyInfo prop, IRow headerRow, IRow currentRow, ImportType impType)
-		{
-			int i = headerRow.FindCell(DESC_PROP);
-			if (newObj is DataModel dm)
 			{
-				dm.Description.Description = currentRow.GetCell(i)?.StringCellValue ?? "";
+				impType.AddTagReference(ido, dataModelType, cell.StringCellValue, prop.PropertyType);
 			}
 		}
 	}

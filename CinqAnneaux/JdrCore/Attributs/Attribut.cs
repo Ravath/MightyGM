@@ -7,7 +7,15 @@ using System.Threading.Tasks;
 
 namespace CinqAnneaux.JdrCore.Attributs {
 	public class Attribut : Value {
-		public Attribut() : base(2){ }
+
+		/// <summary>
+		/// used for Attribute tests.
+		/// </summary>
+		public RollAndKeep Pool { get; private set; }
+
+		public Attribut() : base(2){
+			Pool = new RollAndKeep(this, this);
+		}
 	}
 
 	/// <summary>
@@ -16,6 +24,12 @@ namespace CinqAnneaux.JdrCore.Attributs {
 	public class Anneau : DerivedValue {
 		private Attribut _a1;
 		private Attribut _a2;
+
+		/// <summary>
+		/// used for Ring tests.
+		/// </summary>
+		public RollAndKeep Pool { get; private set; }
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -24,6 +38,7 @@ namespace CinqAnneaux.JdrCore.Attributs {
 		public Anneau( Attribut a1, Attribut a2 ) : base(a1, a2) {
 			_a1 = a1;
 			_a2 = a2;
+			Pool = new RollAndKeep(this, this);
 		}
 
 		public override int BaseValue {

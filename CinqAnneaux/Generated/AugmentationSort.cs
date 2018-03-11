@@ -9,22 +9,39 @@ using Core.Data;
 using Core.Data.Schema;
 using LinqToDB.Mapping;
 namespace CinqAnneaux.Data {
-	[Table(Schema = "cinqanneaux",Name = "augmentationsort")]
+	[Table(Schema = "cinqanneaux",Name = "augmentationsortmodel")]
 	[CoreData]
-	public partial class AugmentationSort : DataObject {
+	public partial class AugmentationSortModel : DataModel {
 
-		private TypeAugmentationSort _type;
-		[Column(Storage = "Type",Name = "type")]
-		public TypeAugmentationSort Type{
-			get{ return _type;}
-			set{_type = value;}
+		private AugmentationSortDescription _obj;
+		public override IDataDescription Description{
+			get{
+				if(_obj == null){
+					IEnumerable<AugmentationSortDescription> id = GetModelReferencer<AugmentationSortDescription>();
+					if(id.Count() == 0) {
+						_obj = new AugmentationSortDescription();
+						_obj.Model = this;
+						_obj.SaveObject();
+					} else {
+						_obj = id.ElementAt(0);
+					}
+				}
+				return _obj;
+				
+			}
 		}
+	}
+	[Table(Schema = "cinqanneaux",Name = "augmentationsortdescription")]
+	public partial class AugmentationSortDescription : DataDescription<AugmentationSortModel> {
+	}
+	[Table(Schema = "cinqanneaux",Name = "augmentationsortexemplar")]
+	public partial class AugmentationSortExemplar : DataExemplaire<AugmentationSortModel> {
 
-		private decimal _facteur;
-		[Column(Storage = "Facteur",Name = "facteur")]
-		public decimal Facteur{
-			get{ return _facteur;}
-			set{_facteur = value;}
+		private string _complement = "";
+		[Column(Storage = "Complement",Name = "complement")]
+		public string Complement{
+			get{ return _complement;}
+			set{_complement = value;}
 		}
 	}
 }

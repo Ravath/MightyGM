@@ -9,6 +9,10 @@ using Core.Data;
 using Core.Data.Schema;
 using LinqToDB.Mapping;
 namespace CinqAnneaux.Data {
-	public partial class SousTypeGlobal {
+	public partial class ApprentissageOptionnelModel {
+	}
+	public partial class ApprentissageOptionnelDescription {
+	}
+	public partial class ApprentissageOptionnelExemplar {
 	}
 }

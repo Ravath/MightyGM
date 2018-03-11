@@ -11,11 +11,11 @@ namespace MightyGmCtrl.ImportExport
 {
 	public class ImportExcel
 	{
-		public delegate void ReportWarningHandler(string TAG, params object[] ags);
+		public delegate void ReportWarningHandler(string tag, params object[] ags);
 		public static event ReportWarningHandler EventReported;
-		internal static void ReportWarning(string TAG, params object[] args)
+		internal static void ReportWarning(string tag, params object[] args)
 		{
-			EventReported?.Invoke(TAG, args);
+			EventReported?.Invoke(tag, args);
 		}
 
 		/// <summary>
@@ -38,7 +38,7 @@ namespace MightyGmCtrl.ImportExport
 				object newObject = import.CreateInstance();
 
 				//Faire correspondre propriété avec colonne
-				foreach (PropertyInfo prop in import.ModelType.GetProperties())
+				foreach (PropertyInfo prop in import.ModelType.GetExportableProperties())
 				{
 					IExcelPropertyConverter conv = ExportExcel.converters.FirstOrDefault(
 						c => c.CanConvertProperty(prop)

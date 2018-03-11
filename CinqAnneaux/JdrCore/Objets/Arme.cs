@@ -10,7 +10,7 @@ using CinqAnneaux.Data;
 namespace CinqAnneaux.JdrCore.Objets {
 
 	public class Arme : IWearable {
-		public RKPool Degats { get; private set; }
+		public RollAndKeep Degats { get; private set; }
 		public TypeArme Type { get; private set; }
 		public string Name { get; private set; }
 		public TailleArme Taille { get; private set; }
@@ -18,6 +18,12 @@ namespace CinqAnneaux.JdrCore.Objets {
 
 		public bool ArmePaysan { get; private set; }
 		public bool ArmeSamurai { get; private set; }
+
+		private List<ObjectSpecial> _specs = new List<ObjectSpecial>();
+		public IEnumerable<ObjectSpecial> Specials
+		{
+			get { return _specs; }
+		}
 
 		#region Arcs
 		public decimal Portee { get; private set; }
@@ -28,9 +34,7 @@ namespace CinqAnneaux.JdrCore.Objets {
 
 		public Arme( ArmeModel model ) {
 			Name = model.Name;
-			Degats = new RKPool();
-			Degats.Number = model.RollVD;
-			Degats.Keep = model.KeepVD;
+			Degats = new RollAndKeep(model.RollVD, model.KeepVD);
 			Type = model.Type;
 			Taille = model.Taille;
 			ArmeSamurai = model.Samurai;
@@ -68,6 +72,11 @@ namespace CinqAnneaux.JdrCore.Objets {
 				break;
 				default:
 				break;
+			}
+			//get specials
+			foreach (SpecialObjetExemplar sp in model.Special)
+			{
+				_specs.Add(SpecialImplementation.Get(sp));
 			}
 		}
 

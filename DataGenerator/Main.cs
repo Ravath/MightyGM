@@ -31,7 +31,7 @@ namespace DataGenerator
 			} catch(Exception lex) {
 				Console.WriteLine(lex.Message);
 				Console.WriteLine(lex.StackTrace);
-				Console.WriteLine("Parsing abouted with an error and stopped the generation.");
+				Console.WriteLine("Parsing aborted with an error and stopped the generation.");
 				Console.In.ReadLine();
 				return;
 			}
@@ -40,7 +40,9 @@ namespace DataGenerator
 #endif
 			//Create model
 			DatabaseModel dm = Converter.Convert(parser.RawData);
+#if DEBUG
 			dm.Print(Console.Out);
+#endif
 			if (ErrorManager.Conclude())
 			{
 				DataModel.Generation gn = new DataModel.Generation();

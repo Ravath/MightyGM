@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Contexts\DefaultJdrContext.cs" />
     <Compile Include="Contexts\MessageType.cs" />
+    <Compile Include="Data\ComplementParser.cs" />
     <Compile Include="Data\CoreDataAttribute.cs" />
     <Compile Include="Data\Database.cs" />
     <Compile Include="Data\DataDescription.cs" />
@@ -60,8 +61,7 @@
     <Compile Include="Data\Schema\Schema.cs" />
     <Compile Include="Data\Schema\SchType.cs" />
     <Compile Include="Data\Schema\SchTypeProperty.cs" />
-    <Compile Include="Dice\IPool.cs" />
-    <Compile Include="Dice\ValuePool.cs" />
+    <Compile Include="Dice\IRoll.cs" />
     <Compile Include="Engine\Agent.cs" />
     <Compile Include="Engine\AlterationStates.cs" />
     <Compile Include="Engine\CollectionCapaciteActive.cs" />
@@ -69,6 +69,7 @@
     <Compile Include="Engine\CompositeJauge.cs" />
     <Compile Include="Engine\CollectionTraits.cs" />
     <Compile Include="Engine\EtatCivil.cs" />
+    <Compile Include="Engine\Facilities.cs" />
     <Compile Include="Engine\InterfacesCompetences.cs" />
     <Compile Include="Engine\InterfacesComposants.cs" />
     <Compile Include="Engine\Jauge.cs" />
@@ -95,7 +96,6 @@
     <Compile Include="Map\MapObject.cs" />
     <Compile Include="Map\SquareGrid.cs" />
     <Compile Include="NullableEnums.cs" />
-    <Compile Include="Dice\Pool.cs" />
     <Compile Include="Types\Distance.cs" />
     <Compile Include="Types\Poids.cs" />
     <Compile Include="Types\Range.cs" />

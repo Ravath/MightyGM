@@ -21,6 +21,7 @@
             <Button Content="Check Excel Validity" Click="OnExcelCheck"/>
             <Button Content="Export Model Joints" Click="OnExportModelJoints"/>
             <Button Content="Import Model Joints" Click="OnImportModelJoints"/>
+            <Button Content="Export Canvas" Click="OnExportCanvas"/>
         </StackPanel>
         <Expander x:Name="xFicheExpander" Header="" HorizontalAlignment="Left" 
                   Collapsed="xFicheExpander_Collapsed" Expanded="xFicheExpander_Expanded"

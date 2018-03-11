@@ -44,7 +44,7 @@ namespace CinqAnneaux.JdrCore.Agent {
 		#endregion
 
 		#region Properties : Caractéristiques
-		public RKPool Initiative { get; }
+		public RollAndKeep Initiative { get; protected set; }
 		public RecuperationRate RecuperationRate { get; }
 		private Value pointsSouillure = new Value(0);
 		public RankedCarac Souillure { get; }
@@ -79,15 +79,21 @@ namespace CinqAnneaux.JdrCore.Agent {
 			Kihos = new ListeKihos(this);
 			Sorts = new ListeSorts(this);
 			// caractéristiques
-			Initiative = new RKPool();
 			RecuperationRate = new RecuperationRate(Attributs.Constitution);
 			Souillure = new RankedCarac(pointsSouillure) { Label = "Souillure" };
 		}
 
-		public virtual void SetPersonnage( PersonnageModel perso ) {
+		public virtual void SetPersonnage(CreatureModel perso)
+		{
 			Attributs.SetPersonnage(perso);
 			Competences.SetPersonnage(perso);
-        }
+			EtatCivil.Description = perso.Description.Description;
+		}
+		public virtual void SetPersonnage( PJModel perso ) {
+			Attributs.SetPersonnage(perso);
+			Competences.SetPersonnage(perso);
+			EtatCivil.Description = perso.Description.Description;
+		}
 		#endregion
 
 		#region Armes et attaques

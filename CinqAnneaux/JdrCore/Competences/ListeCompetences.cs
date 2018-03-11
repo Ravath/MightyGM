@@ -39,12 +39,12 @@ namespace CinqAnneaux.JdrCore.Competences {
 		public event SetCompetences RemovedCompetences;
 		#endregion
 
-		private void AddCompetence( Competence cpt ) {
+		public void AddCompetence( Competence cpt ) {
 			_competences.Add(cpt);
 			cpt.SetAttribut(_attr);
 		}
 
-		public void SetPersonnage( PersonnageModel perso ) {
+		public void SetPersonnage( PJModel perso ) {
 			ClearList();
             foreach(CompetenceExemplar cpt in perso.Competences) {
 				Competence icpt = new Competence();
@@ -53,8 +53,21 @@ namespace CinqAnneaux.JdrCore.Competences {
 			}
 			// todo compétences globables
 			/* évènement nouvelles compétences */
-			if(NewCompetences != null)
-				NewCompetences(this, this.Competences.ToArray());
+			NewCompetences?.Invoke(this, this.Competences.ToArray());
+		}
+
+		public void SetPersonnage(CreatureModel perso)
+		{
+			ClearList();
+			foreach (CompetenceStatus cpt in perso.Competences)
+			{
+				Competence icpt = new Competence();
+				icpt.SetCompetence(cpt);
+				AddCompetence(icpt);
+			}
+			// todo compétences globables
+			/* évènement nouvelles compétences */
+			NewCompetences?.Invoke(this, this.Competences.ToArray());
 		}
 
 		public Competence GetCompetenceArme( TypeArme type ) {
@@ -89,6 +102,23 @@ namespace CinqAnneaux.JdrCore.Competences {
 			return _competences.SingleOrDefault(c => c.Tag == tag);
 		}
 
+		public RollAndKeep GetPool(TraitCompetence attribute, string cptTag, string speTag)
+		{
+			Competence cpt = GetCompetenceByTag(cptTag);
+
+			if(cpt == null)
+			{
+				var pool = Agent.Attributs.GetAttribut(attribute).Pool;
+				return pool;
+			}
+			else
+			{
+				cpt.SetAttribut(Agent.Attributs.GetAttribut(attribute));
+				cpt.Pool.Reroll1 = cpt.HasSpeciality(speTag);
+				return cpt.Pool;
+			}
+		}
+
 		public void ClearList() {
 			Competence[] cs = _competences.ToArray();
 			foreach(var cpt in _competences) {
@@ -96,8 +126,7 @@ namespace CinqAnneaux.JdrCore.Competences {
 			}
 			_competences.Clear();
 			/* évènement des compétences retirées */
-			if(RemovedCompetences != null)
-				RemovedCompetences(this, cs);
+			RemovedCompetences?.Invoke(this, cs);
 		}
 	}
 }

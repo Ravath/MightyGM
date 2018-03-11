@@ -14,7 +14,8 @@ namespace CinqAnneaux.JdrCore.Competences {
 
 		#region Members
 		private string _nom;
-		private RKPool _pool = new RKPool();
+		private Value _rank = new Value(0);
+		private RollAndKeep _pool;
 		private Attribut _att;
 		private List<Specialisation> _specialite = new List<Specialisation>();
 		private List<Maitrise> _maitrise = new List<Maitrise>();
@@ -26,6 +27,7 @@ namespace CinqAnneaux.JdrCore.Competences {
 		public bool Noble { get; protected set; }
 		public bool Sociale { get; protected set; }
 		public bool Martiale { get; protected set; }
+		public string Tag { get; set; }
 
 		public string Nom {
 			get { return _nom; }
@@ -49,10 +51,15 @@ namespace CinqAnneaux.JdrCore.Competences {
 		public TraitCompetence Trait { get; protected set; }
 		public TraitCompetence? TraitAlternatif { get; protected set; }
 
-		public RKPool Pool { get { return _pool; } }
+		/// <summary>
+		/// Used for competence tests.
+		/// Don't forget to adapt reroll of 1 and 10 if the competence is trained or specialised.
+		/// </summary>
+		public RollAndKeep Pool { get { return _pool; } }
+
 		public int Rang {
-			get { return _pool.NumberValue.BaseValue; }
-			set { _pool.NumberValue.BaseValue = value; }
+			get { return _rank.BaseValue; }
+			set { _rank.BaseValue = value; }
 		}
 
 		public IEnumerable<Specialisation> Specialisations {
@@ -62,7 +69,7 @@ namespace CinqAnneaux.JdrCore.Competences {
 		/// Return the unlocked masteries.
 		/// </summary>
 		public IEnumerable<Maitrise> CurrentMaitrises {
-			get { return _maitrise.Where(m => m.Rang <= _pool.NumberValue.BaseValue); }
+			get { return _maitrise.Where(m => m.Rang <= _pool.RollValue.BaseValue); }
 		}
 		/// <summary>
 		/// Return all the masteries.
@@ -70,41 +77,47 @@ namespace CinqAnneaux.JdrCore.Competences {
 		public IEnumerable<Maitrise> AllMaitrises {
 			get { return _maitrise; }
 		}
-
-		public string Tag {
-			get;
-			private set;
-		}
 		#endregion
 
 		#region Init
-		public Competence() { }
+		public Competence() { _pool = new RollAndKeep(_rank, new Value(0)); }
 		/// <summary>
 		/// Set the attribute used for this competence.
 		/// </summary>
 		/// <param name="attribut"></param>
 		public void SetAttribut( Attribut attribut ) {
+			if(_att == attribut) { return; }
 			/* remove former */
 			if(_att != null) {
 				_pool.KeepValue.RemoveModifier(_att);
-				_pool.NumberValue.RemoveModifier(_att);
+				_pool.RollValue.RemoveModifier(_att);
 			}
 			/* set */
 			_att = attribut;
 			/* add new */
-			if(attribut != null) {
+			if(attribut != null)
+			{
 				_pool.KeepValue.AddModifier(_att);
-				_pool.NumberValue.AddModifier(_att);
+				_pool.RollValue.AddModifier(_att);
 			}
 		}
+
 		public void SetAttribut( Attributs.Attributs attribut ) {
 			SetAttribut(attribut.GetAttribut(Trait));
 		}
 		#endregion
+
 		#region Model Setters
 		private void SetCompetence( CompetenceModel model ) {
 			/* val de base */
-			Nom = model.Name;
+			if (model.Global != null)
+			{
+				Nom = model.Global.Name+"("+model.Name+")";
+			}
+			else
+			{
+				Nom = model.Name;
+			}
 			Degradante = model.Degradante;
 			Sociale = model.Sociale;
 			Martiale = model.Martiale;
@@ -120,32 +133,32 @@ namespace CinqAnneaux.JdrCore.Competences {
 				_maitrise.Add(MaitriseInstanciator.Instanciate(maitrise));
             }
 		}
+
+		public bool HasSpeciality(string speTag)
+		{
+			foreach (var item in _specialite)
+			{
+				if(item.Tag == speTag) { return true; }
+			}
+			return false;
+		}
+
 		public void SetCompetence( CompetenceExemplar ex ) {
 			SetCompetence(ex.Model);
 			Rang = ex.Rang;
 			_specialite.Clear();
-			//foreach(Data.Specialisation spe in ex.Specialisation) {
-			//TODO : Specialisations
-			//Specialisation spe = new Specialisation();
-			//spe.SetSpecialisation(ex.Specialisation);
-			//_spe.Add(spe);
-			//}
+			foreach (SpecialisationModel spmodel in ex.SpecialisationsChoisies)
+			{
+				_specialite.Add(new Specialisation(spmodel));
+			}
 		}
-		private void SetCompetenceGlobale( CompetenceGlobaleModel model ) {
-			Nom = model.Name;
-			Trait = model.TraitAssocie;
-			Groupe = model.Groupe;
-			Description = model.Description.Description;
-			_specialite.Clear();
-			_maitrise.Clear();
-        }
-		public void SetCompetenceGlobale( CompetenceGlobaleExemplar ex ) {
-			SetCompetenceGlobale(ex.Model);
-			Nom += string.Format("({0})", ex.Specialisation);
+		public void SetCompetence(CompetenceStatus ex)
+		{
+			SetCompetence(ex.Competence);
 			Rang = ex.Rang;
-			Degradante = ex.Specialisation.Degradante;
-			Trait = ex.Specialisation.TraitAssocie;
-			Tag = ex.Specialisation.Tag;
+			_specialite.Clear();
+			if(ex.Specialite!=null)
+				_specialite.Add(new Specialisation(ex.Specialite));
 		}
 		#endregion
 

@@ -45,7 +45,7 @@ namespace CinqAnneauxWpf.Fiches {
 				xArmeView.Visibility = Visibility.Visible;
 				xArmeView.DataContext = arme;
 				//cas particulier cout
-				if(arme.Cout == -1) {
+				if(arme.CoutVal == -1) {
 					xCout.Text = "Cout: Undefined";
 					xMonnaie.Visibility = Visibility.Collapsed;
 				} else {
@@ -56,10 +56,12 @@ namespace CinqAnneauxWpf.Fiches {
 				xMcPaysan.Visibility = arme.Paysan ? Visibility.Visible : Visibility.Collapsed;
 				xMcSamurai.Visibility = arme.Samurai ? Visibility.Visible : Visibility.Collapsed;
 				//cas arc, portee,...
-				xDegats.Visibility = arme.Type == TypeArme.Arc ? Visibility.Collapsed : Visibility.Visible;
+				xDegats.Visibility = (arme.Type == TypeArme.Arc) ? Visibility.Collapsed : Visibility.Visible;
 				xForce.Visibility = (arme.Force == 0) || (arme.Force == null) ? Visibility.Collapsed : Visibility.Visible;
 				xPortee.Visibility = (arme.Portee == 0) || (arme.Portee == null) ? Visibility.Collapsed : Visibility.Visible;
-				xForceReq.Visibility = arme.ForceRequise == 0 ? Visibility.Collapsed : Visibility.Visible;
+				xForceReq.Visibility = (arme.ForceRequise == 0) ? Visibility.Collapsed : Visibility.Visible;
+				//cas spécificités
+				xSpecList.Visibility = (arme.Special.Count() > 0) ? Visibility.Visible : Visibility.Collapsed;
 			}
 		}
 		private void SetTree( TreeView tr, IEnumerable<ArmeModel> armes ) {

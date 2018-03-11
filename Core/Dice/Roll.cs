@@ -6,50 +6,28 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Core.Dice {
-	public static class Roll {
+	public static class Roll
+	{
+		private static Random _generator = new Random();//the numbers generator.
+		public static int RollD(int faces)
+		{
+			return _generator.Next(1, faces + 1);
+		}
+		public static int D20()
+		{
+			return RollD(20);
+		}
 		/// <summary>
 		/// Lance les dés et en fait la somme.
 		/// </summary>
 		/// <param name="dice">Pool de dés à lancer.</param>
 		/// <returns>La somme du lancer.</returns>
-		public static int Sum( IPool dice ) {
+		public static int RollD( int nbr, int face ) {
 			//Contract.Requires<ArgumentNullException>(dice != null);
-			dice.Roll();
 			int res = 0;
-			foreach(int r in dice.Results) {
-				res += r;
-			}
-			return res;
-		}
-		/// <summary>
-		/// Lance les dés et compte le nombre de succès. Il y a succès si un dés effectue une valeur supérieure ou égale au seuil.
-		/// </summary>
-		/// <param name="dice">Pool de dés à lancer.</param>
-		/// <param name="floor">Valeur miminum pour obtenir un succès.</param>
-		/// <returns>Le nombre de succès du lancer.</returns>
-		public static int Succes( IPool dice, int floor ) {
-			//Contract.Requires<ArgumentNullException>(dice != null);
-			dice.Roll();
-			int res = 0;
-			foreach(int r in dice.Results) {
-				if(r >= floor)
-					res++;
-			}
-			return res;
-		}
-		/// <summary>
-		/// Lance les dés et fait la somme des meilleurs résultats.
-		/// </summary>
-		/// <param name="dice">Pool de dés à lancer.</param>
-		/// <param name="keep">Nombre de meilleurs dé à conserver dans la somme finale.</param>
-		/// <returns>La somme du lancer.</returns>
-		public static int RollAndKeep( Pool dice, int keep ) {
-			//Contract.Requires<ArgumentNullException>(dice != null);
-			dice.Roll();
-			dice.SortDecreasing();
-			int res = 0;
-			for(int i = 0; i < dice.Number && i<keep; i++) {
-				res += dice.Results.ElementAt(i);
+			for (int i = 0; i < nbr; i++)
+			{
+				res += RollD(face);
 			}
 			return res;
 		}

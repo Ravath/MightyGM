@@ -31,41 +31,6 @@ namespace CinqAnneaux.Data {
 			}
 		}
 
-		private GroupeCompetence _groupe;
-		[Column(Storage = "Groupe",Name = "groupe")]
-		public GroupeCompetence Groupe{
-			get{ return _groupe;}
-			set{_groupe = value;}
-		}
-
-		private TraitCompetence _traitAssocie;
-		[Column(Storage = "TraitAssocie",Name = "traitassocie")]
-		public TraitCompetence TraitAssocie{
-			get{ return _traitAssocie;}
-			set{_traitAssocie = value;}
-		}
-
-		private IEnumerable<SousTypeGlobal> _specialisations;
-		public IEnumerable <SousTypeGlobal> Specialisations{
-			get{
-				if( _specialisations == null ){
-					_specialisations = LoadByForeignKey<SousTypeGlobal>(p => p.CompetenceId, Id);
-				}
-				return _specialisations;
-			}
-			set{
-				foreach( SousTypeGlobal item in _specialisations ){
-					item.Competence = null;
-
-				}
-				_specialisations = value;
-				foreach( SousTypeGlobal item in value ){
-					item.Competence = this;
-					item.SaveObject();
-				}
-			}
-		}
-
 		private IEnumerable<CompetenceModel> _specifiques;
 		public IEnumerable <CompetenceModel> Specifiques{
 			get{
@@ -92,34 +57,5 @@ namespace CinqAnneaux.Data {
 	}
 	[Table(Schema = "cinqanneaux",Name = "competenceglobaleexemplar")]
 	public partial class CompetenceGlobaleExemplar : DataExemplaire<CompetenceGlobaleModel> {
-
-		private int _rang;
-		[Column(Storage = "Rang",Name = "rang")]
-		public int Rang{
-			get{ return _rang;}
-			set{_rang = value;}
-		}
-
-		private int _specialisationId;
-		[Column(Storage = "SpecialisationId",Name = "fk_soustypeglobal_specialisation")]
-		[HiddenProperty]
-		public int SpecialisationId{
-			get{ return _specialisationId;}
-			set{_specialisationId = value;}
-		}
-
-		private SousTypeGlobal _specialisation;
-		public SousTypeGlobal Specialisation{
-			get{
-				if( _specialisation == null)
-					_specialisation = LoadById<SousTypeGlobal>(SpecialisationId);
-				return _specialisation;
-			} set {
-				if(_specialisation == value){return;}
-				_specialisation = value;
-				if( value != null)
-					SpecialisationId = value.Id;
-			}
-		}
 	}
 }

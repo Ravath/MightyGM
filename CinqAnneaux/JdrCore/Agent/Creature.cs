@@ -12,13 +12,20 @@ namespace CinqAnneaux.JdrCore.Agent {
 	public class Creature : Agent {
 		public TypeCreature TypeCreature { get; private set; }
 
-		public override void SetPersonnage( PersonnageModel perso ) {
-			base.SetPersonnage(perso);
-			CreatureModel model = (CreatureModel)perso;
+		public Creature()
+		{
+
+		}
+		public Creature(CreatureModel model)
+		{
+			SetPersonnage(model);
+		}
+
+		public override void SetPersonnage( CreatureModel model) {
+			base.SetPersonnage(model);
 			TypeCreature = model.TypeCreature;
 			/* set initiative */
-			Initiative.NumberValue.BaseValue = model.xgInitiative;
-			Initiative.KeepValue.BaseValue = model.gxInitiative;
+			Initiative = new RollAndKeep(model.xgInitiative, model.gxInitiative);
 			/* vie */
 			if(model.VieHumaine)
 				Vie = new SeuilViePJ(this);

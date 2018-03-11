@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Data.Schema;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -31,18 +32,23 @@ namespace Core.Data {
 			Object1 = obj1;
 			Object2 = obj2;
 		}
+		[HiddenProperty]
 		public Type Obj1Type {
 			get {
 				return typeof(T);
 			}
 		}
+		[HiddenProperty]
 		public Type Obj2Type {
 			get {
 				return typeof(U);
 			}
 		}
+		[HiddenProperty]
 		public int Object1Id { get; set; }
+
 		private T _object1;
+		[HiddenProperty]
 		public T Object1 {
 			get {
 				if(_object1 == null) {
@@ -59,8 +65,11 @@ namespace Core.Data {
 			}
 		}
 
+		[HiddenProperty]
 		public int Object2Id { get; set; }
+
 		private U _object2;
+		[HiddenProperty]
 		public U Object2 {
 			get {
 				if(_object2 == null) {
@@ -77,6 +86,7 @@ namespace Core.Data {
 			}
 		}
 
+		[HiddenProperty]
 		DataObject IDataRelation.Object1 {
 			get {
 				return Object1;
@@ -86,6 +96,7 @@ namespace Core.Data {
 			}
 		}
 
+		[HiddenProperty]
 		DataObject IDataRelation.Object2 {
 			get {
 				return Object2;
@@ -95,12 +106,14 @@ namespace Core.Data {
 			}
 		}
 
+		[HiddenProperty]
 		public PropertyInfo Property1 {
 			get {
 				return GetType().GetProperty("Object1");
 			}
 		}
 
+		[HiddenProperty]
 		public PropertyInfo Property2 {
 			get {
 				return GetType().GetProperty("Object2");

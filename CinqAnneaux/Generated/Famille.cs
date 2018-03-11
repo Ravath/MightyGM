@@ -63,6 +63,13 @@ namespace CinqAnneaux.Data {
 				}
 			}
 		}
+
+		private bool _familleDisparue;
+		[Column(Storage = "FamilleDisparue",Name = "familledisparue")]
+		public bool FamilleDisparue{
+			get{ return _familleDisparue;}
+			set{_familleDisparue = value;}
+		}
 	}
 	[Table(Schema = "cinqanneaux",Name = "familledescription")]
 	public partial class FamilleDescription : DataDescription<FamilleModel> {

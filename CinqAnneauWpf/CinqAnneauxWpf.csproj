@@ -111,6 +111,9 @@
       <DependentUpon>FicheHonneur.xaml</DependentUpon>
     </Compile>
     <Compile Include="Fiches\FicheListCreaturePouvoir.cs" />
+    <Compile Include="Fiches\FicheListeAncetres.xaml.cs">
+      <DependentUpon>FicheListeAncetres.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Fiches\FicheListeArmes.xaml.cs">
       <DependentUpon>FicheListeArmes.xaml</DependentUpon>
     </Compile>
@@ -135,6 +138,12 @@
     </Compile>
     <Compile Include="Fiches\FicheListeSorts.xaml.cs">
       <DependentUpon>FicheListeSorts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fiches\FicheMassCombat.xaml.cs">
+      <DependentUpon>FicheMassCombat.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fiches\FicheMassCombatFaction.xaml.cs">
+      <DependentUpon>FicheMassCombatFaction.xaml</DependentUpon>
     </Compile>
     <Compile Include="Fiches\FicheVie.xaml.cs">
       <DependentUpon>FicheVie.xaml</DependentUpon>
@@ -215,6 +224,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Fiches\FicheListeAncetres.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Fiches\FicheListeArmes.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -246,6 +259,14 @@
     <Page Include="Fiches\FicheListeSorts.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Fiches\FicheMassCombat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Fiches\FicheMassCombatFaction.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Fiches\FicheVie.xaml">
       <Generator>MSBuild:Compile</Generator>

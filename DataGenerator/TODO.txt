@@ -1,0 +1,17 @@
+ArrayTable
+
+
+
+ImplementedProperty (cad:
+datatable truc &[implemented](
+	%Exemplar:
+		varchar(30) complement
+)
+=> as DataTable, but also pre-construct mecanisme for getting the implemented function (as minorTag 'Implemented' does?)
+
+
+values for enums (for used as units=>conversion ratios)
+
+a tag information (as 'TAG(CPT2xxx)' )
+
+Oddtable (minortag?)

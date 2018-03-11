@@ -16,10 +16,12 @@ namespace Core.Types {
 	/// <summary>
 	/// A Value determined by an Unit.
 	/// </summary>
-	public abstract class UnitValue<V, U> : IUnitValue,
+	public class UnitValue<V, U> : IUnitValue,
 			IComparable<UnitValue<V, U>>,
 			IEquatable<UnitValue<V, U>>
-			where V : struct where U : struct {
+		where V : struct 
+		where U : struct
+	{
 		public V Value { get; set; }
 		public U Unity { get; set; }
 
@@ -32,7 +34,7 @@ namespace Core.Types {
 		}
 
 		public UnitValue() { }
-		public UnitValue( V val, U unit ) {
+		public UnitValue(V val, U unit) {
 			Value = val;
 			Unity = unit;
 		}
@@ -42,7 +44,13 @@ namespace Core.Types {
 		/// <param name="u"></param>
 		/// <param name="v"></param>
 		/// <returns>U/V</returns>
-		public abstract double Ratio( U u, U v );
+		public virtual double Ratio(U u, U v)
+		{
+			int iu = Array.IndexOf(Enum.GetValues(u.GetType()), u);
+			int iv = Array.IndexOf(Enum.GetValues(v.GetType()), v);
+
+			return Math.Pow(10, iu) / Math.Pow(10, iv);
+		}
 		/// <summary>
 		/// Si supérieur à 0 : other est plus petit
 		/// Si inférieur à 0 : other est plus grand

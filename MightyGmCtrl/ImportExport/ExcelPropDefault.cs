@@ -73,7 +73,7 @@ namespace MightyGmCtrl.ImportExport
 			}
 			else
 			{
-				// if can"t be null
+				// if can't be null
 				o = currentCell.ConvertFromType(prop.PropertyType);
 				// if null, assign default value
 				if (o == null)

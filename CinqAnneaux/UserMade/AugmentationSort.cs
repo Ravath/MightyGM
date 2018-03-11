@@ -8,7 +8,20 @@ using Core.Types;
 using Core.Data;
 using Core.Data.Schema;
 using LinqToDB.Mapping;
+using CinqAnneaux.JdrCore.Capacites;
+
 namespace CinqAnneaux.Data {
-	public partial class AugmentationSort {
+	public partial class AugmentationSortModel
+	{
+	}
+	public partial class AugmentationSortExemplar
+	{
+		public override string ToString()
+		{
+			return Augmentation.GetImplementation(this).Description;
+		}
+	}
+	public partial class AugmentationSortDescription
+	{
 	}
 }

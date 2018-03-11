@@ -153,6 +153,10 @@
     <value>Import</value>
     <comment>NAME : procédure d'export</comment>
   </data>
+  <data name="MUST_SELECT_TYPE" xml:space="preserve">
+    <value>Il faut d'abor sélectionner un type pour pouvoir effectuer cette opération.</value>
+    <comment>ERROR : Type nécessaire.</comment>
+  </data>
   <data name="NAME_ALREADY_IN_DATABASE" xml:space="preserve">
     <value>Le nom "{0}" existe déjà dans la base de donnée pour le type {1}</value>
     <comment>WARNING : Import. Les noms de data models sont uniques</comment>

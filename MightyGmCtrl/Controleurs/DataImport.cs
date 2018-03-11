@@ -36,7 +36,7 @@ namespace MightyGmCtrl.Controleurs
 			for (int i = 0; i <= summary.LastRowNum; i++)
 			{
 				IRow r = summary.GetRow(i);
-				if(r.GetCell(1).StringCellValue == t.Name)
+				if(r?.GetCell(1)?.StringCellValue == t.Name)
 				{
 					return workbook.GetSheet(r.GetCell(0).StringCellValue);
 				}
@@ -95,6 +95,7 @@ namespace MightyGmCtrl.Controleurs
 					foreach (ImportType it in _types) { it.SaveCrossReferences(GlobalContext.Data, ReportMessageRef); }
 					// save with references
 					foreach (ImportType it in _types) { it.SaveData(GlobalContext.Data); }
+					foreach (ImportType it in _types) { it.SaveLateDatas(GlobalContext.Data);  }
 
 					SetFinEtape();
 

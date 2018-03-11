@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using MightyGmCtrl;
+using System.IO;
 
 namespace MightyGmWPF.Tabs {
 	/// <summary>
@@ -131,7 +132,6 @@ namespace MightyGmWPF.Tabs {
 			try {
 				foreach(Core.Data.DataObject obj in xDataGrid.SelectedItems.OfType<Core.Data.DataObject>()) {//tous les items sélectionnés
 					obj.DeleteObject();
-					//Context.Data.Delete(obj);
 				}
 			} catch(TargetInvocationException tie) {
 				MessageBox.Show(tie.InnerException.Message);
@@ -350,12 +350,12 @@ namespace MightyGmWPF.Tabs {
 			if (Context.Files.GetExcelFile(out string outMessage, true))
 			{
 				Context.DataImport.ExcelImport(outMessage, Context.Dll.RawDataTables);
+				RefreshTable();
 			}
 			else
 			{
 				MessageBox.Show(Context.GetMessageRessource("CANT_OPEN_FILE"));
 			}
-			RefreshTable();
 		}
 
 		/// <summary>
@@ -366,15 +366,19 @@ namespace MightyGmWPF.Tabs {
 		/// <param name="e"></param>
 		private void OnExcelImport(object sender, RoutedEventArgs e)
 		{
-			if (Context.Files.GetExcelFile(out string outMessage, true))
+			if(CurrentType == null)
+			{
+				MessageBox.Show(Context.GetMessageRessource("MUST_SELECT_TYPE"));
+			}
+			else if (Context.Files.GetExcelFile(out string outMessage, true))
 			{
 				Context.DataImport.ExcelImport(outMessage, new List<Type>() { CurrentType });
+				RefreshTable();
 			}
 			else
 			{
 				MessageBox.Show(Context.GetMessageRessource("CANT_OPEN_FILE"));
 			}
-			RefreshTable();
 		}
 
 		/// <summary>
@@ -420,8 +424,30 @@ namespace MightyGmWPF.Tabs {
 
 		private void OnImportModelJoints(object sender, RoutedEventArgs e)
 		{
-			//TODO
-			MessageBox.Show(Context.GetMessageRessource("NOT_IMPLEMENTED"));
+			if (Context.Files.GetExcelFile(out string outMessage, true))
+			{
+				Context.DataImport.ExcelImport(outMessage, Context.Dll.JointDataTables);
+				RefreshTable();
+			}
+			else
+			{
+				MessageBox.Show(Context.GetMessageRessource("CANT_OPEN_FILE"));
+			}
+		}
+
+		private void OnExportCanvas(object sender, RoutedEventArgs e)
+		{
+			if (Context.Files.GetExcelFile(out string outMessage, false))
+			{
+				FileInfo fi = new FileInfo(outMessage);
+				Context.DataExport.ExportDataToExcel(outMessage, Context.Dll.RawDataTables, true);
+				outMessage = outMessage.Remove(outMessage.Length - fi.Extension.Length);
+				Context.DataExport.ExportDataToExcel(outMessage+"_joint"+fi.Extension, Context.Dll.JointDataTables, true);
+			}
+			else
+			{
+				MessageBox.Show(Context.GetMessageRessource("CANT_OPEN_FILE"));
+			}
 		}
 		#endregion
 	}

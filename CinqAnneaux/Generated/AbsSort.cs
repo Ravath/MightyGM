@@ -89,17 +89,17 @@ namespace CinqAnneaux.Data {
 			set{_dureeXRang = value;}
 		}
 
-		private IEnumerable<AugmentationSort> _augmentations;
+		private IEnumerable<AugmentationSortExemplar> _augmentations;
 		[Association(ThisKey = "Id",CanBeNull = false,Storage = "Augmentations",OtherKey = "AbsSortModelId")]
-		public IEnumerable <AugmentationSort> Augmentations{
+		public IEnumerable <AugmentationSortExemplar> Augmentations{
 			get{
 				if( _augmentations == null ){
-					_augmentations = LoadFromJointure<AugmentationSort,AbsSortModelToAugmentationSort_Augmentations>(false);
+					_augmentations = LoadFromJointure<AugmentationSortExemplar,AbsSortModelToAugmentationSortExemplar_Augmentations>(false);
 				}
 				return _augmentations;
 			}
 			set{
-				SaveToJointure<AugmentationSort, AbsSortModelToAugmentationSort_Augmentations> (_augmentations, value,false);
+				SaveToJointure<AugmentationSortExemplar, AbsSortModelToAugmentationSortExemplar_Augmentations> (_augmentations, value,false);
 				_augmentations = value;
 			}
 		}
@@ -126,7 +126,7 @@ namespace CinqAnneaux.Data {
 			set{_concentration = value;}
 		}
 		public override void DeleteObject() {
-			DeleteJoins<AbsSortModel,AbsSortModelToAugmentationSort_Augmentations>(true);
+			DeleteJoins<AbsSortModel,AbsSortModelToAugmentationSortExemplar_Augmentations>(true);
 			DeleteDataValue<MotClefsFromAbsSortModel>();
 			base.DeleteObject();
 		}
