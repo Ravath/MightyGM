@@ -1,5 +1,3 @@
-DROP SCHEMA if exists cinqanneaux CASCADE;
-
 CREATE SCHEMA cinqanneaux;
 create table cinqanneaux.dataobject(
 	id serial NOT NULL,

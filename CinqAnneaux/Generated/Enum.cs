@@ -57,7 +57,7 @@ namespace CinqAnneaux.Data {
 		Zeni, Bu, Koku}
 
 	public enum TypePouvoirOutremonde{
-		Mutation, Majeur, Mineur}
+		Mutation, Mineur, Majeur, Akutenshi}
 
 	public enum TypeCreature{
 		Naturelle, Monstre}
