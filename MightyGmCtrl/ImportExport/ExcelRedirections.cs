@@ -26,7 +26,7 @@ namespace MightyGmCtrl.ImportExport
 		/// Here, we use a stack, because single boolean won't work, because class is singleton.
 		/// Hence, the risk is for the import to pass here more than one time in a row, and reset the previous values while it's still used.
 		/// </summary>
-		private Stack<List<int>> widthStack = new Stack<List<int>>();
+		private Dictionary<PropertyInfo, List<int>> widthStack = new Dictionary<PropertyInfo, List<int>>();
 
 		public int CreateHeader(IRow headerRow, PropertyInfo prop, int columnOffset)
 		{
@@ -48,7 +48,11 @@ namespace MightyGmCtrl.ImportExport
 			string pref = GetPrefix(prop.Name);
 			AddPrefix(headerRow, columnOffset, counter, pref);
 
-			widthStack.Push(width);
+			if (!widthStack.ContainsKey(prop))
+			{
+				widthStack.Add(prop,width);
+			}
+
 			return counter;
 		}
 
@@ -63,11 +67,10 @@ namespace MightyGmCtrl.ImportExport
 
 		public void ExportProp(IRow row, object obj, PropertyInfo prop, int columnOffset)
 		{
-			List<int> width = widthStack.Pop();
+			List<int> width = widthStack[prop];
 			//Exporter propriétés du type référencé
-			Type sub = prop.GetType().GenericTypeArguments[0];
 			object val = prop.GetValue(obj);
-			var props = sub.GetExportableProperties();
+			var props = prop.PropertyType.GetExportableProperties();
 			int subOffset = columnOffset;
 
 			for (int i = 0; i < props.Count(); i++)
