@@ -9,6 +9,10 @@ using Core.Data;
 using Core.Data.Schema;
 using LinqToDB.Mapping;
 namespace Polaris.Data {
-	public partial class Personnalite {
+	public partial class PersonnaliteModel {
+	}
+	public partial class PersonnaliteDescription {
+	}
+	public partial class PersonnaliteExemplar {
 	}
 }

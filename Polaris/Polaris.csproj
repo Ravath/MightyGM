@@ -75,6 +75,12 @@
     <Compile Include="Generated\Titre.cs" />
     <Compile Include="Generated\Vehicule.cs" />
     <Compile Include="Generated\Ville.cs" />
+    <Compile Include="Langues\Fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="LocalContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserMade\ArmeMelee.cs" />
     <Compile Include="UserMade\ArmeTrait.cs" />
@@ -113,6 +119,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Langues\Fr.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="JdrCore\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

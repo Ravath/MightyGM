@@ -18,7 +18,7 @@ namespace CinqAnneaux.Processes
 			throw new NotImplementedException();
 		}
 
-		public void Init(IProcess process, IProcessParameters parameters)
+		public void Init(IProcess process)
 		{
 			throw new NotImplementedException();
 		}

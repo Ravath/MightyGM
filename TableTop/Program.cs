@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace TableTop
+namespace CoreMono
 {
 #if WINDOWS || LINUX
 	/// <summary>
@@ -15,7 +15,7 @@ namespace TableTop
         [STAThread]
         static void Main()
         {
-            using (var game = new Game1())
+            using (var game = new MainApplication())
                 game.Run();
         }
     }

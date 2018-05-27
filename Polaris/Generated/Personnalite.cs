@@ -9,23 +9,32 @@ using Core.Data;
 using Core.Data.Schema;
 using LinqToDB.Mapping;
 namespace Polaris.Data {
-	[Table(Schema = "polaris",Name = "personnalite")]
+	[Table(Schema = "polaris",Name = "personnalitemodel")]
 	[CoreData]
-	public partial class Personnalite : DataObject {
+	public partial class PersonnaliteModel : DataModel {
 
-		private string _nom = "";
-		[Column(Storage = "Nom",Name = "nom")]
-		public string Nom{
-			get{ return _nom;}
-			set{_nom = value;}
+		private PersonnaliteDescription _obj;
+		public override IDataDescription Description{
+			get{
+				if(_obj == null){
+					IEnumerable<PersonnaliteDescription> id = GetModelReferencer<PersonnaliteDescription>();
+					if(id.Count() == 0) {
+						_obj = new PersonnaliteDescription();
+						_obj.Model = this;
+						_obj.SaveObject();
+					} else {
+						_obj = id.ElementAt(0);
+					}
+				}
+				return _obj;
+				
+			}
 		}
-
-		private string _description = "";
-		[LargeText]
-		[Column(Storage = "Description",Name = "description")]
-		public string Description{
-			get{ return _description;}
-			set{_description = value;}
-		}
+	}
+	[Table(Schema = "polaris",Name = "personnalitedescription")]
+	public partial class PersonnaliteDescription : DataDescription<PersonnaliteModel> {
+	}
+	[Table(Schema = "polaris",Name = "personnaliteexemplar")]
+	public partial class PersonnaliteExemplar : DataExemplaire<PersonnaliteModel> {
 	}
 }

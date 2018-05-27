@@ -22,13 +22,11 @@ namespace Polaris.Data {
 						_obj = new VehiculeDescription();
 						_obj.Model = this;
 						_obj.SaveObject();
-						return _obj;
 					} else {
-						return id.ElementAt(0);
+						_obj = id.ElementAt(0);
 					}
-				} else {
-					return _obj;
 				}
+				return _obj;
 				
 			}
 		}
@@ -124,9 +122,9 @@ namespace Polaris.Data {
 			set{_resistanceDommages = value;}
 		}
 
-		private ArchetectureExoarmure _architecture;
+		private ArchitectureExoarmure _architecture;
 		[Column(Storage = "Architecture",Name = "architecture")]
-		public ArchetectureExoarmure Architecture{
+		public ArchitectureExoarmure Architecture{
 			get{ return _architecture;}
 			set{_architecture = value;}
 		}

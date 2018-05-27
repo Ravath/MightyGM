@@ -35,7 +35,7 @@ namespace Polaris.Data {
 	public enum CategorieExoarmure{
 		Alpha, Zero, I, II, III, IV, V, VI, Omega}
 
-	public enum ArchetectureExoarmure{
+	public enum ArchitectureExoarmure{
 		Legere, Normale, Loude, UltraLourde}
 
 }

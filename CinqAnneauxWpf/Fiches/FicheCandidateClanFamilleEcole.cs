@@ -9,15 +9,18 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using CoreWpf;
 using Core.Contexts;
+using CoreWpf.UI;
+using Core.Processes;
+using CinqAnneaux.Processes;
 
 namespace CinqAnneauxWpf.Fiches {
 	/// <summary>
 	/// Une fiche pour afficher sur une même interface les clans, et leurs familles et écoles associées.
 	/// </summary>
-	public class FicheCandidateClanFamilleEcole : UserControl, IFicheCandidate {
+	public class FicheCandidateClanFamilleEcole : UserControl, IFicheCandidate, IProcessStepWpf
+	{
 
 		#region Members
-		private Database _data;
 		//lists views
 		private ListView lvClans = new ListView();
 		private ListView lvFamilles = new ListView();
@@ -30,12 +33,37 @@ namespace CinqAnneauxWpf.Fiches {
 		private IEnumerable<ClanModel> _dataClan;
 		private IEnumerable<FamilleModel> _dataFamille;
 		private IEnumerable<EcoleModel> _dataEcole;
+		//selections
+		private ClanModel _selectedClan;
+		private FamilleModel _selectedFamily;
+		private EcoleModel _selectedSchool;
 		#endregion
 
 		#region Properties
-		public ClanModel SelectedClan { get; private set; }
-		public FamilleModel SelectedFamille { get; private set; }
-		public EcoleModel SelectedEcole { get; private set; }
+		public ClanModel SelectedClan
+		{
+			get { return _selectedClan; }
+			set {
+				_selectedClan = value;
+				if (_step != null) { _step.SelectedClan = value; }
+			}
+		}
+		public FamilleModel SelectedFamily
+		{
+			get { return _selectedFamily; }
+			set {
+				_selectedFamily = value;
+				if (_step != null) { _step.SelectedFamily = value; }
+			}
+		}
+		public EcoleModel SelectedSchool
+		{
+			get { return _selectedSchool; }
+			set {
+				_selectedSchool = value;
+				if (_step != null) { _step.SelectedSchool = value; }
+			}
+		}
 		public string FicheName { get { return "Clans"; } }
 		public UserControl Control { get { return this; } }
 		#endregion
@@ -44,10 +72,10 @@ namespace CinqAnneauxWpf.Fiches {
 			fClan.SelectedObject = SelectedClan;
 			fClan.Margin = new System.Windows.Thickness(5);
 			fClan.MinHeight = 100;
-			fFamille.SelectedObject = SelectedFamille;
+			fFamille.SelectedObject = SelectedFamily;
 			fFamille.Margin = new System.Windows.Thickness(5);
 			fFamille.MinWidth = 200;
-			fEcole.SelectedObject = SelectedEcole;
+			fEcole.SelectedObject = SelectedSchool;
 			fEcole.Margin = new System.Windows.Thickness(5);
 			fEcole.MinWidth = 200;
 			lvClans.MinWidth = 100;
@@ -83,34 +111,34 @@ namespace CinqAnneauxWpf.Fiches {
 			lvEcoles.SelectionChanged += LvEcoles_SelectionChanged;
 		}
 		public void SetData(Database data) {
-			_data = data;
-			_dataClan = _data.GetTable<ClanModel>().OrderBy(n => n.Tag);
-			_dataFamille = _data.GetTable<FamilleModel>().OrderBy(n => n.Name);
-			_dataEcole = _data.GetTable<EcoleModel>().OrderBy(n => n.Name);
+			_dataClan = data.GetTable<ClanModel>().OrderBy(n => n.Tag);
+			_dataFamille = data.GetTable<FamilleModel>().OrderBy(n => n.Name);
+			_dataEcole = data.GetTable<EcoleModel>().OrderBy(n => n.Name);
 			lvClans.ItemsSource = _dataClan;
 		}
 		public void Afficher( IGlobalContext c ) {
 			SetData(c.Data);
 		}
+
 		#region events
 		private void LvEcoles_SelectionChanged( object sender, SelectionChangedEventArgs e ) {
 			EcoleModel cm = lvEcoles.SelectedItem as EcoleModel;
 			fEcole.SelectedObject = cm;
-			SelectedEcole = cm;
+			SelectedSchool = cm;
 		}
 
 		private void LvFamilles_SelectionChanged( object sender, SelectionChangedEventArgs e ) {
 			FamilleModel cm = lvFamilles.SelectedItem as FamilleModel;
 			fFamille.SelectedObject = cm;
-			SelectedFamille = cm;
+			SelectedFamily = cm;
 		}
 
 		private void LvClans_SelectionChanged( object sender, SelectionChangedEventArgs e ) {
 			ClanModel cm = lvClans.SelectedItem as ClanModel;
 			fClan.SelectedObject = cm;
 			SelectedClan = cm;
-			SelectedFamille = null;
-			SelectedEcole = null;
+			SelectedFamily = null;
+			SelectedSchool = null;
 			//update families & schools
 			if(cm == null) {
 				lvFamilles.ItemsSource = null;
@@ -119,6 +147,18 @@ namespace CinqAnneauxWpf.Fiches {
 				lvFamilles.ItemsSource = _dataFamille.Where(f => f.ClanId == cm.Id);
 				lvEcoles.ItemsSource = _dataEcole.Where(f => f.ClanId == cm.Id);
 			}
+		}
+		#endregion
+
+		#region Agent Creation Process implementation
+		private AgentE1 _step;
+		public void InitStep(IProcessStep currentStep)
+		{
+			_step = (AgentE1)currentStep;
+			_dataClan = _step.SelectableClan;
+			_dataFamille = _step.SelectableFamily;
+			_dataEcole = _step.SelectableSchool;
+			lvClans.ItemsSource = _dataClan;
 		}
 		#endregion
 	}

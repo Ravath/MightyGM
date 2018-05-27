@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:tk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
              xmlns:local="clr-namespace:MightyGmWPF.Tabs"
-             xmlns:gui="clr-namespace:TableTop.GUI;assembly=TableTop"
              mc:Ignorable="d" 
              d:DesignHeight="735" d:DesignWidth="1040">
     <DockPanel KeyDown="DockPanel_KeyDown" KeyUp="DockPanel_KeyUp">

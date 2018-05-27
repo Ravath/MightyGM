@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Processes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,80 +8,69 @@ using System.Windows;
 using System.Windows.Controls;
 
 namespace CoreWpf.UI {
-
-	public interface IStepsArgument {
+	/// <summary>
+	/// Tag implementation for UserControls used for steps of a process.
+	/// </summary>
+	public interface IProcessStepWpf
+	{
 		/// <summary>
-		/// Init the arguments at the begining of the steps.
+		/// Initialize the User Control at start of the step.
 		/// </summary>
-		void Init();
-    }
-
-	public abstract class Step : UserControl {
-		protected static readonly string defaultErrorMessage = "";
-		/// <summary>
-		/// Cheks if it is possible to progress to the next step.
-		/// </summary>
-		/// <returns>true is ready</returns>
-		public abstract bool CanProgress( out string errorMessage  );
-		/// <summary>
-		/// Undo modifications of the step if necessary, when returning backward.
-		/// </summary>
-		public abstract void GoBack();
-		/// <summary>
-		/// Fonction appellée lorsque le controleur arrive à cette étape.
-		/// </summary>
-		/// <param name="args"></param>
-		/// <param name="personnage"></param>
-		public abstract void Init( IStepsArgument args );
+		/// <param name="currentStep"></param>
+		void InitStep(IProcessStep currentStep);
 	}
-	public enum FinishedState {
-		Done, Canceled
-	}
-	public class StepsWindowsFinishedArguments {
-		public FinishedState FinishedState { get; internal set; }
-    }
 
+	/// <summary>
+	/// Manages a step by step process by controling the flow with Wpf userControls.
+	/// </summary>
 	public class StepsWindow : UserControl {
-		#region Events
-		/// <summary>
-		/// The operations to do when finished.
-		/// </summary>
-		public event StepsFinishedHandler StepsFinished;
-		public delegate void StepsFinishedHandler( IStepsArgument arg, StepsWindowsFinishedArguments endargs ); 
-		#endregion
 
-		private IEnumerable<Step> _steps;
-		private IStepsArgument _args;
+		#region Members
+		private IProcess _process;
 		private int _currentStep = 0;
+		private IEnumerable<IProcessStepWpf> _stepControlers;
 
 		private Button bNext;
 		private Button bPrev;
 		private Button bCancel;
 		private UserControl us;
+		#endregion
 
-		public bool IsAtLastStep {
-			get {
-				return _currentStep == _steps.Count() - 1;
+		#region Properties
+		public bool IsAtLastStep
+		{
+			get
+			{
+				return _currentStep == _process.NbrSteps-1;
 			}
 		}
 
-		public IStepsArgument Arguments {
-			get { return _args; }
+		public IProcessParameters Arguments
+		{
+			get { return _process.Parameters; }
 		}
 
-		public bool IsAtFirstStep {
+		public bool IsAtFirstStep
+		{
 			get { return _currentStep == 0; }
 		}
 
-		public Step CurrentStep {
-			get {
-				return _steps.ElementAt(_currentStep);
-            }
-		}
+		public IProcessStep CurrentStep
+		{
+			get
+			{
+				return _process.GetStep(_currentStep);
+			}
+		} 
+		#endregion
 
-		public StepsWindow( IEnumerable<Step> steps, IStepsArgument args ) {
-			_steps = steps;
-			_args = args;
+		public StepsWindow( IProcess process, IEnumerable<IProcessStepWpf> stepControlers ) {
+			if(process.NbrSteps != stepControlers.Count())
+			{
+				throw new ArgumentException("Windows arguments must have an interface Controler per Step.");
+			}
+			_process = process;
+			_stepControlers = stepControlers;
 			//buttons
 			double fSize = 15;
 			bNext = new Button() { Content = "_S>" };
@@ -100,10 +90,12 @@ namespace CoreWpf.UI {
 			DockPanel dButs = new DockPanel();
 			dButs.Children.Add(bCancel);
             DockPanel.SetDock(bCancel,Dock.Left);
-			StackPanel spPrevNext = new StackPanel();
-			spPrevNext.HorizontalAlignment = HorizontalAlignment.Center;
-			spPrevNext.Orientation = Orientation.Horizontal;
-            spPrevNext.Children.Add(bPrev);
+			StackPanel spPrevNext = new StackPanel
+			{
+				HorizontalAlignment = HorizontalAlignment.Center,
+				Orientation = Orientation.Horizontal
+			};
+			spPrevNext.Children.Add(bPrev);
 			spPrevNext.Children.Add(bNext);
 			dButs.Children.Add(spPrevNext);
 			//control
@@ -119,26 +111,28 @@ namespace CoreWpf.UI {
 
 		public void InitSteps() {
 			SetStep(0);
-			_args.Init();
-            CurrentStep.Init(_args);
+			_process.InitializeProcess();
+            CurrentStep.Init(_process);
 		}
 
+		/// <summary>
+		/// Go to the designated step.
+		/// </summary>
+		/// <param name="num">Index of the step to reach.</param>
 		private void SetStep( int num ) {
-			//vérifications valeur
-			if(_steps.Count() == 0)
+			//argument check (force to stay within range)
+			if(_process.NbrSteps == 0)
 				return;
 			if(num < 0)
 				num = 0;
-			if(num >= _steps.Count())
-				num = _steps.Count() - 1;
-			//nouvelle étape
-			bool forward = num > _currentStep;
+			if(num >= _process.NbrSteps)
+				num = _process.NbrSteps - 1;
+			//Update states
 			_currentStep = num;
-			Step st = _steps.ElementAt(num);
-			if(forward)
-				st.Init(_args);
-            us.Content = st;
-			//gestion boutons
+			IProcessStepWpf stepUc = _stepControlers.ElementAt(num);
+			us.Content = stepUc;
+			stepUc.InitStep(CurrentStep);
+			//Buttons management
 			if(IsAtFirstStep) {
 				bPrev.IsEnabled = false;
 			} else {
@@ -151,31 +145,52 @@ namespace CoreWpf.UI {
 			}
         }
 
-		private void End( StepsWindowsFinishedArguments endargs ) {
-			if(StepsFinished != null)
-				StepsFinished(_args, endargs);
+		private void End(IProcessEndArguments endargs) {
+			_process.FinalizeProcess(endargs);
 		}
 
-		private void BCancel_Click( object sender, RoutedEventArgs e ) {
-			End( new StepsWindowsFinishedArguments { FinishedState = FinishedState.Canceled } );
-        }
+		private void Next()
+		{
+			CurrentStep.PreprossNext();
+			SetStep(_currentStep + 1);
+			CurrentStep.Init(_process);
+		}
 
-		private void BPrev_Click( object sender, RoutedEventArgs e ) {
-			CurrentStep.GoBack();
+		private void Previous()
+		{
+			CurrentStep.Reset();
 			SetStep(_currentStep - 1);
+			CurrentStep.PreprossReset();
 		}
 
-		private void BNext_Click( object sender, RoutedEventArgs e ) {
-			string errorMessage;
-			if(!CurrentStep.CanProgress(out errorMessage)) {
-				MessageBox.Show("Can't progress to next step: "+ errorMessage);
+		#region Buttons Events
+		private void BCancel_Click(object sender, RoutedEventArgs e)
+		{
+			End(new IProcessEndArguments { FinishedState = FinishedState.Canceled });
+		}
+
+		private void BPrev_Click(object sender, RoutedEventArgs e)
+		{
+			Previous();
+		}
+
+		private void BNext_Click(object sender, RoutedEventArgs e)
+		{
+			if (!CurrentStep.CanProgress(out string errorMessage))
+			{
+				MessageBox.Show("Can't progress to next step: " + errorMessage);
 				return;
 			}
-			if(IsAtLastStep) {
-				End(new StepsWindowsFinishedArguments { FinishedState = FinishedState.Done });
-			} else {
-				SetStep(_currentStep + 1);
+			if (IsAtLastStep)
+			{
+				CurrentStep.PreprossNext();
+				End(new IProcessEndArguments { FinishedState = FinishedState.Done });
+			}
+			else
+			{
+				Next();
 			}
 		}
+		#endregion
 	}
 }

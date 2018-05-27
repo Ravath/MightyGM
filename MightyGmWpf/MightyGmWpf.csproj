@@ -52,13 +52,6 @@
     <Reference Include="linq2db, Version=1.10.2.0, Culture=neutral, PublicKeyToken=f19f8aed7feff67e, processorArchitecture=MSIL">
       <HintPath>..\packages\linq2db.1.10.2\lib\net45\linq2db.dll</HintPath>
     </Reference>
-    <Reference Include="MonoGame.Framework, Version=3.6.0.1625, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MonoGame.Framework.WindowsDX.3.6.0.1625\lib\net40\MonoGame.Framework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MonoGame.Framework.WpfInterop, Version=1.5.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MonoGame.Framework.WpfInterop.1.5.3\lib\net45\MonoGame.Framework.WpfInterop.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -225,7 +218,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CinqAnneauWPF\CinqAnneauxWpf.csproj">
+    <ProjectReference Include="..\CinqAnneauxWpf\CinqAnneauxWpf.csproj">
       <Project>{54cf52cb-5f2f-4f18-9555-cde6ac660479}</Project>
       <Name>CinqAnneauxWpf</Name>
     </ProjectReference>
@@ -244,10 +237,6 @@
     <ProjectReference Include="..\MightyGmCtrl\MightyGmCtrl.csproj">
       <Project>{7132b098-9b4e-4b39-a358-aa17d07d8192}</Project>
       <Name>MightyGmCtrl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TableTop\TableTop.csproj">
-      <Project>{cfd42a5b-daa7-40ce-ad72-60f62000bf23}</Project>
-      <Name>TableTop</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

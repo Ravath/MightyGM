@@ -18,7 +18,7 @@ namespace CinqAnneaux.JdrCore.Ecoles {
 		public void AddEcole(Ecole e, int rank ) {
 			e.Rank.BaseValue = rank;
             _ecoles.Add(e);
-			for(int i=1; i<= rank; i++) {
+			for(int i=0; i< rank; i++) {
 				Agent.Techniques.AddTrait(e.Techniques[i]);
             }
 			e.Rank.ValueChanged += V_ValueChanged;

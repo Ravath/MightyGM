@@ -28,8 +28,8 @@ namespace CinqAnneaux.JdrCore.Attaques {
 
 		public void SetAttaqueCreature( Data.AttaqueCreature att )
 		{
-			JetAttaque = new RollAndKeep(att.gxToucher, att.xgToucher);
-			Degats = new RollAndKeep(att.gxDegats, att.xgDegats);
+			JetAttaque = new RollAndKeep(att.xgToucher, att.gxToucher);
+			Degats = new RollAndKeep(att.xgDegats, att.gxDegats);
 			Action = att.Action;
 			Name = att.Name;
 		}

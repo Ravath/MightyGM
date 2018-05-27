@@ -157,8 +157,8 @@
     <Compile Include="Processes\AgentE2.cs" />
     <Compile Include="Processes\AgentE3.cs" />
     <Compile Include="Processes\AgentE4.cs" />
-    <Compile Include="Processes\AgentParameters.cs" />
-    <Compile Include="Processes\AgentProcess.cs" />
+    <Compile Include="Processes\PersonnageParameters.cs" />
+    <Compile Include="Processes\PersonnageProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="userMade\AbsAvantage.cs" />
     <Compile Include="userMade\AbsObjet.cs" />

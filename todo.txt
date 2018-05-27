@@ -1,5 +1,13 @@
+PB : attaque et dégats des créatures : valeurs échangées
+	initiative : pb (Cf zombie: 2 pour 1)
+
 SQL : ajouter "DROP SCHEMA if exists {0} CASCADE
 datatable&export : add sort by TAG
+
+CONFIGURATION
+	The player/user configuration, save as XML or the like
+		Alias, real name, SHA1_Id, Avatar, default language, ...
+	The IsGM boolean (only false when connects into a session as player)
 
 DB
 	Clean/Restart DB
@@ -48,7 +56,15 @@ Fiches dépense Xp / Achat
 	- prévoir les bonus de shugenja/moine pour montée de niveau. (Sorts/Kihos) => utiliser un bouton "Monter de Rang". permet aussi de gérer les voies alternatives. si niveau >5, ajouter les voies avancées
 
 2DDataTable ( mass Combat Results )
-mq Ancetre.Description.Exigence à Import/Export Excel
+Agent_exemplar : string : visible Name.
 
 DICE
 	formula parsing
+
+	
+mq Ancetre.Description.Exigence à Import/Export Excel
+	INFOs : Impossible d'exporter car la propriété renvoie en réalité une IDescription, et non pas le type de description correspondant au Model.
+	Correction : Passer la propriété générique en Hidden, et masquer avec une propriété qui renvoie le type voulu.
+		OU passer le type réel en attribut de properties.
+		
+		

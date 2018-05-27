@@ -9,6 +9,10 @@ using Core.Data;
 using Core.Data.Schema;
 using LinqToDB.Mapping;
 namespace Polaris.Data {
-	public partial class Ville {
+	public partial class VilleModel {
+	}
+	public partial class VilleDescription {
+	}
+	public partial class VilleExemplar {
 	}
 }

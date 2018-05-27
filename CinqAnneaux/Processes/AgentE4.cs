@@ -23,9 +23,17 @@ namespace CinqAnneaux.Processes
 			throw new NotImplementedException();
 		}
 
-		public void Init(IProcess process, IProcessParameters parameters)
+		public void Init(IProcess process)
 		{
 			throw new NotImplementedException();
+			////init attributes
+			//foreach (var item in _params.Personnage.Attributs.AllAttributs)
+			//{
+			//	item.BaseValue = 2;
+			//}
+			//_params.Personnage.Attributs.MaxVide.BaseValue = 2;
+			////set data
+			//fiche.SetData(_params.Data);
 		}
 
 		public void PreprossNext()

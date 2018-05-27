@@ -22,13 +22,11 @@ namespace Polaris.Data {
 						_obj = new PouvoirPolarisDescription();
 						_obj.Model = this;
 						_obj.SaveObject();
-						return _obj;
 					} else {
-						return id.ElementAt(0);
+						_obj = id.ElementAt(0);
 					}
-				} else {
-					return _obj;
 				}
+				return _obj;
 				
 			}
 		}
@@ -46,40 +44,6 @@ namespace Polaris.Data {
 			get{ return _porteeMax;}
 			set{_porteeMax = value;}
 		}
-
-		[Column(Name = "duree_val", Storage="DureeVal")]
-		[HiddenProperty]
-		public int DureeVal{
-			get{
-				return Duree.Value;
-			}
-			set{
-				Duree.Value = value;
-			}
-		}
-
-		[Column(Name = "duree_unit", Storage="DureeUnit")]
-		[HiddenProperty]
-		public TimeUnity DureeUnit{
-			get{
-				return Duree.Unity;
-			}
-			set{
-				Duree.Unity = value;
-			}
-		}
-
-		private TimePeriod _duree = new TimePeriod();
-		public TimePeriod Duree{
-			get{
-				return _duree;
-			}
-			set{
-				_duree = value;
-			}
-		}
-
-
 
 		private int _autre;
 		[Column(Storage = "Autre",Name = "autre")]

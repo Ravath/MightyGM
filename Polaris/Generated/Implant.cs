@@ -22,13 +22,11 @@ namespace Polaris.Data {
 						_obj = new ImplantDescription();
 						_obj.Model = this;
 						_obj.SaveObject();
-						return _obj;
 					} else {
-						return id.ElementAt(0);
+						_obj = id.ElementAt(0);
 					}
-				} else {
-					return _obj;
 				}
+				return _obj;
 				
 			}
 		}

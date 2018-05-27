@@ -9,15 +9,26 @@ using Core.Data;
 using Core.Data.Schema;
 using LinqToDB.Mapping;
 namespace Polaris.Data {
-	[Table(Schema = "polaris",Name = "ville")]
+	[Table(Schema = "polaris",Name = "villemodel")]
 	[CoreData]
-	public partial class Ville : DataObject {
+	public partial class VilleModel : DataModel {
 
-		private string _nom = "";
-		[Column(Storage = "Nom",Name = "nom")]
-		public string Nom{
-			get{ return _nom;}
-			set{_nom = value;}
+		private VilleDescription _obj;
+		public override IDataDescription Description{
+			get{
+				if(_obj == null){
+					IEnumerable<VilleDescription> id = GetModelReferencer<VilleDescription>();
+					if(id.Count() == 0) {
+						_obj = new VilleDescription();
+						_obj.Model = this;
+						_obj.SaveObject();
+					} else {
+						_obj = id.ElementAt(0);
+					}
+				}
+				return _obj;
+				
+			}
 		}
 
 		private int _population;
@@ -28,7 +39,6 @@ namespace Polaris.Data {
 		}
 
 		[Column(Name="profondeur_min", Storage="ProfondeurMin")]
-		[HiddenProperty]
 		public int ProfondeurMin{
 			get{
 				return Profondeur.Min;
@@ -39,7 +49,6 @@ namespace Polaris.Data {
 		}
 
 		[Column(Name="profondeur_max", Storage="ProfondeurMax")]
-		[HiddenProperty]
 		public int ProfondeurMax{
 			get{
 				return Profondeur.Max;
@@ -50,6 +59,7 @@ namespace Polaris.Data {
 		}
 
 		private Range _profondeur = new Range();
+		[HiddenProperty]
 		public Range Profondeur{
 			get{
 				return _profondeur;
@@ -76,22 +86,28 @@ namespace Polaris.Data {
 		}
 
 		private IEnumerable<Complexes> _complexes;
-		[Association(ThisKey = "Id",CanBeNull = false,Storage = "Complexes",OtherKey = "VilleId")]
+		[Association(ThisKey = "Id",CanBeNull = false,Storage = "Complexes",OtherKey = "VilleModelId")]
 		public IEnumerable <Complexes> Complexes{
 			get{
 				if( _complexes == null ){
-					_complexes = LoadFromJointure<Complexes,VilleToComplexes_Complexes>(false);
+					_complexes = LoadFromJointure<Complexes,VilleModelToComplexes_Complexes>(false);
 				}
 				return _complexes;
 			}
 			set{
-				SaveToJointure<Complexes, VilleToComplexes_Complexes> (_complexes, value,false);
+				SaveToJointure<Complexes, VilleModelToComplexes_Complexes> (_complexes, value,false);
 				_complexes = value;
 			}
 		}
 		public override void DeleteObject() {
-			DeleteJoins<Ville,VilleToComplexes_Complexes>(true);
+			DeleteJoins<VilleModel,VilleModelToComplexes_Complexes>(true);
 			base.DeleteObject();
 		}
+	}
+	[Table(Schema = "polaris",Name = "villedescription")]
+	public partial class VilleDescription : DataDescription<VilleModel> {
+	}
+	[Table(Schema = "polaris",Name = "villeexemplar")]
+	public partial class VilleExemplar : DataExemplaire<VilleModel> {
 	}
 }

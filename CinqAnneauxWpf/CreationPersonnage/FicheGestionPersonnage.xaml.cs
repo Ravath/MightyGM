@@ -18,6 +18,11 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CoreWpf;
 using Core.Contexts;
+using Core.Processes;
+using CinqAnneaux.Processes;
+using CinqAnneauxWpf.Fiches;
+using Xceed.Wpf.Toolkit.PropertyGrid;
+using CoreWpf.Dialogs;
 
 namespace CinqAnneauxWpf.CreationPersonnage {
 	/// <summary>
@@ -27,6 +32,7 @@ namespace CinqAnneauxWpf.CreationPersonnage {
 
 		#region States
 		private bool _creationState;
+		private PersonnageProcess persoCreation;
 		private void SetReadState() {
 			_creationState = false;
 			xCreationButton.Content = "Nouveau Personnage";
@@ -42,7 +48,7 @@ namespace CinqAnneauxWpf.CreationPersonnage {
 
 		#region Members
 		private ListeFiche<PersonnageModel> _fichePersonnage = new ListeFiche<PersonnageModel>();
-		private ConstructeurPersonnages _ficheConstruction;
+		private StepsWindow _ficheConstruction;
 		private IGlobalContext _globalContext;
 		#endregion
 
@@ -60,25 +66,55 @@ namespace CinqAnneauxWpf.CreationPersonnage {
 		}
 
 		public void Afficher( IGlobalContext c ) {
-			if(_ficheConstruction == null) {
-				_ficheConstruction = new ConstructeurPersonnages(c.Data);
-				_ficheConstruction.StepsFinished += _constructeur_StepsFinished;
-			}
 			_fichePersonnage.SetDataSource(c.Data.GetTable<PJModel>());
 			_globalContext = c;
 		}
 
-		private void _constructeur_StepsFinished( IStepsArgument arg, StepsWindowsFinishedArguments endargs ) {
-			ParametresCreationPJ arguments = (ParametresCreationPJ)arg;
+		private void _constructeur_StepsFinished(IProcessEndArguments endargs) {
 			SetReadState();
-			xViewer.Content = new Fiche() { SelectedObject = arguments.Personnage };
+			if(endargs.FinishedState == FinishedState.Done)
+			{
+				xViewer.Content = new Fiche() { SelectedObject = persoCreation.Personnage };
+			}
         }
 
 		private void Button_Click( object sender, RoutedEventArgs e ) {
 			if(_creationState)
 				SetReadState();
 			else
+			{
+				if (_ficheConstruction == null)
+				{
+					persoCreation = new PersonnageProcess(_globalContext.Data, GetCreationparameters());
+					_ficheConstruction = new StepsWindow(persoCreation, new List<IProcessStepWpf>()
+					{
+						new FicheCandidateClanFamilleEcole(),
+						new StepOptions(),
+						new StepSpells(),
+						new StepExperience()
+					});
+					persoCreation.EndOfProcess += _constructeur_StepsFinished;
+				}
+				else
+				{
+					persoCreation.Parameters = GetCreationparameters();
+				}
 				SetCreationState();
+			}
+		}
+
+		private PersonnageParameters GetCreationparameters()
+		{
+			PersonnageParameters parameters = new PersonnageParameters();
+			//fenetre
+			Window w = new Window()
+			{
+				Width = 300,
+				Title = "Creation Parameters",
+				Content = new PropertyGrid() { SelectedObject = parameters }
+			};
+			w.ShowDialog();
+			return parameters;
 		}
 	}
 }

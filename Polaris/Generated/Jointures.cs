@@ -2,71 +2,71 @@ using Core.Data;
 using Core.Data.Schema;
 using LinqToDB.Mapping;
 namespace Polaris.Data {
-	[Table(Schema = "polaris",Name = "nationtopersonnalite_personnalites")]
-	public class NationToPersonnalite_Personnalites : DataRelation<Nation, Personnalite> {
+	[Table(Schema = "polaris",Name = "nationdescriptiontopersonnalitemodel_personnalites")]
+	public class NationDescriptionToPersonnaliteModel_Personnalites : DataRelation<NationDescription, PersonnaliteModel> {
 
-		[Column(Name = "fk_nation_join", Storage = "NationId")]
+		[Column(Name = "fk_nationdescription_join", Storage = "NationDescriptionId")]
 		[HiddenProperty]
-		public int NationId {
+		public int NationDescriptionId {
 			get { return Object1Id; }
 			set { Object1Id= value; }
 		}
-		[Association(ThisKey = "NationId", OtherKey = "Id", CanBeNull = false, Storage = "Nation")]
-		public Nation Nation {
+		[Association(ThisKey = "NationDescriptionId", OtherKey = "Id", CanBeNull = false, Storage = "NationDescription")]
+		public NationDescription NationDescription {
 			get { return Object1; }
 			set { Object1 = value; }
 		}
 
-		[Column(Name = "fk_personnalite_join", Storage = "PersonnaliteId")]
+		[Column(Name = "fk_personnalitemodel_join", Storage = "PersonnaliteModelId")]
 		[HiddenProperty]
-		public int PersonnaliteId {
+		public int PersonnaliteModelId {
 			get { return Object2Id; }
 			set { Object2Id= value; }
 		}
-		[Association(ThisKey = "PersonnaliteId", OtherKey = "Id", CanBeNull = false, Storage = "Personnalite")]
-		public Personnalite Personnalite {
+		[Association(ThisKey = "PersonnaliteModelId", OtherKey = "Id", CanBeNull = false, Storage = "PersonnaliteModel")]
+		public PersonnaliteModel PersonnaliteModel {
 			get { return Object2; }
 			set { Object2 = value; }
 		}
 	}
-	[Table(Schema = "polaris",Name = "nationtoville_villes")]
-	public class NationToVille_Villes : DataRelation<Nation, Ville> {
+	[Table(Schema = "polaris",Name = "nationdescriptiontovillemodel_villes")]
+	public class NationDescriptionToVilleModel_Villes : DataRelation<NationDescription, VilleModel> {
 
-		[Column(Name = "fk_nation_join", Storage = "NationId")]
+		[Column(Name = "fk_nationdescription_join", Storage = "NationDescriptionId")]
 		[HiddenProperty]
-		public int NationId {
+		public int NationDescriptionId {
 			get { return Object1Id; }
 			set { Object1Id= value; }
 		}
-		[Association(ThisKey = "NationId", OtherKey = "Id", CanBeNull = false, Storage = "Nation")]
-		public Nation Nation {
+		[Association(ThisKey = "NationDescriptionId", OtherKey = "Id", CanBeNull = false, Storage = "NationDescription")]
+		public NationDescription NationDescription {
 			get { return Object1; }
 			set { Object1 = value; }
 		}
 
-		[Column(Name = "fk_ville_join", Storage = "VilleId")]
+		[Column(Name = "fk_villemodel_join", Storage = "VilleModelId")]
 		[HiddenProperty]
-		public int VilleId {
+		public int VilleModelId {
 			get { return Object2Id; }
 			set { Object2Id= value; }
 		}
-		[Association(ThisKey = "VilleId", OtherKey = "Id", CanBeNull = false, Storage = "Ville")]
-		public Ville Ville {
+		[Association(ThisKey = "VilleModelId", OtherKey = "Id", CanBeNull = false, Storage = "VilleModel")]
+		public VilleModel VilleModel {
 			get { return Object2; }
 			set { Object2 = value; }
 		}
 	}
-	[Table(Schema = "polaris",Name = "villetocomplexes_complexes")]
-	public class VilleToComplexes_Complexes : DataRelation<Ville, Complexes> {
+	[Table(Schema = "polaris",Name = "villemodeltocomplexes_complexes")]
+	public class VilleModelToComplexes_Complexes : DataRelation<VilleModel, Complexes> {
 
-		[Column(Name = "fk_ville_join", Storage = "VilleId")]
+		[Column(Name = "fk_villemodel_join", Storage = "VilleModelId")]
 		[HiddenProperty]
-		public int VilleId {
+		public int VilleModelId {
 			get { return Object1Id; }
 			set { Object1Id= value; }
 		}
-		[Association(ThisKey = "VilleId", OtherKey = "Id", CanBeNull = false, Storage = "Ville")]
-		public Ville Ville {
+		[Association(ThisKey = "VilleModelId", OtherKey = "Id", CanBeNull = false, Storage = "VilleModel")]
+		public VilleModel VilleModel {
 			get { return Object1; }
 			set { Object1 = value; }
 		}

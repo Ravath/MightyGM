@@ -65,14 +65,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreationPersonnage\ConstructeurPersonnages.cs" />
     <Compile Include="CreationPersonnage\FicheGestionPersonnage.xaml.cs">
       <DependentUpon>FicheGestionPersonnage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CreationPersonnage\InitStep.cs" />
-    <Compile Include="CreationPersonnage\ParametresCreationPJ.cs" />
-    <Compile Include="CreationPersonnage\StepClan.cs" />
-    <Compile Include="CreationPersonnage\StepExperience.cs" />
+    <Compile Include="CreationPersonnage\StepExperience.xaml.cs">
+      <DependentUpon>StepExperience.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CreationPersonnage\StepOptions.xaml.cs">
+      <DependentUpon>StepOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CreationPersonnage\StepSpells.xaml.cs">
+      <DependentUpon>StepSpells.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Fiches\FicheAgent.xaml.cs">
       <DependentUpon>FicheAgent.xaml</DependentUpon>
     </Compile>
@@ -175,6 +179,18 @@
     <Page Include="CreationPersonnage\FicheGestionPersonnage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CreationPersonnage\StepExperience.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CreationPersonnage\StepOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CreationPersonnage\StepSpells.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Fiches\FicheAgent.xaml">
       <Generator>MSBuild:Compile</Generator>

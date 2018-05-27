@@ -2,27 +2,63 @@ CREATE SCHEMA polaris;
 create table polaris.dataobject(
 	id serial NOT NULL,
 	primary key(id));
-create table polaris.nation(
+create table polaris.complexes(
+	type integer NOT NULL,
+	nombre integer NOT NULL)INHERITS(polaris.dataobject);
+create table polaris.titre(
+	nom character varying(20) NOT NULL,
+	ordre integer NOT NULL,
+	annees integer NOT NULL,
+	revenus integer NOT NULL,
+	ndrandfactor integer,
+	fdrandfactor integer)INHERITS(polaris.dataobject);
+create table polaris.specialite(
+	nom character varying(20) NOT NULL)INHERITS(polaris.dataobject);
+create table polaris.fabriquant(
+	nom character varying(20) NOT NULL)INHERITS(polaris.dataobject);
+create table polaris.nationmodel(
+	name character varying(40) NOT NULL,
+	tag character varying(7) NOT NULL,
+	unique(name),
+	unique(tag))INHERITS(polaris.dataobject);
+create table polaris.nationdescription(
+	description text NOT NULL,
+	fk_model_id integer,
 	geographie text NOT NULL,
 	historique text NOT NULL,
 	societe text NOT NULL,
 	territoire text NOT NULL,
 	armes text NOT NULL)INHERITS(polaris.dataobject);
-create table polaris.personnalite(
-	nom character varying(30) NOT NULL,
-	description text NOT NULL)INHERITS(polaris.dataobject);
-create table polaris.ville(
-	nom character varying(20) NOT NULL,
+create table polaris.nationexemplar(
+	fk_model_id integer)INHERITS(polaris.dataobject);
+create table polaris.personnalitemodel(
+	name character varying(40) NOT NULL,
+	tag character varying(7) NOT NULL,
+	unique(name),
+	unique(tag))INHERITS(polaris.dataobject);
+create table polaris.personnalitedescription(
+	description text NOT NULL,
+	fk_model_id integer)INHERITS(polaris.dataobject);
+create table polaris.personnaliteexemplar(
+	fk_model_id integer)INHERITS(polaris.dataobject);
+create table polaris.villemodel(
+	name character varying(40) NOT NULL,
+	tag character varying(7) NOT NULL,
 	population integer NOT NULL,
 	profondeur_max integer NOT NULL,
 	profondeur_min integer NOT NULL,
 	popfeconde integer NOT NULL,
-	popmutante integer NOT NULL)INHERITS(polaris.dataobject);
-create table polaris.complexes(
-	type integer NOT NULL,
-	nombre integer NOT NULL)INHERITS(polaris.dataobject);
+	popmutante integer NOT NULL,
+	unique(name),
+	unique(tag))INHERITS(polaris.dataobject);
+create table polaris.villedescription(
+	description text NOT NULL,
+	fk_model_id integer)INHERITS(polaris.dataobject);
+create table polaris.villeexemplar(
+	fk_model_id integer)INHERITS(polaris.dataobject);
 create table polaris.personnagemodel(
 	name character varying(40) NOT NULL,
+	tag character varying(7) NOT NULL,
 	force integer NOT NULL,
 	constitution integer NOT NULL,
 	coordination integer NOT NULL,
@@ -35,7 +71,8 @@ create table polaris.personnagemodel(
 	effetpolaris bool NOT NULL,
 	fecond bool NOT NULL,
 	maindirectrice integer NOT NULL,
-	unique(name))INHERITS(polaris.dataobject);
+	unique(name),
+	unique(tag))INHERITS(polaris.dataobject);
 create table polaris.personnagedescription(
 	description text NOT NULL,
 	fk_model_id integer)INHERITS(polaris.dataobject);
@@ -43,9 +80,11 @@ create table polaris.personnageexemplar(
 	fk_model_id integer)INHERITS(polaris.dataobject);
 create table polaris.mutationmodel(
 	name character varying(40) NOT NULL,
+	tag character varying(7) NOT NULL,
 	cavantage integer,
 	cdesavantage integer,
-	unique(name))INHERITS(polaris.dataobject);
+	unique(name),
+	unique(tag))INHERITS(polaris.dataobject);
 create table polaris.mutationdescription(
 	description text NOT NULL,
 	fk_model_id integer)INHERITS(polaris.dataobject);
@@ -53,8 +92,10 @@ create table polaris.mutationexemplar(
 	fk_model_id integer)INHERITS(polaris.dataobject);
 create table polaris.originesmodel(
 	name character varying(40) NOT NULL,
+	tag character varying(7) NOT NULL,
 	type integer NOT NULL,
-	unique(name))INHERITS(polaris.dataobject);
+	unique(name),
+	unique(tag))INHERITS(polaris.dataobject);
 create table polaris.originesdescription(
 	description text NOT NULL,
 	fk_model_id integer)INHERITS(polaris.dataobject);
@@ -62,10 +103,12 @@ create table polaris.originesexemplar(
 	fk_model_id integer)INHERITS(polaris.dataobject);
 create table polaris.avantagemodel(
 	name character varying(40) NOT NULL,
+	tag character varying(7) NOT NULL,
 	cout integer NOT NULL,
 	unique bool NOT NULL,
 	desavantage bool NOT NULL,
-	unique(name))INHERITS(polaris.dataobject);
+	unique(name),
+	unique(tag))INHERITS(polaris.dataobject);
 create table polaris.avantagedescription(
 	description text NOT NULL,
 	fk_model_id integer)INHERITS(polaris.dataobject);
@@ -74,11 +117,13 @@ create table polaris.avantageexemplar(
 	rangs integer NOT NULL)INHERITS(polaris.dataobject);
 create table polaris.professionmodel(
 	name character varying(40) NOT NULL,
+	tag character varying(7) NOT NULL,
 	contacts integer NOT NULL,
 	allies integer NOT NULL,
 	opposants integer NOT NULL,
 	ratiosennemi integer NOT NULL,
-	unique(name))INHERITS(polaris.dataobject);
+	unique(name),
+	unique(tag))INHERITS(polaris.dataobject);
 create table polaris.professiondescription(
 	description text NOT NULL,
 	fk_model_id integer,
@@ -88,24 +133,18 @@ create table polaris.professionexemplar(
 	experience integer NOT NULL)INHERITS(polaris.dataobject);
 create table polaris.avantagepromodel(
 	name character varying(40) NOT NULL,
-	unique(name))INHERITS(polaris.dataobject);
+	tag character varying(7) NOT NULL,
+	unique(name),
+	unique(tag))INHERITS(polaris.dataobject);
 create table polaris.avantageprodescription(
 	description text NOT NULL,
 	fk_model_id integer)INHERITS(polaris.dataobject);
 create table polaris.avantageproexemplar(
 	fk_model_id integer,
 	rang integer NOT NULL)INHERITS(polaris.dataobject);
-create table polaris.titre(
-	nom character varying(20) NOT NULL,
-	ordre integer NOT NULL,
-	annees integer NOT NULL,
-	revenus integer NOT NULL,
-	ndrandfactor integer,
-	fdrandfactor integer)INHERITS(polaris.dataobject);
-create table polaris.specialite(
-	nom character varying(20) NOT NULL)INHERITS(polaris.dataobject);
 create table polaris.competencemodel(
 	name character varying(40) NOT NULL,
+	tag character varying(7) NOT NULL,
 	reservee bool NOT NULL,
 	limitative bool NOT NULL,
 	prognaturelle bool NOT NULL,
@@ -114,7 +153,8 @@ create table polaris.competencemodel(
 	attributsvariables bool NOT NULL,
 	caracteristiquei integer NOT NULL,
 	caracteristiqueii integer NOT NULL,
-	unique(name))INHERITS(polaris.dataobject);
+	unique(name),
+	unique(tag))INHERITS(polaris.dataobject);
 create table polaris.competencedescription(
 	description text NOT NULL,
 	fk_model_id integer)INHERITS(polaris.dataobject);
@@ -124,31 +164,31 @@ create table polaris.competenceexemplar(
 	fk_specialite_specialite integer)INHERITS(polaris.dataobject);
 create table polaris.pouvoirpolarismodel(
 	name character varying(40) NOT NULL,
+	tag character varying(7) NOT NULL,
 	zoneeffet integer NOT NULL,
 	porteemax integer NOT NULL,
-	duree_unit integer NOT NULL,
-	duree_val integer NOT NULL,
 	autre integer NOT NULL,
 	nbrddgts integer NOT NULL,
 	bonusdgts integer NOT NULL,
 	d6dgts bool NOT NULL,
 	nombrelocalisations integer NOT NULL,
-	unique(name))INHERITS(polaris.dataobject);
+	unique(name),
+	unique(tag))INHERITS(polaris.dataobject);
 create table polaris.pouvoirpolarisdescription(
 	description text NOT NULL,
 	fk_model_id integer)INHERITS(polaris.dataobject);
 create table polaris.pouvoirpolarisexemplar(
 	fk_model_id integer)INHERITS(polaris.dataobject);
-create table polaris.fabriquant(
-	nom character varying(20) NOT NULL)INHERITS(polaris.dataobject);
 create table polaris.objectmodel(
 	name character varying(40) NOT NULL,
+	tag character varying(7) NOT NULL,
 	cout integer NOT NULL,
 	dispo integer NOT NULL,
 	disponoir integer NOT NULL,
 	poids decimal NOT NULL,
 	nt integer NOT NULL,
-	unique(name))INHERITS(polaris.dataobject);
+	unique(name),
+	unique(tag))INHERITS(polaris.dataobject);
 create table polaris.objectdescription(
 	description text NOT NULL,
 	fk_model_id integer)INHERITS(polaris.dataobject);
@@ -158,7 +198,9 @@ create table polaris.objectexemplar(
 	integrte integer NOT NULL)INHERITS(polaris.dataobject);
 create table polaris.localisationcreaturemodel(
 	name character varying(40) NOT NULL,
-	unique(name))INHERITS(polaris.dataobject);
+	tag character varying(7) NOT NULL,
+	unique(name),
+	unique(tag))INHERITS(polaris.dataobject);
 create table polaris.localisationcreaturedescription(
 	description text NOT NULL,
 	fk_model_id integer)INHERITS(polaris.dataobject);
@@ -167,7 +209,9 @@ create table polaris.localisationcreatureexemplar(
 	chances integer NOT NULL)INHERITS(polaris.dataobject);
 create table polaris.attaquecreaturemodel(
 	name character varying(40) NOT NULL,
-	unique(name))INHERITS(polaris.dataobject);
+	tag character varying(7) NOT NULL,
+	unique(name),
+	unique(tag))INHERITS(polaris.dataobject);
 create table polaris.attaquecreaturedescription(
 	description text NOT NULL,
 	fk_model_id integer)INHERITS(polaris.dataobject);
@@ -175,7 +219,9 @@ create table polaris.attaquecreatureexemplar(
 	fk_model_id integer)INHERITS(polaris.dataobject);
 create table polaris.specialcreaturemodel(
 	name character varying(40) NOT NULL,
-	unique(name))INHERITS(polaris.dataobject);
+	tag character varying(7) NOT NULL,
+	unique(name),
+	unique(tag))INHERITS(polaris.dataobject);
 create table polaris.specialcreaturedescription(
 	description text NOT NULL,
 	fk_model_id integer)INHERITS(polaris.dataobject);
@@ -183,6 +229,7 @@ create table polaris.specialcreatureexemplar(
 	fk_model_id integer)INHERITS(polaris.dataobject);
 create table polaris.creaturemodel(
 	name character varying(40) NOT NULL,
+	tag character varying(7) NOT NULL,
 	echelle integer NOT NULL,
 	force integer,
 	constitution integer,
@@ -197,20 +244,21 @@ create table polaris.creaturemodel(
 	poids integer NOT NULL,
 	taille integer NOT NULL,
 	marine bool NOT NULL,
-	unique(name))INHERITS(polaris.dataobject);
+	unique(name),
+	unique(tag))INHERITS(polaris.dataobject);
 create table polaris.creaturedescription(
 	description text NOT NULL,
 	fk_model_id integer)INHERITS(polaris.dataobject);
 create table polaris.creatureexemplar(
 	fk_model_id integer)INHERITS(polaris.dataobject);
-create table polaris.nationtopersonnalite_personnalites(
-	fk_nation_join integer,
-	fk_personnalite_join integer)INHERITS(polaris.dataobject);
-create table polaris.nationtoville_villes(
-	fk_nation_join integer,
-	fk_ville_join integer)INHERITS(polaris.dataobject);
-create table polaris.villetocomplexes_complexes(
-	fk_ville_join integer,
+create table polaris.nationdescriptiontopersonnalitemodel_personnalites(
+	fk_nationdescription_join integer,
+	fk_personnalitemodel_join integer)INHERITS(polaris.dataobject);
+create table polaris.nationdescriptiontovillemodel_villes(
+	fk_nationdescription_join integer,
+	fk_villemodel_join integer)INHERITS(polaris.dataobject);
+create table polaris.villemodeltocomplexes_complexes(
+	fk_villemodel_join integer,
 	fk_complexes_join integer)INHERITS(polaris.dataobject);
 create table polaris.personnagemodeltomutationexemplar_mutations(
 	fk_personnagemodel_join integer,

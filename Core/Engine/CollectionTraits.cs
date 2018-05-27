@@ -31,22 +31,19 @@ namespace Core.Engine {
 		public void AddTrait( T t ) {
 			_traits.Add(t);
 			t.AffectAgent(Agent);
-			if(SelectionChanged != null)
-				SelectionChanged(this);
+			SelectionChanged?.Invoke(this);
 		}
 		public void RemoveTrait( T t ) {
 			if(_traits.Remove(t))
 				t.UnaffectAgent(Agent);
-			if(SelectionChanged != null)
-				SelectionChanged(this);
+			SelectionChanged?.Invoke(this);
 		}
 		public void Clear() {
 			foreach(var t in _traits) {
 				t.UnaffectAgent(Agent);
 			}
 			_traits.Clear();
-			if(SelectionChanged != null)
-				SelectionChanged(this);
+			SelectionChanged?.Invoke(this);
 		}
 
 		public void RemoveNamed( INamed item ) {

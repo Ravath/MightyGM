@@ -46,12 +46,6 @@
     <Reference Include="linq2db, Version=1.10.2.0, Culture=neutral, PublicKeyToken=f19f8aed7feff67e, processorArchitecture=MSIL">
       <HintPath>..\packages\linq2db.1.10.2\lib\net45\linq2db.dll</HintPath>
     </Reference>
-    <Reference Include="MonoGame.Framework, Version=3.5.1.1679, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MonoGame.Framework.WindowsDX.3.5.1.1679\lib\net40\MonoGame.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoGame.Framework.WpfInterop, Version=1.5.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MonoGame.Framework.WpfInterop.1.5.3\lib\net45\MonoGame.Framework.WpfInterop.dll</HintPath>
-    </Reference>
     <Reference Include="Npgsql">
       <HintPath>..\..\JDR_Data\packages\Npgsql.3.0.5\lib\net45\Npgsql.dll</HintPath>
     </Reference>
@@ -141,17 +135,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CoreWPF\CoreWpf.csproj">
-      <Project>{891e0a5a-e23c-4f88-9f35-c37d496c5b61}</Project>
-      <Name>CoreWpf</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{93418f01-3e81-43f0-b93b-3c84ce60b40a}</Project>
       <Name>Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TableTop\TableTop.csproj">
-      <Project>{cfd42a5b-daa7-40ce-ad72-60f62000bf23}</Project>
-      <Name>TableTop</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

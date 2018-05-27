@@ -60,6 +60,6 @@ namespace CinqAnneaux.Data {
 		Mutation, Mineur, Majeur, Akutenshi}
 
 	public enum TypeCreature{
-		Naturelle, Monstre}
+		Naturelle, Monstre, PNJ}
 
 }

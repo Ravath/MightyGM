@@ -1,27 +1,14 @@
-﻿using Core.Map;
+﻿using MightyGmCtrl;
 using MightyGmWPF.MapDrawings;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using TableTop.Map;
-using TableTop.Sprites;
-using Microsoft.Xna.Framework.Graphics;
-using TableTop;
-using Microsoft.Xna.Framework;
-using TableTop.GUI;
-using MightyGmCtrl;
 
-namespace MightyGmWPF.Tabs {
+namespace MightyGmWPF.Tabs
+{
 	/// <summary>
 	/// Logique d'interaction pour TabCreateurs.xaml
 	/// </summary>
