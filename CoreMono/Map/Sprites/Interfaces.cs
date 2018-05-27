@@ -1,11 +1,10 @@
-﻿using CoreMono.Panels;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-namespace CoreMono.Sprites
+namespace CoreMono.Map.Sprites
 {
 	public interface ISpriteDrawer
 	{

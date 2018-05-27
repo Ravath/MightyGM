@@ -50,25 +50,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Apparences\FrameSprite.cs" />
-    <Compile Include="Apparences\PlainColor.cs" />
-    <Compile Include="Apparences\StretchedImage.cs" />
-    <Compile Include="Containers\Margin.cs" />
-    <Compile Include="Containers\Stretcher.cs" />
-    <Compile Include="GuiApparence.cs" />
-    <Compile Include="GuiElement.cs" />
-    <Compile Include="GuiEventArgs.cs" />
-    <Compile Include="Panels\Brush\Brush.cs" />
-    <Compile Include="Panels\Commands\IMapCommand.cs" />
-    <Compile Include="Panels\Commands\SquareDrawCmd.cs" />
-    <Compile Include="Panels\MapDrawer.cs" />
-    <Compile Include="Panels\MapLayer.cs" />
-    <Compile Include="Panels\MapLayerGrid.cs" />
+    <Compile Include="Map\GuiEventArgs.cs" />
+    <Compile Include="Map\Brush\Brush.cs" />
+    <Compile Include="Map\Commands\IMapCommand.cs" />
+    <Compile Include="Map\Commands\SquareDrawCmd.cs" />
+    <Compile Include="Map\MapDrawer.cs" />
+    <Compile Include="Map\MapLayer.cs" />
+    <Compile Include="Map\MapLayerGrid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sprites\Interfaces.cs" />
-    <Compile Include="Sprites\SquareGridSprites.cs" />
-    <Compile Include="Sprites\SquareGridTerrainSprite.cs" />
-    <Compile Include="Sprites\SquareGridTintDrawer.cs" />
+    <Compile Include="Map\Sprites\Interfaces.cs" />
+    <Compile Include="Map\Sprites\SquareGridSprites.cs" />
+    <Compile Include="Map\Sprites\SquareGridTerrainSprite.cs" />
+    <Compile Include="Map\Sprites\SquareGridTintDrawer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\GeonBit.UI\themes\editor\effects\disabled.fx" />

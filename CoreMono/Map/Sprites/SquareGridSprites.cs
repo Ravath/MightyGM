@@ -1,5 +1,4 @@
-﻿using CoreMono.Panels;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoreMono.Sprites
+namespace CoreMono.Map.Sprites
 {
 	/// <summary>
 	/// Draw each square with the corresponding tile from the given texture.

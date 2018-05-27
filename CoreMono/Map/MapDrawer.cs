@@ -1,5 +1,4 @@
-﻿using CoreMono.GUI;
-using CoreMono.Map.Commands;
+﻿using CoreMono.Map.Commands;
 using GeonBit.UI.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -7,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 
-namespace CoreMono.Panels
+namespace CoreMono.Map
 {
 	public enum SquareSizeMode
 	{

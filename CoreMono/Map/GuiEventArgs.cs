@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoreMono.GUI
+namespace CoreMono.Map
 {
 	public class GuiResizeEventArg
 	{

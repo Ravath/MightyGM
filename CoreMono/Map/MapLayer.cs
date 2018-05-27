@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoreMono.Panels
+namespace CoreMono.Map
 {
 	public abstract class MapLayer
 	{

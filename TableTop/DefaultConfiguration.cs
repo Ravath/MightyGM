@@ -1,5 +1,4 @@
-﻿using CoreMono.GUI.Apparences;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.IO;
 
@@ -14,9 +13,7 @@ namespace CoreMono
 				path += "\\";
 			}
 			MouseSprite = Texture2D.FromStream(graphics.GraphicsDevice, File.Open(path+"DefaultCursor.png", FileMode.Open));
-			FrameApparence = new FrameSprite(Texture2D.FromStream(graphics.GraphicsDevice, File.Open(path+"FrameI.png", FileMode.Open)));
 		}
 		public Texture2D MouseSprite;
-		public FrameSprite FrameApparence;
 	}
 }

@@ -1,8 +1,6 @@
-﻿using CoreMono.GUI.Apparences;
-using CoreMono.GUI.Containers;
+﻿using CoreMono.Map;
 using CoreMono.Map.Commands;
-using CoreMono.Panels;
-using CoreMono.Sprites;
+using CoreMono.Map.Sprites;
 using GeonBit.UI;
 using GeonBit.UI.Entities;
 using Microsoft.Xna.Framework;

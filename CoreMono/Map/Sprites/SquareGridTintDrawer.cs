@@ -1,8 +1,7 @@
-﻿using CoreMono.Panels;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace CoreMono.Sprites
+namespace CoreMono.Map.Sprites
 {
 	/// <summary>
 	/// Draw each square with the given tint color.
