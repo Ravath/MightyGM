@@ -120,6 +120,7 @@ namespace DataGenerator
 		}
 
 		protected override void WriteFile( StringBuilder sb ) {
+			sb.AppendLine("DROP SCHEMA IF EXISTS " + _database.Name + " CASCADE;");
 			sb.AppendLine("CREATE SCHEMA " + _database.Name+";");
 			foreach(SQLTable table in _database.Tables.OrderBy(t=>t.ParentNumber)) {
 				table.WriteTable(sb);

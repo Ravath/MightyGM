@@ -205,6 +205,15 @@ namespace DataGenerator {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à {0} : Reference of {1} is incomplete.
+        /// </summary>
+        internal static string NULL_REFERENCE {
+            get {
+                return ResourceManager.GetString("NULL_REFERENCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Table {0} : Name is already used.
         /// </summary>
         internal static string TABLE_DUPLICATE_NAME {

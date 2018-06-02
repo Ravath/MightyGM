@@ -191,7 +191,8 @@ namespace DataGenerator.DataModel.AttributeConvert
 				}
 				else if (datt is DataObjectEnumAttribute de)
 				{
-					LinkReference(dm, de, raw);
+					if (de.Enum == null)//some specific units will already be referenced
+						LinkReference(dm, de, raw);
 				}
 				else
 				{

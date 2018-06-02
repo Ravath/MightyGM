@@ -1,4 +1,7 @@
 
+# Argument 1: The file to generate
+#	The script will look for the files in name relative to 'DataGenerator/bin'
+
 bin="$MIGHTY_GM_DIR/DataGenerator/bin"
 folder="$bin"
 cd "$folder"

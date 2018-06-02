@@ -181,6 +181,10 @@
     <value>Table {0} didn't expect any tag</value>
     <comment>tableName</comment>
   </data>
+  <data name="NULL_REFERENCE" xml:space="preserve">
+    <value>{0} : Reference of {1} is incomplete</value>
+    <comment>context, attribute</comment>
+  </data>
   <data name="TABLE_DUPLICATE_NAME" xml:space="preserve">
     <value>Table {0} : Name is already used</value>
     <comment>tableName</comment>

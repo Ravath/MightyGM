@@ -26,7 +26,14 @@ namespace DataGenerator.Parser {
 		public RawAttribute FindRawAttributeByName(string name)
 		{
 			string ln = name.ToLower();
-			return Attributes.SingleOrDefault(a => a.Name.ToLower() == ln);
+			try
+			{
+				return Attributes.SingleOrDefault(a => a.Name.ToLower() == ln);
+			}catch(Exception e)
+			{
+				ErrorManager.ErrorRef("ERR_DUPLICATE", Name, name);
+				throw e;
+			}
 		}
 	}
 	/// <summary>

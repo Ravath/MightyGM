@@ -1,0 +1,32 @@
+1) Write description of Data using 'MightyData Language'
+
+See MightData languages & definitions
+
+2) Generate
+
+use Script mgTools/DataGen.sh
+	ex: dataGen Yggdrasil.txt"
+
+3) Create a Project in Visual Studio
+ - JDR>Ajouter>Nouveau Projet => Bibliothèque de classes (.NET Framework)
+	(supprimer 'Class1.cs')
+	Il sera nécessaire de renommer le dossier précédemment créé puis de le re-fusionner avec celui créé par VS.
+ - Ajouter les fichiers cs à VS
+	Creer les fichiers correspondant dans visual studio auparavant
+ - Reference>Projet>Core
+ - Reference>Add Ref System.Data.Linq
+ - Add nuget package Link2db
+
+ - Generate The DLL (debug, release, ...)
+ 
+ 4) Creer DB postgres
+ 
+use Script mgTools/schemaGen.sh
+	ex: schemaGen Yggdrasil
+	(mdp : admin)
+	
+ 5) Generate the Excel files using 'mgTools/bin/Debug/mgTools.exe'
+	arg0 : canvas (mgTool cmd name)
+	arg1 : DllPath
+	arg2 : Outpath
+	ex: excelGen Yggdrasil Yggdrasil/ExcelData/Core

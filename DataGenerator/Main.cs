@@ -12,7 +12,7 @@ namespace DataGenerator
 			if(args.Length > 0)
 				reader = new System.IO.StreamReader(args[0]);
 			else {
-				System.Console.WriteLine("File path expected");
+				Console.WriteLine("File path expected");
 				return;
 			}
 
@@ -45,7 +45,7 @@ namespace DataGenerator
 #endif
 			if (ErrorManager.Conclude())
 			{
-				DataModel.Generation gn = new DataModel.Generation();
+				Generation gn = new Generation();
 				gn.Generate(dm);
 
 				Console.WriteLine("Generation Done.");
