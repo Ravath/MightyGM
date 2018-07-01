@@ -1,15 +1,13 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
-using Core.Gestion.Sprites;
 using System.Windows;
 using Core.Contexts;
+using Core.Data;
 
 namespace MightyGmCtrl.Controleurs
 {
@@ -44,40 +42,15 @@ namespace MightyGmCtrl.Controleurs
 			return bi;
 		}
 
-		public Texture2D LoadTexture(GraphicsDevice graphics, string relPath)
-		{
-			if (!GetPath(ref relPath)) { return null; }
-			return Texture2D.FromStream(graphics, File.Open(relPath, FileMode.Open));
-		}
-
-		public BitmapSource GetImageFromSprite(SpriteData selectedSprite)
-		{
-			if (selectedSprite == null || selectedSprite.TextureMap == null)
-				return null;
-			BitmapImage img = LoadImage(selectedSprite.TextureMap.Name);
-			if (img != null)
-			{
-				int w = (int)img.PixelWidth / selectedSprite.TextureMap.Column;
-				int h = (int)img.PixelHeight / selectedSprite.TextureMap.Row;
-				Int32Rect rect = new Int32Rect(
-					selectedSprite.Left * w,
-					selectedSprite.Top * h,
-					(selectedSprite.Right - selectedSprite.Left + 1) * w,
-					(selectedSprite.Bottom - selectedSprite.Top + 1) * h
-				);
-				return new CroppedBitmap(img, rect);
-			}
-			return null;
-		}
-
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="selectedTexture"></param>
 		/// <param name="chosenImage"></param>
 		/// <returns>False if a file Texture directory has to be replaced by new file. The Data has not been added to DB, and file has not been moved.</returns>
-		public Boolean AddToDatabase(TextureMapData selectedTexture, FileInfo chosenImage)
+		public Boolean AddToDatabase(Image selectedTexture, FileInfo chosenImage)
 		{
+			//TODO use filePath, distinct from Name
 			Boolean copy = false;
 			Boolean alreadyExists = false;
 			//if not in the textures directory, copy in Textures diretory

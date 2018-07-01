@@ -32,7 +32,6 @@ namespace MightyGmWPF {
 			xFiches.Content = new TabFiches(Context);
 			xCreators.Content = new TabCreateurs(Context);
 			xParameters.Content = new TabParameters(Context);
-			xRessources.Content = new TabRessources(Context);
 
 			Context.ReportManager.EndOfProcessEvent += EndOfProcessReport;
 		}

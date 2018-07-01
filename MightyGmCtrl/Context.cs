@@ -62,6 +62,10 @@ namespace MightyGmCtrl
 		/// </summary>
 		public DataExport DataExport { get; }
 		/// <summary>
+		/// The Audio Manager of the application.
+		/// </summary>
+		public AudioControl Audio { get; }
+		/// <summary>
 		/// Manages the events and messages from process.
 		/// </summary>
 		public EventsReport ReportManager { get; }
@@ -90,6 +94,7 @@ namespace MightyGmCtrl
 			Textures = new Textures(this);
 			DataImport = new DataImport(this);
 			DataExport = new DataExport(this);
+			Audio = new AudioControl(this);
 			ReportManager = new EventsReport();
 
 			// Events

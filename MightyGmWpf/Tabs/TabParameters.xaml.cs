@@ -1,5 +1,4 @@
-﻿using Core.Gestion;
-using CoreWpf.Dialogs;
+﻿using CoreWpf.Dialogs;
 using MightyGmWPF.GUIcore;
 using LinqToDB;
 using System;
@@ -20,6 +19,7 @@ using System.Windows.Shapes;
 using MightyGmCtrl.Controleurs;
 using Core.Contexts;
 using MightyGmCtrl;
+using Core.Data;
 
 namespace MightyGmWPF.Tabs {
 
@@ -32,13 +32,13 @@ namespace MightyGmWPF.Tabs {
 		private List<string> _assemblies = new List<string>();
 		private List<string> _names = new List<string>();
 		private Scenario _scenario;
-		private Sceance _sceance;
-		private Jdr _jdr;
+		private Session _sceance;
+		private Rpg _jdr;
 		#endregion
 
 		#region Properties
 		public Context Context { get; }
-		public Jdr SelectedJdr {
+		public Rpg SelectedJdr {
 			get {
 				return _jdr;
 			}
@@ -57,9 +57,9 @@ namespace MightyGmWPF.Tabs {
 			get {
 				if(_scenario == null)
 					return null;
-				_scenario.Nom = xScenarioName.Text;
+				_scenario.Name = xScenarioName.Text;
 				_scenario.Synopsis = xSynopsis.Text;
-				_scenario.Jdr = SelectedJdr;
+				_scenario.Rpg = SelectedJdr;
 				return _scenario;
 			}
 			set {
@@ -71,14 +71,14 @@ namespace MightyGmWPF.Tabs {
 				}
 				xgbSceance.IsEnabled = true;
 				xGmName.Text = SelectedScenario?.Gm?.ToString();
-				xScenarioName.Text = value.Nom;
+				xScenarioName.Text = value.Name;
 				xSynopsis.Text = value.Synopsis;
 				UpdateScenarioPlayerList();
 				UpdateSceances();
 			}
 		}
 
-		public Sceance SelectedSceance {
+		public Session SelectedSceance {
 			get {
 				if(_sceance == null)
 					return null;
@@ -98,7 +98,7 @@ namespace MightyGmWPF.Tabs {
 			this.DataContext = this;
 			InitializeComponent();
 			Context = context;
-			xJoueurs.Content = new EditeurListe<Joueur>(context.Data);
+			xJoueurs.Content = new EditeurListe<Player>(context.Data);
 			xJoueurs.MinWidth = 250;
 			UpdateScenarioList();
             xSceanceFiche.ReadOnly = true;
@@ -162,18 +162,18 @@ namespace MightyGmWPF.Tabs {
 			);
 			//trouver jdr avec même nom
 			string jdrName = _names[cb.SelectedIndex];
-			var qj = from c in Context.Data.GetTable<Jdr>()
-					 where c.Nom == jdrName
+			var qj = from c in Context.Data.GetTable<Rpg>()
+					 where c.Name == jdrName
 					 select c;
-			Jdr j = qj.SingleOrDefault();
+			Rpg j = qj.SingleOrDefault();
 			if(j == null) {//si il n'existe pas, le créer.
-				j = new Jdr
+				j = new Rpg
 				{
-					Nom = _names[cb.SelectedIndex]
+					Name = _names[cb.SelectedIndex]
 				};
-				Context.Data.Insert<Jdr>(j);
+				Context.Data.Insert<Rpg>(j);
 				//récupérer pour avoir id et valeurs automatiques
-				j = Context.Data.GetTable<Jdr>().SingleOrDefault(p => p.Nom == _names[cb.SelectedIndex]);
+				j = Context.Data.GetTable<Rpg>().SingleOrDefault(p => p.Name == _names[cb.SelectedIndex]);
 			}
 			SelectedJdr = j;
         }
@@ -188,7 +188,7 @@ namespace MightyGmWPF.Tabs {
 			if(SelectedJdr == null)
 				return;
 			xListScenario.ItemsSource = from c in Context.Data.GetTable<Scenario>()
-										where c.JdrId == SelectedJdr.Id
+										where c.RpgId == SelectedJdr.Id
 										select c;
 		}
 		/// <summary>
@@ -197,17 +197,17 @@ namespace MightyGmWPF.Tabs {
 		private void UpdateScenarioPlayerList() {
 			xPlayersList.ItemsSource = null;
 			if(SelectedScenario != null) {
-				xPlayersList.ItemsSource = SelectedScenario.GetJoueurs();
+				xPlayersList.ItemsSource = SelectedScenario.Players;
 			}
 		}
 		/// <summary>
 		/// parmi les scéances du scénario courant, trouver celle qui n'a pas de date de cloture, et maj avec date actuelle.
 		/// </summary>
 		private void CloseLastSceance() {
-			foreach(Sceance sc in xListSceance.Items) {
-				if(sc.DateFin == null) {
-					sc.CloseSceance();
-					Context.Data.Update<Sceance>(sc);
+			foreach(Session sc in xListSceance.Items) {
+				if(sc.EndSession == null) {
+					sc.EndSession = DateTime.Now;
+					Context.Data.Update<Session>(sc);
 				}
 			}
 		}
@@ -217,7 +217,7 @@ namespace MightyGmWPF.Tabs {
 		private void UpdateSceances() {
 			xListSceance.ItemsSource = null;
 			if(SelectedScenario != null) {
-				xListSceance.ItemsSource = SelectedScenario.GetSceances();
+				xListSceance.ItemsSource = SelectedScenario.Chapters.Select(a=>a.PlayedSessions);
 			}
 		}
 		#endregion
@@ -234,7 +234,7 @@ namespace MightyGmWPF.Tabs {
 			//w.Content = lv;
 			//w.Title = "Players List";
 			//w.ShowDialog();
-			Joueur j = Selectors.GetOne(Context.Data.GetTable<Joueur>());
+			Player j = Selectors.GetOne(Context.Data.GetTable<Player>());
 			SelectedScenario.Gm = j;
 			if(j == null)
 				xGmName.Text = "Personne";
@@ -253,17 +253,22 @@ namespace MightyGmWPF.Tabs {
 			//w.Content = lv;
 			//w.Title = "Players List";
 			//w.ShowDialog();
-			foreach(var j in Selectors.GetMany(Context.Data.GetTable<Joueur>())) {
-				SelectedScenario.AddJoueur((Joueur)j);
-			}
+
+			//Add players to scenario
+			List<Player> pls = new List<Player>(Selectors.GetMany(Context.Data.GetTable<Player>()));
+			pls.AddRange(SelectedScenario.Players);
+			SelectedScenario.Players = pls;
+
 			UpdateScenarioPlayerList();
 		}
 
 		private void RemovePlayerFromScenario( object sender, RoutedEventArgs e ) {
-			Joueur j = xPlayersList.SelectedItem as Joueur;
+			Player j = xPlayersList.SelectedItem as Player;
 			if(j == null)
 				return;
-			SelectedScenario.RemoveJoueur(j);
+			List<Player> pls = new List<Player>(SelectedScenario.Players);
+			pls.Remove(j);
+			SelectedScenario.Players = pls;
 			UpdateScenarioPlayerList();
 		}
 
@@ -276,7 +281,7 @@ namespace MightyGmWPF.Tabs {
 				MessageBox.Show("Must select a Scenario.");
 				return;
 			}
-			SelectedScenario.Delete();
+			Context.Data.Delete(SelectedScenario);
 			SelectedScenario = null;
 			UpdateScenarioPlayerList();
 			UpdateScenarioList();
@@ -299,9 +304,12 @@ namespace MightyGmWPF.Tabs {
 				if(SelectedScenario.Id == 0) {
 					object id = Context.Data.InsertWithIdentity<Scenario>(SelectedScenario);
 					SelectedScenario.Id = Convert.ToInt32(id);
-                    foreach(Joueur item in xPlayersList.Items) {
-						SelectedScenario.AddJoueur(item);
-					}
+
+					//Add Players to scenario
+					List<Player> pl = new List<Player>(SelectedScenario.Players);
+					pl.AddRange(xPlayersList.Items.Cast<Player>());
+					SelectedScenario.Players = pl;
+
 					UpdateScenarioList();
                 } else {
 					Context.Data.Update<Scenario>(SelectedScenario);
@@ -315,7 +323,7 @@ namespace MightyGmWPF.Tabs {
 
 		#region Evénements du panneau des scéances
 		private void SceanceSelected( object sender, SelectionChangedEventArgs e ) {
-			SelectedSceance = xListSceance.SelectedItem as Sceance;
+			SelectedSceance = xListSceance.SelectedItem as Session;
 		}
 
 		private void NewSceance( object sender, RoutedEventArgs e ) {
@@ -324,16 +332,10 @@ namespace MightyGmWPF.Tabs {
 				MessageBox.Show("You Must Select a Scenario.");
 				return;
 			}
-			Sceance sc = new Sceance
-			{
-				Nom = Prompt.ShowDialog("Sceance Title", "title")
-			};
-			if (string.IsNullOrWhiteSpace(sc.Nom))
-				return;
+			Session sc = new Session();
 			SelectedSceance = sc;
-			sc.Scenario = SelectedScenario;
 			try {
-				Context.Data.Insert<Sceance>(sc);
+				Context.Data.Insert<Session>(sc);
 			} catch(Exception ex) {
 				MessageBox.Show(ex.Message);
 				SelectedSceance = null;

@@ -32,8 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="linq2db, Version=1.10.2.0, Culture=neutral, PublicKeyToken=f19f8aed7feff67e, processorArchitecture=MSIL">
-      <HintPath>..\packages\linq2db.1.10.2\lib\net45\linq2db.dll</HintPath>
+    <Reference Include="linq2db, Version=2.0.0.0, Culture=neutral, PublicKeyToken=e41013125f9e410a, processorArchitecture=MSIL">
+      <HintPath>..\packages\linq2db.2.0.0\lib\net45\linq2db.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -79,14 +79,27 @@
     <Compile Include="Engine\Values.cs" />
     <Compile Include="Engine\WearableModule.cs" />
     <Compile Include="Engine\XP.cs" />
-    <Compile Include="Gestion\Joueur.cs" />
-    <Compile Include="Gestion\Sceance.cs" />
-    <Compile Include="Gestion\Scenario.cs" />
-    <Compile Include="Gestion\ScenarioJointureJoueur.cs" />
-    <Compile Include="Gestion\Sprites\SpriteData.cs" />
-    <Compile Include="Gestion\Sprites\SpriteType.cs" />
-    <Compile Include="Gestion\Sprites\TextureMapData.cs" />
     <Compile Include="Contexts\IContext.cs" />
+    <Compile Include="Generated\Chapter.cs" />
+    <Compile Include="Generated\Document.cs" />
+    <Compile Include="Generated\Enum.cs" />
+    <Compile Include="Generated\FilteredTrack.cs" />
+    <Compile Include="Generated\Graph.cs" />
+    <Compile Include="Generated\Handbook.cs" />
+    <Compile Include="Generated\HandbookReference.cs" />
+    <Compile Include="Generated\Image.cs" />
+    <Compile Include="Generated\Jointures.cs" />
+    <Compile Include="Generated\Map.cs" />
+    <Compile Include="Generated\Paragraph.cs" />
+    <Compile Include="Generated\Player.cs" />
+    <Compile Include="Generated\Playlist.cs" />
+    <Compile Include="Generated\Ressource.cs" />
+    <Compile Include="Generated\Rpg.cs" />
+    <Compile Include="Generated\Scenario.cs" />
+    <Compile Include="Generated\Session.cs" />
+    <Compile Include="Generated\SoundFilter.cs" />
+    <Compile Include="Generated\Soundtrack.cs" />
+    <Compile Include="Generated\Tag.cs" />
     <Compile Include="Map\2DPosition.cs" />
     <Compile Include="Map\Abs2DMap.cs" />
     <Compile Include="Map\Discrete2DGrid.cs" />
@@ -104,8 +117,6 @@
     <Compile Include="Types\Poids.cs" />
     <Compile Include="Types\Range.cs" />
     <Compile Include="Dice\Roll.cs" />
-    <Compile Include="Gestion\Jdr.cs" />
-    <Compile Include="Gestion\Manuel.cs" />
     <Compile Include="Data\DataModel.cs" />
     <Compile Include="DocNamespace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
