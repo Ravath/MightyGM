@@ -90,6 +90,8 @@ namespace DataGenerator.CSharp
 				return "string";
 				case CSValueEnum.Bool:
 				return "bool";
+				case CSValueEnum.Datetime:
+				return "DateTime";
 				default:
 				return "TypeNotFound";
 			}

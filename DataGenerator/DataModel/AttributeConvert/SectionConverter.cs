@@ -64,6 +64,8 @@ namespace DataGenerator.DataModel.AttributeConvert
 		public override void AddAttribute(DataEntity entity, DataEntityAttribute att, RawAttribute raw)
 		{
 			DataObject e = (DataObject)entity;
+			if (raw.Section == null)
+				raw.Section = "";
 			switch (raw.Section.ToLower())
 			{
 				case "":

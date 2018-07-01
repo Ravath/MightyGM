@@ -5,6 +5,6 @@
 	/// </summary>
 	public enum CSValueEnum
 	{
-		Int, Float, Decimal, Double, String, Bool
+		Int, Float, Decimal, Double, String, Bool, Datetime
 	}
 }

@@ -137,6 +137,10 @@ namespace DataGenerator.DataModel.AttributeConvert
 					HasTypeTag(entity, raw);
 					result = new DataObjectEnumAttribute(raw.Name);
 					break;
+				case "timestamp":
+					NoTypeTag(entity, raw);
+					result = new DataObjectTimestampAttribute(raw.Name);
+					break;
 				default:
 					ErrorManager.ErrorRef("ATT_UNKNOWN_TYPE", entity.Name, attName, raw.Type);
 					break;

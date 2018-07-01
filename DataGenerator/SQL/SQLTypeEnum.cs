@@ -5,6 +5,6 @@
 	/// </summary>
 	public enum SQLTypeEnum
 	{
-		Int, Char, Serial, Text, Deci, Real, Bool
+		Int, Char, Serial, Text, Deci, Real, Bool, Timestamp
 	}
 }

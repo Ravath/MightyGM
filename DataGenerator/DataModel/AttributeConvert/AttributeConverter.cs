@@ -9,10 +9,10 @@ namespace DataGenerator.DataModel.AttributeConvert
 	public class AttributeConverter
 	{
 		public AbsSectionConverter			SectionConverter		{ get; set; }
-		public AbsTypeConverter			TypeConverter			{ get; set; }
-		public AbsNameConverter			NameConverter			{ get; set; }
+		public AbsTypeConverter				TypeConverter			{ get; set; }
+		public AbsNameConverter				NameConverter			{ get; set; }
 		public AbsCardinalityConverter		CardinalityConverter	{ get; set; }
-		public AbsTargetConverter ReflexReferenceConverter { get; set; }
+		public AbsTargetConverter			ReflexReferenceConverter { get; set; }
 
 		/// <summary>
 		/// Add the given RawAttribute to the given DataEntity.

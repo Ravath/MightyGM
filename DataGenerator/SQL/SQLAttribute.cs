@@ -84,6 +84,8 @@ namespace DataGenerator.SQL
 				return "double precision";
 				case SQLTypeEnum.Bool:
 				return "bool";
+				case SQLTypeEnum.Timestamp:
+				return "timestamp(6)";
 				default:
 				return "Not Implemented";
 			}

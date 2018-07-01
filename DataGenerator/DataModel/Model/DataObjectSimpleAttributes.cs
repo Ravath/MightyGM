@@ -116,4 +116,17 @@ namespace DataGenerator.DataModel.Model
 			return TypeName + "(" + Enum.Name + ")";
 		}
 	}
+
+
+	public class DataObjectTimestampAttribute : DataObjectSimpleAttribute
+	{
+		public DataObjectTimestampAttribute(string name) : base(name) { TypeName = "timestamp"; }
+
+		protected override SQLTypeEnum GetSqlType() { return SQLTypeEnum.Timestamp; }
+
+		protected override CSValueAttribute GetSimpleAttribute(Generation generation, CSClass cs)
+		{
+			return new CSValueAttribute(this) { Type = CSValueEnum.Datetime };
+		}
+	}
 }
