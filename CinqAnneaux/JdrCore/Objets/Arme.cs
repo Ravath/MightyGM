@@ -25,7 +25,7 @@ namespace CinqAnneaux.JdrCore.Objets {
 			get { return _specs; }
 		}
 
-		#region Arcs
+		#region Special Distance
 		public decimal Portee { get; private set; }
 		public int Force { get; private set; }
 		public int ForceRequise { get; private set; }
@@ -40,43 +40,10 @@ namespace CinqAnneaux.JdrCore.Objets {
 			ArmeSamurai = model.Samurai;
 			ArmePaysan = model.Paysan;
 			Brisee = false;
-			/* arcs */
-			Portee = model.Portee ?? -1;
-			Force = model.Force ?? -1;
-			ForceRequise = model.ForceRequise;
-			/* add weapon category special features */
-			switch(model.Type) {
-				// Todo add weapon category special features
-				case TypeArme.Fleche:
-				break;
-				case TypeArme.Arc:
-				break;
-				case TypeArme.Chaine:
-				break;
-				case TypeArme.Hast:
-				break;
-				case TypeArme.Ninjutsu:
-				break;
-				case TypeArme.Lourde:
-				break;
-				case TypeArme.Baton:
-				break;
-				case TypeArme.Couteau:
-				Portee = 6;
-				break;
-				case TypeArme.Eventail:
-				break;
-				case TypeArme.Lance:
-				break;
-				case TypeArme.Sabre:
-				break;
-				default:
-				break;
-			}
 			//get specials
 			foreach (SpecialObjetExemplar sp in model.Special)
 			{
-				_specs.Add(SpecialImplementation.Get(sp));
+				_specs.Add(SpecialImplementation.Instanciate(sp));
 			}
 		}
 

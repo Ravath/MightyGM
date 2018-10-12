@@ -14,9 +14,10 @@ namespace CinqAnneaux.JdrCore.Competences {
 
 		#region Members
 		private string _nom;
-		private Value _rank = new Value(0);
+		private Value _rank = new Value(0) { Label = "Rang" };
 		private RollAndKeep _pool;
 		private Attribut _att;
+		private IndirectValue _keepValue = new IndirectValue(new Value(0)) { Label = "Attribut" };
 		private List<Specialisation> _specialite = new List<Specialisation>();
 		private List<Maitrise> _maitrise = new List<Maitrise>();
 		private GroupeCompetence _groupe;
@@ -80,7 +81,7 @@ namespace CinqAnneaux.JdrCore.Competences {
 		#endregion
 
 		#region Init
-		public Competence() { _pool = new RollAndKeep(_rank, new Value(0)); }
+		public Competence() { _pool = new RollAndKeep(_rank, _keepValue); }
 		/// <summary>
 		/// Set the attribute used for this competence.
 		/// </summary>
@@ -89,15 +90,14 @@ namespace CinqAnneaux.JdrCore.Competences {
 			if(_att == attribut) { return; }
 			/* remove former */
 			if(_att != null) {
-				_pool.KeepValue.RemoveModifier(_att);
 				_pool.RollValue.RemoveModifier(_att);
 			}
 			/* set */
 			_att = attribut;
+			_keepValue.SetValue(_att);
 			/* add new */
-			if(attribut != null)
+			if (attribut != null)
 			{
-				_pool.KeepValue.AddModifier(_att);
 				_pool.RollValue.AddModifier(_att);
 			}
 		}

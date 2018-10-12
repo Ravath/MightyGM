@@ -31,8 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="linq2db, Version=1.10.2.0, Culture=neutral, PublicKeyToken=f19f8aed7feff67e, processorArchitecture=MSIL">
-      <HintPath>..\packages\linq2db.1.10.2\lib\net45\linq2db.dll</HintPath>
+    <Reference Include="linq2db, Version=2.1.0.0, Culture=neutral, PublicKeyToken=e41013125f9e410a, processorArchitecture=MSIL">
+      <HintPath>..\packages\linq2db.2.1.0\lib\net45\linq2db.dll</HintPath>
     </Reference>
     <Reference Include="Npgsql">
       <HintPath>..\..\JDR_Data\packages\Npgsql.3.0.5\lib\net45\Npgsql.dll</HintPath>
@@ -55,26 +55,33 @@
     <Compile Include="Generated\AbsAvantage.cs" />
     <Compile Include="Generated\AbsObjet.cs" />
     <Compile Include="Generated\AbsSort.cs" />
+    <Compile Include="Generated\ActionCombat.cs" />
     <Compile Include="Generated\Ancetre.cs" />
     <Compile Include="Generated\ApprentissageOptionnel.cs" />
     <Compile Include="Generated\Arme.cs" />
     <Compile Include="Generated\Armure.cs" />
-    <Compile Include="Generated\AttaqueCreature.cs" />
+    <Compile Include="Generated\AttaqueFigurant.cs" />
     <Compile Include="Generated\AugmentationSort.cs" />
     <Compile Include="Generated\Avantage.cs" />
     <Compile Include="Generated\Clan.cs" />
+    <Compile Include="Generated\CombatCondition.cs" />
     <Compile Include="Generated\Competence.cs" />
     <Compile Include="Generated\CompetenceGlobale.cs" />
     <Compile Include="Generated\CompetenceStatus.cs" />
-    <Compile Include="Generated\Condition.cs" />
-    <Compile Include="Generated\Creature.cs" />
+    <Compile Include="Generated\ConditionAdmission.cs" />
     <Compile Include="Generated\Desavantage.cs" />
     <Compile Include="Generated\Ecole.cs" />
     <Compile Include="Generated\EcoleAvancee.cs" />
     <Compile Include="Generated\Enum.cs" />
     <Compile Include="Generated\EquipementOptionnel.cs" />
     <Compile Include="Generated\Famille.cs" />
+    <Compile Include="Generated\Figurant.cs" />
+    <Compile Include="Generated\GainGloire.cs" />
+    <Compile Include="Generated\GloireInfo.cs" />
     <Compile Include="Generated\GroupeAvantage.cs" />
+    <Compile Include="Generated\HonneurInfo.cs" />
+    <Compile Include="Generated\InfamieInfo.cs" />
+    <Compile Include="Generated\InfoTable.cs" />
     <Compile Include="Generated\Intrigue.cs" />
     <Compile Include="Generated\Jointures.cs" />
     <Compile Include="Generated\Kata.cs" />
@@ -84,17 +91,22 @@
     <Compile Include="Generated\Objet.cs" />
     <Compile Include="Generated\OpportuniteHeroique.cs" />
     <Compile Include="Generated\Personnage.cs" />
-    <Compile Include="Generated\PJ.cs" />
-    <Compile Include="Generated\PouvoirCreature.cs" />
+    <Compile Include="Generated\PersonnageJoueur.cs" />
+    <Compile Include="Generated\PouvoirNaturel.cs" />
     <Compile Include="Generated\PouvoirOutremonde.cs" />
+    <Compile Include="Generated\SeuilBlessure.cs" />
     <Compile Include="Generated\Sort.cs" />
     <Compile Include="Generated\Specialisation.cs" />
     <Compile Include="Generated\SpecialObjet.cs" />
+    <Compile Include="Generated\StatutInfo.cs" />
+    <Compile Include="Generated\TableHeritage.cs" />
+    <Compile Include="Generated\TableHeritageConsequences.cs" />
+    <Compile Include="Generated\TatouageTogashi.cs" />
     <Compile Include="Generated\Technique.cs" />
     <Compile Include="Generated\TechniqueAvancee.cs" />
     <Compile Include="Generated\VoieAlternative.cs" />
     <Compile Include="JdrCore\Agent\Agent.cs" />
-    <Compile Include="JdrCore\Agent\Creature.cs" />
+    <Compile Include="JdrCore\Agent\Figurant.cs" />
     <Compile Include="JdrCore\Agent\EtatCivilRokugan.cs" />
     <Compile Include="JdrCore\Agent\Personnage.cs" />
     <Compile Include="JdrCore\Agent\SeuilVie.cs" />
@@ -114,7 +126,10 @@
     <Compile Include="JdrCore\Capacites\KihoImplementer.cs" />
     <Compile Include="JdrCore\Capacites\Sort.cs" />
     <Compile Include="JdrCore\Capacites\SortImplementer.cs" />
+    <Compile Include="JdrCore\Competences\CompetenceOptionnelleInstaciator.cs" />
+    <Compile Include="JdrCore\Competences\CompetenceOptionnelle.cs" />
     <Compile Include="JdrCore\Ecoles\Clan.cs" />
+    <Compile Include="JdrCore\Ecoles\ConditionAdmissionImplementation.cs" />
     <Compile Include="JdrCore\Ecoles\Ecole.cs" />
     <Compile Include="JdrCore\Ecoles\Famille.cs" />
     <Compile Include="JdrCore\Ecoles\ListeEcoles.cs" />
@@ -126,6 +141,7 @@
     <Compile Include="JdrCore\MassCombat\MassCombatFighter.cs" />
     <Compile Include="JdrCore\MassCombat\TurnResult.cs" />
     <Compile Include="JdrCore\Objets\ObjectSpecialImplementation.cs" />
+    <Compile Include="JdrCore\Objets\OptEquipmentImplementation.cs" />
     <Compile Include="JdrCore\Traits\AvantageImplementation.cs" />
     <Compile Include="JdrCore\Traits\GeneralTrait.cs" />
     <Compile Include="JdrCore\Traits\PouvoirOutremonde.cs" />
@@ -144,8 +160,8 @@
     <Compile Include="JdrCore\Traits\Avantage.cs" />
     <Compile Include="JdrCore\Traits\ListesTraits.cs" />
     <Compile Include="JdrCore\Traits\TechniqueImplementation.cs" />
-    <Compile Include="JdrCore\Traits\TraitCreature.cs" />
-    <Compile Include="JdrCore\Traits\TraitCreatureImplementation.cs" />
+    <Compile Include="JdrCore\Traits\PouvoirNaturel.cs" />
+    <Compile Include="JdrCore\Traits\PouvoirNaturelImplementation.cs" />
     <Compile Include="JdrCore\ValeurMonetaire.cs" />
     <Compile Include="Langues\Fr.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -163,25 +179,32 @@
     <Compile Include="userMade\AbsAvantage.cs" />
     <Compile Include="userMade\AbsObjet.cs" />
     <Compile Include="userMade\AbsSort.cs" />
+    <Compile Include="userMade\ActionCombat.cs" />
     <Compile Include="userMade\Ancetre.cs" />
     <Compile Include="userMade\ApprentissageOptionnel.cs" />
     <Compile Include="userMade\Arme.cs" />
     <Compile Include="userMade\Armure.cs" />
-    <Compile Include="userMade\AttaqueCreature.cs" />
+    <Compile Include="userMade\AttaqueFigurant.cs" />
     <Compile Include="userMade\AugmentationSort.cs" />
     <Compile Include="userMade\Avantage.cs" />
     <Compile Include="userMade\Clan.cs" />
+    <Compile Include="userMade\CombatCondition.cs" />
     <Compile Include="userMade\Competence.cs" />
     <Compile Include="userMade\CompetenceGlobale.cs" />
     <Compile Include="userMade\CompetenceStatus.cs" />
-    <Compile Include="userMade\Condition.cs" />
-    <Compile Include="userMade\Creature.cs" />
+    <Compile Include="userMade\ConditionAdmission.cs" />
     <Compile Include="userMade\Desavantage.cs" />
     <Compile Include="userMade\Ecole.cs" />
     <Compile Include="userMade\EcoleAvancee.cs" />
     <Compile Include="userMade\EquipementOptionnel.cs" />
     <Compile Include="userMade\Famille.cs" />
+    <Compile Include="userMade\Figurant.cs" />
+    <Compile Include="userMade\GainGloire.cs" />
+    <Compile Include="userMade\GloireInfo.cs" />
     <Compile Include="userMade\GroupeAvantage.cs" />
+    <Compile Include="userMade\HonneurInfo.cs" />
+    <Compile Include="userMade\InfamieInfo.cs" />
+    <Compile Include="userMade\InfoTable.cs" />
     <Compile Include="userMade\Intrigue.cs" />
     <Compile Include="userMade\Kata.cs" />
     <Compile Include="userMade\Kiho.cs" />
@@ -190,12 +213,17 @@
     <Compile Include="userMade\Objet.cs" />
     <Compile Include="userMade\OpportuniteHeroique.cs" />
     <Compile Include="userMade\Personnage.cs" />
-    <Compile Include="userMade\PJ.cs" />
-    <Compile Include="userMade\PouvoirCreature.cs" />
+    <Compile Include="userMade\PersonnageJoueur.cs" />
+    <Compile Include="userMade\PouvoirNaturel.cs" />
     <Compile Include="userMade\PouvoirOutremonde.cs" />
+    <Compile Include="userMade\SeuilBlessure.cs" />
     <Compile Include="userMade\Sort.cs" />
     <Compile Include="userMade\Specialisation.cs" />
     <Compile Include="userMade\SpecialObjet.cs" />
+    <Compile Include="userMade\StatutInfo.cs" />
+    <Compile Include="userMade\TableHeritage.cs" />
+    <Compile Include="userMade\TableHeritageConsequences.cs" />
+    <Compile Include="userMade\TatouageTogashi.cs" />
     <Compile Include="userMade\Technique.cs" />
     <Compile Include="userMade\TechniqueAvancee.cs" />
     <Compile Include="userMade\VoieAlternative.cs" />

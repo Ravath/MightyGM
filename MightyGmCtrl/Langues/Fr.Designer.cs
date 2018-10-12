@@ -70,7 +70,7 @@ namespace MightyGmCtrl.Langues {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Ne peux pas convertir la valeur {0} en {1}.
+        ///   Recherche une chaîne localisée semblable à Ne peux pas convertir la valeur &apos;{0}&apos; en {1}.
         /// </summary>
         internal static string CANT_CONVERT {
             get {
@@ -88,7 +88,7 @@ namespace MightyGmCtrl.Langues {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Un objet DataModel a été trouvé sans nom renseigné pour le type {0}.
+        ///   Recherche une chaîne localisée semblable à Un objet DataModel a été trouvé sans nom renseigné pour le type &apos;{0}&apos;.
         /// </summary>
         internal static string DATAMOD_NO_NAME {
             get {
@@ -97,7 +97,7 @@ namespace MightyGmCtrl.Langues {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Un objet DataModel a été trouvé sans tagrenseigné pour le type {0}.
+        ///   Recherche une chaîne localisée semblable à Un objet DataModel a été trouvé sans tag renseigné pour le type &apos;{0}&apos;.
         /// </summary>
         internal static string DATAMOD_NO_TAG {
             get {
@@ -115,7 +115,7 @@ namespace MightyGmCtrl.Langues {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Import : {0}.
+        ///   Recherche une chaîne localisée semblable à Import : &apos;{0}&apos;.
         /// </summary>
         internal static string IMPORT {
             get {
@@ -124,7 +124,7 @@ namespace MightyGmCtrl.Langues {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Erreur : N&apos;a pas trouvé la feuille Excel {0}.
+        ///   Recherche une chaîne localisée semblable à Erreur : N&apos;a pas trouvé la feuille Excel &apos;{0}&apos;.
         /// </summary>
         internal static string IMPORT_ERROR_NO_SHEET {
             get {
@@ -142,7 +142,7 @@ namespace MightyGmCtrl.Langues {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Il faut d&apos;abor sélectionner un type pour pouvoir effectuer cette opération..
+        ///   Recherche une chaîne localisée semblable à Il faut d&apos;abord sélectionner un type pour pouvoir effectuer cette opération..
         /// </summary>
         internal static string MUST_SELECT_TYPE {
             get {
@@ -151,7 +151,7 @@ namespace MightyGmCtrl.Langues {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Le nom &quot;{0}&quot; existe déjà dans la base de donnée pour le type {1}.
+        ///   Recherche une chaîne localisée semblable à Le nom &apos;{0}&apos; existe déjà dans la base de donnée pour le type &apos;{1}&apos;..
         /// </summary>
         internal static string NAME_ALREADY_IN_DATABASE {
             get {
@@ -160,7 +160,7 @@ namespace MightyGmCtrl.Langues {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à {0} erreurs ont été trouvées.
+        ///   Recherche une chaîne localisée semblable à {0} erreurs ont été trouvées..
         /// </summary>
         internal static string NBR_ERROR_FOUND {
             get {
@@ -169,7 +169,7 @@ namespace MightyGmCtrl.Langues {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Le tag {0} n&apos;a pas été trouvé pour le type {1}.
+        ///   Recherche une chaîne localisée semblable à Le tag &apos;{0}&apos; n&apos;a pas été trouvé pour le type &apos;{1}&apos;..
         /// </summary>
         internal static string NO_TAG {
             get {
@@ -178,7 +178,7 @@ namespace MightyGmCtrl.Langues {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à La fonction n&apos;a pas été implémentée.
+        ///   Recherche une chaîne localisée semblable à La fonction n&apos;a pas été implémentée..
         /// </summary>
         internal static string NOT_IMPLEMENTED {
             get {
@@ -187,7 +187,7 @@ namespace MightyGmCtrl.Langues {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Le fichier {0} n&apos;a pas été trouvé..
+        ///   Recherche une chaîne localisée semblable à Le fichier &apos;{0}&apos; n&apos;a pas été trouvé..
         /// </summary>
         internal static string RESSOURCE_NOT_FOUND {
             get {
@@ -205,7 +205,16 @@ namespace MightyGmCtrl.Langues {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à La Dll d&apos;extention graphique {0} n&apos;a pas été trouvée..
+        ///   Recherche une chaîne localisée semblable à Un problème est survenu lors de la recherche de la propriété &apos;{0}&apos; de la classe &apos;{1}&apos;..
+        /// </summary>
+        internal static string TYPE_PROP_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("TYPE_PROP_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à La Dll d&apos;extention graphique &apos;{0}&apos; n&apos;a pas été trouvée..
         /// </summary>
         internal static string UI_DLL_NOT_FOUND {
             get {
@@ -214,7 +223,7 @@ namespace MightyGmCtrl.Langues {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à La Dll d&apos;extention graphique {0} n&apos;a pas pu être chargée..
+        ///   Recherche une chaîne localisée semblable à La Dll d&apos;extention graphique &apos;{0}&apos; n&apos;a pas pu être chargée..
         /// </summary>
         internal static string UI_DLL_NOT_LOADED {
             get {

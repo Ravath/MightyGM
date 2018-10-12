@@ -22,14 +22,14 @@ namespace CinqAnneaux.JdrCore.Attaques {
 		public RollAndKeep Degats { get; private set; }
 		public Data.Action Action { get; private set; }
 
-		public AttaqueCreature(Data.AttaqueCreature att) {
+		public AttaqueCreature(Data.AttaqueFigurant att) {
 			SetAttaqueCreature(att);
         }
 
-		public void SetAttaqueCreature( Data.AttaqueCreature att )
+		public void SetAttaqueCreature( Data.AttaqueFigurant att )
 		{
-			JetAttaque = new RollAndKeep(att.xgToucher, att.gxToucher);
-			Degats = new RollAndKeep(att.xgDegats, att.gxDegats);
+			JetAttaque = new RollAndKeep(att.Toucher_r, att.Toucher_k);
+			Degats = new RollAndKeep(att.Degats_r, att.Degats_k);
 			Action = att.Action;
 			Name = att.Name;
 		}

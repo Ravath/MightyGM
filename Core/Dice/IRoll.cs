@@ -44,6 +44,11 @@ namespace Core.Dice
 		/// </summary>
 		/// <returns></returns>
 		List<DiceResult> Roll();
+		/// <summary>
+		/// Get the macro formula associated with this operation.
+		/// </summary>
+		/// <returns></returns>
+		string ToMacro();
 	}
 
 	/// <summary>
@@ -74,6 +79,73 @@ namespace Core.Dice
 			}
 			return _result;
 		}
+
+		public string ToMacro()
+		{
+			return NbrDice.TotalValue + "d" + NbrFace;
+		}
+	}
+	
+	/// <summary>
+	/// A Pool of dice to roll. The result is the sum of every kept die.
+	/// </summary>
+	public class Intervalle : IRoll
+	{
+		private List<DiceResult> _result = new List<DiceResult>();
+
+		private Value _nbrDice = new Value(1);
+		public IValue NbrDice { get { return _nbrDice; } }
+		public int NbrFace { get { return Max.TotalValue - Min.TotalValue; } }
+		public int NetResult { get { return _result.Sum(a => a.kept ? a.result : 0); } }
+		public IEnumerable<DiceResult> Result { get { return _result; } }
+
+		public IValue Min { get; set; }
+		public IValue Max { get; set; }
+
+		public Intervalle(IValue min, IValue max) {
+			Min = min;
+			Max = max;
+		}
+		public Intervalle(int min, int max) : this(new Value(min), new Value(max)) { }
+
+		public List<DiceResult> Roll()
+		{
+			_result.Clear();
+			// Order min & max values
+			int min = Min.TotalValue;
+			int max = Max.TotalValue;
+			if (max < min)
+			{
+				int t = max;
+				max = min;
+				min = t;
+			}
+			// Do the random
+			_result.Add(new DiceResult()
+			{
+				result = Dice.Roll.Interval(min, max),
+				kept = true
+			});
+			// Return
+			return _result;
+		}
+
+		public string ToMacro()
+		{
+			int min = Min.TotalValue, max = Max.TotalValue;
+			if(min == max)
+			{
+				return min+"";
+			}
+			else if (min<max)
+			{
+				return min + ":" + max;
+			}
+			else
+			{
+				return max + ":" + min;
+			}
+		}
 	}
 
 	/// <summary>
@@ -81,6 +153,9 @@ namespace Core.Dice
 	/// </summary>
 	public abstract class RollResult : IRoll
 	{
+		protected static char UpperChar = 'h';
+		protected static char LowerChar = 'l';
+
 		public IRoll Prev { get; set; }
 		public int NbrFace { get { return Prev.NbrFace; } }
 		public virtual int NetResult { get { return Prev.NetResult; } }
@@ -92,12 +167,19 @@ namespace Core.Dice
 		}
 
 		public virtual List<DiceResult> Roll() { return Prev.Roll(); }
+
+		public abstract string ToMacro();
 	}
 
 	public class CountOp : RollResult
 	{
 		public CountOp(IRoll prev) : base(prev) {}
 		public override int NetResult { get { return Result.Count(r=>r.kept); } }
+
+		public override string ToMacro()
+		{
+			return Prev.ToMacro()+"c";
+		}
 	}
 
 	public class AddOp : RollResult
@@ -106,6 +188,14 @@ namespace Core.Dice
 		public AddOp(IRoll prev, Value add) : base(prev) { Bonus = add; }
 		public AddOp(IRoll prev, int add) : this(prev, new Value(add)) {}
 		public override int NetResult { get { return Prev.NetResult+Bonus.TotalValue; } }
+
+		public override string ToMacro()
+		{
+			int b = Bonus.TotalValue;
+			if (b > 0) { return Prev.ToMacro() + "+" + b; }
+			else if (b<0) { return Prev.ToMacro() + "-" + (-b); }
+			else /* b==0 */ { return Prev.ToMacro(); }
+		}
 	}
 
 	public abstract class IndividualFilterOp : RollResult
@@ -140,6 +230,10 @@ namespace Core.Dice
 		{
 			return result.result >= Threshold;
 		}
+		public override string ToMacro()
+		{
+			return Prev.ToMacro() + ">=" + Threshold; 
+		}
 	}
 
 	public class KeepLowerThan : KeepThreshold
@@ -148,6 +242,10 @@ namespace Core.Dice
 		public override bool Keep(DiceResult result)
 		{
 			return result.result <= Threshold;
+		}
+		public override string ToMacro()
+		{
+			return Prev.ToMacro() + "<=" + Threshold;
 		}
 	}
 
@@ -167,13 +265,17 @@ namespace Core.Dice
 
 	public abstract class KeepDiceNumber : GeneralFilterOp
 	{
+		/// <summary>
+		/// The number of dice to keep.
+		/// </summary>
 		public IValue Number { get; set; }
 		public KeepDiceNumber(IRoll prev, IValue number) : base(prev) { Number = number; }
 	}
 
 	public class KeepHighestDice : KeepDiceNumber
 	{
-		public KeepHighestDice(IRoll prev, IValue number) : base(prev, number) {}
+		public KeepHighestDice(IRoll prev, IValue number) : base(prev, number) { }
+		public KeepHighestDice(IRoll prev, int number) : base(prev, new Value(number)) { }
 
 		public override void Filter(IEnumerable<DiceResult> enumerable)
 		{
@@ -183,11 +285,17 @@ namespace Core.Dice
 				sorted.ElementAt(i).kept = false;
 			}
 		}
+
+		public override string ToMacro()
+		{
+			return Prev.ToMacro() + "h" + Number.TotalValue;
+		}
 	}
 
 	public class KeepLowestDice : KeepDiceNumber
 	{
 		public KeepLowestDice(IRoll prev, IValue number) : base(prev, number) { }
+		public KeepLowestDice(IRoll prev, int number) : base(prev, new Value(number)) { }
 
 		public override void Filter(IEnumerable<DiceResult> enumerable)
 		{
@@ -197,13 +305,19 @@ namespace Core.Dice
 				sorted.ElementAt(i).kept = false;
 			}
 		}
+
+		public override string ToMacro()
+		{
+			return Prev.ToMacro() + "l" + Number.TotalValue;
+		}
 	}
 
 	public abstract class ReRollOp : RollResult
 	{
 		public bool RerollOnce { get; set; }
+		public bool DiscardPrevious { get; set; }
 
-		public ReRollOp(IRoll prev) : base(prev) { RerollOnce = false; }
+		public ReRollOp(IRoll prev) : base(prev) { RerollOnce = false; DiscardPrevious = true; }
 
 		public override List<DiceResult> Roll()
 		{
@@ -215,7 +329,8 @@ namespace Core.Dice
 				{
 					if (DoReroll(res[i]))
 					{
-						res[i].kept = false;
+						if(DiscardPrevious)
+							res[i].kept = false;
 						res.Add(new DiceResult()
 						{
 							kept = true,
@@ -234,18 +349,29 @@ namespace Core.Dice
 	{
 		public int Threshold { get; set; }
 		public RerollThreshold(IRoll prev, int threshold) : base(prev) { Threshold = threshold; }
+
+		public override string ToMacro()
+		{
+			char op = 'a';
+			if (DiscardPrevious) op = 'r';
+			if (!RerollOnce) op = Char.ToUpper(op);
+			return Prev.ToMacro() + op + GetComplChar + Threshold;
+		}
+		protected abstract char GetComplChar { get; }
 	}
 
 	public class RerollHigherThan : RerollThreshold
 	{
 		public RerollHigherThan(IRoll prev, int threshold) : base(prev, threshold) {}
 		public override bool DoReroll(DiceResult res){ return res.result >= Threshold; }
+		protected override char GetComplChar { get { return RollResult.UpperChar; } }
 	}
 
 	public class RerollLowerThan : RerollThreshold
 	{
 		public RerollLowerThan(IRoll prev, int threshold) : base(prev, threshold) { }
 		public override bool DoReroll(DiceResult res) { return res.result <= Threshold; }
+		protected override char GetComplChar { get { return RollResult.LowerChar; } }
 	}
 
 	public abstract class ExplodeOp : RollResult
@@ -283,16 +409,28 @@ namespace Core.Dice
 	{
 		public int Threshold { get; set; }
 		public ExplodeThreshold(IRoll prev, int threshold) : base(prev) { Threshold = threshold; }
+
+		public override string ToMacro()
+		{
+			char op = 'e';
+			if (!RerollOnce) op = Char.ToUpper(op);
+			return Prev.ToMacro() + op + GetComplChar + Threshold;
+		}
+		protected abstract char GetComplChar { get; }
 	}
+
 	public class ExplodeHigherThan : ExplodeThreshold
 	{
 		public ExplodeHigherThan(IRoll prev, int threshold) : base(prev, threshold) {}
 		public override bool DoReroll(int diceResult, int nbrofReroll){ return diceResult >= Threshold; }
+		protected override char GetComplChar { get { return RollResult.UpperChar; } }
 	}
+
 	public class ExplodeLowerThan : ExplodeThreshold
 	{
 		public ExplodeLowerThan(IRoll prev, int threshold) : base(prev, threshold) { }
 		public override bool DoReroll(int diceResult, int nbrofReroll) { return diceResult <= Threshold; }
+		protected override char GetComplChar { get { return RollResult.LowerChar; } }
 	}
 
 	/// <summary>
@@ -314,6 +452,18 @@ namespace Core.Dice
 			else
 			{
 				return Prev.Roll();
+			}
+		}
+
+		public override string ToMacro()
+		{
+			if (DoOp)
+			{
+				return Prev.ToMacro() + Option.ToMacro();
+			}
+			else
+			{
+				return Prev.ToMacro();
 			}
 		}
 	}

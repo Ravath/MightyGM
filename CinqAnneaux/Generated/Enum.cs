@@ -56,10 +56,16 @@ namespace CinqAnneaux.Data {
 	public enum Monnaie{
 		Zeni, Bu, Koku}
 
+	public enum ObjectType{
+		Divers, Vetement, Service, Suivant}
+
 	public enum TypePouvoirOutremonde{
 		Mutation, Mineur, Majeur, Akutenshi}
 
-	public enum TypeCreature{
-		Naturelle, Monstre, PNJ}
+	public enum TypeActionCombat{
+		Gratuite, Simple, Mouvement, Complexe, Augmentation}
+
+	public enum TypeCombatCondition{
+		Posture, Autre}
 
 }

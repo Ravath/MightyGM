@@ -12,7 +12,7 @@ namespace DataGenerator.Parser {
 		#endregion
 
 		/// <summary>
-		/// Constructeur par défaut
+		/// Constructeur par defaut
 		/// </summary>
 		internal Parser() : base(null) { }
 
@@ -31,7 +31,7 @@ namespace DataGenerator.Parser {
 			return sb.ToString();
 		}
 		/// <summary>
-		/// Ecrit les données brutes prélevées dans un fichier.
+		/// Ecrit les donnees brutes prelevees dans un fichier.
 		/// </summary>
 		/// <param name="filePath"></param>
 		public void ExtractRawToFile( string filePath ) {
@@ -54,12 +54,12 @@ namespace DataGenerator.Parser {
 			/// <summary>
 			/// Constructeur trivial.
 			/// </summary>
-			/// <param name="reader">Le texte à parser.</param>
+			/// <param name="reader">Le texte Eparser.</param>
 			public Lexer( System.IO.TextReader reader ) {
 				this.reader = reader;
 			}
 			/// <summary>
-			/// Traitement d'un caractère unique.
+			/// Traitement d'un caractere unique.
 			/// </summary>
 			/// <returns>Le code du caractere suivant.</returns>
 			public override int yylex() {
@@ -67,7 +67,7 @@ namespace DataGenerator.Parser {
 					char ch;
 					int ord = reader.Read();
 
-					//traitement des commentaires à la volée
+					//traitement des commentaires Ela volée
 					if(ord == '/' && reader.Peek() == '/') {//si 2 slashs d'affilée
 						do {
 							ord = reader.Read();

@@ -136,7 +136,7 @@ namespace MightyGmCtrl.ImportExport
 			IDataObject ido = (IDataObject)newObj;
 			PropertyInfo dataModelType = newObj.GetType().GetProperty(prop.Name+"Id");
 			ICell cell = currentRow.GetCell(i);
-			if(cell != null)
+			if(cell != null && !String.IsNullOrWhiteSpace(cell.StringCellValue))
 			{
 				impType.AddTagReference(ido, dataModelType, cell.StringCellValue, prop.PropertyType);
 			}

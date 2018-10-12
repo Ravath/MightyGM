@@ -3,21 +3,17 @@ using System.Linq;
 using Core.Data;
 using Core.Dice;
 using Core.Engine;
-using LinqToDB;
 using System.Collections.Generic;
 using System.Text;
 using DataGenerator;
 using DataGenerator.CSharp;
 using Core.Types;
-using StarWars;
-using StarWars.Data;
-using Core.Data.Import;
 using CinqAnneaux.JdrCore.Attributs;
 
 namespace TestsConsole {
 	class Program {
-		static void Main( string[] args ) {
-			
+		public static void Main( string[] args ) {
+			GenerationTest.Test();
 
 			//RaceModel rm = new RaceModel();
 			//rm.Id = 2;

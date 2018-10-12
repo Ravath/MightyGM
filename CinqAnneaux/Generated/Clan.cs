@@ -79,6 +79,27 @@ namespace CinqAnneaux.Data {
 				}
 			}
 		}
+
+		private IEnumerable<TableHeritageModel> _heritages;
+		public IEnumerable <TableHeritageModel> Heritages{
+			get{
+				if( _heritages == null ){
+					_heritages = LoadByForeignKey<TableHeritageModel>(p => p.ClanId, Id);
+				}
+				return _heritages;
+			}
+			set{
+				foreach( TableHeritageModel item in _heritages ){
+					item.Clan = null;
+
+				}
+				_heritages = value;
+				foreach( TableHeritageModel item in value ){
+					item.Clan = this;
+					item.SaveObject();
+				}
+			}
+		}
 	}
 	[Table(Schema = "cinqanneaux",Name = "clandescription")]
 	public partial class ClanDescription : DataDescription<ClanModel> {

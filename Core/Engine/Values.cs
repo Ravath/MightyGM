@@ -32,7 +32,7 @@ namespace Core.Engine {
 		/// <param name="vals">Values used for computation of the value.</param>
 		protected void AddDerivedValue( params IValue[] vals ) {
 			foreach(IValue v in vals) {
-				v.ValueChanged += derivedValBaseChanged;
+				v.ValueChanged += DerivedValBaseChanged;
 				_values.Add(v);
 			}
 		}
@@ -42,12 +42,12 @@ namespace Core.Engine {
 		/// <param name="vals">Values no more used used for computation of the value.</param>
 		protected void RemoveDerivedValue( params IValue[] vals ) {
 			foreach(IValue v in vals) {
-				v.ValueChanged -= derivedValBaseChanged;
+				v.ValueChanged -= DerivedValBaseChanged;
 				_values.Remove(v);
 			}
 		}
 
-		private void derivedValBaseChanged( IValue ival, int newValue, int oldValue ) {
+		private void DerivedValBaseChanged( IValue ival, int newValue, int oldValue ) {
 			if(ValueChanged != null) {
 				int tot = TotalValue;
                 int old = tot - newValue + oldValue;
@@ -67,7 +67,7 @@ namespace Core.Engine {
 			int tot = TotalValue;
 			int modTot = mod.TotalValue;
 			_modifiers.Add(mod);
-			mod.ValueChanged += derivedValBaseChanged;
+			mod.ValueChanged += DerivedValBaseChanged;
 			if(modTot != 0 && ValueChanged != null) {
 				ValueChanged(this, tot, tot+ modTot);
             }
@@ -77,7 +77,7 @@ namespace Core.Engine {
 			int tot = TotalValue;
 			int modTot = mod.TotalValue;
             _modifiers.Remove(mod);
-			mod.ValueChanged -= derivedValBaseChanged;
+			mod.ValueChanged -= DerivedValBaseChanged;
             if(modTot != 0 && ValueChanged != null) {
 				ValueChanged(this, tot, tot- modTot);
 			}
@@ -102,8 +102,13 @@ namespace Core.Engine {
 		/// </summary>
 		/// <param name="val"></param>
 		public void SetValue( IValue val ) {
+			if(val == _iv) { return; }
+			if(_iv != null)
+				RemoveDerivedValue(_iv);
+			if(val != null)
+				AddDerivedValue(val);
 			_iv = val;
-        }
+		}
 	}
 
 	public class Value : IValue {
@@ -162,7 +167,7 @@ namespace Core.Engine {
 		#region Functions
 		public virtual void AddModifier( IValue mod ) {
 			_modifiers.Add(mod);
-			mod.ValueChanged += modifierChanged;
+			mod.ValueChanged += ModifierChanged;
 			int modTot = mod.TotalValue;
 			if(ValueChanged != null && modTot != 0) {
 				int tot = TotalValue;
@@ -171,7 +176,7 @@ namespace Core.Engine {
 		}
 		public virtual void RemoveModifier( IValue mod ) {
 			_modifiers.Remove(mod);
-			mod.ValueChanged -= modifierChanged;
+			mod.ValueChanged -= ModifierChanged;
 			int modTot = mod.TotalValue;
 			if(ValueChanged != null && modTot!=0) {
 				int tot = TotalValue;
@@ -180,7 +185,7 @@ namespace Core.Engine {
 		} 
 		#endregion
 
-		private void modifierChanged(IValue mod, int newVal, int oldVal ) {
+		private void ModifierChanged(IValue mod, int newVal, int oldVal ) {
 			if(ValueChanged != null) {
 				int tot = TotalValue;
 				ValueChanged(this, tot, tot + oldVal - newVal);

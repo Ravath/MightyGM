@@ -13,7 +13,7 @@ namespace CinqAnneaux.JdrCore.Traits {
 		public IEnumerable<Avantage> Desavantages { get { return base.Traits.Where(a => a.Desavantage == true); } }
 	}
 
-	public class ListeTraitsCreature : TraitCollection<Agent.Agent, TraitCreature> {
+	public class ListeTraitsCreature : TraitCollection<Agent.Agent, PouvoirNaturel> {
 		public ListeTraitsCreature( Agent.Agent agent ) : base(agent) { }
 	}
 

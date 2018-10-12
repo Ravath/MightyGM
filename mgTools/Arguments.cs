@@ -10,6 +10,7 @@ namespace mgTools
 	{
 		private string[] args;
 		private int index = 1;
+		private int ArgsNumber { get { return args.Length; } }
 		public Arguments(string[] args)
 		{
 			this.args = args;
@@ -17,12 +18,12 @@ namespace mgTools
 
 		public bool HasNext()
 		{
-			return index < args.Length;
+			return index < ArgsNumber;
 		}
 
 		public bool CheckMin(int min)
 		{
-			if(args.Length < min + 1)
+			if(ArgsNumber < min + 1)
 			{
 				Console.Out.WriteLine("Minimum number of arguments is: " + min);
 				return false;
@@ -32,7 +33,7 @@ namespace mgTools
 
 		public bool CheckMax(int max)
 		{
-			if (args.Length > max + 1)
+			if (ArgsNumber > max + 1)
 			{
 				Console.Out.WriteLine("Maximum number of arguments is: " + max);
 				return false;

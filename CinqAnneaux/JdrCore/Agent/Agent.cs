@@ -1,11 +1,8 @@
 ﻿using CinqAnneaux.Data;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CinqAnneaux.JdrCore.Competences;
 using Core.Engine;
+using CinqAnneaux.JdrCore.Competences;
 using CinqAnneaux.JdrCore.Attributs;
 using CinqAnneaux.JdrCore.Attaques;
 using CinqAnneaux.JdrCore.Objets;
@@ -13,10 +10,12 @@ using CinqAnneaux.JdrCore.Traits;
 using CinqAnneaux.JdrCore.Capacites;
 
 namespace CinqAnneaux.JdrCore.Agent {
-	public class Agent : Core.Engine.IAgent {
+	public abstract class Agent : Core.Engine.IAgent
+	{
 
 		#region Members
-		private List<IAttaque> _attaques = new List<IAttaque>();
+		public delegate void ModelChanged(Agent agent);
+		public event ModelChanged OnModelChanged;
 		#endregion
 
 		#region Properties : Composants
@@ -24,7 +23,6 @@ namespace CinqAnneaux.JdrCore.Agent {
 		public Attributs.Attributs Attributs { get; }
 		public ListeCompetences Competences { get; }
 		public SeuilVie Vie { get; protected set; }
-		public IEnumerable<IAttaque> Attaques { get { return _attaques; } }
 		#region Objects
 		public Inventaire Inventaire { get; }
 		public InventaireArmure Armures { get; }
@@ -83,29 +81,17 @@ namespace CinqAnneaux.JdrCore.Agent {
 			Souillure = new RankedCarac(pointsSouillure) { Label = "Souillure" };
 		}
 
-		public virtual void SetPersonnage(CreatureModel perso)
+		private void SetPersonnage(PersonnageModel perso)
 		{
 			Attributs.SetPersonnage(perso);
 			Competences.SetPersonnage(perso);
-			EtatCivil.Description = perso.Description.Description;
+			EtatCivil.SetPersonnage(perso);
+			OnModelChanged?.Invoke(this);
 		}
-		public virtual void SetPersonnage( PJModel perso ) {
-			Attributs.SetPersonnage(perso);
-			Competences.SetPersonnage(perso);
-			EtatCivil.Description = perso.Description.Description;
-		}
+
+		public virtual void SetPersonnage(FigurantModel perso) { SetPersonnage((PersonnageModel)perso); }
+		public virtual void SetPersonnage(PersonnageJoueurModel perso) { SetPersonnage((PersonnageModel)perso); }
 		#endregion
 
-		#region Armes et attaques
-		public void AddAttaque(IAttaque att ) {
-			_attaques.Add(att);
-		}
-		public void RemoveAttaque( IAttaque att ) {
-			_attaques.Remove(att);
-		}
-		public void ClearAttaques() {
-			_attaques.Clear();
-		}
-		#endregion
 	}
 }

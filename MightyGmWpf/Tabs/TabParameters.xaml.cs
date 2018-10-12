@@ -29,8 +29,7 @@ namespace MightyGmWPF.Tabs {
 	public partial class TabParameters : UserControl {
 
 		#region Members
-		private List<string> _assemblies = new List<string>();
-		private List<string> _names = new List<string>();
+		private List<JdrAssembly> _assemblies = new List<JdrAssembly>();
 		private Scenario _scenario;
 		private Session _sceance;
 		private Rpg _jdr;
@@ -104,7 +103,7 @@ namespace MightyGmWPF.Tabs {
             xSceanceFiche.ReadOnly = true;
 			SelectedJdr = null;
 
-			SetAssemblyList(Context.Files.FindJdrModules());
+			MajAssembliesCombo();
 			Context.ReportManager.MessageEvent += Console;
 			Context.ReportManager.ProcessExceptionEvent += Console;
 		}
@@ -128,25 +127,14 @@ namespace MightyGmWPF.Tabs {
 
 		#region Assemblies & Jdr
 		/// <summary>
-		/// Récupère les dlls dans les répertoires indiqués.
-		/// </summary>
-		/// <param name="assemblies">Liste des répertoires où cercher es dlls.</param>
-		public void SetAssemblyList( IEnumerable<FileInfo> assemblies ) {
-			foreach(FileInfo fi in assemblies) {
-				if(fi.Extension.ToLower() == ".dll") {
-					_assemblies.Add(fi.FullName);
-					_names.Add(fi.Name.Remove(fi.Name.Length-4,4));
-				}
-			}
-			MajAssembliesCombo();
-		}
-		/// <summary>
 		/// Maj la comboMox de choix des jdr
 		/// </summary>
 		private void MajAssembliesCombo() {
 			xDlls.Items.Clear();
-			foreach(string n in _names) {
-				xDlls.Items.Add(n);
+			_assemblies.Clear();
+			foreach (JdrAssembly n in Context.Contexts.JdrAssemblies) {
+				xDlls.Items.Add(n.Name);
+				_assemblies.Add(n);
 			}
 		}
 		/// <summary>
@@ -156,26 +144,10 @@ namespace MightyGmWPF.Tabs {
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void xDlls_SelectionChanged( object sender, SelectionChangedEventArgs e ) {
-			ComboBox cb = sender as ComboBox;
-			Context.Dll.SetAssembly(
-				_assemblies[cb.SelectedIndex]
-			);
-			//trouver jdr avec même nom
-			string jdrName = _names[cb.SelectedIndex];
-			var qj = from c in Context.Data.GetTable<Rpg>()
-					 where c.Name == jdrName
-					 select c;
-			Rpg j = qj.SingleOrDefault();
-			if(j == null) {//si il n'existe pas, le créer.
-				j = new Rpg
-				{
-					Name = _names[cb.SelectedIndex]
-				};
-				Context.Data.Insert<Rpg>(j);
-				//récupérer pour avoir id et valeurs automatiques
-				j = Context.Data.GetTable<Rpg>().SingleOrDefault(p => p.Name == _names[cb.SelectedIndex]);
-			}
-			SelectedJdr = j;
+
+			Context.Contexts.SetJdrAssembly(_assemblies[xDlls.SelectedIndex]);
+
+			SelectedJdr = Context.Contexts.Rpg;
         }
 		#endregion
 

@@ -72,7 +72,7 @@ namespace Core.Engine {
 				if(GetEquipedValue(obj) > MaxEquipedObject
 					|| ReachedLimitBehaviour == WearableModuleBehaviour.DoesntWear)
 					return false;
-				//remove objects until the is enought room
+				//remove objects until there is enought room
 				do {
 					switch(ReachedLimitBehaviour) {
 						case WearableModuleBehaviour.RemoveFirsts:

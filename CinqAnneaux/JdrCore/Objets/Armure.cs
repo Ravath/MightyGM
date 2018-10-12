@@ -25,26 +25,17 @@ namespace CinqAnneaux.JdrCore.Objets {
 			/* add specific effects */
 			// todo : add armor specific effects
 		}
-		/// <summary>
-		/// Create the natural armor of the given creature.
-		/// </summary>
-		/// <param name="model"></param>
-		public void SetCreatureModel( CreatureModel model ) {
-			Name = "Armure Naturelle";
-			ND.BaseValue = model.NDArmure;
-			Reduction.BaseValue = model.Reduction;
-		}
 
 		public void Desequiper( IAgent personnage ) {
 			Agent.Agent p = (Agent.Agent)personnage;
-			p.Armures.ND.AddModifier(ND);
-			p.Armures.Reduction.AddModifier(Reduction);
+			p.Armures.ND.RemoveModifier(ND);
+			p.Armures.Reduction.RemoveModifier(Reduction);
 		}
 
 		public void Equiper( IAgent personnage ) {
 			Agent.Agent p = (Agent.Agent)personnage;
-			p.Armures.ND.RemoveModifier(ND);
-			p.Armures.Reduction.RemoveModifier(Reduction);
+			p.Armures.ND.AddModifier(ND);
+			p.Armures.Reduction.AddModifier(Reduction);
 		}
 	}
 }

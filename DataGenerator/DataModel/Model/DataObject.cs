@@ -84,12 +84,11 @@ namespace DataGenerator.DataModel.Model
 			//tag PJ : ajouter propriété JoueurModel
 			if (HasTag(MinorTag.Pj))
 			{
-				SQLForeignKeyAttribute sfk = new SQLForeignKeyAttribute("Joueur", "id");
-				CSForeignKey fg = new CSForeignKey(sfk, "Joueur");
+				SQLForeignKeyAttribute sfk = new SQLForeignKeyAttribute("Player", "id");
+				CSForeignKey fg = new CSForeignKey(sfk, "Player");
 				modelClass.AddAttribute(fg);
-				modelClass.AddAttribute( new CSOneToOne(new CSClass("Joueur"), "Joueur") );
+				modelClass.AddAttribute( new CSOneToOne(new CSClass("Player"), "Player") );
 				modelClass.SQLTable.AddAttribute(sfk);
-				genFile.AddUsing("Core.Gestion");
 			}
 		}
 

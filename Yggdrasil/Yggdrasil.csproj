@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{72D10BEC-B4C9-45E5-8238-17F48092E019}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Yggdrasil</RootNamespace>
+    <AssemblyName>Yggdrasil</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="linq2db, Version=2.1.0.0, Culture=neutral, PublicKeyToken=e41013125f9e410a, processorArchitecture=MSIL">
+      <HintPath>..\packages\linq2db.2.1.0\lib\net45\linq2db.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Generated\Archetype.cs" />
+    <Compile Include="Generated\Arme.cs" />
+    <Compile Include="Generated\Armure.cs" />
+    <Compile Include="Generated\Blessure.cs" />
+    <Compile Include="Generated\Caractere.cs" />
+    <Compile Include="Generated\Competence.cs" />
+    <Compile Include="Generated\DomaineGaldr.cs" />
+    <Compile Include="Generated\DomaineSejdr.cs" />
+    <Compile Include="Generated\Don.cs" />
+    <Compile Include="Generated\Enum.cs" />
+    <Compile Include="Generated\Figurant.cs" />
+    <Compile Include="Generated\Jointures.cs" />
+    <Compile Include="Generated\Maladie.cs" />
+    <Compile Include="Generated\Objet.cs" />
+    <Compile Include="Generated\ObjetQuotidien.cs" />
+    <Compile Include="Generated\Personnage.cs" />
+    <Compile Include="Generated\Poison.cs" />
+    <Compile Include="Generated\Prouesse.cs" />
+    <Compile Include="Generated\Rune.cs" />
+    <Compile Include="Generated\SortGaldr.cs" />
+    <Compile Include="Generated\SortRune.cs" />
+    <Compile Include="Generated\SortSejdr.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserMade\Archetype.cs" />
+    <Compile Include="UserMade\Arme.cs" />
+    <Compile Include="UserMade\Armure.cs" />
+    <Compile Include="UserMade\Blessure.cs" />
+    <Compile Include="UserMade\Caractere.cs" />
+    <Compile Include="UserMade\Competence.cs" />
+    <Compile Include="UserMade\DomaineGaldr.cs" />
+    <Compile Include="UserMade\DomaineSejdr.cs" />
+    <Compile Include="UserMade\Don.cs" />
+    <Compile Include="UserMade\Figurant.cs" />
+    <Compile Include="UserMade\Maladie.cs" />
+    <Compile Include="UserMade\Objet.cs" />
+    <Compile Include="UserMade\ObjetQuotidien.cs" />
+    <Compile Include="UserMade\Personnage.cs" />
+    <Compile Include="UserMade\Poison.cs" />
+    <Compile Include="UserMade\Prouesse.cs" />
+    <Compile Include="UserMade\Rune.cs" />
+    <Compile Include="UserMade\SortGaldr.cs" />
+    <Compile Include="UserMade\SortRune.cs" />
+    <Compile Include="UserMade\SortSejdr.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{93418f01-3e81-43f0-b93b-3c84ce60b40a}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

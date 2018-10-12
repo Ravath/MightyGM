@@ -255,8 +255,8 @@ namespace CinqAnneaux.Data {
 			set { Object2 = value; }
 		}
 	}
-	[Table(Schema = "cinqanneaux",Name = "ecoleavanceemodeltoconditionexemplar_conditions")]
-	public class EcoleAvanceeModelToConditionExemplar_Conditions : DataRelation<EcoleAvanceeModel, ConditionExemplar> {
+	[Table(Schema = "cinqanneaux",Name = "ecoleavanceemodeltoconditionadmissionexemplar_conditions")]
+	public class EcoleAvanceeModelToConditionAdmissionExemplar_Conditions : DataRelation<EcoleAvanceeModel, ConditionAdmissionExemplar> {
 
 		[Column(Name = "fk_ecoleavanceemodel_join", Storage = "EcoleAvanceeModelId")]
 		[HiddenProperty]
@@ -270,14 +270,14 @@ namespace CinqAnneaux.Data {
 			set { Object1 = value; }
 		}
 
-		[Column(Name = "fk_conditionexemplar_join", Storage = "ConditionExemplarId")]
+		[Column(Name = "fk_conditionadmissionexemplar_join", Storage = "ConditionAdmissionExemplarId")]
 		[HiddenProperty]
-		public int ConditionExemplarId {
+		public int ConditionAdmissionExemplarId {
 			get { return Object2Id; }
 			set { Object2Id= value; }
 		}
-		[Association(ThisKey = "ConditionExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "ConditionExemplar")]
-		public ConditionExemplar ConditionExemplar {
+		[Association(ThisKey = "ConditionAdmissionExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "ConditionAdmissionExemplar")]
+		public ConditionAdmissionExemplar ConditionAdmissionExemplar {
 			get { return Object2; }
 			set { Object2 = value; }
 		}
@@ -309,8 +309,8 @@ namespace CinqAnneaux.Data {
 			set { Object2 = value; }
 		}
 	}
-	[Table(Schema = "cinqanneaux",Name = "voiealternativemodeltoconditionexemplar_conditions")]
-	public class VoieAlternativeModelToConditionExemplar_Conditions : DataRelation<VoieAlternativeModel, ConditionExemplar> {
+	[Table(Schema = "cinqanneaux",Name = "voiealternativemodeltoconditionadmissionexemplar_conditions")]
+	public class VoieAlternativeModelToConditionAdmissionExemplar_Conditions : DataRelation<VoieAlternativeModel, ConditionAdmissionExemplar> {
 
 		[Column(Name = "fk_voiealternativemodel_join", Storage = "VoieAlternativeModelId")]
 		[HiddenProperty]
@@ -324,14 +324,14 @@ namespace CinqAnneaux.Data {
 			set { Object1 = value; }
 		}
 
-		[Column(Name = "fk_conditionexemplar_join", Storage = "ConditionExemplarId")]
+		[Column(Name = "fk_conditionadmissionexemplar_join", Storage = "ConditionAdmissionExemplarId")]
 		[HiddenProperty]
-		public int ConditionExemplarId {
+		public int ConditionAdmissionExemplarId {
 			get { return Object2Id; }
 			set { Object2Id= value; }
 		}
-		[Association(ThisKey = "ConditionExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "ConditionExemplar")]
-		public ConditionExemplar ConditionExemplar {
+		[Association(ThisKey = "ConditionAdmissionExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "ConditionAdmissionExemplar")]
+		public ConditionAdmissionExemplar ConditionAdmissionExemplar {
 			get { return Object2; }
 			set { Object2 = value; }
 		}
@@ -400,152 +400,17 @@ namespace CinqAnneaux.Data {
 		}
 
 	}
-	[Table(Schema = "cinqanneaux",Name = "creaturemodeltopouvoircreatureexemplar_pouvoirs")]
-	public class CreatureModelToPouvoirCreatureExemplar_Pouvoirs : DataRelation<CreatureModel, PouvoirCreatureExemplar> {
+	[Table(Schema = "cinqanneaux",Name = "personnagemodeltoavantageexemplar_avantages")]
+	public class PersonnageModelToAvantageExemplar_Avantages : DataRelation<PersonnageModel, AvantageExemplar> {
 
-		[Column(Name = "fk_creaturemodel_join", Storage = "CreatureModelId")]
+		[Column(Name = "fk_personnagemodel_join", Storage = "PersonnageModelId")]
 		[HiddenProperty]
-		public int CreatureModelId {
+		public int PersonnageModelId {
 			get { return Object1Id; }
 			set { Object1Id= value; }
 		}
-		[Association(ThisKey = "CreatureModelId", OtherKey = "Id", CanBeNull = false, Storage = "CreatureModel")]
-		public CreatureModel CreatureModel {
-			get { return Object1; }
-			set { Object1 = value; }
-		}
-
-		[Column(Name = "fk_pouvoircreatureexemplar_join", Storage = "PouvoirCreatureExemplarId")]
-		[HiddenProperty]
-		public int PouvoirCreatureExemplarId {
-			get { return Object2Id; }
-			set { Object2Id= value; }
-		}
-		[Association(ThisKey = "PouvoirCreatureExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "PouvoirCreatureExemplar")]
-		public PouvoirCreatureExemplar PouvoirCreatureExemplar {
-			get { return Object2; }
-			set { Object2 = value; }
-		}
-	}
-	[Table(Schema = "cinqanneaux",Name = "creaturemodeltocompetencestatus_competences")]
-	public class CreatureModelToCompetenceStatus_Competences : DataRelation<CreatureModel, CompetenceStatus> {
-
-		[Column(Name = "fk_creaturemodel_join", Storage = "CreatureModelId")]
-		[HiddenProperty]
-		public int CreatureModelId {
-			get { return Object1Id; }
-			set { Object1Id= value; }
-		}
-		[Association(ThisKey = "CreatureModelId", OtherKey = "Id", CanBeNull = false, Storage = "CreatureModel")]
-		public CreatureModel CreatureModel {
-			get { return Object1; }
-			set { Object1 = value; }
-		}
-
-		[Column(Name = "fk_competencestatus_join", Storage = "CompetenceStatusId")]
-		[HiddenProperty]
-		public int CompetenceStatusId {
-			get { return Object2Id; }
-			set { Object2Id= value; }
-		}
-		[Association(ThisKey = "CompetenceStatusId", OtherKey = "Id", CanBeNull = false, Storage = "CompetenceStatus")]
-		public CompetenceStatus CompetenceStatus {
-			get { return Object2; }
-			set { Object2 = value; }
-		}
-	}
-	[Table(Schema = "cinqanneaux",Name = "pjmodeltocompetenceexemplar_armes")]
-	public class PJModelToCompetenceExemplar_Armes : DataRelation<PJModel, CompetenceExemplar> {
-
-		[Column(Name = "fk_pjmodel_join", Storage = "PJModelId")]
-		[HiddenProperty]
-		public int PJModelId {
-			get { return Object1Id; }
-			set { Object1Id= value; }
-		}
-		[Association(ThisKey = "PJModelId", OtherKey = "Id", CanBeNull = false, Storage = "PJModel")]
-		public PJModel PJModel {
-			get { return Object1; }
-			set { Object1 = value; }
-		}
-
-		[Column(Name = "fk_competenceexemplar_join", Storage = "CompetenceExemplarId")]
-		[HiddenProperty]
-		public int CompetenceExemplarId {
-			get { return Object2Id; }
-			set { Object2Id= value; }
-		}
-		[Association(ThisKey = "CompetenceExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "CompetenceExemplar")]
-		public CompetenceExemplar CompetenceExemplar {
-			get { return Object2; }
-			set { Object2 = value; }
-		}
-	}
-	[Table(Schema = "cinqanneaux",Name = "pjmodeltoobjetexemplar_inventaire")]
-	public class PJModelToObjetExemplar_Inventaire : DataRelation<PJModel, ObjetExemplar> {
-
-		[Column(Name = "fk_pjmodel_join", Storage = "PJModelId")]
-		[HiddenProperty]
-		public int PJModelId {
-			get { return Object1Id; }
-			set { Object1Id= value; }
-		}
-		[Association(ThisKey = "PJModelId", OtherKey = "Id", CanBeNull = false, Storage = "PJModel")]
-		public PJModel PJModel {
-			get { return Object1; }
-			set { Object1 = value; }
-		}
-
-		[Column(Name = "fk_objetexemplar_join", Storage = "ObjetExemplarId")]
-		[HiddenProperty]
-		public int ObjetExemplarId {
-			get { return Object2Id; }
-			set { Object2Id= value; }
-		}
-		[Association(ThisKey = "ObjetExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "ObjetExemplar")]
-		public ObjetExemplar ObjetExemplar {
-			get { return Object2; }
-			set { Object2 = value; }
-		}
-	}
-	[Table(Schema = "cinqanneaux",Name = "pjmodeltoecoleexemplar_ecoles")]
-	public class PJModelToEcoleExemplar_Ecoles : DataRelation<PJModel, EcoleExemplar> {
-
-		[Column(Name = "fk_pjmodel_join", Storage = "PJModelId")]
-		[HiddenProperty]
-		public int PJModelId {
-			get { return Object1Id; }
-			set { Object1Id= value; }
-		}
-		[Association(ThisKey = "PJModelId", OtherKey = "Id", CanBeNull = false, Storage = "PJModel")]
-		public PJModel PJModel {
-			get { return Object1; }
-			set { Object1 = value; }
-		}
-
-		[Column(Name = "fk_ecoleexemplar_join", Storage = "EcoleExemplarId")]
-		[HiddenProperty]
-		public int EcoleExemplarId {
-			get { return Object2Id; }
-			set { Object2Id= value; }
-		}
-		[Association(ThisKey = "EcoleExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "EcoleExemplar")]
-		public EcoleExemplar EcoleExemplar {
-			get { return Object2; }
-			set { Object2 = value; }
-		}
-	}
-	[Table(Schema = "cinqanneaux",Name = "pjmodeltoavantageexemplar_avantages")]
-	public class PJModelToAvantageExemplar_Avantages : DataRelation<PJModel, AvantageExemplar> {
-
-		[Column(Name = "fk_pjmodel_join", Storage = "PJModelId")]
-		[HiddenProperty]
-		public int PJModelId {
-			get { return Object1Id; }
-			set { Object1Id= value; }
-		}
-		[Association(ThisKey = "PJModelId", OtherKey = "Id", CanBeNull = false, Storage = "PJModel")]
-		public PJModel PJModel {
+		[Association(ThisKey = "PersonnageModelId", OtherKey = "Id", CanBeNull = false, Storage = "PersonnageModel")]
+		public PersonnageModel PersonnageModel {
 			get { return Object1; }
 			set { Object1 = value; }
 		}
@@ -562,17 +427,17 @@ namespace CinqAnneaux.Data {
 			set { Object2 = value; }
 		}
 	}
-	[Table(Schema = "cinqanneaux",Name = "pjmodeltodesavantageexemplar_desavantages")]
-	public class PJModelToDesavantageExemplar_Desavantages : DataRelation<PJModel, DesavantageExemplar> {
+	[Table(Schema = "cinqanneaux",Name = "personnagemodeltodesavantageexemplar_desavantages")]
+	public class PersonnageModelToDesavantageExemplar_Desavantages : DataRelation<PersonnageModel, DesavantageExemplar> {
 
-		[Column(Name = "fk_pjmodel_join", Storage = "PJModelId")]
+		[Column(Name = "fk_personnagemodel_join", Storage = "PersonnageModelId")]
 		[HiddenProperty]
-		public int PJModelId {
+		public int PersonnageModelId {
 			get { return Object1Id; }
 			set { Object1Id= value; }
 		}
-		[Association(ThisKey = "PJModelId", OtherKey = "Id", CanBeNull = false, Storage = "PJModel")]
-		public PJModel PJModel {
+		[Association(ThisKey = "PersonnageModelId", OtherKey = "Id", CanBeNull = false, Storage = "PersonnageModel")]
+		public PersonnageModel PersonnageModel {
 			get { return Object1; }
 			set { Object1 = value; }
 		}
@@ -589,98 +454,44 @@ namespace CinqAnneaux.Data {
 			set { Object2 = value; }
 		}
 	}
-	[Table(Schema = "cinqanneaux",Name = "pjmodeltocompetenceexemplar_competences")]
-	public class PJModelToCompetenceExemplar_Competences : DataRelation<PJModel, CompetenceExemplar> {
+	[Table(Schema = "cinqanneaux",Name = "personnagemodeltoecoleexemplar_ecoles")]
+	public class PersonnageModelToEcoleExemplar_Ecoles : DataRelation<PersonnageModel, EcoleExemplar> {
 
-		[Column(Name = "fk_pjmodel_join", Storage = "PJModelId")]
+		[Column(Name = "fk_personnagemodel_join", Storage = "PersonnageModelId")]
 		[HiddenProperty]
-		public int PJModelId {
+		public int PersonnageModelId {
 			get { return Object1Id; }
 			set { Object1Id= value; }
 		}
-		[Association(ThisKey = "PJModelId", OtherKey = "Id", CanBeNull = false, Storage = "PJModel")]
-		public PJModel PJModel {
+		[Association(ThisKey = "PersonnageModelId", OtherKey = "Id", CanBeNull = false, Storage = "PersonnageModel")]
+		public PersonnageModel PersonnageModel {
 			get { return Object1; }
 			set { Object1 = value; }
 		}
 
-		[Column(Name = "fk_competenceexemplar_join", Storage = "CompetenceExemplarId")]
+		[Column(Name = "fk_ecoleexemplar_join", Storage = "EcoleExemplarId")]
 		[HiddenProperty]
-		public int CompetenceExemplarId {
+		public int EcoleExemplarId {
 			get { return Object2Id; }
 			set { Object2Id= value; }
 		}
-		[Association(ThisKey = "CompetenceExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "CompetenceExemplar")]
-		public CompetenceExemplar CompetenceExemplar {
+		[Association(ThisKey = "EcoleExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "EcoleExemplar")]
+		public EcoleExemplar EcoleExemplar {
 			get { return Object2; }
 			set { Object2 = value; }
 		}
 	}
-	[Table(Schema = "cinqanneaux",Name = "pjmodeltosortmodel_sorts")]
-	public class PJModelToSortModel_Sorts : DataRelation<PJModel, SortModel> {
+	[Table(Schema = "cinqanneaux",Name = "personnagemodeltoecoleavanceeexemplar_ecolesavancees")]
+	public class PersonnageModelToEcoleAvanceeExemplar_EcolesAvancees : DataRelation<PersonnageModel, EcoleAvanceeExemplar> {
 
-		[Column(Name = "fk_pjmodel_join", Storage = "PJModelId")]
+		[Column(Name = "fk_personnagemodel_join", Storage = "PersonnageModelId")]
 		[HiddenProperty]
-		public int PJModelId {
+		public int PersonnageModelId {
 			get { return Object1Id; }
 			set { Object1Id= value; }
 		}
-		[Association(ThisKey = "PJModelId", OtherKey = "Id", CanBeNull = false, Storage = "PJModel")]
-		public PJModel PJModel {
-			get { return Object1; }
-			set { Object1 = value; }
-		}
-
-		[Column(Name = "fk_sortmodel_join", Storage = "SortModelId")]
-		[HiddenProperty]
-		public int SortModelId {
-			get { return Object2Id; }
-			set { Object2Id= value; }
-		}
-		[Association(ThisKey = "SortModelId", OtherKey = "Id", CanBeNull = false, Storage = "SortModel")]
-		public SortModel SortModel {
-			get { return Object2; }
-			set { Object2 = value; }
-		}
-	}
-	[Table(Schema = "cinqanneaux",Name = "pjmodeltomahoumodel_mahou")]
-	public class PJModelToMahouModel_Mahou : DataRelation<PJModel, MahouModel> {
-
-		[Column(Name = "fk_pjmodel_join", Storage = "PJModelId")]
-		[HiddenProperty]
-		public int PJModelId {
-			get { return Object1Id; }
-			set { Object1Id= value; }
-		}
-		[Association(ThisKey = "PJModelId", OtherKey = "Id", CanBeNull = false, Storage = "PJModel")]
-		public PJModel PJModel {
-			get { return Object1; }
-			set { Object1 = value; }
-		}
-
-		[Column(Name = "fk_mahoumodel_join", Storage = "MahouModelId")]
-		[HiddenProperty]
-		public int MahouModelId {
-			get { return Object2Id; }
-			set { Object2Id= value; }
-		}
-		[Association(ThisKey = "MahouModelId", OtherKey = "Id", CanBeNull = false, Storage = "MahouModel")]
-		public MahouModel MahouModel {
-			get { return Object2; }
-			set { Object2 = value; }
-		}
-	}
-	[Table(Schema = "cinqanneaux",Name = "pjmodeltoecoleavanceeexemplar_ecolesavancees")]
-	public class PJModelToEcoleAvanceeExemplar_EcolesAvancees : DataRelation<PJModel, EcoleAvanceeExemplar> {
-
-		[Column(Name = "fk_pjmodel_join", Storage = "PJModelId")]
-		[HiddenProperty]
-		public int PJModelId {
-			get { return Object1Id; }
-			set { Object1Id= value; }
-		}
-		[Association(ThisKey = "PJModelId", OtherKey = "Id", CanBeNull = false, Storage = "PJModel")]
-		public PJModel PJModel {
+		[Association(ThisKey = "PersonnageModelId", OtherKey = "Id", CanBeNull = false, Storage = "PersonnageModel")]
+		public PersonnageModel PersonnageModel {
 			get { return Object1; }
 			set { Object1 = value; }
 		}
@@ -697,17 +508,17 @@ namespace CinqAnneaux.Data {
 			set { Object2 = value; }
 		}
 	}
-	[Table(Schema = "cinqanneaux",Name = "pjmodeltovoiealternativeexemplar_voiealternatives")]
-	public class PJModelToVoieAlternativeExemplar_VoieAlternatives : DataRelation<PJModel, VoieAlternativeExemplar> {
+	[Table(Schema = "cinqanneaux",Name = "personnagemodeltovoiealternativeexemplar_voiealternatives")]
+	public class PersonnageModelToVoieAlternativeExemplar_VoieAlternatives : DataRelation<PersonnageModel, VoieAlternativeExemplar> {
 
-		[Column(Name = "fk_pjmodel_join", Storage = "PJModelId")]
+		[Column(Name = "fk_personnagemodel_join", Storage = "PersonnageModelId")]
 		[HiddenProperty]
-		public int PJModelId {
+		public int PersonnageModelId {
 			get { return Object1Id; }
 			set { Object1Id= value; }
 		}
-		[Association(ThisKey = "PJModelId", OtherKey = "Id", CanBeNull = false, Storage = "PJModel")]
-		public PJModel PJModel {
+		[Association(ThisKey = "PersonnageModelId", OtherKey = "Id", CanBeNull = false, Storage = "PersonnageModel")]
+		public PersonnageModel PersonnageModel {
 			get { return Object1; }
 			set { Object1 = value; }
 		}
@@ -724,17 +535,71 @@ namespace CinqAnneaux.Data {
 			set { Object2 = value; }
 		}
 	}
-	[Table(Schema = "cinqanneaux",Name = "pjmodeltokataexemplar_katas")]
-	public class PJModelToKataExemplar_Katas : DataRelation<PJModel, KataExemplar> {
+	[Table(Schema = "cinqanneaux",Name = "personnagemodeltosortmodel_sorts")]
+	public class PersonnageModelToSortModel_Sorts : DataRelation<PersonnageModel, SortModel> {
 
-		[Column(Name = "fk_pjmodel_join", Storage = "PJModelId")]
+		[Column(Name = "fk_personnagemodel_join", Storage = "PersonnageModelId")]
 		[HiddenProperty]
-		public int PJModelId {
+		public int PersonnageModelId {
 			get { return Object1Id; }
 			set { Object1Id= value; }
 		}
-		[Association(ThisKey = "PJModelId", OtherKey = "Id", CanBeNull = false, Storage = "PJModel")]
-		public PJModel PJModel {
+		[Association(ThisKey = "PersonnageModelId", OtherKey = "Id", CanBeNull = false, Storage = "PersonnageModel")]
+		public PersonnageModel PersonnageModel {
+			get { return Object1; }
+			set { Object1 = value; }
+		}
+
+		[Column(Name = "fk_sortmodel_join", Storage = "SortModelId")]
+		[HiddenProperty]
+		public int SortModelId {
+			get { return Object2Id; }
+			set { Object2Id= value; }
+		}
+		[Association(ThisKey = "SortModelId", OtherKey = "Id", CanBeNull = false, Storage = "SortModel")]
+		public SortModel SortModel {
+			get { return Object2; }
+			set { Object2 = value; }
+		}
+	}
+	[Table(Schema = "cinqanneaux",Name = "personnagemodeltomahoumodel_mahou")]
+	public class PersonnageModelToMahouModel_Mahou : DataRelation<PersonnageModel, MahouModel> {
+
+		[Column(Name = "fk_personnagemodel_join", Storage = "PersonnageModelId")]
+		[HiddenProperty]
+		public int PersonnageModelId {
+			get { return Object1Id; }
+			set { Object1Id= value; }
+		}
+		[Association(ThisKey = "PersonnageModelId", OtherKey = "Id", CanBeNull = false, Storage = "PersonnageModel")]
+		public PersonnageModel PersonnageModel {
+			get { return Object1; }
+			set { Object1 = value; }
+		}
+
+		[Column(Name = "fk_mahoumodel_join", Storage = "MahouModelId")]
+		[HiddenProperty]
+		public int MahouModelId {
+			get { return Object2Id; }
+			set { Object2Id= value; }
+		}
+		[Association(ThisKey = "MahouModelId", OtherKey = "Id", CanBeNull = false, Storage = "MahouModel")]
+		public MahouModel MahouModel {
+			get { return Object2; }
+			set { Object2 = value; }
+		}
+	}
+	[Table(Schema = "cinqanneaux",Name = "personnagemodeltokataexemplar_katas")]
+	public class PersonnageModelToKataExemplar_Katas : DataRelation<PersonnageModel, KataExemplar> {
+
+		[Column(Name = "fk_personnagemodel_join", Storage = "PersonnageModelId")]
+		[HiddenProperty]
+		public int PersonnageModelId {
+			get { return Object1Id; }
+			set { Object1Id= value; }
+		}
+		[Association(ThisKey = "PersonnageModelId", OtherKey = "Id", CanBeNull = false, Storage = "PersonnageModel")]
+		public PersonnageModel PersonnageModel {
 			get { return Object1; }
 			set { Object1 = value; }
 		}
@@ -751,17 +616,17 @@ namespace CinqAnneaux.Data {
 			set { Object2 = value; }
 		}
 	}
-	[Table(Schema = "cinqanneaux",Name = "pjmodeltokihoexemplar_kihos")]
-	public class PJModelToKihoExemplar_Kihos : DataRelation<PJModel, KihoExemplar> {
+	[Table(Schema = "cinqanneaux",Name = "personnagemodeltokihoexemplar_kihos")]
+	public class PersonnageModelToKihoExemplar_Kihos : DataRelation<PersonnageModel, KihoExemplar> {
 
-		[Column(Name = "fk_pjmodel_join", Storage = "PJModelId")]
+		[Column(Name = "fk_personnagemodel_join", Storage = "PersonnageModelId")]
 		[HiddenProperty]
-		public int PJModelId {
+		public int PersonnageModelId {
 			get { return Object1Id; }
 			set { Object1Id= value; }
 		}
-		[Association(ThisKey = "PJModelId", OtherKey = "Id", CanBeNull = false, Storage = "PJModel")]
-		public PJModel PJModel {
+		[Association(ThisKey = "PersonnageModelId", OtherKey = "Id", CanBeNull = false, Storage = "PersonnageModel")]
+		public PersonnageModel PersonnageModel {
 			get { return Object1; }
 			set { Object1 = value; }
 		}
@@ -774,6 +639,141 @@ namespace CinqAnneaux.Data {
 		}
 		[Association(ThisKey = "KihoExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "KihoExemplar")]
 		public KihoExemplar KihoExemplar {
+			get { return Object2; }
+			set { Object2 = value; }
+		}
+	}
+	[Table(Schema = "cinqanneaux",Name = "personnagemodeltopouvoirnaturelexemplar_pouvoirs")]
+	public class PersonnageModelToPouvoirNaturelExemplar_Pouvoirs : DataRelation<PersonnageModel, PouvoirNaturelExemplar> {
+
+		[Column(Name = "fk_personnagemodel_join", Storage = "PersonnageModelId")]
+		[HiddenProperty]
+		public int PersonnageModelId {
+			get { return Object1Id; }
+			set { Object1Id= value; }
+		}
+		[Association(ThisKey = "PersonnageModelId", OtherKey = "Id", CanBeNull = false, Storage = "PersonnageModel")]
+		public PersonnageModel PersonnageModel {
+			get { return Object1; }
+			set { Object1 = value; }
+		}
+
+		[Column(Name = "fk_pouvoirnaturelexemplar_join", Storage = "PouvoirNaturelExemplarId")]
+		[HiddenProperty]
+		public int PouvoirNaturelExemplarId {
+			get { return Object2Id; }
+			set { Object2Id= value; }
+		}
+		[Association(ThisKey = "PouvoirNaturelExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "PouvoirNaturelExemplar")]
+		public PouvoirNaturelExemplar PouvoirNaturelExemplar {
+			get { return Object2; }
+			set { Object2 = value; }
+		}
+	}
+	[Table(Schema = "cinqanneaux",Name = "personnagemodeltoarmeexemplar_armes")]
+	public class PersonnageModelToArmeExemplar_Armes : DataRelation<PersonnageModel, ArmeExemplar> {
+
+		[Column(Name = "fk_personnagemodel_join", Storage = "PersonnageModelId")]
+		[HiddenProperty]
+		public int PersonnageModelId {
+			get { return Object1Id; }
+			set { Object1Id= value; }
+		}
+		[Association(ThisKey = "PersonnageModelId", OtherKey = "Id", CanBeNull = false, Storage = "PersonnageModel")]
+		public PersonnageModel PersonnageModel {
+			get { return Object1; }
+			set { Object1 = value; }
+		}
+
+		[Column(Name = "fk_armeexemplar_join", Storage = "ArmeExemplarId")]
+		[HiddenProperty]
+		public int ArmeExemplarId {
+			get { return Object2Id; }
+			set { Object2Id= value; }
+		}
+		[Association(ThisKey = "ArmeExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "ArmeExemplar")]
+		public ArmeExemplar ArmeExemplar {
+			get { return Object2; }
+			set { Object2 = value; }
+		}
+	}
+	[Table(Schema = "cinqanneaux",Name = "personnagemodeltoobjetexemplar_inventaire")]
+	public class PersonnageModelToObjetExemplar_Inventaire : DataRelation<PersonnageModel, ObjetExemplar> {
+
+		[Column(Name = "fk_personnagemodel_join", Storage = "PersonnageModelId")]
+		[HiddenProperty]
+		public int PersonnageModelId {
+			get { return Object1Id; }
+			set { Object1Id= value; }
+		}
+		[Association(ThisKey = "PersonnageModelId", OtherKey = "Id", CanBeNull = false, Storage = "PersonnageModel")]
+		public PersonnageModel PersonnageModel {
+			get { return Object1; }
+			set { Object1 = value; }
+		}
+
+		[Column(Name = "fk_objetexemplar_join", Storage = "ObjetExemplarId")]
+		[HiddenProperty]
+		public int ObjetExemplarId {
+			get { return Object2Id; }
+			set { Object2Id= value; }
+		}
+		[Association(ThisKey = "ObjetExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "ObjetExemplar")]
+		public ObjetExemplar ObjetExemplar {
+			get { return Object2; }
+			set { Object2 = value; }
+		}
+	}
+	[Table(Schema = "cinqanneaux",Name = "figurantmodeltocompetencestatus_competences")]
+	public class FigurantModelToCompetenceStatus_Competences : DataRelation<FigurantModel, CompetenceStatus> {
+
+		[Column(Name = "fk_figurantmodel_join", Storage = "FigurantModelId")]
+		[HiddenProperty]
+		public int FigurantModelId {
+			get { return Object1Id; }
+			set { Object1Id= value; }
+		}
+		[Association(ThisKey = "FigurantModelId", OtherKey = "Id", CanBeNull = false, Storage = "FigurantModel")]
+		public FigurantModel FigurantModel {
+			get { return Object1; }
+			set { Object1 = value; }
+		}
+
+		[Column(Name = "fk_competencestatus_join", Storage = "CompetenceStatusId")]
+		[HiddenProperty]
+		public int CompetenceStatusId {
+			get { return Object2Id; }
+			set { Object2Id= value; }
+		}
+		[Association(ThisKey = "CompetenceStatusId", OtherKey = "Id", CanBeNull = false, Storage = "CompetenceStatus")]
+		public CompetenceStatus CompetenceStatus {
+			get { return Object2; }
+			set { Object2 = value; }
+		}
+	}
+	[Table(Schema = "cinqanneaux",Name = "personnagejoueurmodeltocompetenceexemplar_competences")]
+	public class PersonnageJoueurModelToCompetenceExemplar_Competences : DataRelation<PersonnageJoueurModel, CompetenceExemplar> {
+
+		[Column(Name = "fk_personnagejoueurmodel_join", Storage = "PersonnageJoueurModelId")]
+		[HiddenProperty]
+		public int PersonnageJoueurModelId {
+			get { return Object1Id; }
+			set { Object1Id= value; }
+		}
+		[Association(ThisKey = "PersonnageJoueurModelId", OtherKey = "Id", CanBeNull = false, Storage = "PersonnageJoueurModel")]
+		public PersonnageJoueurModel PersonnageJoueurModel {
+			get { return Object1; }
+			set { Object1 = value; }
+		}
+
+		[Column(Name = "fk_competenceexemplar_join", Storage = "CompetenceExemplarId")]
+		[HiddenProperty]
+		public int CompetenceExemplarId {
+			get { return Object2Id; }
+			set { Object2Id= value; }
+		}
+		[Association(ThisKey = "CompetenceExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "CompetenceExemplar")]
+		public CompetenceExemplar CompetenceExemplar {
 			get { return Object2; }
 			set { Object2 = value; }
 		}

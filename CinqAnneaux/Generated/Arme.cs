@@ -72,41 +72,6 @@ namespace CinqAnneaux.Data {
 			get{ return _samurai;}
 			set{_samurai = value;}
 		}
-
-		private bool _doubleNDArmure;
-		[Column(Storage = "DoubleNDArmure",Name = "doublendarmure")]
-		public bool DoubleNDArmure{
-			get{ return _doubleNDArmure;}
-			set{_doubleNDArmure = value;}
-		}
-
-		private int? _force;
-		[Column(Storage = "Force",Name = "force")]
-		public int? Force{
-			get{ return _force;}
-			set{_force = value;}
-		}
-
-		private int _forceRequise;
-		[Column(Storage = "ForceRequise",Name = "forcerequise")]
-		public int ForceRequise{
-			get{ return _forceRequise;}
-			set{_forceRequise = value;}
-		}
-
-		private decimal? _portee;
-		[Column(Storage = "Portee",Name = "portee")]
-		public decimal? Portee{
-			get{ return _portee;}
-			set{_portee = value;}
-		}
-
-		private bool _armeDeJet;
-		[Column(Storage = "ArmeDeJet",Name = "armedejet")]
-		public bool ArmeDeJet{
-			get{ return _armeDeJet;}
-			set{_armeDeJet = value;}
-		}
 	}
 	[Table(Schema = "cinqanneaux",Name = "armedescription")]
 	public partial class ArmeDescription : AbsObjetDescription {

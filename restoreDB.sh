@@ -1,0 +1,3 @@
+schemaGen CinqAnneaux
+excelImportAll CinqAnneaux/ExcelData/Core.xlsx
+excelImportJoint CinqAnneaux/ExcelData/Core_joint.xlsx

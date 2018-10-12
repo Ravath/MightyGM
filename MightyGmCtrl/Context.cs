@@ -153,5 +153,11 @@ namespace MightyGmCtrl
 		{
 			throw new NotImplementedException();
 		}
+
+		public void Exit()
+		{
+			Audio.Exit();
+		}
+
 	}
 }

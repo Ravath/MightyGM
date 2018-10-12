@@ -27,7 +27,7 @@ namespace MightyGmCtrl.ImportExport
 		/// <returns>null si n'a pas trouvé de feuille ou si ne peux pas ouvrir le fichier.</returns>
 		public static void Import(ISheet sheet, ImportType import)
 		{
-			IRow headerRow = sheet.GetRow(0);
+			IRow headerRow = sheet.GetRow(ExportExcel.NBR_LIGNES_HEADER-1);
 			//Extraire les données (1eres lignes : header)
 			for (int i = ExportExcel.NBR_LIGNES_HEADER; i <= sheet.LastRowNum; i++)
 			{

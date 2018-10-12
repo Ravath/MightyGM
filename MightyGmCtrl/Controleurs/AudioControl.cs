@@ -1,36 +1,34 @@
-﻿using CSCore;
-using CSCore.Codecs;
+﻿using Core.Data;
 using CSCore.CoreAudioAPI;
-using CSCore.SoundOut;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MightyGmCtrl.Controleurs
 {
 	public class AudioControl : Controleur
 	{
-		private ISoundOut _soundOut;
-		private IWaveSource _waveSource;
+		private int _deviceIndex;
 		private readonly ObservableCollection<MMDevice> _devices = new ObservableCollection<MMDevice>();
-		public event EventHandler<PlaybackStoppedEventArgs> PlaybackStopped;
-
-		public PlaybackState PlaybackState
-		{
-			get
-			{
-				if (_soundOut != null)
-					return _soundOut.PlaybackState;
-				return PlaybackState.Stopped;
-			}
-		}
+		private List<TrackControl> _tracks = new List<TrackControl>();
 
 		public IEnumerable<MMDevice> MMDevices
 		{
 			get { return _devices; }
+		}
+
+		public int SelectedDeviceIndex
+		{
+			get{ return _deviceIndex; }
+			set
+			{
+				if(value == _deviceIndex) { return; }
+				_deviceIndex = value;
+				foreach (TrackControl tr in _tracks)
+				{
+					tr.InitializeSoundOut(MMDevices.ElementAt(SelectedDeviceIndex));
+				}
+			}
 		}
 
 		public AudioControl(Context context) : base(context)
@@ -38,60 +36,22 @@ namespace MightyGmCtrl.Controleurs
 			ActualizeMMDevicesList();
 		}
 
-		public void Play()
+		private TrackControl Open(Soundtrack track, MMDevice device)
 		{
-			if (_soundOut != null)
-				_soundOut.Play();
-		}
+			TrackControl newTrack = new TrackControl();
+			newTrack.Open(track, device);
+			_tracks.Add(newTrack);
 
-		public void Pause()
-		{
-			if (_soundOut != null)
-				_soundOut.Pause();
-		}
-
-		public void Stop()
-		{
-			if (_soundOut != null)
-				_soundOut.Stop();
-		}
-
-		private void CleanupPlayback()
-		{
-			if (_soundOut != null)
-			{
-				_soundOut.Dispose();
-				_soundOut = null;
-			}
-			if (_waveSource != null)
-			{
-				_waveSource.Dispose();
-				_waveSource = null;
-			}
-		}
-
-		private void Open(string filename, MMDevice device)
-		{
-			CleanupPlayback();
-
-			_waveSource =
-				CodecFactory.Instance.GetCodec(filename)
-					.ToSampleSource()
-					.ToMono()
-					.ToWaveSource();
-			_soundOut = new WasapiOut() { Latency = 100, Device = device };
-			_soundOut.Initialize(_waveSource);
-			if (PlaybackStopped != null) _soundOut.Stopped += PlaybackStopped;
+			return newTrack;
 		}
 
 		/// <summary>
-		/// done to prevent using MMdevice class from user.
+		/// Add the given Soundtrack to the player.
 		/// </summary>
-		/// <param name="filename"></param>
-		/// <param name="deviceIndex"></param>
-		public void Open(string filename, int deviceIndex)
+		/// <param name="track">Track to play.</param>
+		public TrackControl Open(Soundtrack track)
 		{
-			Open(filename, MMDevices.ElementAt(deviceIndex));
+			return Open(track, MMDevices.ElementAt(SelectedDeviceIndex));
 		}
 
 		public void ActualizeMMDevicesList()
@@ -109,6 +69,14 @@ namespace MightyGmCtrl.Controleurs
 						_devices.Add(device);
 					}
 				}
+			}
+		}
+
+		internal void Exit()
+		{
+			foreach (TrackControl tr in _tracks)
+			{
+				tr.Dispose();
 			}
 		}
 	}

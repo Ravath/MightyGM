@@ -29,14 +29,56 @@ namespace MightyGmCtrl.Controleurs
 				IWorkbook workbook = new XSSFWorkbook();
 
 				//Create header cell style
-				ICellStyle HeaderCellStyle = workbook.CreateCellStyle();
-				HeaderCellStyle.FillForegroundColor = NPOI.HSSF.Util.HSSFColor.Grey40Percent.Index;
+				//Generic
+				ICellStyle headerCellStyle = workbook.CreateCellStyle();
+				headerCellStyle.VerticalAlignment = VerticalAlignment.Top;
+				headerCellStyle.FillForegroundColor = NPOI.HSSF.Util.HSSFColor.Grey25Percent.Index;
+				headerCellStyle.FillPattern = FillPattern.SolidForeground;
 				IFont boldFont = workbook.CreateFont();
 				boldFont.IsBold = true;
-				HeaderCellStyle.SetFont(boldFont);
+				headerCellStyle.SetFont(boldFont);
+				//Grid
+				ICellStyle headerCellStyleGrid = workbook.CreateCellStyle();
+				headerCellStyleGrid.CloneStyleFrom(headerCellStyle);
+				headerCellStyleGrid.BorderBottom = BorderStyle.Thin;
+				headerCellStyleGrid.BorderTop = BorderStyle.Thin;
+				headerCellStyleGrid.BorderLeft = BorderStyle.Thin;
+				headerCellStyleGrid.BorderRight = BorderStyle.Thin;
+
+				//Create link cellStyle
+				ICellStyle linkCellStyle = workbook.CreateCellStyle();
+				IFont linkFont = workbook.CreateFont();
+				linkFont.Color = NPOI.HSSF.Util.HSSFColor.DarkBlue.Index;
+				linkFont.Underline = FontUnderlineType.Single;
+				linkCellStyle.SetFont(linkFont);
 
 				//Create Summary
 				ISheet sommaire = workbook.CreateSheet(GlobalContext.GetMessageRessource("SUMMARY"));
+
+				//Create headers
+				List<IRow> headers = new List<IRow>();
+				for (int i = 0; i < ExportExcel.NBR_LIGNES_HEADER_SUMMARY; i++)
+				{
+					headers.Add(sommaire.CreateRow(i));
+					//Format Style
+					for (int j = 0; j < 5; j++)
+					{
+						//last one is a grid
+						headers[i].CreateCell(j).CellStyle = (i == ExportExcel.NBR_LIGNES_HEADER_SUMMARY-1 ? headerCellStyleGrid : headerCellStyle);
+					}
+				}
+				headers[0].GetCell(0).SetCellValue(System.DateTime.Now.ToString("yyyy/MM/dd"));
+				headers[0].GetCell(1).SetCellValue(GlobalContext.JdrContext.Name);
+				headers[1].GetCell(0).SetCellValue("Link");
+				headers[1].GetCell(1).SetCellValue("Table");
+				headers[1].GetCell(2).SetCellValue("Tag");
+				headers[1].GetCell(3).SetCellValue("Completion");
+				headers[1].GetCell(4).SetCellValue("Correction");
+				sommaire.SetColumnWidth(0, 10 * ExportExcel.COL_WIDTH_FACTOR);
+				sommaire.SetColumnWidth(1, 30 * ExportExcel.COL_WIDTH_FACTOR);
+				sommaire.SetColumnWidth(3, 30 * ExportExcel.COL_WIDTH_FACTOR);
+				sommaire.SetColumnWidth(4, 12 * ExportExcel.COL_WIDTH_FACTOR);
+				sommaire.CreateFreezePane(0, ExportExcel.NBR_LIGNES_HEADER_SUMMARY);
 
 				//Add types
 				for (int i = 0; i < types.Count(); i++)
@@ -46,17 +88,21 @@ namespace MightyGmCtrl.Controleurs
 					ISheet newSheet = workbook.CreateSheet(sheetName);
 
 					//Summary update : new line
-					IRow rs = sommaire.CreateRow(i);
+					IRow rs = sommaire.CreateRow(i + ExportExcel.NBR_LIGNES_HEADER_SUMMARY);
 					rs.CreateCell(1).SetCellValue(types.ElementAt(i).Name);
 					rs.CreateCell(0).SetCellValue(sheetName);
-					//Summary update : hyperlink Creation
-					XSSFHyperlink link2 = new XSSFHyperlink(HyperlinkType.Document);
-					link2.Address = sheetName+"!A1";
+					//Summary update : hyperlink Creation (Summary -> Sheet)
+					XSSFHyperlink link2 = new XSSFHyperlink(HyperlinkType.Document) { Address = sheetName + "!A1" };
 					rs.GetCell(0).Hyperlink = link2;
+					rs.GetCell(0).CellStyle = linkCellStyle;
 
 					//Sheet Creation
-					ExportExcel.CreateSheet(newSheet, HeaderCellStyle, (onlyHeader ? null : GlobalContext.Data), types.ElementAt(i));
+					ExportExcel.CreateSheet(newSheet, headerCellStyle, headerCellStyleGrid, (onlyHeader ? null : GlobalContext.Data), types.ElementAt(i));
 					SetFinEtape();
+
+					//Summary update : hyperlink Creation (Sheet -> Summary)
+					XSSFHyperlink link2r = new XSSFHyperlink(HyperlinkType.Document) { Address = sommaire.SheetName + "!A1" };
+					newSheet.GetRow(0).GetCell(1).Hyperlink = link2r;
 				}
 
 				//Write excel file

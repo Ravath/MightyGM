@@ -122,7 +122,7 @@
     <comment>ERROR : un processus a été interrompu</comment>
   </data>
   <data name="CANT_CONVERT" xml:space="preserve">
-    <value>Ne peux pas convertir la valeur {0} en {1}</value>
+    <value>Ne peux pas convertir la valeur '{0}' en {1}</value>
     <comment>WARNING : import : n'arrive pas à convertir vers un type spécifié</comment>
   </data>
   <data name="CANT_OPEN_FILE" xml:space="preserve">
@@ -130,11 +130,11 @@
     <comment>ERROR : n'a pas réussit à ouvrir un fichier</comment>
   </data>
   <data name="DATAMOD_NO_NAME" xml:space="preserve">
-    <value>Un objet DataModel a été trouvé sans nom renseigné pour le type {0}</value>
+    <value>Un objet DataModel a été trouvé sans nom renseigné pour le type '{0}'</value>
     <comment>WARNING : Import. Les data models doivent tous être pourvus d'un nom.</comment>
   </data>
   <data name="DATAMOD_NO_TAG" xml:space="preserve">
-    <value>Un objet DataModel a été trouvé sans tagrenseigné pour le type {0}</value>
+    <value>Un objet DataModel a été trouvé sans tag renseigné pour le type '{0}'</value>
     <comment>WARNING : Import. Les data models doivent tous être pourvus d'un tag</comment>
   </data>
   <data name="EXPORT_PROC" xml:space="preserve">
@@ -142,11 +142,11 @@
     <comment>NAME : procédure d'export</comment>
   </data>
   <data name="IMPORT" xml:space="preserve">
-    <value>Import : {0}</value>
+    <value>Import : '{0}'</value>
     <comment>INFO : début d'un import</comment>
   </data>
   <data name="IMPORT_ERROR_NO_SHEET" xml:space="preserve">
-    <value>Erreur : N'a pas trouvé la feuille Excel {0}</value>
+    <value>Erreur : N'a pas trouvé la feuille Excel '{0}'</value>
     <comment>ERROR : n'a pas trouvé une feuille excel de nom donné</comment>
   </data>
   <data name="IMPORT_PROC" xml:space="preserve">
@@ -154,39 +154,43 @@
     <comment>NAME : procédure d'export</comment>
   </data>
   <data name="MUST_SELECT_TYPE" xml:space="preserve">
-    <value>Il faut d'abor sélectionner un type pour pouvoir effectuer cette opération.</value>
+    <value>Il faut d'abord sélectionner un type pour pouvoir effectuer cette opération.</value>
     <comment>ERROR : Type nécessaire.</comment>
   </data>
   <data name="NAME_ALREADY_IN_DATABASE" xml:space="preserve">
-    <value>Le nom "{0}" existe déjà dans la base de donnée pour le type {1}</value>
+    <value>Le nom '{0}' existe déjà dans la base de donnée pour le type '{1}'.</value>
     <comment>WARNING : Import. Les noms de data models sont uniques</comment>
   </data>
   <data name="NBR_ERROR_FOUND" xml:space="preserve">
-    <value>{0} erreurs ont été trouvées</value>
+    <value>{0} erreurs ont été trouvées.</value>
     <comment>INFO : Nombre erreurs trouvées au terme d'un check/parse</comment>
   </data>
   <data name="NOT_IMPLEMENTED" xml:space="preserve">
-    <value>La fonction n'a pas été implémentée</value>
+    <value>La fonction n'a pas été implémentée.</value>
     <comment>INFO : Fonctionalitée non utilisable</comment>
   </data>
   <data name="NO_TAG" xml:space="preserve">
-    <value>Le tag {0} n'a pas été trouvé pour le type {1}</value>
+    <value>Le tag '{0}' n'a pas été trouvé pour le type '{1}'.</value>
     <comment>WARNING : le tag de l'objet n'a pas été trouvé</comment>
   </data>
   <data name="RESSOURCE_NOT_FOUND" xml:space="preserve">
-    <value>Le fichier {0} n'a pas été trouvé.</value>
+    <value>Le fichier '{0}' n'a pas été trouvé.</value>
     <comment>WARNING : Problème lors de la recherche d'un fichier (image, son, ...)</comment>
   </data>
   <data name="SUMMARY" xml:space="preserve">
     <value>Sommaire</value>
     <comment>TITLE : nom de la page de garde lors export Excel</comment>
   </data>
+  <data name="TYPE_PROP_NOT_FOUND" xml:space="preserve">
+    <value>Un problème est survenu lors de la recherche de la propriété '{0}' de la classe '{1}'.</value>
+    <comment>ERROR : problème de réflexion</comment>
+  </data>
   <data name="UI_DLL_NOT_FOUND" xml:space="preserve">
-    <value>La Dll d'extention graphique {0} n'a pas été trouvée.</value>
+    <value>La Dll d'extention graphique '{0}' n'a pas été trouvée.</value>
     <comment>ERROR : Problème lors du chargement de la dll JdrUI.</comment>
   </data>
   <data name="UI_DLL_NOT_LOADED" xml:space="preserve">
-    <value>La Dll d'extention graphique {0} n'a pas pu être chargée.</value>
+    <value>La Dll d'extention graphique '{0}' n'a pas pu être chargée.</value>
     <comment>ERROR : Problème lors du chargement du context de la dll JdrUI.</comment>
   </data>
 </root>

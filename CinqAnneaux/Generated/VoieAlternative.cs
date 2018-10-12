@@ -67,17 +67,17 @@ namespace CinqAnneaux.Data {
 			}
 		}
 
-		private IEnumerable<ConditionExemplar> _conditions;
+		private IEnumerable<ConditionAdmissionExemplar> _conditions;
 		[Association(ThisKey = "Id",CanBeNull = false,Storage = "Conditions",OtherKey = "VoieAlternativeModelId")]
-		public IEnumerable <ConditionExemplar> Conditions{
+		public IEnumerable <ConditionAdmissionExemplar> Conditions{
 			get{
 				if( _conditions == null ){
-					_conditions = LoadFromJointure<ConditionExemplar,VoieAlternativeModelToConditionExemplar_Conditions>(false);
+					_conditions = LoadFromJointure<ConditionAdmissionExemplar,VoieAlternativeModelToConditionAdmissionExemplar_Conditions>(false);
 				}
 				return _conditions;
 			}
 			set{
-				SaveToJointure<ConditionExemplar, VoieAlternativeModelToConditionExemplar_Conditions> (_conditions, value,false);
+				SaveToJointure<ConditionAdmissionExemplar, VoieAlternativeModelToConditionAdmissionExemplar_Conditions> (_conditions, value,false);
 				_conditions = value;
 			}
 		}
@@ -105,7 +105,7 @@ namespace CinqAnneaux.Data {
 		}
 		public override void DeleteObject() {
 			DeleteJoins<VoieAlternativeModel,VoieAlternativeModelToCompetenceStatus_CompetencesRequises>(true);
-			DeleteJoins<VoieAlternativeModel,VoieAlternativeModelToConditionExemplar_Conditions>(true);
+			DeleteJoins<VoieAlternativeModel,VoieAlternativeModelToConditionAdmissionExemplar_Conditions>(true);
 			base.DeleteObject();
 		}
 	}

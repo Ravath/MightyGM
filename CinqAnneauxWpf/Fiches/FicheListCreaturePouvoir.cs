@@ -30,7 +30,7 @@ namespace CinqAnneauxWpf.Fiches {
 	}
 
 	internal class pFichePouvoirCreature : UserControl, IFiche {
-		private TraitCreature _pc;
+		private PouvoirNaturel _pc;
 		private TextBlock _tb = new TextBlock() {
 			TextWrapping = System.Windows.TextWrapping.Wrap,
 			HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
@@ -41,7 +41,7 @@ namespace CinqAnneauxWpf.Fiches {
 		public object SelectedObject {
 			get { return _pc; }
 			set {
-				_pc = (TraitCreature)value;
+				_pc = (PouvoirNaturel)value;
 				Refresh();
             }
 		}

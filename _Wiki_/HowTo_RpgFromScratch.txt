@@ -1,3 +1,7 @@
+0) In order to work, the following procedures, scripts and aliases must be correctly setted.
+	- mgTools/loadBashProfile.sh is sourced
+	- environment variables link to the mgTool.exe and Rpg.dll you want to use.
+
 1) Write description of Data using 'MightyData Language'
 
 See MightData languages & definitions
@@ -26,7 +30,10 @@ use Script mgTools/schemaGen.sh
 	(mdp : admin)
 	
  5) Generate the Excel files using 'mgTools/bin/Debug/mgTools.exe'
-	arg0 : canvas (mgTool cmd name)
-	arg1 : DllPath
-	arg2 : Outpath
-	ex: excelGen Yggdrasil Yggdrasil/ExcelData/Core
+	arg1 : Outpath
+	ex: excelGen Yggdrasil/ExcelData/Core
+	
+ 6) When the data is recorded is the excel files, load them in database using 'mgTools/bin/Debug/mgTools.exe'
+	arg1 : Input file path
+	ex: excelImportAll Yggdrasil/ExcelData/Core.xlsx
+		excelImportJoint Yggdrasil/ExcelData/Core_joint.xlsx

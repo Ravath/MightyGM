@@ -130,7 +130,19 @@ namespace MightyGmCtrl.ImportExport
 		public virtual object GetPropertyObject(PropertyInfo prop, object newObject)
 		{
 			bool save = false;
-			object val = prop.GetValue(newObject);
+
+			object val;
+			try
+			{
+				val = prop.GetValue(newObject);
+			}
+			catch (Exception e)
+			{
+				ImportExcel.ReportWarning("TYPE_PROP_NOT_FOUND", prop.Name, prop.DeclaringType);
+				throw e;
+			}
+
+
 			if (val == null)
 			{
 				if (prop.CanWrite)//pointless if can't write the objet back

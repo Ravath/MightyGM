@@ -76,9 +76,6 @@ namespace CinqAnneaux.JdrCore.Agent {
 
 	public class SeuilVieCreature : SeuilVie {
 
-		public int _s5;
-		public int _s10;
-		public int _s15;
 		public Value _sMort = new Value() { Label = "Blessures Max" };
 
 		public override bool IsDead {
@@ -89,38 +86,37 @@ namespace CinqAnneaux.JdrCore.Agent {
 			get {
 				if(HorsCombat)
 					return -1;
-				if(_s15 > 0 && Degats >= _s15) 
-					return 15;
-				if(_s10 > 0 && Degats >= _s10)
-					return 10;
-				if(_s5 > 0 && Degats >= _s5)
-					return 5;
-				return 0;
+				
+				//Find wound status
+				var t = _seuils.LastOrDefault(s => Degats >= s.Item1);
+
+				//No malus if nothing found
+				return t?.Item2 ?? 0;
 			}
 		}
 
 		public override IEnumerable<Tuple<int, int>> Seuils {
-			get {
-				if(_s5 > 0)
-					yield return new Tuple<int, int>(_s5, 5);
-				if(_s10 > 0)
-					yield return new Tuple<int, int>(_s10, 10);
-				if(_s15 > 0)
-					yield return new Tuple<int, int>(_s15, 15);
-			}
+			get { return _seuils; }
 		}
+
+		private List<Tuple<int, int>> _seuils = new List<Tuple<int, int>>();
 
 		/// <summary>
 		/// Compteur de blessures utilisé par les créatures qui n'utilisent pas le même compteur que les PJs.
 		/// </summary>
 		/// <param name="agent"></param>
 		/// <param name="creature"></param>
-		public SeuilVieCreature( Agent agent, CreatureModel creature ) : base(agent) {
+		public SeuilVieCreature( Agent agent, FigurantModel creature ) : base(agent) {
 			_sMort.BaseValue = creature.VieMax;
 			DeathThresholdValue = _sMort;
-			_s15 = creature.Bless15;
-			_s10 = creature.Bless10;
-			_s5 = creature.Bless5;
+
+			// Update Malus Thresholds
+			_seuils.Clear();
+			foreach (var item in creature.Seuils)
+			{
+				_seuils.Add(new Tuple<int, int>(item.Seuil, item.Malus));
+			}
+			_seuils.OrderBy(s => s.Item1);
 		}
 	}
 

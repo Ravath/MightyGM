@@ -43,18 +43,19 @@ namespace Core.Data {
 			MethodInfo insertGeneric = insertMethod.MakeGenericMethod(new Type[] { type });
 			lock (DataAccess)
 			{
-				insertGeneric.Invoke(this, new object[] { this, obj });
+				insertGeneric.Invoke(this, new object[] { this, obj, null, null, null });
 			}
 			return true;
 		}
 		public bool Insert( IDataObject obj ) {
 			Type type = obj.GetType();
 			IEnumerable<MethodInfo> insertMethods = typeof(DataExtensions).GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy).Where(p => p.Name == "InsertWithIdentity");
+			var list = insertMethods.ToList();
 			MethodInfo insertMethod = insertMethods.First(t => t.GetParameters().ElementAt(0).ParameterType == typeof(IDataContext));
 			MethodInfo insertGeneric = insertMethod.MakeGenericMethod(new Type[] { type });
 			lock (DataAccess)
 			{
-				object o = insertGeneric.Invoke(this, new object[] { this, obj });//InsertWithIdentity
+				object o = insertGeneric.Invoke(this, new object[] { this, obj, null, null, null });//InsertWithIdentity
 				obj.Id = Convert.ToInt32(o);
 			}
 			return true;

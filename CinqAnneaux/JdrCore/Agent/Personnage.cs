@@ -6,8 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Core.Gestion;
 using CinqAnneaux.JdrCore.Ecoles;
+using Core.Data;
 
 namespace CinqAnneaux.JdrCore.Agent {
 	public class Personnage : Agent {
@@ -19,7 +19,7 @@ namespace CinqAnneaux.JdrCore.Agent {
 		#endregion
 
 		#region Properties
-		public Joueur Joueur { get; set; }
+		public Player Joueur { get; set; }
 		public RangReputation Reputation { get; }
 		public RankedCarac Honneur { get; }
 		public RankedCarac Gloire { get; }
@@ -47,22 +47,25 @@ namespace CinqAnneaux.JdrCore.Agent {
 			Clan = new Clan();
 			Ecoles = new ListeEcoles(this);
         }
-		public Personnage(PJModel model) : this()
+		public Personnage(PersonnageJoueurModel model) : this()
 		{
 			SetPersonnage(model);
 		}
 		#endregion
 
-		public override void SetPersonnage(PJModel model)
+		public override void SetPersonnage(PersonnageJoueurModel model)
 		{
-			base.SetPersonnage(model);
 			//TODO : init set pj
 			/* clear everything */
-			ClearAttaques();
 			Ecoles.ClearSchools();
 			/* set values */
 			Famille.SetModel(model.Famille);
 			Clan.SetModel(model.Clan);
+
+			Armes.SetPersonnageModel(model);
+
+			// base settings + event
+			base.SetPersonnage(model);
 		}
 	}
 }

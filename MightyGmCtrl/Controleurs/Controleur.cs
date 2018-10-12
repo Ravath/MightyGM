@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MightyGmCtrl.Controleurs
 {
-	public class Controleur
+	public abstract class Controleur
 	{
 		#region members
 		private Context _context;

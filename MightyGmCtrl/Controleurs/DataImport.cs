@@ -33,7 +33,7 @@ namespace MightyGmCtrl.Controleurs
 		private ISheet GetSheet(Type t, IWorkbook workbook)
 		{
 			ISheet summary = workbook.GetSheetAt(0);
-			for (int i = 0; i <= summary.LastRowNum; i++)
+			for (int i = ExportExcel.NBR_LIGNES_HEADER_SUMMARY; i <= summary.LastRowNum; i++)
 			{
 				IRow r = summary.GetRow(i);
 				if(r?.GetCell(1)?.StringCellValue == t.Name)

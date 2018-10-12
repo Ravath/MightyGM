@@ -239,7 +239,7 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Column="0" Grid.Row="0" Text="M'Empereur"/>
+                    <TextBlock Grid.Column="0" Grid.Row="0" Text="L'Empereur"/>
                     <TextBlock Grid.Column="1" Grid.Row="0" Text="10"/>
                     <TextBlock Grid.Column="0" Grid.Row="1" Text="L'Impératrice"/>
                     <TextBlock Grid.Column="1" Grid.Row="1" Text="9.9"/>
@@ -407,7 +407,7 @@
                         <TextBlock Text="Gain d'un nombre de Points de Gloire égal au Statut ou à la Gloire (plus bas des deux) de la personne qui offre si elle possède un status plus élevé que celui du personnage."/>
                         <TextBlock Text="Perte du double des Points de Gloire normalement gagnés pour l'acte sur lequel le samurai a été pris  mentir."/>
                         <TextBlock Text="Reconnaissance publique d'un individu de Statut 7+, gain de 1 Rang de Gloire."/>
-                        <TextBlock Text="Un Point de Gloire pour déclarer être amoureux publiquement (sans révéler l'identité de l'ête aimé)."/>
+                        <TextBlock Text="Un Point de Gloire pour déclarer être amoureux publiquement (sans révéler l'identité de l'être aimé)."/>
                         <TextBlock Text="Après avoir gagné de la Gloire, s'en vanter en public permet d'en gagner 1 Point de plus."/>
                         <TextBlock Text="Gain d'un nombre de Points de Gloire égal au nombre de Points de Statut gagnés."/>
                         <TextBlock Text="Se venger d'un ennemi rapporte des Points de Gloire équivalent au Statut ou à la Gloire (plus bas des deux) de ce dernier."/>

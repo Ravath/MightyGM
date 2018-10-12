@@ -8,7 +8,8 @@ namespace Core.Data {
 	/// <summary>
 	/// Object de la database servant de modèle, et identifié par un nom unique.
 	/// </summary>
-	public abstract class DataModel : DataObject {
+	public abstract class DataModel : DataObject, IDataModel
+	{
 		/// <summary>
 		/// Nom de l'objet.
 		/// </summary>

@@ -4,7 +4,6 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Ehlion/source/repos/MightyGM/TableTop/Content/map.png</File>
     <File>C:/Users/Ehlion/source/repos/MightyGM/TableTop/Content/GeonBit.UI/themes/editor/effects/disabled.fx</File>
     <File>C:/Users/Ehlion/source/repos/MightyGM/TableTop/Content/GeonBit.UI/themes/editor/effects/silhouette.fx</File>
     <File>C:/Users/Ehlion/source/repos/MightyGM/TableTop/Content/GeonBit.UI/themes/editor/fonts/Bold.spritefont</File>
@@ -591,5 +590,6 @@
     <File>C:/Users/Ehlion/source/repos/MightyGM/TableTop/Content/GeonBit.UI/themes/lowres/textures/slider_fancy_md.xml</File>
     <File>C:/Users/Ehlion/source/repos/MightyGM/TableTop/Content/GeonBit.UI/themes/lowres/textures/white_texture.png</File>
     <File>C:/Users/Ehlion/source/repos/MightyGM/TableTop/Content/GeonBit.UI/themes/lowres/ThemeData.xml</File>
+    <File>C:/Users/Ehlion/source/repos/MightyGM/TableTop/Content/map.png</File>
   </SourceFiles>
 </SourceFileCollection>

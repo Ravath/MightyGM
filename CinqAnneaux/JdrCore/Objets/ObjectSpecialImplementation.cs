@@ -8,7 +8,7 @@ using CinqAnneaux.Data;
 namespace CinqAnneaux.JdrCore.Objets
 {
 	public static class SpecialImplementation{
-		public static ObjectSpecial Get(SpecialObjetExemplar spo)
+		public static ObjectSpecial Instanciate(SpecialObjetExemplar spo)
 		{
 			switch (spo.Model.Tag)
 			{

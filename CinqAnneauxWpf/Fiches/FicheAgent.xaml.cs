@@ -61,8 +61,8 @@ namespace CinqAnneauxWpf.Fiches {
 				} else if (value is PersonnageModel) {
 					Agent ag = Agent;
 					if(value is CreatureModel cm) {
-						if(!(ag is Creature)) {
-							ag = new Creature(cm);
+						if(!(ag is Figurant)) {
+							ag = new Figurant(cm);
 						}
 						else
 						{

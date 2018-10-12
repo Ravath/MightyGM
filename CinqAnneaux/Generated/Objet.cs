@@ -38,11 +38,11 @@ namespace CinqAnneaux.Data {
 			set{_coutMax = value;}
 		}
 
-		private bool _vetement;
-		[Column(Storage = "Vetement",Name = "vetement")]
-		public bool Vetement{
-			get{ return _vetement;}
-			set{_vetement = value;}
+		private ObjectType _type;
+		[Column(Storage = "Type",Name = "type")]
+		public ObjectType Type{
+			get{ return _type;}
+			set{_type = value;}
 		}
 
 		private bool _necessaireVoyage;

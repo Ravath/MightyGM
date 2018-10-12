@@ -54,19 +54,19 @@ namespace MightyGmCtrl.ImportExport
 				{//est un DataModel
 					if (string.IsNullOrWhiteSpace(dataMod.Tag))
 					{
-						reportRef(MessageType.WARNING, "DATAMOD_NO_TAG", new object[] { temp.GetType() });
+						reportRef(MessageType.WARNING, "DATAMOD_NO_TAG", new object[] { temp.GetType().Name });
 						//we don't want objects without tag in DB
 						toRemove.Add(temp);
 					}
 					else if (string.IsNullOrWhiteSpace(dataMod.Name))
 					{
-						reportRef(MessageType.WARNING, "DATAMOD_NO_NAME", new object[] { temp.GetType() });
+						reportRef(MessageType.WARNING, "DATAMOD_NO_NAME", new object[] { temp.GetType().Name });
 						//we don't want objects without name in DB
 						toRemove.Add(temp);
 					}
 					else if (data.Contains(_type, dataMod))
 					{
-						reportRef(MessageType.WARNING, "NAME_ALREADY_IN_DATABASE", new object[] { dataMod.Name, temp.GetType() });
+						reportRef(MessageType.WARNING, "NAME_ALREADY_IN_DATABASE", new object[] { dataMod.Name, temp.GetType().Name});
 					}
 					else
 					{
@@ -106,7 +106,7 @@ namespace MightyGmCtrl.ImportExport
 				}
 				else
 				{
-					reportRef(MessageType.WARNING, "NO_TAG", new object[] { rel.tag, rel.inst.GetType() });
+					reportRef(MessageType.WARNING, "NO_TAG", new object[] { rel.tag, rel.inst.GetType().Name+":"+rel.refProperty.Name });
 				}
 			}
 			foreach (CollectionValue col in _collections)

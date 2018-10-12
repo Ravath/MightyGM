@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.Data;
 using System.Reflection;
+using System.IO;
 
 namespace MightyGmCtrl.Controleurs
 {
@@ -19,6 +20,18 @@ namespace MightyGmCtrl.Controleurs
 		#region members
 		private IJdrContext _jdrContext;
 		private IJdrContextUI _jdrContextUi;
+		private List<JdrAssembly> _jdrAssemblies;
+		public IEnumerable<JdrAssembly> JdrAssemblies {
+			get
+			{
+				if(_jdrAssemblies == null)
+				{
+					_jdrAssemblies = GetJdrAssemblies();
+				}
+				return _jdrAssemblies;
+			}
+		}
+		public Rpg Rpg { get; private set; }
 		#endregion
 
 		public Contexts(Context context) : base(context)
@@ -48,6 +61,52 @@ namespace MightyGmCtrl.Controleurs
 		internal void OnAssemblyChanged_Event(DllData sender, Assembly newAssembly)
 		{
 			JdrContext = sender.GetJdrContext(GlobalContext);
+		}
+
+		internal List<JdrAssembly> GetJdrAssemblies()
+		{
+			// Init
+			List<JdrAssembly> ret = new List<JdrAssembly>();
+
+			// Find the dll modules
+			foreach (FileInfo fi in GlobalContext.Files.FindJdrModules())
+			{
+				if (fi.Extension.ToLower() == ".dll")
+				{
+					// Create new Assembly
+					JdrAssembly newAss = new JdrAssembly()
+					{
+						Name = fi.Name.Remove(fi.Name.Length - 4, 4),
+						DllPath = fi
+					};
+					ret.Add(newAss);
+				}
+			}
+
+			// End
+			return ret;
+		}
+
+		public void SetJdrAssembly(JdrAssembly assembly)
+		{
+			// Load Dll
+			GlobalContext.Dll.SetAssembly(assembly.DllPath.FullName);
+
+			// Get RPG in DB
+			var qj = from c in GlobalContext.Data.GetTable<Rpg>()
+					 where c.Name == assembly.Name
+					 select c;
+			Rpg j = qj.SingleOrDefault();
+
+			// Create if doesn't exist
+			if (j == null)
+			{
+				j = new Rpg { Name = assembly.Name };
+				j.SaveObject();
+			}
+
+			// Keep
+			Rpg = j;
 		}
 	}
 }

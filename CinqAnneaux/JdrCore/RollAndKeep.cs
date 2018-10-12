@@ -46,6 +46,23 @@ namespace CinqAnneaux.JdrCore {
 		}
 
 		public RollAndKeep(int roll, int keep) : this(new Value(roll), new Value(keep)) { }
+
+
+		//
+		// Résumé :
+		//     Retourne une chaîne qui représente l'objet actuel.
+		//
+		// Retourne :
+		//     Chaîne qui représente l'objet actuel.
+		public override string ToString()
+		{
+			return RollValue.TotalValue + "g" + KeepValue.TotalValue;
+		}
+
+		public string ToMacro()
+		{
+			return _pool.ToMacro();
+		}
 	}
 
 	//public abstract class AbsRKPool : IPool {

@@ -18,7 +18,7 @@ namespace Core.Data {
 		/// </summary>
 		public Assembly Assembly {
 			get { return _assembly; }
-			set {
+			private set {
 				_assembly = value;
 				ParseAssembly();
 				OnAssemblyChanged?.Invoke(this, value);

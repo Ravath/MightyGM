@@ -44,7 +44,14 @@ namespace CinqAnneaux.JdrCore.Competences {
 			cpt.SetAttribut(_attr);
 		}
 
-		public void SetPersonnage( PJModel perso ) {
+		public void SetPersonnage(PersonnageModel perso)
+		{
+			if(perso is FigurantModel f) { SetPersonnage(f); }
+			else if(perso is PersonnageJoueurModel p) { SetPersonnage(p); }
+			else { throw new Exception("PersonnageModel of Type '"+ perso.GetType().Name+"' is not implemented"); }
+		}
+
+		public void SetPersonnage(PersonnageJoueurModel perso ) {
 			ClearList();
             foreach(CompetenceExemplar cpt in perso.Competences) {
 				Competence icpt = new Competence();
@@ -56,7 +63,7 @@ namespace CinqAnneaux.JdrCore.Competences {
 			NewCompetences?.Invoke(this, this.Competences.ToArray());
 		}
 
-		public void SetPersonnage(CreatureModel perso)
+		public void SetPersonnage(FigurantModel perso)
 		{
 			ClearList();
 			foreach (CompetenceStatus cpt in perso.Competences)

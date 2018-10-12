@@ -32,16 +32,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="linq2db, Version=2.0.0.0, Culture=neutral, PublicKeyToken=e41013125f9e410a, processorArchitecture=MSIL">
-      <HintPath>..\packages\linq2db.2.0.0\lib\net45\linq2db.dll</HintPath>
+    <Reference Include="linq2db, Version=2.1.0.0, Culture=neutral, PublicKeyToken=e41013125f9e410a, processorArchitecture=MSIL">
+      <HintPath>..\packages\linq2db.2.1.0\lib\net45\linq2db.dll</HintPath>
+    </Reference>
+    <Reference Include="Npgsql, Version=4.0.2.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.4.0.2\lib\net451\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.0\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -62,6 +70,11 @@
     <Compile Include="Data\Schema\SchType.cs" />
     <Compile Include="Data\Schema\SchTypeProperty.cs" />
     <Compile Include="Dice\IRoll.cs" />
+    <Compile Include="Dice\Parser\RollParserCustom.cs" />
+    <Compile Include="Dice\Parser\GplexBuffers.cs" />
+    <Compile Include="Dice\Parser\RollParserGenerated.cs" />
+    <Compile Include="Dice\Parser\ShiftReduceParserCode.cs" />
+    <Compile Include="Dice\Procedures.cs" />
     <Compile Include="Engine\Agent.cs" />
     <Compile Include="Engine\AlterationStates.cs" />
     <Compile Include="Engine\CollectionCapaciteActive.cs" />
@@ -100,6 +113,21 @@
     <Compile Include="Generated\SoundFilter.cs" />
     <Compile Include="Generated\Soundtrack.cs" />
     <Compile Include="Generated\Tag.cs" />
+    <Compile Include="Generator\AbsAction.cs" />
+    <Compile Include="Generator\AbsNode.cs" />
+    <Compile Include="Generator\AbsComposite.cs" />
+    <Compile Include="Generator\AbsRessource.cs" />
+    <Compile Include="Generator\ActionPrint.cs" />
+    <Compile Include="Generator\ActionRandomizer.cs" />
+    <Compile Include="Generator\ActionRessource.cs" />
+    <Compile Include="Generator\ActionTag.cs" />
+    <Compile Include="Generator\GenerationResult.cs" />
+    <Compile Include="Generator\Generator.cs" />
+    <Compile Include="Generator\NodeIf.cs" />
+    <Compile Include="Generator\NodeRandomizer.cs" />
+    <Compile Include="Generator\NodeSequence.cs" />
+    <Compile Include="Generator\RessourceFile.cs" />
+    <Compile Include="Generator\RessourceSequence.cs" />
     <Compile Include="Map\2DPosition.cs" />
     <Compile Include="Map\Abs2DMap.cs" />
     <Compile Include="Map\Discrete2DGrid.cs" />
@@ -121,6 +149,24 @@
     <Compile Include="DocNamespace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Types\UnitValue.cs" />
+    <Compile Include="UserMade\Chapter.cs" />
+    <Compile Include="UserMade\Document.cs" />
+    <Compile Include="UserMade\FilteredTrack.cs" />
+    <Compile Include="UserMade\Graph.cs" />
+    <Compile Include="UserMade\Handbook.cs" />
+    <Compile Include="UserMade\HandbookReference.cs" />
+    <Compile Include="UserMade\Image.cs" />
+    <Compile Include="UserMade\Map.cs" />
+    <Compile Include="UserMade\Paragraph.cs" />
+    <Compile Include="UserMade\Player.cs" />
+    <Compile Include="UserMade\Playlist.cs" />
+    <Compile Include="UserMade\Ressource.cs" />
+    <Compile Include="UserMade\Rpg.cs" />
+    <Compile Include="UserMade\Scenario.cs" />
+    <Compile Include="UserMade\Session.cs" />
+    <Compile Include="UserMade\SoundFilter.cs" />
+    <Compile Include="UserMade\Soundtrack.cs" />
+    <Compile Include="UserMade\Tag.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -13,6 +13,10 @@ namespace Core.Dice {
 		{
 			return _generator.Next(1, faces + 1);
 		}
+		public static int Interval(int min, int max)
+		{
+			return _generator.Next(min, max + 1);
+		}
 		public static int D20()
 		{
 			return RollD(20);

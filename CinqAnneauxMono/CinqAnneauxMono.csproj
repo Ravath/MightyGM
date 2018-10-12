@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1E0F2F8D-5766-49AC-A9E6-1AEAC023F14A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CinqAnneauxMono</RootNamespace>
+    <AssemblyName>CinqAnneauxMono</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="linq2db, Version=2.1.0.0, Culture=neutral, PublicKeyToken=e41013125f9e410a" />
+    <Reference Include="MonoGame.Framework, Version=3.6.0.1625, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FichesCandidates\AdvancedSchoolFc.cs" />
+    <Compile Include="FichesCandidates\ConditionFc.cs" />
+    <Compile Include="FichesCandidates\AdvantageFc.cs" />
+    <Compile Include="FichesCandidates\ActionFc.cs" />
+    <Compile Include="FichesCandidates\IntrigueFc.cs" />
+    <Compile Include="FichesCandidates\AlternativeSchoolFc.cs" />
+    <Compile Include="FichesCandidates\StatusFc.cs" />
+    <Compile Include="FichesCandidates\TatooFc.cs" />
+    <Compile Include="FichesCandidates\ClanFc.cs" />
+    <Compile Include="FichesCandidates\AncestorFc.cs" />
+    <Compile Include="FichesCandidates\HeroicOpportunityFc.cs" />
+    <Compile Include="FichesCandidates\ShadowlandPowerFc.cs" />
+    <Compile Include="FichesCandidates\KihoFc.cs" />
+    <Compile Include="FichesCandidates\SkillFc.cs" />
+    <Compile Include="FichesCandidates\KataFc.cs" />
+    <Compile Include="FichesCandidates\SpellFc.cs" />
+    <Compile Include="FichesCandidates\CreatureFc.cs" />
+    <Compile Include="FichesCandidates\WeaponFc.cs" />
+    <Compile Include="FichesCandidates\ObjectFc.cs" />
+    <Compile Include="Fiches\DisplayAttacks.cs" />
+    <Compile Include="Fiches\DisplayAttributes.cs" />
+    <Compile Include="Fiches\DisplayNaturalPowers.cs" />
+    <Compile Include="Fiches\DisplayLife.cs" />
+    <Compile Include="Fiches\DisplaySecondaries.cs" />
+    <Compile Include="Fiches\DisplaySkills.cs" />
+    <Compile Include="Fiches\FicheAgent.cs" />
+    <Compile Include="Fiches\FicheAdvancedSchool.cs" />
+    <Compile Include="Fiches\FicheCondition.cs" />
+    <Compile Include="Fiches\FicheAction.cs" />
+    <Compile Include="Fiches\FicheFigurant.cs" />
+    <Compile Include="Fiches\FicheHeroicOpportunity.cs" />
+    <Compile Include="Fiches\FicheIntrigue.cs" />
+    <Compile Include="Fiches\FicheAlternativeSchool.cs" />
+    <Compile Include="Fiches\FicheJoueur.cs" />
+    <Compile Include="Fiches\FicheTatoo.cs" />
+    <Compile Include="Fiches\FicheShadowlandPower.cs" />
+    <Compile Include="Fiches\FicheKiho.cs" />
+    <Compile Include="Fiches\FicheKata.cs" />
+    <Compile Include="Fiches\FicheSkill.cs" />
+    <Compile Include="Fiches\FicheAdvantage.cs" />
+    <Compile Include="Fiches\FicheSpell.cs" />
+    <Compile Include="Fiches\FicheAncestor.cs" />
+    <Compile Include="Fiches\FicheArmor.cs" />
+    <Compile Include="Fiches\FicheWeapon.cs" />
+    <Compile Include="Fiches\FicheClan.cs" />
+    <Compile Include="Fiches\FicheFamily.cs" />
+    <Compile Include="Fiches\FicheObject.cs" />
+    <Compile Include="Fiches\FicheSchool.cs" />
+    <Compile Include="Fiches\RollAndKeepReader.cs" />
+    <Compile Include="LocalContextMono.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CinqAnneaux\CinqAnneaux.csproj">
+      <Project>{4216a40e-5304-484b-85b7-c31dceeaf5d2}</Project>
+      <Name>CinqAnneaux</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoreMono\CoreMono.csproj">
+      <Project>{1bf8fe9c-5f29-428d-8021-99d2cb2fcca9}</Project>
+      <Name>CoreMono</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{93418f01-3e81-43f0-b93b-3c84ce60b40a}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GeonBit.UI\GeonBit.UI\GeonBit.UI.csproj">
+      <Project>{dd284f36-fcd5-4265-ae4c-28b9a38b9def}</Project>
+      <Name>GeonBit.UI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

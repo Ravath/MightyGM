@@ -13,9 +13,19 @@ namespace MightyGmCtrl.Controleurs
 		/// <summary>
 		/// Application local path;
 		/// </summary>
-		public string UiTypeName { get; set; }
 		public string LocalPath { get; }
+
+		/// <summary>
+		/// The Application discriminant for the UI modular DLLs.
+		/// </summary>
+		public string UiTypeName { get; set; }
+		/// <summary>
+		/// The directory where RPG modules are stored.
+		/// </summary>
 		public string ModulesDirectory { get { return LocalPath + "\\Modules"; } }
+		/// <summary>
+		/// The directory where textures are stored.
+		/// </summary>
 		public string TexturesDirectory { get { return LocalPath + "\\Textures"; } }
 
 		public FilesControl(Context ctx, string uiTypeName) : base(ctx)
@@ -59,6 +69,49 @@ namespace MightyGmCtrl.Controleurs
 			return success;
 		}
 
+		private FileInfo[] GetFiles(string filter, bool multiselect, bool fileExists, out bool exitSuccess, out string outMessage)
+		{
+			exitSuccess = false;
+			outMessage = GetMessageRessource("ABORT");
+			FileInfo[] ret = new FileInfo[0];
+
+			try
+			{
+				// Create an instance of the open file dialog box.
+				System.Windows.Forms.OpenFileDialog openFileDialog1 = new System.Windows.Forms.OpenFileDialog
+				{
+					// Set filter options and filter index.
+					Filter = filter,
+					Multiselect = multiselect,
+					CheckFileExists = fileExists
+				};
+				// Show the dialog and get result.
+				System.Windows.Forms.DialogResult result = openFileDialog1.ShowDialog();
+
+				//return values
+				exitSuccess = (result == System.Windows.Forms.DialogResult.OK || result == System.Windows.Forms.DialogResult.Yes);
+				if (exitSuccess)
+				{
+					ret = new FileInfo[openFileDialog1.FileNames.Length];
+					for (int i = 0; i < ret.Length; i++)
+					{
+						ret[i] = new FileInfo(openFileDialog1.FileNames[i]);
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				ReportException(ex);
+			}
+
+			return ret;
+		}
+
+		public FileInfo[] GetAudioFiles(out string outMessage, out bool success)
+		{
+			return GetFiles("Audio Files(.mp3; .wma) | *.mp3; *.wma", true, true, out success, out outMessage);
+		}
+
 		/// <summary>
 		/// Make user choose an excel file from computer.
 		/// </summary>
@@ -78,6 +131,11 @@ namespace MightyGmCtrl.Controleurs
 		{
 			return GetFile("Document Word|*.docx", false, fileExists, out outMessage);
 		}
+
+		public FileInfo[] GetPictFiles(out string outMessage, out bool success)
+		{
+			return GetFiles("Images Files(.jpg; .png) | *.jpg; *.png", true, true, out success, out outMessage);
+		}
 		#endregion
 
 		#region Dll management
@@ -85,7 +143,7 @@ namespace MightyGmCtrl.Controleurs
 		/// Find the path to every Jdr dll module.
 		/// </summary>
 		/// <returns></returns>
-		public IEnumerable<FileInfo> FindJdrModules()
+		internal IEnumerable<FileInfo> FindJdrModules()
 		{
 			List<FileInfo> assems = new List<FileInfo>();
 			foreach (string dirpath in Directory.EnumerateDirectories(ModulesDirectory))
@@ -100,7 +158,7 @@ namespace MightyGmCtrl.Controleurs
 			return assems;
 		}
 
-		public IJdrContextUI GetUIDll(string name)
+		internal IJdrContextUI GetUIDll(string name)
 		{
 			IJdrContextUI result = null;
 			FileInfo fi = GetDllFile(name, UiTypeName);
@@ -115,7 +173,7 @@ namespace MightyGmCtrl.Controleurs
 			return result;
 		}
 
-		public FileInfo GetDllFile(string moduleName, string dllSuffixe)
+		internal FileInfo GetDllFile(string moduleName, string dllSuffixe)
 		{
 			return new FileInfo(ModulesDirectory + "\\" + moduleName + "\\" + moduleName + dllSuffixe + ".dll");
 		} 
