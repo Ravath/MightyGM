@@ -17,6 +17,7 @@ namespace Core.Generator
 		[XmlElement("Print", typeof(ActionPrint))]
 		[XmlElement("Tag", typeof(ActionTag))]
 		[XmlElement("Randomizer", typeof(ActionRandomizer))]
+		[XmlElement("Selector", typeof(ActionSelector))]
 		[XmlElement("If", typeof(NodeIf))]
 		[XmlElement("Ressource", typeof(ActionRessource))]
 		[XmlElement("Sequence", typeof(NodeSequence))]

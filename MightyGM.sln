@@ -76,7 +76,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dice", "Dice\Dice.csproj", 
 		{93418F01-3E81-43F0-B93B-3C84CE60B40A} = {93418F01-3E81-43F0-B93B-3C84CE60B40A}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MightyGenerator", "RndGenerator\MightyGenerator.csproj", "{CE7CFAA2-3120-407A-BEC2-48DCFE63B808}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MightyGenerator", "MightyGenerator\MightyGenerator.csproj", "{CE7CFAA2-3120-407A-BEC2-48DCFE63B808}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -120,11 +120,13 @@
     <Compile Include="Generator\ActionPrint.cs" />
     <Compile Include="Generator\ActionRandomizer.cs" />
     <Compile Include="Generator\ActionRessource.cs" />
+    <Compile Include="Generator\ActionSelector.cs" />
     <Compile Include="Generator\ActionTag.cs" />
     <Compile Include="Generator\GenerationResult.cs" />
     <Compile Include="Generator\Generator.cs" />
     <Compile Include="Generator\NodeIf.cs" />
     <Compile Include="Generator\NodeRandomizer.cs" />
+    <Compile Include="Generator\NodeSelector.cs" />
     <Compile Include="Generator\NodeSequence.cs" />
     <Compile Include="Generator\RessourceFile.cs" />
     <Compile Include="Generator\RessourceSequence.cs" />
