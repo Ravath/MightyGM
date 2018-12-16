@@ -15,6 +15,7 @@ namespace MightyGmCtrl.ImportExport
 		public const int COL_WIDTH_FACTOR = 256;
 		public const int NBR_LIGNES_HEADER_SUMMARY = 2;
 		public const int NBR_LIGNES_HEADER = 2;
+		public const int NBR_MIN_COL_HEADER = 2;
 
 		/// <summary>
 		/// The Import/Exportdelegated rule for each managed property type, in priority order.
@@ -74,6 +75,10 @@ namespace MightyGmCtrl.ImportExport
 					}
 					columnOffset += width;
 				}
+			}
+			if(columnOffset < NBR_MIN_COL_HEADER)
+			{
+				columnOffset = NBR_MIN_COL_HEADER;
 			}
 
 			//Header Completion

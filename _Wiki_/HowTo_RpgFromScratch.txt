@@ -4,12 +4,12 @@
 
 1) Write description of Data using 'MightyData Language'
 
-See MightData languages & definitions
+See MightyData languages & definitions
 
 2) Generate
 
 use Script mgTools/DataGen.sh
-	ex: dataGen Yggdrasil.txt"
+	ex: "dataGen Yggdrasil.txt"
 
 3) Create a Project in Visual Studio
  - JDR>Ajouter>Nouveau Projet => Bibliothèque de classes (.NET Framework)
@@ -20,6 +20,9 @@ use Script mgTools/DataGen.sh
  - Reference>Projet>Core
  - Reference>Add Ref System.Data.Linq
  - Add nuget package Link2db
+ 
+ - Add "Langue/fr.resx"
+ - Implémenter LocalContext.cs
 
  - Generate The DLL (debug, release, ...)
  
