@@ -5,21 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace Core.Generator
+namespace Core.Generator.Collections
 {
-	public class NodeIf : NodeSequence
+	public class ConditionalNode : SequenceCollection
 	{
 		private string _value;
 		private bool _negative;
+
 		[XmlAttribute("Tag")]
 		public string Tag { get; set; }
 		[XmlAttribute("Value")]
-		public string Value{
-			get {
+		public string Value
+		{
+			get
+			{
 				if (_negative) { return "!" + _value; }
 				else { return _value; }
 			}
-			set {
+			set
+			{
 				if (String.IsNullOrWhiteSpace(value))
 				{
 					_negative = false;
@@ -33,38 +37,35 @@ namespace Core.Generator
 			}
 		}
 
-		public NodeIf() {}
-		public NodeIf(string tag, string value)
+		public ConditionalNode() { }
+		public ConditionalNode(string tag, string value)
 		{
 			Tag = tag;
 			Value = value;
 		}
 
-		/// <summary>
-		/// Make every children perform generation in order.
-		/// </summary>
-		/// <param name="result"></param>
-		public override void Generation(ref GenerationResult result)
+		protected Boolean IsConditionTrue(GenerationResult result)
 		{
 			// empty value is specific
 			if (String.IsNullOrWhiteSpace(_value))
 			{
 				// if "!" only means not already defined
-				if(!_negative && result.ContainsTag(Tag))
-					base.Generation(ref result);
+				if (!_negative && result.ContainsTag(Tag))
+					return true;
 				// else, only has to be defined
 				else if (_negative && !result.ContainsTag(Tag))
-					base.Generation(ref result);
+					return true;
 			}
 			else if (result.ContainsTag(Tag))
 			{
 				// basic case : value matches
 				if (!_negative && result.GetTagValue(Tag) == _value)
-					base.Generation(ref result);
+					return true;
 				// else, ( "!VALUE" ) : value dismatches
-				else if(_negative && result.GetTagValue(Tag) != _value)
-					base.Generation(ref result);
+				else if (_negative && result.GetTagValue(Tag) != _value)
+					return true;
 			}
+			return false;
 		}
 	}
 }

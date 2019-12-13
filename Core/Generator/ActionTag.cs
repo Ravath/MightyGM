@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace Core.Generator
 {
-	public class ActionTag : AbsAction
+	public class ActionTag : AbsNode
 	{
 
 		[XmlAttribute("Tag")]

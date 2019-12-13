@@ -1,27 +1,45 @@
-﻿using System;
+﻿using Core.Dice;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace Core.Generator
+namespace Core.Generator.Collections
 {
 	/// <summary>
 	/// A specialized sequence node associated with conditions.
 	/// </summary>
-	public class NodeRandomizer : NodeSequence
+	public class RandomRow : SequenceCollection
 	{
 		[XmlAttribute("Min")]
-		public int Min { get; set; }
+		public string MinString { get; set; }
 		[XmlAttribute("Max")]
-		public int Max { get; set; }
+		public string MaxString { get; set; }
 
-		public NodeRandomizer() {}
-		public NodeRandomizer(int min, int max)
+		[XmlIgnore]
+		public int Min { get; private set; }
+		[XmlIgnore]
+		public int Max { get; private set; }
+
+		public RandomRow() {}
+		public RandomRow(int min, int max)
 		{
 			Min = min;
 			Max = max;
+		}
+
+		public void InitRow(GenerationResult result)
+		{
+			//Min
+			IRoll roll = result.GetRoll(MinString);
+			roll.Roll();
+			Min = roll.NetResult;
+			//Max
+			roll = result.GetRoll(MaxString);
+			roll.Roll();
+			Max = roll.NetResult;
 		}
 
 		/// <summary>

@@ -8,32 +8,24 @@ using System.Xml.Serialization;
 namespace Core.Generator
 {
 	/// <summary>
-	/// Abstract Class for nodes collection of nodes. Works in a Composite pattern.
+	/// Higher class, parent of the Generation Nodes in the composite pattern.
 	/// </summary>
-	public abstract class AbsNode : AbsComposite
+	public abstract class AbsNode
 	{
-		private List<AbsComposite> _children = new List<AbsComposite>();
+		/// <summary>
+		/// Abstract definition of the fonction called by generation.
+		/// </summary>
+		/// <param name="result">The result to perform the generation upon.</param>
+		public abstract void Generation(ref GenerationResult result);
 
-		[XmlElement("Print", typeof(ActionPrint))]
-		[XmlElement("Tag", typeof(ActionTag))]
-		[XmlElement("Randomizer", typeof(ActionRandomizer))]
-		[XmlElement("Selector", typeof(ActionSelector))]
-		[XmlElement("If", typeof(NodeIf))]
-		[XmlElement("Ressource", typeof(ActionRessource))]
-		[XmlElement("Sequence", typeof(NodeSequence))]
-		public List<AbsComposite> Children { get { return _children; } }
+		/// <summary>
+		/// Default definition of the fonction called before generation.
+		/// </summary>
+		public virtual void StartGeneration() { }
 
-		public void AddChild(AbsComposite newChild)
-		{
-			_children.Add(newChild);
-		}
-
-		public void AddChild(params AbsComposite[] newChildren)
-		{
-			foreach (var item in newChildren)
-			{
-				_children.Add(item);
-			}
-		}
+		/// <summary>
+		/// Default definition of the fonction called after generation.
+		/// </summary>
+		public virtual void EndGeneration() { }
 	}
 }

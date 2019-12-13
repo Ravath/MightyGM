@@ -10,7 +10,7 @@ namespace Core.Generator
 	/// <summary>
 	/// Basic action printing the given text.
 	/// </summary>
-	public class ActionPrint : AbsAction
+	public class ActionPrint : AbsNode
 	{
 		/// <summary>
 		/// The added text.
@@ -30,7 +30,7 @@ namespace Core.Generator
 		/// <param name="result"></param>
 		public override void Generation(ref GenerationResult result)
 		{
-			result.AddText(Core.Dice.Procedures.ParseFromText(Value));
+			result.AddText(Core.Dice.Procedures.ParseFromText(result.ReplaceTags(Value)));
 		}
 	}
 }

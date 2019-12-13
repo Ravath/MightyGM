@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Generator.Collections;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,16 +12,18 @@ namespace Core.Generator
 	public class Generator
 	{
 		private GenerationResult _result;
-
+		
 		public string Name { get; set; }
-		public NodeSequence Sequence { get; set; }
+		
+		public SequenceCollection Sequence { get; set; }
+
 		[XmlArrayItem("File", typeof(RessourceFile))]
 		[XmlArrayItem("Ressource", typeof(RessourceSequence))]
 		public List<AbsRessource> Ressources { get; set; }
 
 		public Generator()
 		{
-			Sequence = new NodeSequence();
+			Sequence = new SequenceCollection();
 			Ressources = new List<AbsRessource>();
 			_result = new GenerationResult(this);
 		}
@@ -28,8 +31,18 @@ namespace Core.Generator
 		public GenerationResult Generate()
 		{
 			_result.StartGeneration();
+			Sequence.StartGeneration();
+			foreach (var item in Ressources)
+			{
+				item.StartGeneration();
+			}
 			Sequence.Generation(ref _result);
 			_result.EndGeneration();
+			foreach (var item in Ressources)
+			{
+				item.EndGeneration();
+			}
+			Sequence.EndGeneration();
 
 			return _result;
 		}

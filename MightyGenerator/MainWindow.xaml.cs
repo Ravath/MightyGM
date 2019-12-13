@@ -58,12 +58,24 @@ namespace MightyGenerator
 				catch (Exception e)
 				{
 					Text.Text += "File : " + item + "\n";
-					Text.Text += e.StackTrace;
-					Text.Text += "\n";
-					Text.Text += e.Message;
-					Text.Text += "\n";
+					PopUpException(e);
 				}
 			}
+		}
+
+		private void PopUpException(Exception e)
+		{
+#if DEBUG
+			Text.Text += e.StackTrace + "\n";
+#endif
+			Exception ei = e;
+			while (ei != null)
+			{
+				Text.Text += ei.Message + "\n";
+				ei = ei.InnerException;
+			}
+
+			Text.Text += "\n";
 		}
 
 		private void ButtonReload_Click(object sender, RoutedEventArgs e)
@@ -79,7 +91,14 @@ namespace MightyGenerator
 			}
 			else
 			{
-				Text.Text = _selected.Generate().FinalText;
+				try
+				{
+					Text.Text = _selected.Generate().FinalText;
+				}
+				catch (Exception ex)
+				{
+					PopUpException(ex);
+				}
 			}
 		}
 

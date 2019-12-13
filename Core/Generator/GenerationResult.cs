@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Core.Dice;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Core.Generator
@@ -87,6 +89,37 @@ namespace Core.Generator
 		public string GetTagValue(string tag)
 		{
 			return _tags[tag];
+		}
+
+		public string ReplaceTags(string value)
+		{
+			Regex r = new Regex(@"{[^}]*}");
+
+			// Find first
+			Match m = r.Match(value);
+			string tagMatch = m.Value;
+
+			// If something found
+			while (!String.IsNullOrWhiteSpace(tagMatch))
+			{
+				string tag = tagMatch.Substring(1, tagMatch.Length - 2);
+
+				if (ContainsTag(tag))
+				{
+					value = value.Replace(tagMatch, GetTagValue(tag));
+				}
+
+				// Try find next
+				m = r.Match(value);
+				tagMatch = m.Value;
+			}
+			return value;
+		}
+
+		public IRoll GetRoll(String value)
+		{
+			String macro = ReplaceTags(value);
+			return Dice.Procedures.Parse(macro);
 		}
 
 		/// <summary>

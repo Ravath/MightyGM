@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace Core.Generator
 {
-	public class ActionRessource : AbsAction
+	public class ActionRessource : AbsNode
 	{
 		[XmlAttribute("Tag")]
 		public string RessourceTag { get; set; }
