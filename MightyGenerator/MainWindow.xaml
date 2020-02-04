@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MightyGenerator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MightyGen" Height="350" Width="525">
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding CopyCommand}"  Key="C" Modifiers="Control"/>
+    </Window.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
@@ -18,9 +21,9 @@
         <Button Grid.Column="0" Grid.Row="0"
                 Content="Reload"
                 Click="ButtonReload_Click"/>
-        <ListView Grid.Column="0" Grid.Row="1"
+        <TreeView Grid.Column="0" Grid.Row="1"
                   x:Name="List"
-                  SelectionChanged="List_SelectionChanged"/>
+                  SelectedItemChanged="List_SelectedItemChanged"/>
         <Button Grid.Column="1" Grid.Row="0"
             Content="Generate"
             Click="ButtonGenerate_Click"/>

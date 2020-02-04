@@ -57,11 +57,15 @@ namespace Core.Generator.Collections
 
 						if (!PutBack)
 						{
-							//have to remove item when drawn
-							list.Remove(item);
-							//recompute total weight
-							sum = list.Sum(t => t.Weight);
-							if (sum == 0) { return; }
+							if(item.PutBack == 1)
+							{
+								//have to remove item when drawn
+								list.Remove(item);
+								//recompute total weight
+								sum -= item.Weight;
+								if (sum == 0) { return; }
+							} else if (item.PutBack > 1) { item.PutBack--; }
+							//And if 0 (or less), will never be removed
 						}
 						break;
 					}

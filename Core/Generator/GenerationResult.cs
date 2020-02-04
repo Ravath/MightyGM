@@ -100,7 +100,7 @@ namespace Core.Generator
 			string tagMatch = m.Value;
 
 			// If something found
-			while (!String.IsNullOrWhiteSpace(tagMatch))
+			if (!String.IsNullOrWhiteSpace(tagMatch))
 			{
 				string tag = tagMatch.Substring(1, tagMatch.Length - 2);
 
@@ -118,8 +118,15 @@ namespace Core.Generator
 
 		public IRoll GetRoll(String value)
 		{
-			String macro = ReplaceTags(value);
-			return Dice.Procedures.Parse(macro);
+			String macro = "";
+			try
+			{
+				macro = ReplaceTags(value);
+				return Dice.Procedures.Parse(macro);
+			} catch(Exception pe)
+			{
+				throw new Exception("Couldn't Parse the Expression : " + value + " / " + macro, pe);
+			}
 		}
 
 		/// <summary>

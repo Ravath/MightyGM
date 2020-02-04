@@ -25,12 +25,18 @@ namespace Core.Generator.Collections
 
 		private int counter=1;
 		private int incrementDirection = 1;
+		private bool firstPassage = true;
 		public override void Generation(ref GenerationResult result)
 		{
 			//Anti-infinite-loop check
 			if(_children.Count == 0) { return; }
 
 			//Init
+			if (firstPassage)
+			{
+				foreach (var item in Children) { item.InitRow(result); }
+				firstPassage = false;
+			}
 			int localCounter = counter;
 
 			//find the current state
@@ -69,6 +75,7 @@ namespace Core.Generator.Collections
 		{
 			counter = 1;
 			incrementDirection = 1;
+			firstPassage = true;
 			base.StartGeneration();
 		}
 	}

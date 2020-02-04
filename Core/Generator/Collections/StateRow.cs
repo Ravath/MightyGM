@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Dice;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,18 +10,23 @@ namespace Core.Generator.Collections
 {
 	public class StateRow : SequenceCollection
 	{
-		private int _repeat = 1;
 		[XmlAttribute("Repeat")]
-		public int Repeat
-		{
-			get { return _repeat; }
-			set { _repeat = Math.Max(1, value); }
-		}
+		public string RepeatString { get; set; } = "1";
+
+		[XmlIgnore]
+		public int Repeat { get; private set; }
 
 		public StateRow() { }
 		public StateRow(int repeat)
 		{
 			Repeat = repeat;
+		}
+
+		public void InitRow(GenerationResult result)
+		{
+			IRoll roll = result.GetRoll(RepeatString);
+			roll.Roll();
+			Repeat = Math.Max(0, roll.NetResult);
 		}
 	}
 }

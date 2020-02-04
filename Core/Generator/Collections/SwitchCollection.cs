@@ -15,6 +15,9 @@ namespace Core.Generator.Collections
 		[XmlAttribute("Tag")]
 		public string Tag { get; set; }
 
+		[XmlAttribute("StopAtFirst")]
+		public bool StopAtFirst { get; set; } = false;
+
 		protected SwitchCollection() { }
 
 		public override void Generation(ref GenerationResult result)
@@ -29,6 +32,10 @@ namespace Core.Generator.Collections
 			foreach (var item in _children)
 			{
 				item.Generation(ref result);
+				if (StopAtFirst)
+				{
+					continue;
+				}
 			}
 		}
 	}

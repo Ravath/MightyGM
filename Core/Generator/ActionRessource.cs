@@ -24,7 +24,8 @@ namespace Core.Generator
 
 		public override void Generation(ref GenerationResult result)
 		{
-			result.UseRessource(RessourceTag);
+			string currentTag = result.ReplaceTags(RessourceTag);
+			result.UseRessource(currentTag);
 		}
 	}
 }

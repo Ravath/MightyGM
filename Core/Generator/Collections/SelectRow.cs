@@ -16,6 +16,12 @@ namespace Core.Generator.Collections
 		[XmlIgnore]
 		public int Weight { get; private set; }
 
+		[XmlAttribute("PutBack")]
+		public string PutBackString { get; set; } = "1";
+
+		[XmlIgnore]
+		public int PutBack { get; internal set; }
+
 		public SelectRow() { }
 		public SelectRow(int weight)
 		{
@@ -27,6 +33,9 @@ namespace Core.Generator.Collections
 			IRoll roll = result.GetRoll(WeightString);
 			roll.Roll();
 			Weight = Math.Max(0,roll.NetResult);
+			roll = result.GetRoll(PutBackString);
+			roll.Roll();
+			PutBack = Math.Max(0, roll.NetResult);
 		}
 	}
 }

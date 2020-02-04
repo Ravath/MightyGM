@@ -24,11 +24,7 @@ namespace Core.Generator
 
 		public override void Generation(ref GenerationResult result)
 		{
-			if(Sequence == null)
-			{
-				result.ReportError(String.Format("The ressource {0} hasn't any sequence implemented", Name));
-			}
-			else
+			if(Sequence != null)
 			{
 				Sequence.Generation(ref result);
 			}

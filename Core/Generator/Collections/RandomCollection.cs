@@ -29,6 +29,9 @@ namespace Core.Generator.Collections
 		[XmlAttribute("Compulsory")]
 		public bool Compulsory { get; set; } = false;
 
+		[XmlAttribute("StopAtFirst")]
+		public bool StopAtFirst { get; set; } = false;
+
 		public RandomCollection() { }
 		public RandomCollection(IRoll roll, int number) : this(roll, new Intervalle(number, number)) { }
 		public RandomCollection(IRoll roll, IRoll number)
@@ -74,8 +77,17 @@ namespace Core.Generator.Collections
 
 						if (!PutBack)
 						{
-							//have to remove item when drawn
-							toRemove.Add(item);
+							if (item.PutBack == 1)
+							{
+								//have to remove item when drawn
+								toRemove.Add(item);
+							}
+							else if (item.PutBack > 1) { item.PutBack--; }
+							//And if 0 (or less), will never be removed
+						}
+						if (StopAtFirst)
+						{
+							continue;
 						}
 					}
 				}

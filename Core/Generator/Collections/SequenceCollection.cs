@@ -16,6 +16,7 @@ namespace Core.Generator.Collections
 	{
 		[XmlElement("Print", typeof(ActionPrint))]
 		[XmlElement("Tag", typeof(ActionTag))]
+		[XmlElement("Define", typeof(ActionDefine))]
 		[XmlElement("If", typeof(IfNode))]
 		[XmlElement("While", typeof(WhileNode))]
 		[XmlElement("Ressource", typeof(ActionRessource))]

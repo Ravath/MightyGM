@@ -23,6 +23,12 @@ namespace Core.Generator.Collections
 		[XmlIgnore]
 		public int Max { get; private set; }
 
+		[XmlAttribute("PutBack")]
+		public string PutBackString { get; set; } = "1";
+
+		[XmlIgnore]
+		public int PutBack { get; internal set; }
+
 		public RandomRow() {}
 		public RandomRow(int min, int max)
 		{
@@ -40,6 +46,10 @@ namespace Core.Generator.Collections
 			roll = result.GetRoll(MaxString);
 			roll.Roll();
 			Max = roll.NetResult;
+			//Number of putBacks
+			roll = result.GetRoll(PutBackString);
+			roll.Roll();
+			PutBack = Math.Max(0, roll.NetResult);
 		}
 
 		/// <summary>
