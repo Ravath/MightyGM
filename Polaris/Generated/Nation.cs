@@ -30,6 +30,53 @@ namespace Polaris.Data {
 				
 			}
 		}
+
+		private TypeNation _typeNation;
+		[Column(Storage = "TypeNation",Name = "typenation")]
+		public TypeNation TypeNation{
+			get{ return _typeNation;}
+			set{_typeNation = value;}
+		}
+
+		private IEnumerable<PersonnaliteModel> _personnalites;
+		public IEnumerable <PersonnaliteModel> Personnalites{
+			get{
+				if( _personnalites == null ){
+					_personnalites = LoadByForeignKey<PersonnaliteModel>(p => p.NationId, Id);
+				}
+				return _personnalites;
+			}
+			set{
+				foreach( PersonnaliteModel item in _personnalites ){
+					item.Nation = null;
+
+				}
+				_personnalites = value;
+				foreach( PersonnaliteModel item in value ){
+					item.Nation = this;
+					item.SaveObject();
+				}
+			}
+		}
+
+		private IEnumerable<VilleModel> _villes;
+		[Association(ThisKey = "Id",CanBeNull = false,Storage = "Villes",OtherKey = "NationModelId")]
+		public IEnumerable <VilleModel> Villes{
+			get{
+				if( _villes == null ){
+					_villes = LoadFromJointure<VilleModel,NationModelToVilleModel_Villes>(false);
+				}
+				return _villes;
+			}
+			set{
+				SaveToJointure<VilleModel, NationModelToVilleModel_Villes> (_villes, value,false);
+				_villes = value;
+			}
+		}
+		public override void DeleteObject() {
+			DeleteJoins<NationModel,NationModelToVilleModel_Villes>(true);
+			base.DeleteObject();
+		}
 	}
 	[Table(Schema = "polaris",Name = "nationdescription")]
 	public partial class NationDescription : DataDescription<NationModel> {
@@ -72,41 +119,6 @@ namespace Polaris.Data {
 		public string Armes{
 			get{ return _armes;}
 			set{_armes = value;}
-		}
-
-		private IEnumerable<PersonnaliteModel> _personnalites;
-		[Association(ThisKey = "Id",CanBeNull = false,Storage = "Personnalites",OtherKey = "NationDescriptionId")]
-		public IEnumerable <PersonnaliteModel> Personnalites{
-			get{
-				if( _personnalites == null ){
-					_personnalites = LoadFromJointure<PersonnaliteModel,NationDescriptionToPersonnaliteModel_Personnalites>(false);
-				}
-				return _personnalites;
-			}
-			set{
-				SaveToJointure<PersonnaliteModel, NationDescriptionToPersonnaliteModel_Personnalites> (_personnalites, value,false);
-				_personnalites = value;
-			}
-		}
-
-		private IEnumerable<VilleModel> _villes;
-		[Association(ThisKey = "Id",CanBeNull = false,Storage = "Villes",OtherKey = "NationDescriptionId")]
-		public IEnumerable <VilleModel> Villes{
-			get{
-				if( _villes == null ){
-					_villes = LoadFromJointure<VilleModel,NationDescriptionToVilleModel_Villes>(false);
-				}
-				return _villes;
-			}
-			set{
-				SaveToJointure<VilleModel, NationDescriptionToVilleModel_Villes> (_villes, value,false);
-				_villes = value;
-			}
-		}
-		public override void DeleteObject() {
-			DeleteJoins<NationDescription,NationDescriptionToPersonnaliteModel_Personnalites>(true);
-			DeleteJoins<NationDescription,NationDescriptionToVilleModel_Villes>(true);
-			base.DeleteObject();
 		}
 	}
 	[Table(Schema = "polaris",Name = "nationexemplar")]

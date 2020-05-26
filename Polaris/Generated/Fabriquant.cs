@@ -9,15 +9,32 @@ using Core.Data;
 using Core.Data.Schema;
 using LinqToDB.Mapping;
 namespace Polaris.Data {
-	[Table(Schema = "polaris",Name = "fabriquant")]
+	[Table(Schema = "polaris",Name = "fabriquantmodel")]
 	[CoreData]
-	public partial class Fabriquant : DataObject {
+	public partial class FabriquantModel : DataModel {
 
-		private string _nom = "";
-		[Column(Storage = "Nom",Name = "nom")]
-		public string Nom{
-			get{ return _nom;}
-			set{_nom = value;}
+		private FabriquantDescription _obj;
+		public override IDataDescription Description{
+			get{
+				if(_obj == null){
+					IEnumerable<FabriquantDescription> id = GetModelReferencer<FabriquantDescription>();
+					if(id.Count() == 0) {
+						_obj = new FabriquantDescription();
+						_obj.Model = this;
+						_obj.SaveObject();
+					} else {
+						_obj = id.ElementAt(0);
+					}
+				}
+				return _obj;
+				
+			}
 		}
+	}
+	[Table(Schema = "polaris",Name = "fabriquantdescription")]
+	public partial class FabriquantDescription : DataDescription<FabriquantModel> {
+	}
+	[Table(Schema = "polaris",Name = "fabriquantexemplar")]
+	public partial class FabriquantExemplar : DataExemplaire<FabriquantModel> {
 	}
 }

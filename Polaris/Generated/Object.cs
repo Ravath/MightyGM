@@ -47,22 +47,22 @@ namespace Polaris.Data {
 			set{_nT = value;}
 		}
 
-		private IEnumerable<Fabriquant> _fabriquant;
+		private IEnumerable<FabriquantModel> _fabriquant;
 		[Association(ThisKey = "Id",CanBeNull = false,Storage = "Fabriquant",OtherKey = "ObjectModelId")]
-		public IEnumerable <Fabriquant> Fabriquant{
+		public IEnumerable <FabriquantModel> Fabriquant{
 			get{
 				if( _fabriquant == null ){
-					_fabriquant = LoadFromJointure<Fabriquant,ObjectModelToFabriquant_Fabriquant>(false);
+					_fabriquant = LoadFromJointure<FabriquantModel,ObjectModelToFabriquantModel_Fabriquant>(false);
 				}
 				return _fabriquant;
 			}
 			set{
-				SaveToJointure<Fabriquant, ObjectModelToFabriquant_Fabriquant> (_fabriquant, value,false);
+				SaveToJointure<FabriquantModel, ObjectModelToFabriquantModel_Fabriquant> (_fabriquant, value,false);
 				_fabriquant = value;
 			}
 		}
 		public override void DeleteObject() {
-			DeleteJoins<ObjectModel,ObjectModelToFabriquant_Fabriquant>(true);
+			DeleteJoins<ObjectModel,ObjectModelToFabriquantModel_Fabriquant>(true);
 			base.DeleteObject();
 		}
 	}
@@ -79,11 +79,11 @@ namespace Polaris.Data {
 			set{_integriteMax = value;}
 		}
 
-		private int _integrte;
-		[Column(Storage = "Integrte",Name = "integrte")]
-		public int Integrte{
-			get{ return _integrte;}
-			set{_integrte = value;}
+		private int _integrite;
+		[Column(Storage = "Integrite",Name = "integrite")]
+		public int Integrite{
+			get{ return _integrite;}
+			set{_integrite = value;}
 		}
 	}
 }

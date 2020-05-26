@@ -115,6 +115,50 @@ namespace Polaris.Data {
 			set{_mainDirectrice = value;}
 		}
 
+		private int _archetypeId;
+		[Column(Storage = "ArchetypeId",Name = "fk_archetypemodel_archetype")]
+		[HiddenProperty]
+		public int ArchetypeId{
+			get{ return _archetypeId;}
+			set{_archetypeId = value;}
+		}
+
+		private ArchetypeModel _archetype;
+		public ArchetypeModel Archetype{
+			get{
+				if( _archetype == null)
+					_archetype = LoadById<ArchetypeModel>(ArchetypeId);
+				return _archetype;
+			} set {
+				if(_archetype == value){return;}
+				_archetype = value;
+				if( value != null)
+					ArchetypeId = value.Id;
+			}
+		}
+
+		private int _typeGenetiqueId;
+		[Column(Storage = "TypeGenetiqueId",Name = "fk_typegenetiqueexemplar_typegenetique")]
+		[HiddenProperty]
+		public int TypeGenetiqueId{
+			get{ return _typeGenetiqueId;}
+			set{_typeGenetiqueId = value;}
+		}
+
+		private TypeGenetiqueExemplar _typeGenetique;
+		public TypeGenetiqueExemplar TypeGenetique{
+			get{
+				if( _typeGenetique == null)
+					_typeGenetique = LoadById<TypeGenetiqueExemplar>(TypeGenetiqueId);
+				return _typeGenetique;
+			} set {
+				if(_typeGenetique == value){return;}
+				_typeGenetique = value;
+				if( value != null)
+					TypeGenetiqueId = value.Id;
+			}
+		}
+
 		private IEnumerable<MutationExemplar> _mutations;
 		[Association(ThisKey = "Id",CanBeNull = false,Storage = "Mutations",OtherKey = "PersonnageModelId")]
 		public IEnumerable <MutationExemplar> Mutations{
@@ -130,17 +174,17 @@ namespace Polaris.Data {
 			}
 		}
 
-		private IEnumerable<OriginesExemplar> _origines;
+		private IEnumerable<OrigineExemplar> _origines;
 		[Association(ThisKey = "Id",CanBeNull = false,Storage = "Origines",OtherKey = "PersonnageModelId")]
-		public IEnumerable <OriginesExemplar> Origines{
+		public IEnumerable <OrigineExemplar> Origines{
 			get{
 				if( _origines == null ){
-					_origines = LoadFromJointure<OriginesExemplar,PersonnageModelToOriginesExemplar_Origines>(false);
+					_origines = LoadFromJointure<OrigineExemplar,PersonnageModelToOrigineExemplar_Origines>(false);
 				}
 				return _origines;
 			}
 			set{
-				SaveToJointure<OriginesExemplar, PersonnageModelToOriginesExemplar_Origines> (_origines, value,false);
+				SaveToJointure<OrigineExemplar, PersonnageModelToOrigineExemplar_Origines> (_origines, value,false);
 				_origines = value;
 			}
 		}
@@ -191,7 +235,7 @@ namespace Polaris.Data {
 		}
 		public override void DeleteObject() {
 			DeleteJoins<PersonnageModel,PersonnageModelToMutationExemplar_Mutations>(true);
-			DeleteJoins<PersonnageModel,PersonnageModelToOriginesExemplar_Origines>(true);
+			DeleteJoins<PersonnageModel,PersonnageModelToOrigineExemplar_Origines>(true);
 			DeleteJoins<PersonnageModel,PersonnageModelToCompetenceExemplar_Competences>(true);
 			DeleteJoins<PersonnageModel,PersonnageModelToProfessionExemplar_Professions>(true);
 			DeleteJoins<PersonnageModel,PersonnageModelToAvantageExemplar_Avantages>(true);
@@ -203,5 +247,137 @@ namespace Polaris.Data {
 	}
 	[Table(Schema = "polaris",Name = "personnageexemplar")]
 	public partial class PersonnageExemplar : DataExemplaire<PersonnageModel> {
+
+		private int _teteId;
+		[Column(Storage = "TeteId",Name = "fk_blessures_tete")]
+		[HiddenProperty]
+		public int TeteId{
+			get{ return _teteId;}
+			set{_teteId = value;}
+		}
+
+		private Blessures _tete;
+		public Blessures Tete{
+			get{
+				if( _tete == null)
+					_tete = LoadById<Blessures>(TeteId);
+				return _tete;
+			} set {
+				if(_tete == value){return;}
+				_tete = value;
+				if( value != null)
+					TeteId = value.Id;
+			}
+		}
+
+		private int _corpsId;
+		[Column(Storage = "CorpsId",Name = "fk_blessures_corps")]
+		[HiddenProperty]
+		public int CorpsId{
+			get{ return _corpsId;}
+			set{_corpsId = value;}
+		}
+
+		private Blessures _corps;
+		public Blessures Corps{
+			get{
+				if( _corps == null)
+					_corps = LoadById<Blessures>(CorpsId);
+				return _corps;
+			} set {
+				if(_corps == value){return;}
+				_corps = value;
+				if( value != null)
+					CorpsId = value.Id;
+			}
+		}
+
+		private int _brasDId;
+		[Column(Storage = "BrasDId",Name = "fk_blessures_brasd")]
+		[HiddenProperty]
+		public int BrasDId{
+			get{ return _brasDId;}
+			set{_brasDId = value;}
+		}
+
+		private Blessures _brasD;
+		public Blessures BrasD{
+			get{
+				if( _brasD == null)
+					_brasD = LoadById<Blessures>(BrasDId);
+				return _brasD;
+			} set {
+				if(_brasD == value){return;}
+				_brasD = value;
+				if( value != null)
+					BrasDId = value.Id;
+			}
+		}
+
+		private int _brasGId;
+		[Column(Storage = "BrasGId",Name = "fk_blessures_brasg")]
+		[HiddenProperty]
+		public int BrasGId{
+			get{ return _brasGId;}
+			set{_brasGId = value;}
+		}
+
+		private Blessures _brasG;
+		public Blessures BrasG{
+			get{
+				if( _brasG == null)
+					_brasG = LoadById<Blessures>(BrasGId);
+				return _brasG;
+			} set {
+				if(_brasG == value){return;}
+				_brasG = value;
+				if( value != null)
+					BrasGId = value.Id;
+			}
+		}
+
+		private int _jambeDId;
+		[Column(Storage = "JambeDId",Name = "fk_blessures_jambed")]
+		[HiddenProperty]
+		public int JambeDId{
+			get{ return _jambeDId;}
+			set{_jambeDId = value;}
+		}
+
+		private Blessures _jambeD;
+		public Blessures JambeD{
+			get{
+				if( _jambeD == null)
+					_jambeD = LoadById<Blessures>(JambeDId);
+				return _jambeD;
+			} set {
+				if(_jambeD == value){return;}
+				_jambeD = value;
+				if( value != null)
+					JambeDId = value.Id;
+			}
+		}
+
+		private int _jambeGId;
+		[Column(Storage = "JambeGId",Name = "fk_blessures_jambeg")]
+		[HiddenProperty]
+		public int JambeGId{
+			get{ return _jambeGId;}
+			set{_jambeGId = value;}
+		}
+
+		private Blessures _jambeG;
+		public Blessures JambeG{
+			get{
+				if( _jambeG == null)
+					_jambeG = LoadById<Blessures>(JambeGId);
+				return _jambeG;
+			} set {
+				if(_jambeG == value){return;}
+				_jambeG = value;
+				if( value != null)
+					JambeGId = value.Id;
+			}
+		}
 	}
 }

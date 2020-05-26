@@ -31,11 +31,19 @@ namespace Polaris.Data {
 			}
 		}
 
-		private int _cout;
-		[Column(Storage = "Cout",Name = "cout")]
-		public int Cout{
-			get{ return _cout;}
-			set{_cout = value;}
+
+		private IEnumerable < int > _couts;
+		[Association(ThisKey = "Id",CanBeNull = true,Storage = "Couts",OtherKey = "AvantageModel")]
+		public IEnumerable < int > Couts{
+			get{
+				if( _couts == null ){
+					_couts = LoadFromDataValue<CoutsFromAvantageModel, int>();
+				}
+				return _couts;
+			}
+			set{
+				SaveDataValue<CoutsFromAvantageModel, int>(_couts, value);
+			}
 		}
 
 		private bool _unique;
@@ -51,6 +59,26 @@ namespace Polaris.Data {
 			get{ return _desavantage;}
 			set{_desavantage = value;}
 		}
+
+		private IEnumerable<PlayerEffectModel> _effets;
+		[Association(ThisKey = "Id",CanBeNull = false,Storage = "Effets",OtherKey = "AvantageModelId")]
+		public IEnumerable <PlayerEffectModel> Effets{
+			get{
+				if( _effets == null ){
+					_effets = LoadFromJointure<PlayerEffectModel,AvantageModelToPlayerEffectModel_Effets>(false);
+				}
+				return _effets;
+			}
+			set{
+				SaveToJointure<PlayerEffectModel, AvantageModelToPlayerEffectModel_Effets> (_effets, value,false);
+				_effets = value;
+			}
+		}
+		public override void DeleteObject() {
+			DeleteJoins<AvantageModel,AvantageModelToPlayerEffectModel_Effets>(true);
+			DeleteDataValue<CoutsFromAvantageModel>();
+			base.DeleteObject();
+		}
 	}
 	[Table(Schema = "polaris",Name = "avantagedescription")]
 	public partial class AvantageDescription : DataDescription<AvantageModel> {
@@ -58,11 +86,18 @@ namespace Polaris.Data {
 	[Table(Schema = "polaris",Name = "avantageexemplar")]
 	public partial class AvantageExemplar : DataExemplaire<AvantageModel> {
 
-		private int _rangs;
-		[Column(Storage = "Rangs",Name = "rangs")]
-		public int Rangs{
-			get{ return _rangs;}
-			set{_rangs = value;}
+		private int _cout;
+		[Column(Storage = "Cout",Name = "cout")]
+		public int Cout{
+			get{ return _cout;}
+			set{_cout = value;}
+		}
+
+		private string _valeur = "";
+		[Column(Storage = "Valeur",Name = "valeur")]
+		public string Valeur{
+			get{ return _valeur;}
+			set{_valeur = value;}
 		}
 	}
 }

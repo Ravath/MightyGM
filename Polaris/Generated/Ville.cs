@@ -86,22 +86,24 @@ namespace Polaris.Data {
 		}
 
 		private IEnumerable<Complexes> _complexes;
-		[Association(ThisKey = "Id",CanBeNull = false,Storage = "Complexes",OtherKey = "VilleModelId")]
 		public IEnumerable <Complexes> Complexes{
 			get{
 				if( _complexes == null ){
-					_complexes = LoadFromJointure<Complexes,VilleModelToComplexes_Complexes>(false);
+					_complexes = LoadByForeignKey<Complexes>(p => p.VilleId, Id);
 				}
 				return _complexes;
 			}
 			set{
-				SaveToJointure<Complexes, VilleModelToComplexes_Complexes> (_complexes, value,false);
+				foreach( Complexes item in _complexes ){
+					item.Ville = null;
+
+				}
 				_complexes = value;
+				foreach( Complexes item in value ){
+					item.Ville = this;
+					item.SaveObject();
+				}
 			}
-		}
-		public override void DeleteObject() {
-			DeleteJoins<VilleModel,VilleModelToComplexes_Complexes>(true);
-			base.DeleteObject();
 		}
 	}
 	[Table(Schema = "polaris",Name = "villedescription")]

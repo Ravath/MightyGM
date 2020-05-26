@@ -52,6 +52,13 @@ namespace Yggdrasil.Data {
 			set{_solidite = value;}
 		}
 
+		private bool _peutEtreLancee;
+		[Column(Storage = "PeutEtreLancee",Name = "peutetrelancee")]
+		public bool PeutEtreLancee{
+			get{ return _peutEtreLancee;}
+			set{_peutEtreLancee = value;}
+		}
+
 		private int _porteeC;
 		[Column(Storage = "PorteeC",Name = "porteec")]
 		public int PorteeC{

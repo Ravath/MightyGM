@@ -10,26 +10,7 @@ using Core.Data.Schema;
 using LinqToDB.Mapping;
 namespace Yggdrasil.Data {
 	[Table(Schema = "yggdrasil",Name = "objetmodel")]
-	[CoreData]
-	public partial class ObjetModel : DataModel {
-
-		private ObjetDescription _obj;
-		public override IDataDescription Description{
-			get{
-				if(_obj == null){
-					IEnumerable<ObjetDescription> id = GetModelReferencer<ObjetDescription>();
-					if(id.Count() == 0) {
-						_obj = new ObjetDescription();
-						_obj.Model = this;
-						_obj.SaveObject();
-					} else {
-						_obj = id.ElementAt(0);
-					}
-				}
-				return _obj;
-				
-			}
-		}
+	public abstract partial class ObjetModel : DataModel {
 
 		private int _encombrement;
 		[Column(Storage = "Encombrement",Name = "encombrement")]
@@ -46,9 +27,9 @@ namespace Yggdrasil.Data {
 		}
 	}
 	[Table(Schema = "yggdrasil",Name = "objetdescription")]
-	public partial class ObjetDescription : DataDescription<ObjetModel> {
+	public abstract partial class ObjetDescription : DataDescription<ObjetModel> {
 	}
 	[Table(Schema = "yggdrasil",Name = "objetexemplar")]
-	public partial class ObjetExemplar : DataExemplaire<ObjetModel> {
+	public abstract partial class ObjetExemplar : DataExemplaire<ObjetModel> {
 	}
 }

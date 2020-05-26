@@ -31,11 +31,11 @@ namespace Yggdrasil.Data {
 			}
 		}
 
-		private bool _monstrueux;
-		[Column(Storage = "Monstrueux",Name = "monstrueux")]
-		public bool Monstrueux{
-			get{ return _monstrueux;}
-			set{_monstrueux = value;}
+		private CategorieFigurant _categorie;
+		[Column(Storage = "Categorie",Name = "categorie")]
+		public CategorieFigurant Categorie{
+			get{ return _categorie;}
+			set{_categorie = value;}
 		}
 
 		private int _conflitOffensif;

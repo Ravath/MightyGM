@@ -37,13 +37,6 @@ namespace Yggdrasil.Data {
 			get{ return _oddMin;}
 			set{_oddMin = value;}
 		}
-
-		private int _oddMax;
-		[Column(Storage = "oddMax",Name = "oddmax")]
-		public int oddMax{
-			get{ return _oddMax;}
-			set{_oddMax = value;}
-		}
 	}
 	[Table(Schema = "yggdrasil",Name = "blessuredescription")]
 	public partial class BlessureDescription : DataDescription<BlessureModel> {

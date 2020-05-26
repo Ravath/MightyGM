@@ -31,11 +31,25 @@ namespace Yggdrasil.Data {
 			}
 		}
 
+		private CategorieCompetence _categorie;
+		[Column(Storage = "Categorie",Name = "categorie")]
+		public CategorieCompetence Categorie{
+			get{ return _categorie;}
+			set{_categorie = value;}
+		}
+
 		private bool _hasSpecialisations;
 		[Column(Storage = "HasSpecialisations",Name = "hasspecialisations")]
 		public bool HasSpecialisations{
 			get{ return _hasSpecialisations;}
 			set{_hasSpecialisations = value;}
+		}
+
+		private bool _utilisationInnee;
+		[Column(Storage = "UtilisationInnee",Name = "utilisationinnee")]
+		public bool UtilisationInnee{
+			get{ return _utilisationInnee;}
+			set{_utilisationInnee = value;}
 		}
 	}
 	[Table(Schema = "yggdrasil",Name = "competencedescription")]

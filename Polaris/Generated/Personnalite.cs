@@ -30,6 +30,32 @@ namespace Polaris.Data {
 				
 			}
 		}
+
+		private int _nationId;
+		[Column(Storage = "NationId",Name = "fk_nationmodel_nation")]
+		[HiddenProperty]
+		public int NationId{
+			get{ return _nationId;}
+			set{_nationId = value;}
+		}
+
+		private NationModel _nation;
+		public NationModel Nation{
+			get {
+				if(_nation == null) {
+					_nation = LoadById<NationModel>(NationId);
+			       }
+				return _nation;
+			} set {
+				if(value == _nation) { return; }
+				_nation = value;
+				if(_nation != null) {
+					_nationId = _nation.Id;
+				} else {
+					_nationId = 0;
+				}
+			}
+		}
 	}
 	[Table(Schema = "polaris",Name = "personnalitedescription")]
 	public partial class PersonnaliteDescription : DataDescription<PersonnaliteModel> {

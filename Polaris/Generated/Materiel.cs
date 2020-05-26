@@ -51,6 +51,25 @@ namespace Polaris.Data {
 			get{ return _niveauVariable;}
 			set{_niveauVariable = value;}
 		}
+
+		private IEnumerable<ObjectEffectExemplar> _effects;
+		[Association(ThisKey = "Id",CanBeNull = false,Storage = "Effects",OtherKey = "MaterielModelId")]
+		public IEnumerable <ObjectEffectExemplar> Effects{
+			get{
+				if( _effects == null ){
+					_effects = LoadFromJointure<ObjectEffectExemplar,MaterielModelToObjectEffectExemplar_Effects>(false);
+				}
+				return _effects;
+			}
+			set{
+				SaveToJointure<ObjectEffectExemplar, MaterielModelToObjectEffectExemplar_Effects> (_effects, value,false);
+				_effects = value;
+			}
+		}
+		public override void DeleteObject() {
+			DeleteJoins<MaterielModel,MaterielModelToObjectEffectExemplar_Effects>(true);
+			base.DeleteObject();
+		}
 	}
 	[Table(Schema = "polaris",Name = "materieldescription")]
 	public partial class MaterielDescription : ObjectDescription {

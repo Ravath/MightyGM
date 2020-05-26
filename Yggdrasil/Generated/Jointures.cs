@@ -29,8 +29,8 @@ namespace Yggdrasil.Data {
 			set { Object2 = value; }
 		}
 	}
-	[Table(Schema = "yggdrasil",Name = "personnagemodeltodonmodel_dons")]
-	public class PersonnageModelToDonModel_Dons : DataRelation<PersonnageModel, DonModel> {
+	[Table(Schema = "yggdrasil",Name = "personnagemodeltodonexemplar_dons")]
+	public class PersonnageModelToDonExemplar_Dons : DataRelation<PersonnageModel, DonExemplar> {
 
 		[Column(Name = "fk_personnagemodel_join", Storage = "PersonnageModelId")]
 		[HiddenProperty]
@@ -44,14 +44,14 @@ namespace Yggdrasil.Data {
 			set { Object1 = value; }
 		}
 
-		[Column(Name = "fk_donmodel_join", Storage = "DonModelId")]
+		[Column(Name = "fk_donexemplar_join", Storage = "DonExemplarId")]
 		[HiddenProperty]
-		public int DonModelId {
+		public int DonExemplarId {
 			get { return Object2Id; }
 			set { Object2Id= value; }
 		}
-		[Association(ThisKey = "DonModelId", OtherKey = "Id", CanBeNull = false, Storage = "DonModel")]
-		public DonModel DonModel {
+		[Association(ThisKey = "DonExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "DonExemplar")]
+		public DonExemplar DonExemplar {
 			get { return Object2; }
 			set { Object2 = value; }
 		}
@@ -295,6 +295,33 @@ namespace Yggdrasil.Data {
 		}
 		[Association(ThisKey = "ObjetQuotidienModelId", OtherKey = "Id", CanBeNull = false, Storage = "ObjetQuotidienModel")]
 		public ObjetQuotidienModel ObjetQuotidienModel {
+			get { return Object2; }
+			set { Object2 = value; }
+		}
+	}
+	[Table(Schema = "yggdrasil",Name = "personnagemodeltocaractereexemplar_caracteres")]
+	public class PersonnageModelToCaractereExemplar_Caracteres : DataRelation<PersonnageModel, CaractereExemplar> {
+
+		[Column(Name = "fk_personnagemodel_join", Storage = "PersonnageModelId")]
+		[HiddenProperty]
+		public int PersonnageModelId {
+			get { return Object1Id; }
+			set { Object1Id= value; }
+		}
+		[Association(ThisKey = "PersonnageModelId", OtherKey = "Id", CanBeNull = false, Storage = "PersonnageModel")]
+		public PersonnageModel PersonnageModel {
+			get { return Object1; }
+			set { Object1 = value; }
+		}
+
+		[Column(Name = "fk_caractereexemplar_join", Storage = "CaractereExemplarId")]
+		[HiddenProperty]
+		public int CaractereExemplarId {
+			get { return Object2Id; }
+			set { Object2Id= value; }
+		}
+		[Association(ThisKey = "CaractereExemplarId", OtherKey = "Id", CanBeNull = false, Storage = "CaractereExemplar")]
+		public CaractereExemplar CaractereExemplar {
 			get { return Object2; }
 			set { Object2 = value; }
 		}

@@ -37,6 +37,46 @@ namespace Yggdrasil.Data {
 			get{ return _prixMax;}
 			set{_prixMax = value;}
 		}
+
+		[Column(Name = "quantite_val", Storage="QuantiteVal")]
+		public int QuantiteVal{
+			get{
+				return Quantite.Value;
+			}
+			set{
+				Quantite.Value = value;
+			}
+		}
+
+		[Column(Name = "quantite_unit", Storage="QuantiteUnit")]
+		public UniteObjet QuantiteUnit{
+			get{
+				return Quantite.Unity;
+			}
+			set{
+				Quantite.Unity = value;
+			}
+		}
+
+		private UnitValue<int,UniteObjet> _quantite = new UnitValue<int,UniteObjet>();
+		[HiddenProperty]
+		public UnitValue<int,UniteObjet> Quantite{
+			get{
+				return _quantite;
+			}
+			set{
+				_quantite = value;
+			}
+		}
+
+
+
+		private CategorieObjet _categorie;
+		[Column(Storage = "Categorie",Name = "categorie")]
+		public CategorieObjet Categorie{
+			get{ return _categorie;}
+			set{_categorie = value;}
+		}
 	}
 	[Table(Schema = "yggdrasil",Name = "objetquotidiendescription")]
 	public partial class ObjetQuotidienDescription : ObjetDescription {

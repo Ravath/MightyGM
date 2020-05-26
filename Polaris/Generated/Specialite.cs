@@ -9,15 +9,58 @@ using Core.Data;
 using Core.Data.Schema;
 using LinqToDB.Mapping;
 namespace Polaris.Data {
-	[Table(Schema = "polaris",Name = "specialite")]
+	[Table(Schema = "polaris",Name = "specialitemodel")]
 	[CoreData]
-	public partial class Specialite : DataObject {
+	public partial class SpecialiteModel : AbsCompetenceModel {
 
-		private string _nom = "";
-		[Column(Storage = "Nom",Name = "nom")]
-		public string Nom{
-			get{ return _nom;}
-			set{_nom = value;}
+		private SpecialiteDescription _obj;
+		public override IDataDescription Description{
+			get{
+				if(_obj == null){
+					IEnumerable<SpecialiteDescription> id = GetModelReferencer<SpecialiteDescription>();
+					if(id.Count() == 0) {
+						_obj = new SpecialiteDescription();
+						_obj.Model = this;
+						_obj.SaveObject();
+					} else {
+						_obj = id.ElementAt(0);
+					}
+				}
+				return _obj;
+				
+			}
 		}
+
+		private int _competenceId;
+		[Column(Storage = "CompetenceId",Name = "fk_competencemodel_competence")]
+		[HiddenProperty]
+		public int CompetenceId{
+			get{ return _competenceId;}
+			set{_competenceId = value;}
+		}
+
+		private CompetenceModel _competence;
+		public CompetenceModel Competence{
+			get {
+				if(_competence == null) {
+					_competence = LoadById<CompetenceModel>(CompetenceId);
+			       }
+				return _competence;
+			} set {
+				if(value == _competence) { return; }
+				_competence = value;
+				if(_competence != null) {
+					_competenceId = _competence.Id;
+				} else {
+					_competenceId = 0;
+				}
+			}
+		}
+	}
+	[Table(Schema = "polaris",Name = "specialitedescription")]
+	public partial class SpecialiteDescription : AbsCompetenceDescription {
+	}
+	[Table(Schema = "polaris",Name = "specialiteexemplar")]
+	public partial class SpecialiteExemplar : AbsCompetenceExemplar {
 	}
 }

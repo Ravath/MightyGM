@@ -11,7 +11,7 @@ using LinqToDB.Mapping;
 namespace Polaris.Data {
 	[Table(Schema = "polaris",Name = "armemeleemodel")]
 	[CoreData]
-	public partial class ArmeMeleeModel : ObjectModel {
+	public partial class ArmeMeleeModel : AbsArmeModel {
 
 		private ArmeMeleeDescription _obj;
 		public override IDataDescription Description{
@@ -31,74 +31,25 @@ namespace Polaris.Data {
 			}
 		}
 
-		private int _nbrDDegats;
-		[Column(Storage = "nbrDDegats",Name = "nbrddegats")]
-		public int nbrDDegats{
-			get{ return _nbrDDegats;}
-			set{_nbrDDegats = value;}
+		private string _degatsChoc = "";
+		[Column(Storage = "DegatsChoc",Name = "degatschoc")]
+		public string DegatsChoc{
+			get{ return _degatsChoc;}
+			set{_degatsChoc = value;}
 		}
 
-		private bool _dgtsD6;
-		[Column(Storage = "dgtsD6",Name = "dgtsd6")]
-		public bool dgtsD6{
-			get{ return _dgtsD6;}
-			set{_dgtsD6 = value;}
-		}
-
-		private int _plus;
-		[Column(Storage = "Plus",Name = "plus")]
-		public int Plus{
-			get{ return _plus;}
-			set{_plus = value;}
-		}
-
-		private bool _degatsCumulatifs;
+		private int _degatsCumulatifs;
 		[Column(Storage = "DegatsCumulatifs",Name = "degatscumulatifs")]
-		public bool DegatsCumulatifs{
+		public int DegatsCumulatifs{
 			get{ return _degatsCumulatifs;}
 			set{_degatsCumulatifs = value;}
 		}
 
-		private int? _nbrDDegatsChoc;
-		[Column(Storage = "nbrDDegatsChoc",Name = "nbrddegatschoc")]
-		public int? nbrDDegatsChoc{
-			get{ return _nbrDDegatsChoc;}
-			set{_nbrDDegatsChoc = value;}
-		}
-
-		private bool? _dgtsD6Choc;
-		[Column(Storage = "dgtsD6Choc",Name = "dgtsd6choc")]
-		public bool? dgtsD6Choc{
-			get{ return _dgtsD6Choc;}
-			set{_dgtsD6Choc = value;}
-		}
-
-		private int? _plusChoc;
-		[Column(Storage = "PlusChoc",Name = "pluschoc")]
-		public int? PlusChoc{
-			get{ return _plusChoc;}
-			set{_plusChoc = value;}
-		}
-
-		private int _penalite;
-		[Column(Storage = "Penalite",Name = "penalite")]
-		public int Penalite{
-			get{ return _penalite;}
-			set{_penalite = value;}
-		}
-
-		private int _force;
-		[Column(Storage = "Force",Name = "force")]
-		public int Force{
-			get{ return _force;}
-			set{_force = value;}
-		}
-
-		private int _init;
-		[Column(Storage = "Init",Name = "init")]
-		public int Init{
-			get{ return _init;}
-			set{_init = value;}
+		private int _penaliteCumulative;
+		[Column(Storage = "PenaliteCumulative",Name = "penalitecumulative")]
+		public int PenaliteCumulative{
+			get{ return _penaliteCumulative;}
+			set{_penaliteCumulative = value;}
 		}
 
 		private int _allonge;
@@ -130,9 +81,9 @@ namespace Polaris.Data {
 		}
 	}
 	[Table(Schema = "polaris",Name = "armemeleedescription")]
-	public partial class ArmeMeleeDescription : ObjectDescription {
+	public partial class ArmeMeleeDescription : AbsArmeDescription {
 	}
 	[Table(Schema = "polaris",Name = "armemeleeexemplar")]
-	public partial class ArmeMeleeExemplar : ObjectExemplar {
+	public partial class ArmeMeleeExemplar : AbsArmeExemplar {
 	}
 }

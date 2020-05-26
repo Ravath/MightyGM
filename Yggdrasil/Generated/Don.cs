@@ -43,5 +43,12 @@ namespace Yggdrasil.Data {
 	}
 	[Table(Schema = "yggdrasil",Name = "donexemplar")]
 	public partial class DonExemplar : DataExemplaire<DonModel> {
+
+		private string _precisions = "";
+		[Column(Storage = "Precisions",Name = "precisions")]
+		public string Precisions{
+			get{ return _precisions;}
+			set{_precisions = value;}
+		}
 	}
 }

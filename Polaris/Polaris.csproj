@@ -31,8 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="linq2db, Version=2.1.0.0, Culture=neutral, PublicKeyToken=e41013125f9e410a, processorArchitecture=MSIL">
-      <HintPath>..\packages\linq2db.2.1.0\lib\net45\linq2db.dll</HintPath>
+    <Reference Include="linq2db, Version=2.9.7.0, Culture=neutral, PublicKeyToken=e41013125f9e410a, processorArchitecture=MSIL">
+      <HintPath>..\packages\linq2db.2.9.7\lib\net46\linq2db.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -45,36 +45,62 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Generated\AbsArme.cs" />
+    <Compile Include="Generated\AbsCompetence.cs" />
+    <Compile Include="Generated\AbsPoison.cs" />
+    <Compile Include="Generated\AccessoireArme.cs" />
+    <Compile Include="Generated\Archetype.cs" />
+    <Compile Include="Generated\ArmeDistance.cs" />
     <Compile Include="Generated\ArmeMelee.cs" />
-    <Compile Include="Generated\ArmeTrait.cs" />
     <Compile Include="Generated\Armure.cs" />
     <Compile Include="Generated\AttaqueCreature.cs" />
     <Compile Include="Generated\Avantage.cs" />
     <Compile Include="Generated\AvantagePro.cs" />
+    <Compile Include="Generated\AvantageProAleatoire.cs" />
+    <Compile Include="Generated\Blessures.cs" />
+    <Compile Include="Generated\CategorieMateriel.cs" />
     <Compile Include="Generated\Competence.cs" />
     <Compile Include="Generated\Complexes.cs" />
     <Compile Include="Generated\Creature.cs" />
+    <Compile Include="Generated\Drogue.cs" />
     <Compile Include="Generated\Drone.cs" />
     <Compile Include="Generated\Enum.cs" />
     <Compile Include="Generated\ExoArmure.cs" />
     <Compile Include="Generated\Fabriquant.cs" />
+    <Compile Include="Generated\Faction.cs" />
     <Compile Include="Generated\Implant.cs" />
+    <Compile Include="Generated\IncidentPolaris.cs" />
     <Compile Include="Generated\Jointures.cs" />
+    <Compile Include="Generated\LanceTorpille.cs" />
     <Compile Include="Generated\LocalisationCreature.cs" />
+    <Compile Include="Generated\Maladie.cs" />
     <Compile Include="Generated\Materiel.cs" />
+    <Compile Include="Generated\MunitionSpeciale.cs" />
     <Compile Include="Generated\Mutation.cs" />
     <Compile Include="Generated\Nation.cs" />
     <Compile Include="Generated\Object.cs" />
-    <Compile Include="Generated\Origines.cs" />
+    <Compile Include="Generated\ObjectEffect.cs" />
+    <Compile Include="Generated\Ordinateur.cs" />
+    <Compile Include="Generated\Origine.cs" />
     <Compile Include="Generated\Personnage.cs" />
     <Compile Include="Generated\Personnalite.cs" />
+    <Compile Include="Generated\PlayerCondition.cs" />
+    <Compile Include="Generated\PlayerEffect.cs" />
+    <Compile Include="Generated\Poison.cs" />
     <Compile Include="Generated\PouvoirPolaris.cs" />
     <Compile Include="Generated\Profession.cs" />
+    <Compile Include="Generated\Programme.cs" />
+    <Compile Include="Generated\ReversDeFortune.cs" />
+    <Compile Include="Generated\SpecialArme.cs" />
     <Compile Include="Generated\SpecialCreature.cs" />
     <Compile Include="Generated\Specialite.cs" />
+    <Compile Include="Generated\TechniqueMartiale.cs" />
+    <Compile Include="Generated\TechniqueTir.cs" />
     <Compile Include="Generated\Titre.cs" />
+    <Compile Include="Generated\TypeGenetique.cs" />
     <Compile Include="Generated\Vehicule.cs" />
     <Compile Include="Generated\Ville.cs" />
+    <Compile Include="Generated\VilleMajeure.cs" />
     <Compile Include="Langues\Fr.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -82,34 +108,60 @@
     </Compile>
     <Compile Include="LocalContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserMade\AbsArme.cs" />
+    <Compile Include="UserMade\AbsCompetence.cs" />
+    <Compile Include="UserMade\AbsPoison.cs" />
+    <Compile Include="UserMade\AccessoireArme.cs" />
+    <Compile Include="UserMade\Archetype.cs" />
+    <Compile Include="UserMade\ArmeDistance.cs" />
     <Compile Include="UserMade\ArmeMelee.cs" />
-    <Compile Include="UserMade\ArmeTrait.cs" />
     <Compile Include="UserMade\Armure.cs" />
     <Compile Include="UserMade\AttaqueCreature.cs" />
     <Compile Include="UserMade\Avantage.cs" />
     <Compile Include="UserMade\AvantagePro.cs" />
+    <Compile Include="UserMade\AvantageProAleatoire.cs" />
+    <Compile Include="UserMade\Blessures.cs" />
+    <Compile Include="UserMade\CategorieMateriel.cs" />
     <Compile Include="UserMade\Competence.cs" />
     <Compile Include="UserMade\Complexes.cs" />
     <Compile Include="UserMade\Creature.cs" />
+    <Compile Include="UserMade\Drogue.cs" />
     <Compile Include="UserMade\Drone.cs" />
     <Compile Include="UserMade\ExoArmure.cs" />
     <Compile Include="UserMade\Fabriquant.cs" />
+    <Compile Include="UserMade\Faction.cs" />
     <Compile Include="UserMade\Implant.cs" />
+    <Compile Include="UserMade\IncidentPolaris.cs" />
+    <Compile Include="UserMade\LanceTorpille.cs" />
     <Compile Include="UserMade\LocalisationCreature.cs" />
+    <Compile Include="UserMade\Maladie.cs" />
     <Compile Include="UserMade\Materiel.cs" />
+    <Compile Include="UserMade\MunitionSpeciale.cs" />
     <Compile Include="UserMade\Mutation.cs" />
     <Compile Include="UserMade\Nation.cs" />
     <Compile Include="UserMade\Object.cs" />
-    <Compile Include="UserMade\Origines.cs" />
+    <Compile Include="UserMade\ObjectEffect.cs" />
+    <Compile Include="UserMade\Ordinateur.cs" />
+    <Compile Include="UserMade\Origine.cs" />
     <Compile Include="UserMade\Personnage.cs" />
     <Compile Include="UserMade\Personnalite.cs" />
+    <Compile Include="UserMade\PlayerCondition.cs" />
+    <Compile Include="UserMade\PlayerEffect.cs" />
+    <Compile Include="UserMade\Poison.cs" />
     <Compile Include="UserMade\PouvoirPolaris.cs" />
     <Compile Include="UserMade\Profession.cs" />
+    <Compile Include="UserMade\Programme.cs" />
+    <Compile Include="UserMade\ReversDeFortune.cs" />
+    <Compile Include="UserMade\SpecialArme.cs" />
     <Compile Include="UserMade\SpecialCreature.cs" />
     <Compile Include="UserMade\Specialite.cs" />
+    <Compile Include="UserMade\TechniqueMartiale.cs" />
+    <Compile Include="UserMade\TechniqueTir.cs" />
     <Compile Include="UserMade\Titre.cs" />
+    <Compile Include="UserMade\TypeGenetique.cs" />
     <Compile Include="UserMade\Vehicule.cs" />
     <Compile Include="UserMade\Ville.cs" />
+    <Compile Include="UserMade\VilleMajeure.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
@@ -127,6 +179,7 @@
     <Folder Include="JdrCore\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

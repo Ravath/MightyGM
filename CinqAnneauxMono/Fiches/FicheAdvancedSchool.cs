@@ -15,7 +15,7 @@ namespace CinqAnneauxMono.Fiches
 {
 	public class FicheAdvancedSchool : FicheModel<EcoleAvanceeModel>
 	{
-		private const float techDescHeigth = 350;
+		private const float techDescHeigth = 400;
 
 		private Header _schoolName = new MgHeader();
 		private Paragraph _schoolClan = new MgSubProperty();

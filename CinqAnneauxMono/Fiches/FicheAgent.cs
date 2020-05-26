@@ -9,6 +9,9 @@ namespace CinqAnneauxMono.Fiches
 {
 	public abstract class FicheAgent<T, A> : FicheModel<T> where T : PersonnageModel where A : Agent, new()
 	{
+		const float topHeight = 210;
+		const float columnHeight = 800;
+
 		private const String title = "Personnage";
 		private Header _name = new MgHeader(title);
 		private DisplayAttributes _attributes = new DisplayAttributes();
@@ -16,7 +19,7 @@ namespace CinqAnneauxMono.Fiches
 		private DisplaySecondaries _secondaries = new DisplaySecondaries(new Vector2(0f, 280f), Anchor.Auto) { Padding = new Vector2(0f) };
 		private DisplayAttacks _attacks = new DisplayAttacks(new Vector2(0f, 100f), Anchor.Auto);
 		private DisplaySkills _skills = new DisplaySkills(new Vector2(0f, 100f), Anchor.Auto);
-		private DisplayNaturalPowers _powers = new DisplayNaturalPowers();
+		private DisplayNaturalPowers _powers = new DisplayNaturalPowers(new Vector2(0f, 500f));
 		private MgDescription _description = new MgDescription();
 
 		protected Agent _character = new A();
@@ -25,9 +28,8 @@ namespace CinqAnneauxMono.Fiches
 			: base(size, anchor, offset)
 		{
 			Padding = Vector2.Zero;
-			const float columnHeight = 800;
 
-			Entity topPanel = new Panel(new Vector2(0f, 210), PanelSkin.Default, Anchor.AutoInline) { Padding = new Vector2(0f, 10f) };
+			Entity topPanel = new Panel(new Vector2(0f, topHeight), PanelSkin.Default, Anchor.AutoInline) { Padding = new Vector2(0f, 10f) };
 			Entity leftColumn = new Panel(new Vector2(0.5f, columnHeight), PanelSkin.Default, Anchor.AutoInline) { Padding = new Vector2(0f, 10f) };
 			Entity rightColumn = new Panel(new Vector2(0.5f, columnHeight), PanelSkin.Default, Anchor.AutoInline) { Padding = new Vector2(0f, 10f) };
 
@@ -56,7 +58,7 @@ namespace CinqAnneauxMono.Fiches
 			_skills.Character = _character;
 			_powers.Character = _character;
 
-			MinSize = new Vector2(800f, columnHeight + _description.Size.Y + _attributes.Size.Y + 500f);
+			MinSize = new Vector2(800f, topHeight + columnHeight + _powers.Size.Y + _description.Size.Y + 800f);
 		}
 
 		protected override void SetModel(T model)

@@ -58,26 +58,17 @@ namespace CinqAnneauxMono.FichesCandidates
 			tab[3].AddItem("{{RED}}" + System.String.Format(gloireString, "Situation", "Description"));
 			tab[4].AddItem("{{RED}}" + System.String.Format(honneurString, "Action", "1 ", "2-3", "4-5", "6-7", "8-9", "10"));
 
-			foreach (InfoTable info in context.UpperContext.Data.GetTable<GloireInfo>().OrderBy(t => t.Rang))
-			{
-				tab[0].AddItem(MgFont.Clean(string.Format(infoString, info.Description, info.Value)));
-			}
-			foreach (InfoTable info in context.UpperContext.Data.GetTable<InfamieInfo>().OrderBy(t => t.Rang))
-			{
-				tab[1].AddItem(MgFont.Clean(string.Format(infoString, info.Description, info.Value)));
-			}
-			foreach (InfoTable info in context.UpperContext.Data.GetTable<StatutInfo>().OrderBy(t => t.Rang))
-			{
-				tab[2].AddItem(MgFont.Clean(string.Format(infoString, info.Description, info.Value)));
-			}
-			foreach (GainGloire info in context.UpperContext.Data.GetTable<GainGloire>().OrderBy(t => t.Id))
-			{
-				tab[3].AddItem(MgFont.Clean(string.Format(gloireString, info.Nom, info.Description)));
-			}
-			foreach (HonneurInfo info in context.UpperContext.Data.GetTable<HonneurInfo>().OrderBy(t => t.Id))
-			{
-				tab[4].AddItem(MgFont.Clean(string.Format(honneurString, info.Description, info.Seuil1, info.Seuil2, info.Seuil3, info.Seuil4, info.Seuil5, info.Seuil6)));
-			}
+			tab[0].AddItem(context.UpperContext.Data.GetTable<GloireInfo>().OrderBy(t => t.Rang)
+				.Select(info=> MgFont.Clean(string.Format(infoString, info.Description, info.Value))));
+			tab[1].AddItem(context.UpperContext.Data.GetTable<InfamieInfo>().OrderBy(t => t.Rang)
+				.Select(info => MgFont.Clean(string.Format(infoString, info.Description, info.Value))));
+			tab[2].AddItem(context.UpperContext.Data.GetTable<StatutInfo>().OrderBy(t => t.Rang)
+				.Select(info => MgFont.Clean(string.Format(infoString, info.Description, info.Value))));
+			tab[3].AddItem(context.UpperContext.Data.GetTable<GainGloire>().OrderBy(t => t.Id)
+				.Select(info => MgFont.Clean(string.Format(gloireString, info.Nom, info.Description))));
+			tab[4].AddItem(context.UpperContext.Data.GetTable<HonneurInfo>().OrderBy(t => t.Id)
+				.Select(info => MgFont.Clean(string.Format(honneurString, info.Description, info.Seuil1, info.Seuil2, info.Seuil3, info.Seuil4, info.Seuil5, info.Seuil6))));
+
 			//Freeze header
 			for (int i = 0; i < tab.Length; i++)
 			{

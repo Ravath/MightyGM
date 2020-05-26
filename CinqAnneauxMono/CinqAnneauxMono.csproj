@@ -30,7 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="linq2db, Version=2.1.0.0, Culture=neutral, PublicKeyToken=e41013125f9e410a" />
+    <Reference Include="linq2db, Version=2.9.7.0, Culture=neutral, PublicKeyToken=e41013125f9e410a, processorArchitecture=MSIL">
+      <HintPath>..\packages\linq2db.2.9.7\lib\net46\linq2db.dll</HintPath>
+    </Reference>
     <Reference Include="MonoGame.Framework, Version=3.6.0.1625, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -42,25 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FichesCandidates\AdvancedSchoolFc.cs" />
-    <Compile Include="FichesCandidates\ConditionFc.cs" />
-    <Compile Include="FichesCandidates\AdvantageFc.cs" />
-    <Compile Include="FichesCandidates\ActionFc.cs" />
-    <Compile Include="FichesCandidates\IntrigueFc.cs" />
-    <Compile Include="FichesCandidates\AlternativeSchoolFc.cs" />
     <Compile Include="FichesCandidates\StatusFc.cs" />
-    <Compile Include="FichesCandidates\TatooFc.cs" />
     <Compile Include="FichesCandidates\ClanFc.cs" />
-    <Compile Include="FichesCandidates\AncestorFc.cs" />
-    <Compile Include="FichesCandidates\HeroicOpportunityFc.cs" />
-    <Compile Include="FichesCandidates\ShadowlandPowerFc.cs" />
-    <Compile Include="FichesCandidates\KihoFc.cs" />
-    <Compile Include="FichesCandidates\SkillFc.cs" />
-    <Compile Include="FichesCandidates\KataFc.cs" />
-    <Compile Include="FichesCandidates\SpellFc.cs" />
-    <Compile Include="FichesCandidates\CreatureFc.cs" />
-    <Compile Include="FichesCandidates\WeaponFc.cs" />
-    <Compile Include="FichesCandidates\ObjectFc.cs" />
     <Compile Include="Fiches\DisplayAttacks.cs" />
     <Compile Include="Fiches\DisplayAttributes.cs" />
     <Compile Include="Fiches\DisplayNaturalPowers.cs" />
@@ -111,6 +96,10 @@
       <Project>{dd284f36-fcd5-4265-ae4c-28b9a38b9def}</Project>
       <Name>GeonBit.UI</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

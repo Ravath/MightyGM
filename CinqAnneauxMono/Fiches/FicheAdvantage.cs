@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CinqAnneauxMono.Fiches
 {
-	public class FicheAdvantage : FicheModel<AbsAvantageModel>
+	public class FicheAdvantage<D> : FicheModel<D> where D : AbsAvantageModel
 	{
 		private Header _fName = new MgHeader();
 		private Paragraph _fCost = new MgProperty();
@@ -28,7 +28,7 @@ namespace CinqAnneauxMono.Fiches
 			AddChild(_fDescription);
 		}
 
-		protected override void SetModel(AbsAvantageModel model)
+		protected override void SetModel(D model)
 		{
 			_fName.Text = String.Format("{0} [{1}]",model.Name, model.SousType);
 			_fCost.Text = String.Format("Cout : {0} points", model.Cout);

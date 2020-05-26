@@ -13,6 +13,32 @@ namespace Polaris.Data {
 	[CoreData]
 	public partial class Titre : DataObject {
 
+		private int _professionId;
+		[Column(Storage = "ProfessionId",Name = "fk_professionmodel_profession")]
+		[HiddenProperty]
+		public int ProfessionId{
+			get{ return _professionId;}
+			set{_professionId = value;}
+		}
+
+		private ProfessionModel _profession;
+		public ProfessionModel Profession{
+			get {
+				if(_profession == null) {
+					_profession = LoadById<ProfessionModel>(ProfessionId);
+			       }
+				return _profession;
+			} set {
+				if(value == _profession) { return; }
+				_profession = value;
+				if(_profession != null) {
+					_professionId = _profession.Id;
+				} else {
+					_professionId = 0;
+				}
+			}
+		}
+
 		private string _nom = "";
 		[Column(Storage = "Nom",Name = "nom")]
 		public string Nom{

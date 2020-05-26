@@ -31,13 +31,6 @@ namespace Yggdrasil.Data {
 			}
 		}
 
-		private bool _monstre;
-		[Column(Storage = "Monstre",Name = "monstre")]
-		public bool Monstre{
-			get{ return _monstre;}
-			set{_monstre = value;}
-		}
-
 		private int _conflitOffensif;
 		[Column(Storage = "ConflitOffensif",Name = "conflitoffensif")]
 		public int ConflitOffensif{
@@ -92,6 +85,20 @@ namespace Yggdrasil.Data {
 		public int Vitalite{
 			get{ return _vitalite;}
 			set{_vitalite = value;}
+		}
+
+		private CategorieFigurant _categorie;
+		[Column(Storage = "Categorie",Name = "categorie")]
+		public CategorieFigurant Categorie{
+			get{ return _categorie;}
+			set{_categorie = value;}
+		}
+
+		private int _degats;
+		[Column(Storage = "Degats",Name = "degats")]
+		public int Degats{
+			get{ return _degats;}
+			set{_degats = value;}
 		}
 	}
 	[Table(Schema = "yggdrasil",Name = "figurantdescription")]

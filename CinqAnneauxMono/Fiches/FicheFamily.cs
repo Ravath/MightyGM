@@ -35,7 +35,7 @@ namespace CinqAnneauxMono.Fiches
 		{
 			_familyName.Text = "Famille";
 			_familyAttribute.Text = "";
-			_familyDescription.Value = "";
+			_familyDescription.Text = "";
 		}
 	}
 }

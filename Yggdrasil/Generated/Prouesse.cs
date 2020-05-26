@@ -38,18 +38,18 @@ namespace Yggdrasil.Data {
 			set{_niveau = value;}
 		}
 
-		private int _niveauMin;
-		[Column(Storage = "NiveauMin",Name = "niveaumin")]
-		public int NiveauMin{
-			get{ return _niveauMin;}
-			set{_niveauMin = value;}
+		private int _ameliorations;
+		[Column(Storage = "Ameliorations",Name = "ameliorations")]
+		public int Ameliorations{
+			get{ return _ameliorations;}
+			set{_ameliorations = value;}
 		}
 
-		private TypeProuesse _type;
-		[Column(Storage = "Type",Name = "type")]
-		public TypeProuesse Type{
-			get{ return _type;}
-			set{_type = value;}
+		private TypeProuesse _typeProuesse;
+		[Column(Storage = "TypeProuesse",Name = "typeprouesse")]
+		public TypeProuesse TypeProuesse{
+			get{ return _typeProuesse;}
+			set{_typeProuesse = value;}
 		}
 	}
 	[Table(Schema = "yggdrasil",Name = "prouessedescription")]
@@ -57,5 +57,12 @@ namespace Yggdrasil.Data {
 	}
 	[Table(Schema = "yggdrasil",Name = "prouesseexemplar")]
 	public partial class ProuesseExemplar : DataExemplaire<ProuesseModel> {
+
+		private int _niveauActuel;
+		[Column(Storage = "NiveauActuel",Name = "niveauactuel")]
+		public int NiveauActuel{
+			get{ return _niveauActuel;}
+			set{_niveauActuel = value;}
+		}
 	}
 }

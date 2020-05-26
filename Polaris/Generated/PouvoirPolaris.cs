@@ -45,6 +45,39 @@ namespace Polaris.Data {
 			set{_porteeMax = value;}
 		}
 
+		[Column(Name = "duree_val", Storage="DureeVal")]
+		public int DureeVal{
+			get{
+				return Duree.Value;
+			}
+			set{
+				Duree.Value = value;
+			}
+		}
+
+		[Column(Name = "duree_unit", Storage="DureeUnit")]
+		public TimeUnity DureeUnit{
+			get{
+				return Duree.Unity;
+			}
+			set{
+				Duree.Unity = value;
+			}
+		}
+
+		private TimePeriod _duree = new TimePeriod();
+		[HiddenProperty]
+		public TimePeriod Duree{
+			get{
+				return _duree;
+			}
+			set{
+				_duree = value;
+			}
+		}
+
+
+
 		private int _autre;
 		[Column(Storage = "Autre",Name = "autre")]
 		public int Autre{

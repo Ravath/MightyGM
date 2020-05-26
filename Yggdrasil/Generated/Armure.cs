@@ -57,5 +57,12 @@ namespace Yggdrasil.Data {
 			get{ return _soliditeRestante;}
 			set{_soliditeRestante = value;}
 		}
+
+		private bool _pieceDecoree;
+		[Column(Storage = "PieceDecoree",Name = "piecedecoree")]
+		public bool PieceDecoree{
+			get{ return _pieceDecoree;}
+			set{_pieceDecoree = value;}
+		}
 	}
 }

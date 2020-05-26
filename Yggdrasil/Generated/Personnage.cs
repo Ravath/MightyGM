@@ -45,6 +45,13 @@ namespace Yggdrasil.Data {
 			set{_vigueur = value;}
 		}
 
+		private int _agilite;
+		[Column(Storage = "Agilite",Name = "agilite")]
+		public int Agilite{
+			get{ return _agilite;}
+			set{_agilite = value;}
+		}
+
 		private int _intellect;
 		[Column(Storage = "Intellect",Name = "intellect")]
 		public int Intellect{
@@ -87,6 +94,28 @@ namespace Yggdrasil.Data {
 			set{_communication = value;}
 		}
 
+		private int _archetypeId;
+		[Column(Storage = "ArchetypeId",Name = "fk_archetypeexemplar_archetype")]
+		[HiddenProperty]
+		public int ArchetypeId{
+			get{ return _archetypeId;}
+			set{_archetypeId = value;}
+		}
+
+		private ArchetypeExemplar _archetype;
+		public ArchetypeExemplar Archetype{
+			get{
+				if( _archetype == null)
+					_archetype = LoadById<ArchetypeExemplar>(ArchetypeId);
+				return _archetype;
+			} set {
+				if(_archetype == value){return;}
+				_archetype = value;
+				if( value != null)
+					ArchetypeId = value.Id;
+			}
+		}
+
 		private IEnumerable<RuneExemplar> _tirage;
 		[Association(ThisKey = "Id",CanBeNull = false,Storage = "Tirage",OtherKey = "PersonnageModelId")]
 		public IEnumerable <RuneExemplar> Tirage{
@@ -109,17 +138,17 @@ namespace Yggdrasil.Data {
 			set{_typeFuror = value;}
 		}
 
-		private IEnumerable<DonModel> _dons;
+		private IEnumerable<DonExemplar> _dons;
 		[Association(ThisKey = "Id",CanBeNull = false,Storage = "Dons",OtherKey = "PersonnageModelId")]
-		public IEnumerable <DonModel> Dons{
+		public IEnumerable <DonExemplar> Dons{
 			get{
 				if( _dons == null ){
-					_dons = LoadFromJointure<DonModel,PersonnageModelToDonModel_Dons>(false);
+					_dons = LoadFromJointure<DonExemplar,PersonnageModelToDonExemplar_Dons>(false);
 				}
 				return _dons;
 			}
 			set{
-				SaveToJointure<DonModel, PersonnageModelToDonModel_Dons> (_dons, value,false);
+				SaveToJointure<DonExemplar, PersonnageModelToDonExemplar_Dons> (_dons, value,false);
 				_dons = value;
 			}
 		}
@@ -259,6 +288,21 @@ namespace Yggdrasil.Data {
 			}
 		}
 
+		private IEnumerable<CaractereExemplar> _caracteres;
+		[Association(ThisKey = "Id",CanBeNull = false,Storage = "Caracteres",OtherKey = "PersonnageModelId")]
+		public IEnumerable <CaractereExemplar> Caracteres{
+			get{
+				if( _caracteres == null ){
+					_caracteres = LoadFromJointure<CaractereExemplar,PersonnageModelToCaractereExemplar_Caracteres>(false);
+				}
+				return _caracteres;
+			}
+			set{
+				SaveToJointure<CaractereExemplar, PersonnageModelToCaractereExemplar_Caracteres> (_caracteres, value,false);
+				_caracteres = value;
+			}
+		}
+
 		private string _historique = "";
 		[LargeText]
 		[Column(Storage = "Historique",Name = "historique")]
@@ -289,7 +333,7 @@ namespace Yggdrasil.Data {
 		}
 		public override void DeleteObject() {
 			DeleteJoins<PersonnageModel,PersonnageModelToRuneExemplar_Tirage>(true);
-			DeleteJoins<PersonnageModel,PersonnageModelToDonModel_Dons>(true);
+			DeleteJoins<PersonnageModel,PersonnageModelToDonExemplar_Dons>(true);
 			DeleteJoins<PersonnageModel,PersonnageModelToBlessureExemplar_Sequelles>(true);
 			DeleteJoins<PersonnageModel,PersonnageModelToMaladieExemplar_Maladies>(true);
 			DeleteJoins<PersonnageModel,PersonnageModelToProuesseExemplar_Prouesses>(true);
@@ -299,6 +343,7 @@ namespace Yggdrasil.Data {
 			DeleteJoins<PersonnageModel,PersonnageModelToArmeModel_Armes>(true);
 			DeleteJoins<PersonnageModel,PersonnageModelToArmureModel_Armures>(true);
 			DeleteJoins<PersonnageModel,PersonnageModelToObjetQuotidienModel_Objets>(true);
+			DeleteJoins<PersonnageModel,PersonnageModelToCaractereExemplar_Caracteres>(true);
 			base.DeleteObject();
 		}
 	}

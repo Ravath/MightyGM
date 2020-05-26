@@ -9,7 +9,7 @@ using System.Text;
 
 namespace CinqAnneauxMono.Fiches
 {
-	public class FicheSpell : FicheModel<AbsSortModel>
+	public class FicheSpell<S> : FicheModel<S> where S : AbsSortModel
 	{
 		private Header _name = new MgHeader();
 		private Paragraph _element = new MgProperty();
@@ -33,7 +33,7 @@ namespace CinqAnneauxMono.Fiches
 			AddChild(_keyWords);
 		}
 
-		protected override void SetModel(AbsSortModel model)
+		protected override void SetModel(S model)
 		{
 			_name.Text = model.Name;
 			_element.Text = String.Format("{0} - {1}", model.Element, model.Maitrise);
