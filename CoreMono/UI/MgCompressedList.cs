@@ -41,6 +41,7 @@ namespace CoreMono.UI
 				{
 					CompressAll();
 					body.Visible = true;
+					MarkAsDirty();
 				}
 			};
 		}

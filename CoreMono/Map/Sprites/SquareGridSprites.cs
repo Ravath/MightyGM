@@ -34,7 +34,6 @@ namespace CoreMono.Map.Sprites
 		{
 			int spriteWidth, spriteHeight;
 			int squareSize = lm.SquareSize;
-			batch.Begin();
 			for (int i = 0; i < map.GetLength(0); i++)
 			{
 				spriteWidth = (i % Column) * cw;
@@ -50,7 +49,6 @@ namespace CoreMono.Map.Sprites
 					}
 				}
 			}
-			batch.End();
 		}
 	}
 }

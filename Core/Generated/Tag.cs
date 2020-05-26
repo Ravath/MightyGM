@@ -18,5 +18,12 @@ namespace Core.Data {
 			get{ return _label;}
 			set{_label = value;}
 		}
+
+		private bool _isFolder;
+		[Column(Storage = "isFolder",Name = "isfolder")]
+		public bool IsFolder{
+			get{ return _isFolder;}
+			set{_isFolder = value;}
+		}
 	}
 }

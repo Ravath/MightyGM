@@ -1,42 +1,49 @@
-0) In order to work, the following procedures, scripts and aliases must be correctly setted.
+ 0) In order to work, the following procedures, scripts and aliases must be correctly setted.
 	- mgTools/loadBashProfile.sh is sourced
 	- environment variables link to the mgTool.exe and Rpg.dll you want to use.
 
-1) Write description of Data using 'MightyData Language'
+ 1) Write description of Data using 'MightyData Language'
 
 See MightyData languages & definitions
 
-2) Generate
+ 2) Generate
 
 use Script mgTools/DataGen.sh
 	ex: "dataGen Yggdrasil.txt"
+	
+	/!\ : you musn't let any whitespace or empty line at the end of line.
 
-3) Create a Project in Visual Studio
+ 3) Create a Project in Visual Studio (ONLY if not automated by STEP 2)
  - JDR>Ajouter>Nouveau Projet => Bibliothèque de classes (.NET Framework)
 	(supprimer 'Class1.cs')
 	Il sera nécessaire de renommer le dossier précédemment créé puis de le re-fusionner avec celui créé par VS.
  - Ajouter les fichiers cs à VS
 	Creer les fichiers correspondant dans visual studio auparavant
- - Reference>Projet>Core
- - Reference>Add Ref System.Data.Linq
+ - Reference>Add Ref>Projet>Core
+ - Reference>Add Ref>Assembly>System.Data.Linq
  - Add nuget package Link2db
  
  - Add "Langue/fr.resx"
  - Implémenter LocalContext.cs
 
+ 4)
  - Generate The DLL (debug, release, ...)
  
- 4) Creer DB postgres
+ 5) Creer DB postgres
  
 use Script mgTools/schemaGen.sh
 	ex: schemaGen Yggdrasil
 	(mdp : admin)
 	
- 5) Generate the Excel files using 'mgTools/bin/Debug/mgTools.exe'
+ 6) use 'setRpgDll' command for setting the used RPG dll
+		Will be used by the next scripts
+	ex: setRpgDll Yggdrasil
+	
+ 7) Generate the Excel files using 'mgTools/bin/Debug/mgTools.exe'
 	arg1 : Outpath
 	ex: excelGen Yggdrasil/ExcelData/Core
 	
- 6) When the data is recorded is the excel files, load them in database using 'mgTools/bin/Debug/mgTools.exe'
+ 8) When the data is recorded is the excel files, load them in database using 'mgTools/bin/Debug/mgTools.exe'
 	arg1 : Input file path
 	ex: excelImportAll Yggdrasil/ExcelData/Core.xlsx
 		excelImportJoint Yggdrasil/ExcelData/Core_joint.xlsx

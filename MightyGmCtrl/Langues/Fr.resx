@@ -129,6 +129,9 @@
     <value>Erreur : ne peut pas ouvrir le fichier</value>
     <comment>ERROR : n'a pas réussit à ouvrir un fichier</comment>
   </data>
+  <data name="DATAMOD_NAME_TOO_LONG" xml:space="preserve">
+    <value>Un objet DataModel a été trouvé avec un nom trop long pour le type '{0}' : {1}</value>
+  </data>
   <data name="DATAMOD_NO_NAME" xml:space="preserve">
     <value>Un objet DataModel a été trouvé sans nom renseigné pour le type '{0}'</value>
     <comment>WARNING : Import. Les data models doivent tous être pourvus d'un nom.</comment>
@@ -148,6 +151,10 @@
   <data name="IMPORT_ERROR_NO_SHEET" xml:space="preserve">
     <value>Erreur : N'a pas trouvé la feuille Excel '{0}'</value>
     <comment>ERROR : n'a pas trouvé une feuille excel de nom donné</comment>
+  </data>
+  <data name="IMPORT_EXECEPTION" xml:space="preserve">
+    <value>Une erreur est survenue : {0}. Contexte : {1}</value>
+    <comment>ERROR : Exception dans le cadre d'un import Excel</comment>
   </data>
   <data name="IMPORT_PROC" xml:space="preserve">
     <value>Import</value>

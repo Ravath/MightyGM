@@ -83,10 +83,19 @@ namespace MightyGmCtrl.ImportExport
 			/* begin check */
 			bool fatalFound = false;
 
-			for (int i = 0; i < Workbook.NumberOfSheets; i++)
+			for (int i = 1/*skip summary*/; i < Workbook.NumberOfSheets; i++)
 			{
 				ISheet sheet = Workbook.GetSheetAt(i);
-				IRow firstRow = sheet.GetRow(sheet.FirstRowNum);
+				IRow firstRow = sheet.GetRow(ExportExcel.NBR_LIGNES_HEADER-1/*0-based*/);
+
+				/* Check there are at least 2 rows.
+				 * which is, in fact, only due to formatting. */
+				if (sheet.LastRowNum < ExportExcel.NBR_MIN_COL_HEADER - 1/*0-based*/)
+				{
+					AddError(sheet, 0, sheet.LastRowNum, "Must have at least 2 columns");
+				}
+
+				/* for every columns */
 				foreach (var cell in firstRow.Cells)
 				{
 					if(cell == null) { continue; }
@@ -98,14 +107,14 @@ namespace MightyGmCtrl.ImportExport
 					/*check all name specific verifications */
 					if (cell.StringCellValue.ToLower() == "name")
 					{
-						for (int ir = 1; ir <= sheet.LastRowNum; ir++)
+						for (int ir = ExportExcel.NBR_LIGNES_HEADER/*0-based*/; ir <= sheet.LastRowNum; ir++)
 						{
 							var nameCell = sheet.GetRow(ir)?.GetCell(cell.ColumnIndex);
 							if(nameCell == null) { continue; }
-							/* check all data names has length <=40 */
-							if (nameCell.StringCellValue.Length > 40)
+							/* check all data names has length */
+							if (nameCell.StringCellValue.Length > ExportExcel.NAME_MAX_LENGTH)
 							{
-								AddError(sheet, ir, cell.ColumnIndex, "name length > 40");
+								AddError(sheet, ir, cell.ColumnIndex, "name length > "+ ExportExcel.NAME_MAX_LENGTH + " : "+ nameCell.StringCellValue.Length);
 								fatalFound = true;
 							}
 							/* look for duplicates */
@@ -123,7 +132,7 @@ namespace MightyGmCtrl.ImportExport
 					/*check all tag specific verifications */
 					if (cell.StringCellValue?.ToLower() == "tag")
 					{
-						for (int ir = 1; ir <= sheet.LastRowNum; ir++)
+						for (int ir = ExportExcel.NBR_LIGNES_HEADER/*0-based*/; ir <= sheet.LastRowNum; ir++)
 						{
 							var nameCell = sheet.GetRow(ir)?.GetCell(cell.ColumnIndex);
 							if (nameCell == null)

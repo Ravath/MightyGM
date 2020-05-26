@@ -32,12 +32,16 @@ create table core.session(
 	playersummary text NOT NULL,
 	gmnotes text NOT NULL)INHERITS(core.dataobject);
 create table core.tag(
-	label character varying(30) NOT NULL)INHERITS(core.dataobject);
+	label character varying(30) NOT NULL,
+	isfolder bool NOT NULL)INHERITS(core.dataobject);
 create table core.ressource(
 	name character varying(255) NOT NULL)INHERITS(core.dataobject);
-create table core.soundfilter(
-	type integer NOT NULL,
-	values character varying(20) NOT NULL)INHERITS(core.dataobject);
+create table core.ressourcebase(
+	path character varying(516) NOT NULL,
+	defaultmiscpath character varying(256) NOT NULL,
+	defaulttextpath character varying(256) NOT NULL,
+	defaultimagepath character varying(256) NOT NULL,
+	defaultsoundtrackpath character varying(256) NOT NULL)INHERITS(core.dataobject);
 create table core.scenariotoplayer_players(
 	fk_scenario_join integer,
 	fk_player_join integer)INHERITS(core.dataobject);
@@ -47,34 +51,15 @@ create table core.sessiontoplayer_playersatthesession(
 create table core.ressourcetotag_tags(
 	fk_ressource_join integer,
 	fk_tag_join integer)INHERITS(core.dataobject);
-create table core.documenttoparagraph_paragraphs(
-	fk_document_join integer,
-	fk_paragraph_join integer)INHERITS(core.dataobject);
-create table core.documenttodocument_subdocs(
-	fk_document_joinsubdocs integer,
-	fk_document_join integer)INHERITS(core.dataobject);
-create table core.filteredtracktosoundfilter_filters(
-	fk_filteredtrack_join integer,
-	fk_soundfilter_join integer)INHERITS(core.dataobject);
-create table core.paragraph(
-	title character varying(255) NOT NULL,
-	text text NOT NULL,
+create table core.settorawressource_ressources(
+	fk_set_join integer,
+	fk_rawressource_join integer)INHERITS(core.dataobject);
+create table core.rawressource(
+	fk_ressourcebase_db integer,
+	ressourcetype integer NOT NULL,
+	path character varying(516) NOT NULL,
 	primary key(id))INHERITS(core.ressource);
-create table core.document(
+create table core.secondaryressource(
 	primary key(id))INHERITS(core.ressource);
-create table core.image(
-	filepath character varying(255) NOT NULL,
-	primary key(id))INHERITS(core.ressource);
-create table core.soundtrack(
-	filepath character varying(255) NOT NULL,
-	primary key(id))INHERITS(core.ressource);
-create table core.playlist(
-	fk_filteredtrack_track integer,
-	primary key(id))INHERITS(core.ressource);
-create table core.graph(
-	primary key(id))INHERITS(core.ressource);
-create table core.map(
-	primary key(id))INHERITS(core.ressource);
-create table core.filteredtrack(
-	repeat bool NOT NULL,
-	primary key(id))INHERITS(core.soundtrack);
+create table core.set(
+	primary key(id))INHERITS(core.secondaryressource);

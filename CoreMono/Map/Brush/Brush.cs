@@ -41,6 +41,7 @@ namespace CoreMono.Map.Brush
 					return null;
 			}
 		}
+
 		public IEnumerable<Point> GetRectanglePoints(int x, int y, Func<int, int, bool> select)
 		{
 			if (Radius <= 1)

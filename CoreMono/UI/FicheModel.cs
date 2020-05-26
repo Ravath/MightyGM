@@ -39,6 +39,7 @@ namespace CoreMono.UI
 			{
 				SetModel(model);
 			}
+			MarkAsDirty();
 		}
 
 		protected abstract void SetModel(T model);

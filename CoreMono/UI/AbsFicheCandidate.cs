@@ -12,7 +12,7 @@ namespace CoreMono.UI
 	public abstract class AbsFicheCandidate : Panel
 	{
 		public AbsFicheCandidate(string name)
-			: base(new Vector2(0,0), PanelSkin.Default, Anchor.Center, null)
+			: base(new Vector2(0,0), PanelSkin.None, Anchor.Center, null)
 		{
 			Name = name;
 			Padding = new Vector2(0, 0);

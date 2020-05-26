@@ -64,6 +64,12 @@ namespace MightyGmCtrl.ImportExport
 						//we don't want objects without name in DB
 						toRemove.Add(temp);
 					}
+					else if(dataMod.Name.Length > ExportExcel.NAME_MAX_LENGTH)
+					{
+						reportRef(MessageType.WARNING, "DATAMOD_NAME_TOO_LONG", new object[] { temp.GetType().Name, dataMod.Name });
+						//we don't want objects without name in DB
+						toRemove.Add(temp);
+					}
 					else if (data.Contains(_type, dataMod))
 					{
 						reportRef(MessageType.WARNING, "NAME_ALREADY_IN_DATABASE", new object[] { dataMod.Name, temp.GetType().Name});

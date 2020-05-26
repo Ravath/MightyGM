@@ -48,7 +48,8 @@ namespace MightyGmCtrl.Controleurs
 		/// <param name="selectedTexture"></param>
 		/// <param name="chosenImage"></param>
 		/// <returns>False if a file Texture directory has to be replaced by new file. The Data has not been added to DB, and file has not been moved.</returns>
-		public Boolean AddToDatabase(Image selectedTexture, FileInfo chosenImage)
+		[Obsolete("AddToDatabase is deprecated, please use CoreDataControl for managing RawRessources instead.")]
+		public Boolean AddToDatabase(RawRessource selectedTexture, FileInfo chosenImage)
 		{
 			//TODO use filePath, distinct from Name
 			Boolean copy = false;

@@ -88,19 +88,28 @@ namespace MightyGmCtrl.Controleurs
 
 				if(_warnings.Count() == 0)
 				{
-					// Save in DB
-					// save raw data (must have IDs before linking references)
-					foreach (ImportType it in _types) { it.InsertData(GlobalContext.Data, ReportMessageRef); }
-					// update cross references
-					foreach (ImportType it in _types) { it.SaveCrossReferences(GlobalContext.Data, ReportMessageRef); }
-					// save with references
-					foreach (ImportType it in _types) { it.SaveData(GlobalContext.Data); }
-					foreach (ImportType it in _types) { it.SaveLateDatas(GlobalContext.Data);  }
+					ImportType current = null;
+					try
+					{
+						// Save in DB
+						// save raw data (must have IDs before linking references)
+						foreach (ImportType it in _types) { current = it; it.InsertData(GlobalContext.Data, ReportMessageRef); }
+						// update cross references
+						foreach (ImportType it in _types) { current = it; it.SaveCrossReferences(GlobalContext.Data, ReportMessageRef); }
+						// save with references
+						foreach (ImportType it in _types) { current = it; it.SaveData(GlobalContext.Data); }
+						foreach (ImportType it in _types) { current = it; it.SaveLateDatas(GlobalContext.Data); }
+
+						// Finisehd
+						success = true;
+					}
+					catch (Exception e)
+					{
+						ReportMessageRef(MessageType.ERROR, "IMPORT_EXECEPTION", e, current.ModelType.BaseType);
+						success = false;
+					}
 
 					SetFinEtape();
-
-					// Finisehd
-					success = true;
 				}
 			}
 			catch (IOException)
@@ -149,7 +158,7 @@ namespace MightyGmCtrl.Controleurs
 				}
 				SetFinEtape();
 
-				// Finisehd
+				// Finished
 				success = true;
 			}
 			catch (IOException)

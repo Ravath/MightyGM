@@ -40,11 +40,13 @@ namespace MightyGmCtrl.ImportExport
 				//Faire correspondre propriété avec colonne
 				foreach (PropertyInfo prop in import.ModelType.GetExportableProperties())
 				{
+					//Find a converter
 					IExcelPropertyConverter conv = ExportExcel.converters.FirstOrDefault(
 						c => c.CanConvertProperty(prop)
 						&& c.CanConvertColumn(prop, headerRow));
 					if (conv != null)
 					{
+						// Do the importation of the property for this row
 						conv.ImportColumn(newObject, prop, headerRow, currentRow, import);
 					}
 				}

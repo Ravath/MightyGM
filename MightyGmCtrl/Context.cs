@@ -46,6 +46,10 @@ namespace MightyGmCtrl
 		/// </summary>
 		public Database Data { get; internal set; }
 		/// <summary>
+		/// Management of the Core Data (DB, ressources...).
+		/// </summary>
+		public CoreDataControl CoreData { get; internal set; }
+		/// <summary>
 		/// Current JDR's DataModel.
 		/// </summary>
 		public DllData Dll { get; internal set; }
@@ -88,6 +92,7 @@ namespace MightyGmCtrl
 
 			// Managers instantiation.
 			Data = new Database();
+			CoreData = new CoreDataControl(this);
 			Dll = new DllData(null);
 			Contexts = new Contexts(this);
 			Files = new FilesControl(this, uitypeName);

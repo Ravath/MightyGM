@@ -6,6 +6,7 @@ using CSCore.SoundOut;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,9 +17,27 @@ namespace MightyGmCtrl.Controleurs
 	{
 		private ISoundOut _soundOut;
 		private IWaveSource _waveSource;
-		private MMDevice _device;
-		private Soundtrack _track;
+		private FileInfo _file;
+		private AudioControl _control;
+
 		public event EventHandler<PlaybackStoppedEventArgs> PlaybackStopped;
+
+		/// <summary>
+		/// Should only be instanciated by the 'AudioControl' class.
+		/// </summary>
+		/// <param name="control"></param>
+		internal TrackControl(AudioControl control)
+		{
+			_control = control;
+		}
+
+		#region Properties
+		public FileInfo File {
+			get
+			{
+				return _file;
+			}
+		}
 
 		public PlaybackState PlaybackState
 		{
@@ -76,7 +95,9 @@ namespace MightyGmCtrl.Controleurs
 				}
 			}
 		}
+		#endregion
 
+		#region Methods
 		public void Play()
 		{
 			if (_soundOut != null)
@@ -110,14 +131,14 @@ namespace MightyGmCtrl.Controleurs
 			}
 		}
 
-		public void Open(Soundtrack track, MMDevice device)
+		public void Open(FileInfo track, MMDevice device)
 		{
 			CleanupPlayback();
 
-			_track = track;
+			_file = track;
 
 			_waveSource =
-				CodecFactory.Instance.GetCodec(_track.FilePath)
+				CodecFactory.Instance.GetCodec(_file.FullName)
 					.ToSampleSource()
 					.ToMono()
 					.ToWaveSource();
@@ -127,18 +148,23 @@ namespace MightyGmCtrl.Controleurs
 
 		public void InitializeSoundOut(MMDevice device)
 		{
-			_device = device;
+			bool wasPlaying = Plays;
 
 			_soundOut?.Dispose();
-
-			_soundOut = new WasapiOut() { Latency = 100, Device = _device };
+			_soundOut = new WasapiOut() { Latency = 100, Device = device };
 			_soundOut.Initialize(_waveSource);
+
 			if (PlaybackStopped != null) _soundOut.Stopped += PlaybackStopped;
+
+			// if the device was changed during play, we restart playing on the new device
+			if (wasPlaying) Play();
 		}
 
 		public void Dispose()
 		{
 			CleanupPlayback();
-		}
+			_control.Remove(this);
+		} 
+		#endregion
 	}
 }

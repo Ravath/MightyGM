@@ -111,7 +111,7 @@ namespace MightyGmCtrl.ImportExport
 				if (string.IsNullOrEmpty(stringEnum))
 					return null;
 				object enumVal = null;
-				try { enumVal = Enum.Parse(t, stringEnum); } catch { }
+				try { enumVal = Enum.Parse(t, stringEnum, true); } catch { }
 				return enumVal;
 			}
 			else if (t.IsAssignableFrom(typeof(bool)))

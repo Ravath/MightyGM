@@ -25,6 +25,15 @@ if [ -z $1 ] ; then
 	echo "Must have first argument : the output file name for the exported Excel file"
 	exit
 fi
+if [ ! -d $(dirname $1) ] ; then 
+	echo "Can't find Output directory : $(dirname $1)"
+	read -p "Want you to create it now? y/n" yn
+	if [ ${yn,,} == "y" ] ; then
+		mkdir -p $(dirname $1)
+	else
+		exit
+	fi
+fi
 
 # CALL EXECUTABLE
 $TOOLS_EXE canvas "$CURRENT_RPG_DLL" "$1.xlsx"

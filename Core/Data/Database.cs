@@ -38,12 +38,12 @@ namespace Core.Data {
 
 		public bool Update( IDataObject obj ) {
 			Type type = obj.GetType();
-			IEnumerable<MethodInfo> insertMethods = typeof(DataExtensions).GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy).Where(p => p.Name == "Update");
-			MethodInfo insertMethod = insertMethods.First(t => t.GetParameters().ElementAt(0).ParameterType == typeof(IDataContext));
-			MethodInfo insertGeneric = insertMethod.MakeGenericMethod(new Type[] { type });
+			IEnumerable<MethodInfo> updateMethods = typeof(DataExtensions).GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy).Where(p => p.Name == "Update");
+			MethodInfo updateMethod = updateMethods.First(t => t.GetParameters().ElementAt(0).ParameterType == typeof(IDataContext));
+			MethodInfo updateGeneric = updateMethod.MakeGenericMethod(new Type[] { type });
 			lock (DataAccess)
 			{
-				insertGeneric.Invoke(this, new object[] { this, obj, null, null, null });
+				updateGeneric.Invoke(this, new object[] { this, obj, null, null, null });
 			}
 			return true;
 		}
@@ -62,12 +62,12 @@ namespace Core.Data {
 		}
 		public bool Delete( IDataObject obj ) {
 			Type type = obj.GetType();
-			IEnumerable<MethodInfo> insertMethods = typeof(DataExtensions).GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy).Where(p => p.Name == "Delete");
-			MethodInfo insertMethod = insertMethods.First(t => t.GetParameters().ElementAt(0).ParameterType == typeof(IDataContext));
-			MethodInfo insertGeneric = insertMethod.MakeGenericMethod(new Type[] { type });
+			IEnumerable<MethodInfo> deleteMethods = typeof(DataExtensions).GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy).Where(p => p.Name == "Delete");
+			MethodInfo deleteMethod = deleteMethods.First(t => t.GetParameters().ElementAt(0).ParameterType == typeof(IDataContext));
+			MethodInfo deleteGeneric = deleteMethod.MakeGenericMethod(new Type[] { type });
 			lock (DataAccess)
 			{
-				insertGeneric.Invoke(this, new object[] { this, obj });
+				deleteGeneric.Invoke(this, new object[] { this, obj, null, null, null });
 			}
 			return true;
 		}
@@ -112,7 +112,7 @@ namespace Core.Data {
 		}
 		public bool Contains( Type type, DataModel mod ) {
 			return ContainsByTag(type, mod.Tag);
-			}
+		}
 		/// <summary>
 		/// Check if there already is a DataModel whith this name.
 		/// </summary>

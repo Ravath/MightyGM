@@ -1,12 +1,14 @@
 ﻿using CoreMono.UI;
 using GeonBit.UI;
 using GeonBit.UI.Entities;
+using GeonBit.UI.Entities.TextValidators;
 using GeonBit.UI.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MightyGmCtrl;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using TableTop.UI;
 
@@ -21,19 +23,17 @@ namespace CoreMono
 		public static Context Controler;
 		public static DefaultConfiguration configuration;
 		public static GraphicsDeviceManager graphics;
+		public static MainApplication inst;
 		SpriteBatch spriteBatch;
 
-		/// <summary>
-		/// The Main tabs of the different control panels.
-		/// </summary>
-		private PanelTabs tabPanel;
-
 		// THE PANELS
-		private JdrPanel jdrControl;
-		private ImagePanel imageControl;
-		private MusicPanel musicControl;
-		private GridPanel gridControl;
-		private FichePanel ficheControl;
+		public TablePanel TableControl { get; private set; }
+		public JdrPanel JdrControl { get; private set; }
+		public RessourcesPanel ResControl { get; private set; }
+		public FichePanel FicheControl { get; private set; }
+		public OptionPanel OptionControl { get; private set; }
+		// TODO : test panels
+		public ImagePanel ImageControl { get; private set; }
 
 		public MainApplication()
 		{
@@ -54,6 +54,9 @@ namespace CoreMono
 
 			// Register Exit Event
 			Exiting += (object sender, EventArgs e) => { Controler.Exit(); };
+
+			// init static access
+			inst = this;
 		}
 
 		/// <summary>
@@ -69,41 +72,64 @@ namespace CoreMono
 			UserInterface.Active.UseRenderTarget = true;
 			UserInterface.Active.GlobalScale = 1f;
 			UserInterface.Active.GenerateTooltipFunc = GenerateTooltipFunc;
+			UserInterface.TimeToShowTooltipText = 1f;
 
-			// create a tabs
-			tabPanel = new PanelTabs() { Size = new Vector2(0f) };
-			TabData jdrPanel = tabPanel.AddTab("Jdr");
-			TabData imagePanel = tabPanel.AddTab("Pict");
-			TabData musicPanel = tabPanel.AddTab("Music");
-			TabData gridPanel = tabPanel.AddTab("Grid");
-			TabData fichePanel = tabPanel.AddTab("Fiche");
+			//Decomment for debug drawing assistance
+			//UserInterface.Active.DebugDraw = true;
 
-			jdrControl = new JdrPanel();
-			imageControl = new ImagePanel();
-			musicControl = new MusicPanel();
-			gridControl = new GridPanel();
-			ficheControl = new FichePanel();
+			TableControl = new TablePanel();
+			JdrControl = new JdrPanel();
+			ResControl = new RessourcesPanel();
+			//ImageControl = new ImagePanel();
+			FicheControl = new FichePanel();
+			OptionControl = new OptionPanel();
 
-			// sw shortcut
-			if (jdrControl.JdrCount == 1)
-				jdrControl.JdrIndex = 0;
+			//// SW shortcut
+			//if (JdrControl.JdrCount == 1)
+				JdrControl.JdrIndex = 0;
 
-			const float panelPadding = 0;
-			jdrPanel.panel.Padding = new Vector2(panelPadding);
-			imagePanel.panel.Padding = new Vector2(panelPadding);
-			musicPanel.panel.Padding = new Vector2(panelPadding);
-			gridPanel.panel.Padding = new Vector2(panelPadding);
-			fichePanel.panel.Padding = new Vector2(panelPadding);
-
-			jdrPanel.panel.AddChild(jdrControl);
-			imagePanel.panel.AddChild(imageControl);
-			musicPanel.panel.AddChild(musicControl);
-			gridPanel.panel.AddChild(gridControl);
-			fichePanel.panel.AddChild(ficheControl);
-
-			UserInterface.Active.AddEntity(tabPanel);
+			//UserInterface.Active.AddEntity(tabPanel);
+			//UserInterface.Active.AddEntity(TableControl);
+			ReturnToTable();
 
 			base.Initialize();
+		}
+
+		public void ReturnToTable()
+		{
+			UserInterface.Active.Clear();
+			UserInterface.Active.AddEntity(TableControl);
+		}
+
+		internal void SetExitableView(Entity view)
+		{
+			UserInterface.Active.Clear();
+			UserInterface.Active.AddEntity(view);
+			UserInterface.Active.AddEntity(new Button("X", anchor: Anchor.TopLeft, size: new Vector2(50))
+			{
+				Padding = Vector2.Zero,
+				OnClick = (e) => { ReturnToTable(); }
+			});
+		}
+
+		internal void ChooseRpgView()
+		{
+			SetExitableView(JdrControl);
+		}
+
+		internal void RessourceView()
+		{
+			SetExitableView(ResControl);
+		}
+
+		internal void FicheView()
+		{
+			SetExitableView(FicheControl);
+		}
+
+		internal void OptionView()
+		{
+			SetExitableView(OptionControl);
 		}
 
 		/// <summary>
@@ -119,9 +145,6 @@ namespace CoreMono
 			{
 				font.DefaultCharacter = ' ';
 			}
-
-			//Load the sprites of the test grid.
-			gridControl.LoadContent(graphics);
 		}
 
 		/// <summary>
@@ -178,11 +201,11 @@ namespace CoreMono
 		{
 			if (success)
 			{
-				MessageBox.ShowMsgBox(procName, "Operation Finished With Success");
+				GeonBit.UI.Utils.MessageBox.ShowMsgBox(procName, "Operation Finished With Success");
 			}
 			else
 			{
-				MessageBox.ShowMsgBox(procName, "Operation Failed");
+				GeonBit.UI.Utils.MessageBox.ShowMsgBox(procName, "Operation Failed");
 			}
 		}
 		
@@ -218,7 +241,7 @@ namespace CoreMono
 				if (position.X > screenBounds.Right - destRect.Width) position.X = screenBounds.Right - destRect.Width;
 
 				// update tooltip position
-				tooltip.SetPosition(Anchor.TopLeft, position / UserInterface.Active.GlobalScale);
+				tooltip.SetAnchorAndOffset(Anchor.TopLeft, position / UserInterface.Active.GlobalScale);
 			};
 			tooltip.CalcTextActualRectWithWrap();
 			tooltip.BeforeDraw(tooltip);

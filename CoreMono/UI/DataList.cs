@@ -63,10 +63,8 @@ namespace CoreMono.UI
 		{
 			list.ClearItems();
 			if(_data == null) { return; }
-			foreach (T item in _data)
-			{
-				list.AddItem(MgFont.Clean(item.Name));
-			}
+
+			list.AddItem(_data.Select(s=> MgFont.Clean(s.Name)));
 		}
 
 	}

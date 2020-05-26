@@ -17,6 +17,9 @@ namespace DataGenerator
 			}
 
 			//Parse File
+#if DEBUG
+			Console.Out.WriteLine("Start Parsing : ");
+#endif
 			parser.Scanner = new Parser.Parser.Lexer(reader);
 			Console.WriteLine();
 			try
@@ -35,28 +38,24 @@ namespace DataGenerator
 				Console.In.ReadLine();
 				return;
 			}
-#if !DEBUG
 			try {
-#endif
-			//Create model
-			DatabaseModel dm = Converter.Convert(parser.RawData);
+				//Create model
+				DatabaseModel dm = Converter.Convert(parser.RawData);
 #if DEBUG
-			dm.Print(Console.Out);
+				dm.Print(Console.Out);
 #endif
-			if (ErrorManager.Conclude())
-			{
-				Generation gn = new Generation();
-				gn.Generate(dm);
+				if (ErrorManager.Conclude())
+				{
+					Generation gn = new Generation();
+					gn.Generate(dm);
 
-				Console.WriteLine("Generation Done.");
-			}
-#if !DEBUG
+					Console.WriteLine("Generation Done.");
+				}
 			} catch(Exception ex) {
 				Console.WriteLine("An error Has occured and stopped the generation:");
 				Console.WriteLine(ex.Message);
 				Console.WriteLine(ex.StackTrace);
 			}
-#endif
 #if DEBUG
 			Console.In.ReadLine();
 #endif

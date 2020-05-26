@@ -73,7 +73,10 @@ namespace Core.Data {
 		}
 
 		public override void SaveObject() {
-			ModelId = Model.Id;//has to be updated in case it changed during insertion.
+			/* Has to be updated in case it changed during insertion.
+			 * If no Model set, use default Id 0.
+			 * Assume it is temporary or will be fixed latter. */
+			ModelId = Model?.Id??0;
 			base.SaveObject();
 		}
 	}

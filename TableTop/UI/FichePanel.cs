@@ -24,6 +24,9 @@ namespace TableTop.UI
 		{
 			MainApplication.Controler.Contexts.JdrChanged += Contexts_JdrChanged;
 
+			Offset = Vector2.Zero;
+			Padding = Vector2.Zero;
+
 			MgSplitEntity split = new MgSplitEntity (new Vector2(0f))
 			{
 				MinLeftWidth = 200,
@@ -57,12 +60,9 @@ namespace TableTop.UI
 		{
 			jdrContext = newJdrContext;
 			uiContext = newJdrUiContext as IJdrContextMono;
-			listFiches.ClearChildren();
+			listFiches.ClearItems();
 			lazyload = new bool[uiContext.Fiches.Count()];
-			foreach (var item in uiContext.Fiches)
-			{
-				listFiches.AddItem(item.Name);
-			}
+			listFiches.AddItem(uiContext.Fiches.Select(item=>item.Name));
 		}
 	}
 }

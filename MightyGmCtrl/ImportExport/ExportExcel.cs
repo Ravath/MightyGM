@@ -16,6 +16,7 @@ namespace MightyGmCtrl.ImportExport
 		public const int NBR_LIGNES_HEADER_SUMMARY = 2;
 		public const int NBR_LIGNES_HEADER = 2;
 		public const int NBR_MIN_COL_HEADER = 2;
+		public const int NAME_MAX_LENGTH = 40;
 
 		/// <summary>
 		/// The Import/Exportdelegated rule for each managed property type, in priority order.
@@ -78,6 +79,10 @@ namespace MightyGmCtrl.ImportExport
 			}
 			if(columnOffset < NBR_MIN_COL_HEADER)
 			{
+				for(int i = columnOffset; i < NBR_MIN_COL_HEADER; i++)
+				{
+					header1.CreateCell(i);
+				}
 				columnOffset = NBR_MIN_COL_HEADER;
 			}
 

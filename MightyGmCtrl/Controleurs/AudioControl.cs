@@ -2,7 +2,10 @@
 using CSCore.CoreAudioAPI;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.Contracts;
 using System.Linq;
+using System;
+using System.IO;
 
 namespace MightyGmCtrl.Controleurs
 {
@@ -36,9 +39,9 @@ namespace MightyGmCtrl.Controleurs
 			ActualizeMMDevicesList();
 		}
 
-		private TrackControl Open(Soundtrack track, MMDevice device)
+		private TrackControl Open(FileInfo track, MMDevice device)
 		{
-			TrackControl newTrack = new TrackControl();
+			TrackControl newTrack = new TrackControl(this);
 			newTrack.Open(track, device);
 			_tracks.Add(newTrack);
 
@@ -49,9 +52,19 @@ namespace MightyGmCtrl.Controleurs
 		/// Add the given Soundtrack to the player.
 		/// </summary>
 		/// <param name="track">Track to play.</param>
-		public TrackControl Open(Soundtrack track)
+		public TrackControl Open(RawRessource track)
 		{
-			return Open(track, MMDevices.ElementAt(SelectedDeviceIndex));
+			Contract.Assert(track.RessourceType == RawRessourceType.Soundtrack);
+			return Open(track.Info, MMDevices.ElementAt(SelectedDeviceIndex));
+		}
+
+		/// <summary>
+		/// Should be called only by 'TrackControl::Dispose()'.
+		/// </summary>
+		/// <param name="track"></param>
+		internal void Remove(TrackControl track)
+		{
+			_tracks.Remove(track);
 		}
 
 		public void ActualizeMMDevicesList()
@@ -74,9 +87,9 @@ namespace MightyGmCtrl.Controleurs
 
 		internal void Exit()
 		{
-			foreach (TrackControl tr in _tracks)
+			for (int i = _tracks.Count-1; i >=0; i--)
 			{
-				tr.Dispose();
+				_tracks.ElementAt(i).Dispose();
 			}
 		}
 	}

@@ -19,6 +19,7 @@ namespace CoreMono.Map
 		
 		public MouseDrawCmd ActiveCommand { get; set; }
 
+		public int LayerCount { get { return _layers.Count; } }
 		public int SquareSize { get; set; }
 		public SquareSizeMode SquareSizeMode { get; set; }
 
@@ -27,10 +28,10 @@ namespace CoreMono.Map
 		{
 			SquareSize = 30;
 			SquareSizeMode = SquareSizeMode.FIT;
-			this.OnMouseDown += LayerMap_MouseDown;
-			this.OnMouseReleased += LayerMap_MouseUp;
-			this.OnMouseLeave += LayerMap_MouseOut;
-			this.WhileMouseDown += Layermap_MouseDragging;
+			OnMouseDown += LayerMap_MouseDown;
+			OnMouseReleased += LayerMap_MouseUp;
+			OnMouseLeave += LayerMap_MouseOut;
+			WhileMouseDown += Layermap_MouseDragging;
 			UpdateStyle(DefaultStyle);
 		}
 
@@ -72,14 +73,21 @@ namespace CoreMono.Map
 
 		public override void Draw(SpriteBatch spriteBatch)
 		{
+			int col = GetMaxCol();
+			int row = GetMaxRow();
+
+			if(col <=0 || row <= 0) { return; }
+
 			/* resize squares */
-			Stretch(SquareSizeMode, GetMaxCol(), GetMaxRow());
+			Stretch(SquareSizeMode, col, row);
 
 			/* draw layers */
+			spriteBatch.Begin();
 			for (int i = 0; i < _layers.Count; i++)
 			{
 				_layers[i].Draw(spriteBatch, this);
 			}
+			spriteBatch.End();
 		}
 
 		public int GetMaxCol()
@@ -120,7 +128,7 @@ namespace CoreMono.Map
 
 		public E GetLayer<E>(int v) where E : MapLayer
 		{
-			return (E)_layers[v];
+			return _layers[v] as E;
 		}
 
 		public void SetActiveLayer(int i)

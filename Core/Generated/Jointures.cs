@@ -83,83 +83,29 @@ namespace Core.Data {
 			set { Object2 = value; }
 		}
 	}
-	[Table(Schema = "core",Name = "documenttoparagraph_paragraphs")]
-	public class DocumentToParagraph_Paragraphs : DataRelation<Document, Paragraph> {
+	[Table(Schema = "core",Name = "settorawressource_ressources")]
+	public class SetToRawRessource_Ressources : DataRelation<Set, RawRessource> {
 
-		[Column(Name = "fk_document_join", Storage = "DocumentId")]
+		[Column(Name = "fk_set_join", Storage = "SetId")]
 		[HiddenProperty]
-		public int DocumentId {
+		public int SetId {
 			get { return Object1Id; }
 			set { Object1Id= value; }
 		}
-		[Association(ThisKey = "DocumentId", OtherKey = "Id", CanBeNull = false, Storage = "Document")]
-		public Document Document {
+		[Association(ThisKey = "SetId", OtherKey = "Id", CanBeNull = false, Storage = "Set")]
+		public Set Set {
 			get { return Object1; }
 			set { Object1 = value; }
 		}
 
-		[Column(Name = "fk_paragraph_join", Storage = "ParagraphId")]
+		[Column(Name = "fk_rawressource_join", Storage = "RawRessourceId")]
 		[HiddenProperty]
-		public int ParagraphId {
+		public int RawRessourceId {
 			get { return Object2Id; }
 			set { Object2Id= value; }
 		}
-		[Association(ThisKey = "ParagraphId", OtherKey = "Id", CanBeNull = false, Storage = "Paragraph")]
-		public Paragraph Paragraph {
-			get { return Object2; }
-			set { Object2 = value; }
-		}
-	}
-	[Table(Schema = "core",Name = "documenttodocument_subdocs")]
-	public class DocumentToDocument_SubDocs : DataRelation<Document, Document> {
-
-		[Column(Name = "fk_document_joinsubdocs", Storage = "DocumentSubDocsId")]
-		[HiddenProperty]
-		public int DocumentSubDocsId {
-			get { return Object1Id; }
-			set { Object1Id= value; }
-		}
-		[Association(ThisKey = "DocumentSubDocsId", OtherKey = "Id", CanBeNull = false, Storage = "DocumentSubDocs")]
-		public Document DocumentSubDocs {
-			get { return Object1; }
-			set { Object1 = value; }
-		}
-
-		[Column(Name = "fk_document_join", Storage = "DocumentId")]
-		[HiddenProperty]
-		public int DocumentId {
-			get { return Object2Id; }
-			set { Object2Id= value; }
-		}
-		[Association(ThisKey = "DocumentId", OtherKey = "Id", CanBeNull = false, Storage = "Document")]
-		public Document Document {
-			get { return Object2; }
-			set { Object2 = value; }
-		}
-	}
-	[Table(Schema = "core",Name = "filteredtracktosoundfilter_filters")]
-	public class FilteredTrackToSoundFilter_Filters : DataRelation<FilteredTrack, SoundFilter> {
-
-		[Column(Name = "fk_filteredtrack_join", Storage = "FilteredTrackId")]
-		[HiddenProperty]
-		public int FilteredTrackId {
-			get { return Object1Id; }
-			set { Object1Id= value; }
-		}
-		[Association(ThisKey = "FilteredTrackId", OtherKey = "Id", CanBeNull = false, Storage = "FilteredTrack")]
-		public FilteredTrack FilteredTrack {
-			get { return Object1; }
-			set { Object1 = value; }
-		}
-
-		[Column(Name = "fk_soundfilter_join", Storage = "SoundFilterId")]
-		[HiddenProperty]
-		public int SoundFilterId {
-			get { return Object2Id; }
-			set { Object2Id= value; }
-		}
-		[Association(ThisKey = "SoundFilterId", OtherKey = "Id", CanBeNull = false, Storage = "SoundFilter")]
-		public SoundFilter SoundFilter {
+		[Association(ThisKey = "RawRessourceId", OtherKey = "Id", CanBeNull = false, Storage = "RawRessource")]
+		public RawRessource RawRessource {
 			get { return Object2; }
 			set { Object2 = value; }
 		}

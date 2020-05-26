@@ -133,9 +133,9 @@ namespace CoreMono.UI
 		private void SetAnchor(bool horizontal)
 		{
 			Anchor set = horizontal ? Anchor.AutoInline : Anchor.AutoCenter;
-			_leftPanelContainer.SetAnchor(set);
-			_rightPanelContainer.SetAnchor(set);
-			_separator.SetAnchor(set);
+			_leftPanelContainer.Anchor = set;
+			_rightPanelContainer.Anchor = set;
+			_separator.Anchor = set;
 		}
 
 		public override Rectangle CalcDestRect()

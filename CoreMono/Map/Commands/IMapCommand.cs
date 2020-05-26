@@ -65,8 +65,7 @@ namespace CoreMono.Map.Commands
 
 		public sealed override void MouseDown(MapDrawer sender, MouseState ms)
 		{
-			int x, y;
-			if (sender.GetSquareCoordinate(ms.Position, out x, out y))
+			if (sender.GetSquareCoordinate(ms.Position, out int x, out int y))
 			{
 				MouseDown(sender, x, y);
 				_prevX = x;
@@ -75,16 +74,14 @@ namespace CoreMono.Map.Commands
 		}
 		public sealed override void MouseHold(MapDrawer sender, MouseState ms)
 		{
-			int x, y;
-			if (sender.GetSquareCoordinate(ms.Position, out x, out y) && CheckPrevCoordinates(x, y))
+			if (sender.GetSquareCoordinate(ms.Position, out int x, out int y) && CheckPrevCoordinates(x, y))
 			{
 				MouseHold(sender, x, y);
 			}
 		}
 		public sealed override void MouseUp(MapDrawer sender, MouseState ms)
 		{
-			int x, y;
-			if (sender.GetSquareCoordinate(ms.Position, out x, out y) && CheckPrevCoordinates(x, y))
+			if (sender.GetSquareCoordinate(ms.Position, out int x, out int y) && CheckPrevCoordinates(x, y))
 			{
 				MouseUp(sender, x, y);
 			}

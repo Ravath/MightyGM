@@ -61,4 +61,14 @@ namespace CoreMono.UI
 			TextStyle = FontStyle.Italic;
 		}
 	}
+
+	public class MgDescription : MgParagraph
+	{
+		public MgDescription(Anchor anchor = Anchor.Auto, Vector2? offset = null) : base("", anchor, offset)
+		{
+			Locked = true;
+			Scale = 0.8f;
+			Padding = new Vector2(10);
+		}
+	}
 }

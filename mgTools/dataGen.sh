@@ -76,7 +76,12 @@ mv "$databaseName" "$folder"
 #UPDATE Files
 cd "$MIGHTY_GM_DIR"
 if [ ! -d "$databaseName" ] ; then
-	mkdir "$databaseName"
+	# mkdir "$databaseName"
+	"${MIGHTY_GM_TOOLS_DIR}/createRpgProject.sh" "$databaseName" "$folder"
+	if [ $? -ne 0 ] ; then
+		echo "Can't create new project"
+		exit
+	fi
 fi
 if [ ! -d "$databaseName/UserMade" ] ; then
 	mkdir "$databaseName/UserMade"

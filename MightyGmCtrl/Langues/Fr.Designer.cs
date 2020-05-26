@@ -88,6 +88,15 @@ namespace MightyGmCtrl.Langues {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Un objet DataModel a été trouvé avec un nom trop long pour le type &apos;{0}&apos; : {1}.
+        /// </summary>
+        internal static string DATAMOD_NAME_TOO_LONG {
+            get {
+                return ResourceManager.GetString("DATAMOD_NAME_TOO_LONG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Un objet DataModel a été trouvé sans nom renseigné pour le type &apos;{0}&apos;.
         /// </summary>
         internal static string DATAMOD_NO_NAME {
@@ -129,6 +138,15 @@ namespace MightyGmCtrl.Langues {
         internal static string IMPORT_ERROR_NO_SHEET {
             get {
                 return ResourceManager.GetString("IMPORT_ERROR_NO_SHEET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Une erreur est survenue : {0}. Contexte : {1}.
+        /// </summary>
+        internal static string IMPORT_EXECEPTION {
+            get {
+                return ResourceManager.GetString("IMPORT_EXECEPTION", resourceCulture);
             }
         }
         

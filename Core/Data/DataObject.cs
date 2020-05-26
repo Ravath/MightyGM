@@ -174,16 +174,17 @@ namespace Core.Data {
 
 			Jointure[] oldData = (from q in Data.GetTable<Jointure>() select q).ToArray();
 
-			foreach(Res item in _erase) {//enlever ceux qui ne servent plus
-				Jointure[] q = oldData.Where(c => (saveToLeft ? c.Object1Id : c.Object2Id) == item.Id).ToArray();
-				//var q = from c in Data.GetTable<Jointure>()
-				//	    where (saveToLeft ? c.Object1Id : c.Object2Id) == item.Id
-				//		select c;
-				foreach(Jointure ji in q) {
+			foreach(Res item in _erase) {//enlever ceux qui ne servent plus (jointures uniquement)
+				var q = from c in oldData
+						where (saveToLeft ? c.Object1Id : c.Object2Id) == item.Id
+						   && (saveToLeft ? c.Object2Id : c.Object1Id) == Id
+						select c;
+				foreach (Jointure ji in q.ToArray())
+				{
 					ji.DeleteObject();
 				}
 			}
-			foreach(Res item in _insert) {//rajouter les nouveaux
+			foreach (Res item in _insert) {//rajouter les nouveaux
 				if(item.Id == 0)//sauvegarder si pas fait
 					item.SaveObject();
 				Jointure j = new Jointure();
@@ -244,9 +245,11 @@ namespace Core.Data {
 				d.DeleteObject();
 			}
 			foreach(V item in _insert) {//rajouter les nouveaux
-				DV j = new DV();
-				j.FromId = Id;
-				j.Value = item;
+				DV j = new DV
+				{
+					FromId = Id,
+					Value = item
+				};
 				j.SaveObject();
 			}
 		}

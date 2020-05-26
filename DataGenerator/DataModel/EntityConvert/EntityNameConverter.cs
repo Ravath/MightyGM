@@ -8,7 +8,7 @@ namespace DataGenerator.DataModel.EntityConvert
 		/// <summary>
 		/// List of forbidden names for both table and attributes, in lower case.
 		/// </summary>
-		public static string[] ForbiddenNames = { "all", "and", "or", "create", "table", "not" };
+		public static string[] ForbiddenNames = { "all", "and", "or", "create", "table", "not", "type", "limit", "range" };
 		///et tant d'autres
 		/// <summary>
 		/// List of forbidden table names, in lower case.

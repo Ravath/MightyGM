@@ -151,7 +151,6 @@ namespace CoreMono.Map.Sprites
 		public void Draw(SpriteBatch batch, MapDrawer lm, bool[,] map)
 		{
 			SetBatch(batch, lm, map);
-			batch.Begin();
 			for (int i = 0; i < map.GetLength(0); i++)
 			{
 				for (int j = 0; j < map.GetLength(1); j++)
@@ -173,7 +172,6 @@ namespace CoreMono.Map.Sprites
 					}
 				}
 			}
-			batch.End();
 		}
 		private void DrawCornerSprite(int i, int j, bool right, bool up)
 		{

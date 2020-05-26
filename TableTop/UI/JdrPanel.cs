@@ -22,10 +22,7 @@ namespace TableTop.UI
 			AddChild(_jdrSelection);
 
 			_assemblies = MainApplication.Controler.Contexts.JdrAssemblies;
-			foreach (JdrAssembly jdr in _assemblies)
-			{
-				_jdrSelection.AddItem(jdr.Name);
-			}
+			_jdrSelection.AddItem(_assemblies.Select(jdr=>MgFont.Clean(jdr.Name)));
 
 			_jdrSelection.OnValueChange = (Entity entity) =>
 			{

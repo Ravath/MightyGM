@@ -109,7 +109,9 @@ namespace MightyGmCtrl.Controleurs
 
 		public FileInfo[] GetAudioFiles(out string outMessage, out bool success)
 		{
-			return GetFiles("Audio Files(.mp3; .wma) | *.mp3; *.wma", true, true, out success, out outMessage);
+			return GetFiles(String.Format("Audio Files({0})) | {1}",
+				ConcateneExtensions(_soundtrackExtensions, false),
+				ConcateneExtensions(_soundtrackExtensions, true)), true, true, out success, out outMessage);
 		}
 
 		/// <summary>
@@ -134,7 +136,83 @@ namespace MightyGmCtrl.Controleurs
 
 		public FileInfo[] GetPictFiles(out string outMessage, out bool success)
 		{
-			return GetFiles("Images Files(.jpg; .png) | *.jpg; *.png", true, true, out success, out outMessage);
+			return GetFiles(String.Format("Images Files({0})) | {1}",
+				ConcateneExtensions(_imageExtensions, false),
+				ConcateneExtensions(_imageExtensions, true)), true, true, out success, out outMessage);
+		}
+		/// <summary>
+		/// concatene the given strings for the 'GetFiles' function use.
+		/// I.E: - ".jpg; .png"
+		///  or  - "*.jpg; *.png"
+		/// </summary>
+		/// <param name="extensions">The extensions to concate.</param>
+		/// <param name="insertAsterisk">Option for the asterisk before the extension.</param>
+		/// <returns></returns>
+		private string ConcateneExtensions(string[] extensions, bool insertAsterisk)
+		{
+			if(extensions.Length == 0)
+			{
+				return "";
+			}
+			else
+			{
+				string res = (insertAsterisk ? "*" : "") + extensions[0];
+				for(int i = 1; i<extensions.Length; i++)
+				{
+					res += (insertAsterisk?"; *":"; ") + extensions[i];
+				}
+				return res;
+			}
+		}
+		#endregion
+
+		#region Find Folder Dialog
+		public DirectoryInfo GetFolder(Boolean canCreateFolder, out string outMessage, out bool exitSuccess)
+		{
+			exitSuccess = false;
+			outMessage = GetMessageRessource("ABORT");
+			DirectoryInfo ret = null;
+			try
+			{
+				System.Windows.Forms.FolderBrowserDialog findFolder = new System.Windows.Forms.FolderBrowserDialog()
+				{
+					Description = "Select a Folder",
+					ShowNewFolderButton = canCreateFolder,
+				};
+				// Show the dialog and get result.
+				System.Windows.Forms.DialogResult result = findFolder.ShowDialog();
+
+				//return values
+				exitSuccess = (result == System.Windows.Forms.DialogResult.OK || result == System.Windows.Forms.DialogResult.Yes);
+				if (exitSuccess)
+				{
+					ret = new DirectoryInfo(findFolder.SelectedPath);
+				}
+			}
+			catch (Exception ex)
+			{
+				ReportException(ex);
+			}
+
+			return ret;
+		}
+		#endregion
+
+		#region File Compatibility
+		private string[] _imageExtensions = { ".jpg", ".jpeg", ".png" };
+		public bool IsCompatibleImage(string extension)
+		{
+			return _imageExtensions.Contains(extension);
+		}
+		private string[] _soundtrackExtensions = { ".mp3", ".wma" };
+		public bool IsCompatibleSoundtrack(string extension)
+		{
+			return _soundtrackExtensions.Contains(extension);
+		}
+		private string[] _textExtensions = { ".txt" };
+		public bool IsCompatibleText(string extension)
+		{
+			return _textExtensions.Contains(extension);
 		}
 		#endregion
 

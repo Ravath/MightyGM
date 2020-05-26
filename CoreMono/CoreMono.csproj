@@ -11,6 +11,8 @@
     <AssemblyName>CoreMono</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,9 +32,38 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MonoGame.Framework, Version=3.6.0.1625, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MonoGame.Framework.WindowsDX.3.6.0.1625\lib\net40\MonoGame.Framework.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="linq2db, Version=2.9.7.0, Culture=neutral, PublicKeyToken=e41013125f9e410a, processorArchitecture=MSIL">
+      <HintPath>..\packages\linq2db.2.9.7\lib\net46\linq2db.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework, Version=3.7.1.189, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Framework.WindowsDX.3.7.1.189\lib\net45\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.4.2.0\lib\net45\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct2D1, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Direct2D1.4.2.0\lib\net45\SharpDX.Direct2D1.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Direct3D11.4.2.0\lib\net45\SharpDX.Direct3D11.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D9, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Direct3D9.4.2.0\lib\net45\SharpDX.Direct3D9.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.DXGI.4.2.0\lib\net45\SharpDX.DXGI.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Mathematics, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Mathematics.4.2.0\lib\net45\SharpDX.Mathematics.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.MediaFoundation, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.MediaFoundation.4.2.0\lib\net45\SharpDX.MediaFoundation.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.XAudio2, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.XAudio2.4.2.0\lib\net45\SharpDX.XAudio2.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.XInput, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.XInput.4.2.0\lib\net45\SharpDX.XInput.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -44,8 +75,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasicDraws.cs" />
     <Compile Include="IJdrContextMono.cs" />
-    <Compile Include="Map\GuiEventArgs.cs" />
+    <Compile Include="Map\MouseEventArg.cs" />
     <Compile Include="Map\Brush\Brush.cs" />
     <Compile Include="Map\Commands\IMapCommand.cs" />
     <Compile Include="Map\Commands\SquareDrawCmd.cs" />
@@ -57,21 +89,43 @@
     <Compile Include="Map\Sprites\SquareGridSprites.cs" />
     <Compile Include="Map\Sprites\SquareGridTerrainSprite.cs" />
     <Compile Include="Map\Sprites\SquareGridTintDrawer.cs" />
+    <Compile Include="TableTop\Command\CommandManager.cs" />
+    <Compile Include="TableTop\Grid\Command\MouseGridCmd.cs" />
+    <Compile Include="TableTop\Graph\Edge.cs" />
+    <Compile Include="TableTop\Graph\EdgeLayer.cs" />
+    <Compile Include="TableTop\Graph\GraphLayer.cs" />
+    <Compile Include="TableTop\Graph\Shape\IEdgeShape.cs" />
+    <Compile Include="TableTop\Graph\Shape\PlainLineShape.cs" />
+    <Compile Include="TableTop\Command\Brush.cs" />
+    <Compile Include="TableTop\Grid\Command\GridBrush.cs" />
+    <Compile Include="TableTop\Grid\Command\GridDrawCmd.cs" />
+    <Compile Include="TableTop\Grid\GridLayer.cs" />
+    <Compile Include="TableTop\Grid\Shape\IGridShape.cs" />
+    <Compile Include="TableTop\Grid\Shape\GridSprite.cs" />
+    <Compile Include="TableTop\Grid\Shape\GridComputedSprite.cs" />
+    <Compile Include="TableTop\Grid\Shape\GridTint.cs" />
+    <Compile Include="TableTop\TableLayer.cs" />
+    <Compile Include="TableTop\TableMap.cs" />
+    <Compile Include="TableTop\Token\Shape\GeometricShape.cs" />
+    <Compile Include="TableTop\Token\Shape\ITokenShape.cs" />
+    <Compile Include="TableTop\Token\TokenLayer.cs" />
+    <Compile Include="TableTop\Token\Token.cs" />
+    <Compile Include="UI\ColorSelector.cs" />
     <Compile Include="UI\DataList.cs" />
     <Compile Include="UI\AbsFicheCandidate.cs" />
+    <Compile Include="UI\DefaultFicheCandidate.cs" />
+    <Compile Include="UI\FicheFilter.cs" />
     <Compile Include="UI\FicheModel.cs" />
     <Compile Include="UI\MgGrid.cs" />
     <Compile Include="UI\MgCompressedList.cs" />
-    <Compile Include="UI\MgDescription.cs" />
     <Compile Include="UI\MgFont.cs" />
     <Compile Include="UI\MgHeader.cs" />
     <Compile Include="UI\MgParagraph.cs" />
     <Compile Include="UI\MgSplitEntity.cs" />
+    <Compile Include="UI\PropertyDisplay.cs" />
+    <Compile Include="UI\TwoListsSelector.cs" />
     <Compile Include="UI\ValueLabel.cs" />
     <Compile Include="UI\ValueReader.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
@@ -83,5 +137,16 @@
       <Name>GeonBit.UI</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\MonoGame.Framework.WindowsDX.3.7.1.189\build\MonoGame.Framework.WindowsDX.targets" Condition="Exists('..\packages\MonoGame.Framework.WindowsDX.3.7.1.189\build\MonoGame.Framework.WindowsDX.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Ce projet fait référence à des packages NuGet qui sont manquants sur cet ordinateur. Utilisez l'option de restauration des packages NuGet pour les télécharger. Pour plus d'informations, consultez http://go.microsoft.com/fwlink/?LinkID=322105. Le fichier manquant est : {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MonoGame.Framework.WindowsDX.3.7.1.189\build\MonoGame.Framework.WindowsDX.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MonoGame.Framework.WindowsDX.3.7.1.189\build\MonoGame.Framework.WindowsDX.targets'))" />
+  </Target>
 </Project>
