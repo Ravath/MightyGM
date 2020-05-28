@@ -130,7 +130,7 @@ namespace MightyGmWPF.MapDrawings {
 		public void SetDimension( double width, double height ) {
 			double _xScale = width / _grid.Width;
 			double _yScale = height / _grid.Height;
-			SizeFactor = Math.Min(_xScale, _yScale) / _squareSize;
+			SizeFactor = System.Math.Min(_xScale, _yScale) / _squareSize;
 		}
 		public void SetSquareType( int x, int y, FloorType ft ) {
 			if(_grid.Map[x,y] == ft) { return; }
