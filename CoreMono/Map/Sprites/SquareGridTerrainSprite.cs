@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Core.Map.Grid;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace CoreMono.Map.Sprites
 	/// the edges and a given square sprite depends on the neighbours, and is computed from a sub 3x3 grid for each square.
 	/// Each subSquare is deduced from the square base sprite, subdivided in a 4x4 grid.
 	/// </summary>
-	public class SquareGridTerrainSprite : ISquareDrawer
+	public class SquareGridTerrainSprite : ISquareDrawer<bool>
 	{
 		#region private Members
 		private Rectangle _wall, _sample;
@@ -110,7 +111,7 @@ namespace CoreMono.Map.Sprites
 		/// <summary>
 		/// The map from which the square to draw are deduced.
 		/// </summary>
-		private bool[,] _map;
+		private SquareGrid<bool> _map;
 		/// <summary>
 		/// The mobile viewport used to tell where to draw the sub-sprites.
 		/// </summary>
@@ -118,42 +119,42 @@ namespace CoreMono.Map.Sprites
 		/// <summary>
 		/// The size of a full square.
 		/// </summary>
-		private int sqrS;
+		private int squareSize;
 		/// <summary>
 		/// Position of the upper left corner of the grid.
 		/// </summary>
 		private int offsetX, offsetY;
 
-		private void SetBatch(SpriteBatch batch, MapDrawer lm, bool[,] map)
+		private void SetBatch(SpriteBatch batch, MapDrawer lm, SquareGrid<bool> map)
 		{
 			_batch = batch;
 			_map = map;
-			sqrS = lm.SquareSize;
-			offsetX = lm.Parent.InternalDestRect.X;
-			offsetY = lm.Parent.InternalDestRect.Y;
-			_drawScope = new Rectangle(0, 0, sqrS / 3, sqrS / 3);
+			squareSize = (int)lm.ScreenSquareSize;
+			offsetX = (int)lm.ScreenOffsetX;
+			offsetY = (int)lm.ScreenOffsetY;
+			_drawScope = new Rectangle(0, 0, squareSize / 3, squareSize / 3);
 		}
 		private void DrawBatch(Rectangle from, int toX, int toY, int subx, int suby)
 		{
-			_drawScope.X = (sqrS * toX) + (subx * _drawScope.Width)  + offsetX;
-			_drawScope.Y = (sqrS * toY) + (suby * _drawScope.Height) + offsetY;
+			_drawScope.X = (squareSize * toX) + (subx * _drawScope.Width)  + offsetX;
+			_drawScope.Y = (squareSize * toY) + (suby * _drawScope.Height) + offsetY;
 			_batch.Draw(Sprite, _drawScope, from, Tint);
 		}
 		private bool IsWall(int x, int y)
 		{
-			if (x < 0 || y < 0 || x >= _map.GetLength(0) || y >= _map.GetLength(1))
+			if (x < 0 || y < 0 || x >= _map.Column || y >= _map.Row)
 				return OutsideIsWall;
 			return _map[x, y];
 		}
 		#endregion
 
 		#region Drawing
-		public void Draw(SpriteBatch batch, MapDrawer lm, bool[,] map)
+		public void Draw(SpriteBatch batch, MapDrawer lm, SquareGrid<bool> map)
 		{
 			SetBatch(batch, lm, map);
-			for (int i = 0; i < map.GetLength(0); i++)
+			for (int i = 0; i < map.Column; i++)
 			{
-				for (int j = 0; j < map.GetLength(1); j++)
+				for (int j = 0; j < map.Row; j++)
 				{
 					if (map[i, j])
 					{

@@ -1,4 +1,5 @@
 ﻿using CoreMono.Map.Commands;
+using CoreMono.Map.Layers;
 using GeonBit.UI.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -10,29 +11,58 @@ namespace CoreMono.Map
 {
 	public enum SquareSizeMode
 	{
-		FIX, FIT, STRETCH_VERT, STRETCH_HORI
+		// Don't bother
+		FIX,
+		// Make it fit entirely in the display space
+		FIT,
+		// Make it fit at maximum in the width display space
+		STRETCH_VERT,
+		// Make it fit at maximum in the height display space
+		STRETCH_HORI
 	}
+
 	public class MapDrawer : Entity
 	{
-		private List<MapLayer> _layers = new List<MapLayer>();
+		private List<IMapLayer> _layers = new List<IMapLayer>();
 		private int _activeLayer = 0;
 		
 		public MouseDrawCmd ActiveCommand { get; set; }
 
 		public int LayerCount { get { return _layers.Count; } }
-		public int SquareSize { get; set; }
+		public int RelativeSquareSize { get; set; }
+		public int RelativeOffsetX { get; set; }
+		public int RelativeOffsetY { get; set; }
+		public int Column { get; private set; }
+		public int Row { get; private set; }
+		public double ZoomFactor { get; set; }
 		public SquareSizeMode SquareSizeMode { get; set; }
 
+		public double ScreenSquareSize { get { return RelativeSquareSize * ZoomFactor; } }
+		public double ScreenOffsetX { get { return Parent.InternalDestRect.X + RelativeOffsetX; } }
+		public double ScreenOffsetY { get { return Parent.InternalDestRect.Y + RelativeOffsetY; } }
 
 		public MapDrawer(Vector2? size = null, Anchor anchor = Anchor.Auto, Vector2? offset = null) : base(size, anchor, offset)
 		{
-			SquareSize = 30;
-			SquareSizeMode = SquareSizeMode.FIT;
+			RelativeOffsetY = 0;
+			RelativeOffsetX = 0;
+			ZoomFactor = MapDefaultValues.ZoomFactor;
+			SquareSizeMode = MapDefaultValues.SquareSizeMode;
+			RelativeSquareSize = MapDefaultValues.RelativeSquareSize;
 			OnMouseDown += LayerMap_MouseDown;
 			OnMouseReleased += LayerMap_MouseUp;
 			OnMouseLeave += LayerMap_MouseOut;
 			WhileMouseDown += Layermap_MouseDragging;
 			UpdateStyle(DefaultStyle);
+		}
+
+		public void SetGridDimensions(int col, int row)
+		{
+			Column = col;
+			Row = row;
+			foreach (IMapLayer layer in _layers)
+			{
+				layer.Resize(col, row, RelativeSquareSize);
+			}
 		}
 
 		private void Layermap_MouseDragging(Entity entity)
@@ -66,20 +96,17 @@ namespace CoreMono.Map
 			}
 		}
 
-		public void AddLayer(MapLayer newLayer)
+		public void AddLayer(IMapLayer newLayer)
 		{
 			_layers.Add(newLayer);
 		}
 
 		public override void Draw(SpriteBatch spriteBatch)
 		{
-			int col = GetMaxCol();
-			int row = GetMaxRow();
-
-			if(col <=0 || row <= 0) { return; }
+			if(Column <=0 || Row <= 0) { return; }
 
 			/* resize squares */
-			Stretch(SquareSizeMode, col, row);
+			Stretch();
 
 			/* draw layers */
 			spriteBatch.Begin();
@@ -89,46 +116,32 @@ namespace CoreMono.Map
 			}
 			spriteBatch.End();
 		}
-
-		public int GetMaxCol()
+		
+		public void Stretch()
 		{
-			int i = 0;
-			foreach (MapLayerGrid l in _layers)
+			//TODO : Use 'isDirty' flag to autoupdate when values change?
+			int sizeToMatch = RelativeSquareSize;
+			switch (SquareSizeMode)
 			{
-				i = Math.Max(i, l.Column);
-			}
-			return i;
-		}
-
-		public int GetMaxRow()
-		{
-			int i = 0;
-			foreach (MapLayerGrid l in _layers)
-			{
-				i = Math.Max(i, l.Row);
-			}
-			return i;
-		}
-
-		private void Stretch(SquareSizeMode mode, int col, int row)
-		{
-			switch (mode)
-			{
+				case SquareSizeMode.FIX:
+					// Don't bother
+					break;
 				case SquareSizeMode.FIT:
-					SquareSize = Math.Min(Parent.InternalDestRect.Width/ col, Parent.InternalDestRect.Height / row);
+					sizeToMatch = Math.Min(Parent.InternalDestRect.Width/ Column, Parent.InternalDestRect.Height / Row);
 					break;
 				case SquareSizeMode.STRETCH_HORI:
-					SquareSize = Parent.InternalDestRect.Width / col;
+					sizeToMatch = Parent.InternalDestRect.Width / Column;
 					break;
 				case SquareSizeMode.STRETCH_VERT:
-					SquareSize = Parent.InternalDestRect.Height / row;
+					sizeToMatch = Parent.InternalDestRect.Height / Row;
 					break;
 			}
+			ZoomFactor = sizeToMatch / RelativeSquareSize;
 		}
 
-		public E GetLayer<E>(int v) where E : MapLayer
+		public E GetLayer<E>(int v) where E : IMapLayer
 		{
-			return _layers[v] as E;
+			return (E)_layers[v];
 		}
 
 		public void SetActiveLayer(int i)
@@ -136,7 +149,7 @@ namespace CoreMono.Map
 			_activeLayer = i;
 		}
 
-		public E GetActiveLayer<E>() where E : MapLayer
+		public E GetActiveLayer<E>() where E : IMapLayer
 		{
 			int v = _activeLayer;
 			if (_activeLayer >= _layers.Count) { v = _layers.Count - 1; }
@@ -146,12 +159,12 @@ namespace CoreMono.Map
 
 		public bool GetSquareCoordinate(Point windowCoordinate, out int x, out int y)
 		{
-			x = (windowCoordinate.X - Parent.InternalDestRect.X) / SquareSize;
-			y = (windowCoordinate.Y - Parent.InternalDestRect.Y) / SquareSize;
-			MapLayerGrid l = GetActiveLayer<MapLayerGrid>();
+			x = (int)((windowCoordinate.X - RelativeOffsetX) / ScreenSquareSize);
+			y = (int)((windowCoordinate.Y - RelativeOffsetY) / ScreenSquareSize);
+			IMapLayer l = GetActiveLayer<IMapLayer>();
 			if (l != null)
 			{
-				return x < l.Column && y < l.Row && x >= 0 && y >= 0;
+				return x < Column && y < Row && x >= 0 && y >= 0;
 			}
 			return false;
 		}

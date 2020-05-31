@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoreMono.Map
+namespace CoreMono.Map.Commands
 {
 	public enum MouseBehaviour { MOUSE_GET_IN, MOUSE_IN, MOUSE_GET_OUT }
 
