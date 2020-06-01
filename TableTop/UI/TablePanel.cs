@@ -1,6 +1,4 @@
 ﻿using CoreMono;
-using CoreMono.Map;
-using CoreMono.Map.Commands;
 using CoreMono.Map.Sprites;
 using CoreMono.TableTop;
 using CoreMono.TableTop.Graph;
@@ -31,7 +29,7 @@ namespace TableTop.UI
 		private SelectList _layersList;
 		private PropertyDisplay _displayer;
 
-		TableMap map = new TableMap(Vector2.Zero, Anchor.Center, Vector2.Zero);
+		Map map = new Map(Vector2.Zero, Anchor.Center, Vector2.Zero);
 		public int ColumnWidth { get; set; } = 10;
 		public int RowWidth { get; set; } = 10;
 		public int SquareSize { get; set; } = 80;
@@ -135,15 +133,15 @@ namespace TableTop.UI
 		private string[] layerNames = {"Grid", "Graph"};
 		private void AddLayer(int selectedIndex)
 		{
-			TableLayer newLayer;
+			Layer newLayer;
 			Color tint = map.LayerCount < 1 ? Color.Green : Color.Red;//TODO this is debug
 			switch (selectedIndex)
 			{
 				case 0:
 					//TODO this is test
-					IGridShape texture = new GridComputedSprite(
+					IGridShape<bool> texture = new GridComputedSprite(
 						   Texture2D.FromStream(MainApplication.graphics.GraphicsDevice, File.OpenRead("TilesI_wb.png"))) { Tint = tint };
-					GridLayer gl = new GridLayer(ColumnWidth, RowWidth, texture, SquareSize);
+					GridLayer<bool> gl = new GridLayer<bool>(ColumnWidth, RowWidth, texture);
 					newLayer = gl;
 					break;
 				case 1:
@@ -190,7 +188,7 @@ namespace TableTop.UI
 
 			map.SetActiveLayer(index);
 
-			map.GetActiveLayer<TableLayer>().DisplayProperties(_displayer);
+			map.GetActiveLayer<Layer>().DisplayProperties(_displayer);
 		}
 	}
 }

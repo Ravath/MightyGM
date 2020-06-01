@@ -15,7 +15,7 @@ namespace CoreMono.Map.Sprites
 	/// Draw each square with the corresponding tile from the given texture.
 	/// The texture is interpreted as a 2D array of texture squares.
 	/// </summary>
-	public class GridSprite : IGridShape
+	public class GridSprite : IGridShape<bool>
 	{
 		/// <summary>
 		/// Temporary File used for differing the loading of the Sprite
@@ -59,7 +59,7 @@ namespace CoreMono.Map.Sprites
 			Sprite = sprite;
 		}
 
-		public void Draw(SpriteBatch batch, GridLayer grid)
+		public void Draw(SpriteBatch batch, GridLayer<bool> grid)
 		{
 			if (Sprite == null)
 			{
@@ -70,17 +70,22 @@ namespace CoreMono.Map.Sprites
 			int cw = Sprite.Width / Column;
 
 			int spriteWidth, spriteHeight;
-			int squareSize = grid.SquareSize;
-			for (int i = 0; i < grid.Map.GetLength(0); i++)
+			int squareSize = (int)grid.MapScale.SquareSize;
+			int offsetX = grid.MapScale.OffsetX;
+			int offsetY = grid.MapScale.OffsetY;
+			for (int i = 0; i < grid.Column; i++)
 			{
 				spriteWidth = (i % Column) * cw;
-				for (int j = 0; j < grid.Map.GetLength(1); j++)
+				for (int j = 0; j < grid.Row; j++)
 				{
-					if (grid.Map[i, j])
+					if (grid.Grid[i, j])
 					{
 						spriteHeight = (j % Row) * ch;
 						batch.Draw(Sprite,
-							new Rectangle(grid.InternalDestRect.X + squareSize * i, grid.InternalDestRect.Y + squareSize * j, squareSize, squareSize),
+							new Rectangle(
+								offsetX + squareSize * i,
+								offsetY + squareSize * j,
+								squareSize, squareSize),
 							new Rectangle(spriteWidth, spriteHeight, cw, ch),
 							Tint);
 					}

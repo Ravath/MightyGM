@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using Core.Map.Grid;
 
 namespace CoreMono.Map.Sprites
 {
@@ -16,7 +17,7 @@ namespace CoreMono.Map.Sprites
 	/// the edges and a given square sprite depends on the neighbours, and is computed from a sub 3x3 grid for each square.
 	/// Each subSquare is deduced from the square base sprite, subdivided in a 4x4 grid.
 	/// </summary>
-	public class GridComputedSprite : IGridShape
+	public class GridComputedSprite : IGridShape<bool>
 	{
 		#region private Members
 		/// <summary>
@@ -131,7 +132,7 @@ namespace CoreMono.Map.Sprites
 		/// <summary>
 		/// The map from which the square to draw are deduced.
 		/// </summary>
-		private bool[,] _map;
+		private SquareGrid<bool> _map;
 		/// <summary>
 		/// The mobile viewport used to tell where to draw the sub-sprites.
 		/// </summary>
@@ -139,37 +140,39 @@ namespace CoreMono.Map.Sprites
 		/// <summary>
 		/// The size of a full square.
 		/// </summary>
-		private int sqrS;
+		private int squareSize;
 		/// <summary>
 		/// Position of the upper left corner of the grid.
 		/// </summary>
 		private int offsetX, offsetY;
 
-		private void SetBatch(SpriteBatch batch, GridLayer grid)
+		private void SetBatch(SpriteBatch batch, GridLayer<bool> grid)
 		{
 			_batch = batch;
-			_map = grid.Map;
-			sqrS = grid.SquareSize;
-			offsetX = grid.InternalDestRect.X;
-			offsetY = grid.InternalDestRect.Y;
-			_drawScope = new Rectangle(0, 0, sqrS / 3, sqrS / 3);
+			_map = grid.Grid;
+			squareSize = (int)grid.MapScale.SquareSize;
+			offsetX = grid.MapScale.OffsetX;
+			offsetY = grid.MapScale.OffsetY;
+			_drawScope = new Rectangle(0, 0, squareSize / 3, squareSize / 3);
 		}
 		private void DrawBatch(Rectangle from, int toX, int toY, int subx, int suby)
 		{
-			_drawScope.X = (sqrS * toX) + (subx * _drawScope.Width)  + offsetX;
-			_drawScope.Y = (sqrS * toY) + (suby * _drawScope.Height) + offsetY;
+			_drawScope.X = (squareSize * toX) + (subx * _drawScope.Width)  + offsetX;
+			_drawScope.Y = (squareSize * toY) + (suby * _drawScope.Height) + offsetY;
 			_batch.Draw(Sprite, _drawScope, from, Tint);
 		}
 		private bool IsWall(int x, int y)
 		{
-			if (x < 0 || y < 0 || x >= _map.GetLength(0) || y >= _map.GetLength(1))
+			// If outside boundaries
+			if (x < 0 || y < 0 || x >= _map.Column || y >= _map.Row)
 				return OutsideIsWall;
+			// Else grid value
 			return _map[x, y];
 		}
 		#endregion
 
 		#region Drawing
-		public void Draw(SpriteBatch batch, GridLayer grid)
+		public void Draw(SpriteBatch batch, GridLayer<bool> grid)
 		{
 			if(Sprite == null)
 			{
@@ -178,11 +181,11 @@ namespace CoreMono.Map.Sprites
 			}
 
 			SetBatch(batch, grid);
-			for (int i = 0; i < grid.Map.GetLength(0); i++)
+			for (int i = 0; i < grid.Column; i++)
 			{
-				for (int j = 0; j < grid.Map.GetLength(1); j++)
+				for (int j = 0; j < grid.Row; j++)
 				{
-					if (grid.Map[i, j])
+					if (grid.Grid[i, j])
 					{
 						//coins
 						DrawCornerSprite(i, j, true, false);

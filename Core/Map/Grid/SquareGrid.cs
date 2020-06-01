@@ -10,7 +10,7 @@ namespace Core.Map.Grid {
 	/// A 2D Square Grid.
 	/// </summary>
 	/// <typeparam name="T">The value stored in the Array.</typeparam>
-	public abstract class SquareGrid<T> {
+	public class SquareGrid<T> {
 
 		#region Members
 		private T[,] _map;
@@ -85,7 +85,7 @@ namespace Core.Map.Grid {
 		/// <returns>True if within boundaries.</returns>
 		public bool Contains(int x, int y)
 		{
-			return !(x <= 0 || y <= 0 || y > Row || x > Column);
+			return x >= 0 && y >= 0 && y < Row && x < Column;
 		}
 	}
 }

@@ -77,20 +77,11 @@
   <ItemGroup>
     <Compile Include="BasicDraws.cs" />
     <Compile Include="IJdrContextMono.cs" />
-    <Compile Include="Map\MapDefaultValues.cs" />
-    <Compile Include="Map\Commands\MouseEventArg.cs" />
-    <Compile Include="Map\Brush\Brush.cs" />
-    <Compile Include="Map\Commands\IMapCommand.cs" />
-    <Compile Include="Map\Commands\SquareDrawBooleanSwapCmd.cs" />
-    <Compile Include="Map\MapDrawer.cs" />
-    <Compile Include="Map\Layers\IMapLayer.cs" />
-    <Compile Include="Map\Layers\MapLayerSquareGrid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Map\Sprites\Interfaces.cs" />
-    <Compile Include="Map\Sprites\SquareGridSprites.cs" />
-    <Compile Include="Map\Sprites\SquareGridTerrainSprite.cs" />
-    <Compile Include="Map\Sprites\SquareGridTintDrawer.cs" />
     <Compile Include="TableTop\Command\CommandManager.cs" />
+    <Compile Include="TableTop\Command\MapDragCommand.cs" />
+    <Compile Include="TableTop\Grid\Shape\GridShape.cs" />
+    <Compile Include="TableTop\MapScale.cs" />
     <Compile Include="TableTop\Grid\Command\MouseGridCmd.cs" />
     <Compile Include="TableTop\Graph\Edge.cs" />
     <Compile Include="TableTop\Graph\EdgeLayer.cs" />
@@ -99,14 +90,14 @@
     <Compile Include="TableTop\Graph\Shape\PlainLineShape.cs" />
     <Compile Include="TableTop\Command\Brush.cs" />
     <Compile Include="TableTop\Grid\Command\GridBrush.cs" />
-    <Compile Include="TableTop\Grid\Command\GridDrawCmd.cs" />
+    <Compile Include="TableTop\Grid\Command\GridBooleanSwapDrawCmd.cs" />
     <Compile Include="TableTop\Grid\GridLayer.cs" />
     <Compile Include="TableTop\Grid\Shape\IGridShape.cs" />
     <Compile Include="TableTop\Grid\Shape\GridSprite.cs" />
     <Compile Include="TableTop\Grid\Shape\GridComputedSprite.cs" />
     <Compile Include="TableTop\Grid\Shape\GridTint.cs" />
-    <Compile Include="TableTop\TableLayer.cs" />
-    <Compile Include="TableTop\TableMap.cs" />
+    <Compile Include="TableTop\Layer.cs" />
+    <Compile Include="TableTop\Map.cs" />
     <Compile Include="TableTop\Token\Shape\GeometricShape.cs" />
     <Compile Include="TableTop\Token\Shape\ITokenShape.cs" />
     <Compile Include="TableTop\Token\TokenLayer.cs" />
@@ -140,7 +131,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Map\ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="TableTop\ClassDiagram1.cd" />
   </ItemGroup>

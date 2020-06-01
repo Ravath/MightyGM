@@ -10,22 +10,21 @@ using Microsoft.Xna.Framework.Graphics;
 using CoreMono.UI;
 using CoreMono.Map.Sprites;
 using System.IO;
+using Core.Map.Grid;
 
 namespace CoreMono.TableTop.Grid
 {
-	public class GridLayer : TableLayer
+	public class GridLayer<T> : Layer
 	{
-		public IGridShape Shape { get; set; }
-		public bool[,] Map { get; private set; }
-		public int Column { get { return Map.GetLength(0); } }
-		public int Row { get { return Map.GetLength(1); } }
-		public int SquareSize { get; set; }
+		public IGridShape<T> Shape { get; set; }
+		public SquareGrid<T> Grid { get; private set; }
+		public int Column { get { return Grid.Column; } }
+		public int Row { get { return Grid.Row; } }
 
-		public GridLayer(int col, int row, IGridShape drawer, int squareSize = 30, Vector2? size = null, Anchor anchor = Anchor.Center, Vector2? offset = null) : base(size, anchor, offset)
+		public GridLayer(int col, int row, IGridShape<T> drawer, Vector2? size = null, Anchor anchor = Anchor.Center, Vector2? offset = null) : base(size, anchor, offset)
 		{
-			Map = new bool[col, row];
+			Grid = new SquareGrid<T>(col, row);
 			Shape = drawer;
-			SquareSize = squareSize;
 		}
 
 		protected override void DrawEntity(SpriteBatch spriteBatch, DrawPhase phase)
@@ -40,25 +39,20 @@ namespace CoreMono.TableTop.Grid
 		/// Initialize the whole array to the given value.
 		/// </summary>
 		/// <param name="setValue"></param>
-		public void SetMap(Boolean setValue)
+		public void SetMap(T setValue)
 		{
-			for (int i = 0; i < Column; i++)
-			{
-				for (int j = 0; j < Row; j++)
-				{
-					Map[i, j] = setValue;
-				}
-			}
+			Grid.SetMap(setValue);
 		}
 
 		/// <summary>
 		/// Check if the given grid coordinates are within the grid.
+		/// Index starts at 0.
 		/// </summary>
 		/// <param name="p">Grid coordinates.</param>
 		/// <returns>True if is within the grid board.</returns>
 		public bool Contains(Point p)
 		{
-			return !(p.X < 0 || p.Y < 0 || p.Y >= Row || p.X >= Column);
+			return Grid.Contains(p.X, p.Y);
 		}
 
 		/// <summary>
@@ -70,11 +64,17 @@ namespace CoreMono.TableTop.Grid
 		/// <returns>True if the point is within the grid.</returns>
 		public bool GetCoordinate(Point windowCoordinate, out int x, out int y)
 		{
-			x = (windowCoordinate.X - InternalDestRect.X) / SquareSize;
-			y = (windowCoordinate.Y - InternalDestRect.Y) / SquareSize;
-			return x < Column && y < Row && x >= 0 && y >= 0;
+			x = (int)((windowCoordinate.X - MapScale.OffsetX) / MapScale.SquareSize);
+			y = (int)((windowCoordinate.Y - MapScale.OffsetY) / MapScale.SquareSize);
+			return Grid.Contains(x,y);
 		}
 
+		public override void Resize(int col, int row)
+		{
+			Grid.Resize(col, row);
+		}
+
+		#region Display Properties
 		public override void DisplayProperties(PropertyDisplay displayer)
 		{
 			displayer.ClearChildren();
@@ -82,17 +82,21 @@ namespace CoreMono.TableTop.Grid
 			displayer.AddChild(new MgHeader("Shape"));
 			displayer.AddObject(Shape);
 			displayer.AddChild(new MgHeader("Dimensions"));
-			displayer.AddProperty(typeof(GridLayer).GetProperty("Column"), this);
-			displayer.AddProperty(typeof(GridLayer).GetProperty("Row"), this);
-			displayer.AddProperty(typeof(GridLayer).GetProperty("SquareSize"), this);
+			displayer.AddProperty(typeof(GridLayer<T>).GetProperty("Column"), this);
+			displayer.AddProperty(typeof(GridLayer<T>).GetProperty("Row"), this);
 		}
 
 		private void AddGridShapesSelection(PropertyDisplay displayer)
 		{
+			// TODO do gestion of multiple values types
+			// Can only to 'boolean' for now
+			if (typeof(T) != typeof(bool))
+				return;
+
 			DropDown sl = new DropDown();
 			sl.AddItem(Enum.GetNames(typeof(GridShapeE)));
-			
-			if(Shape.GetType() == typeof(GridTint))
+
+			if (Shape.GetType() == typeof(GridTint))
 			{
 				sl.SelectedIndex = (int)GridShapeE.Tint;
 			}
@@ -104,6 +108,10 @@ namespace CoreMono.TableTop.Grid
 			{
 				sl.SelectedIndex = (int)GridShapeE.ComputedSprite;
 			}
+			else if (Shape.GetType() == typeof(GridShape<bool>))
+			{
+				sl.SelectedIndex = (int)GridShapeE.Grid;
+			}
 
 			sl.OnValueChange = (e) =>
 			{
@@ -111,14 +119,17 @@ namespace CoreMono.TableTop.Grid
 				{
 					case -1:
 						return;
+					case (int)GridShapeE.Grid:
+						Shape = (IGridShape<T>)new GridShape<bool>(Color.Black);
+						break;
 					case (int)GridShapeE.Tint:
-						Shape = new GridTint(Color.Red);
+						Shape = (IGridShape<T>)new GridTint(Color.Red);
 						break;
 					case (int)GridShapeE.Sprite:
-						Shape = new GridSprite(File.OpenRead("Floor_II.jpg"), 4, 4);
+						Shape = (IGridShape<T>)new GridSprite(File.OpenRead("Floor_II.jpg"), 4, 4);
 						break;
 					case (int)GridShapeE.ComputedSprite:
-						Shape = new GridComputedSprite(File.OpenRead("TilesI_wb.png"));
+						Shape = (IGridShape<T>)new GridComputedSprite(File.OpenRead("TilesI_wb.png"));
 						break;
 					default:
 						throw new Exception("Not implemented Grid Shape");
@@ -127,5 +138,6 @@ namespace CoreMono.TableTop.Grid
 			};
 			displayer.AddChild(sl);
 		}
+		#endregion
 	}
 }

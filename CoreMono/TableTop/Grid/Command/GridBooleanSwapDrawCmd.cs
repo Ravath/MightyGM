@@ -8,34 +8,34 @@ using System.Threading.Tasks;
 
 namespace CoreMono.TableTop.Grid.Command
 {
-	public class GridDrawCmd : MouseGridCmd
+	public class GridBooleanSwapDrawCmd : MouseGridCmd<bool>
 	{
 		private bool _ft;
-		private GridLayer _lg;
+		private GridLayer<bool> _lg;
 
 		public GridBrush Brush { get; set; }
 
-		public GridDrawCmd()
+		public GridBooleanSwapDrawCmd()
 		{
 			this.Brush = new GridBrush();
 		}
 
-		protected override void MouseDown(GridLayer sender, int x, int y)
+		protected override void MouseDown(GridLayer<bool> sender, int x, int y)
 		{
 			_lg = sender;
-			_ft = !_lg.Map[x, y];
+			_ft = !_lg.Grid[x, y];
 			BrushMap(sender, x, y);
 		}
-		protected override void MouseHold(GridLayer sender, int x, int y)
+		protected override void MouseHold(GridLayer<bool> sender, int x, int y)
 		{
 			BrushMap(sender, x, y);
 		}
-		protected override void MouseUp(GridLayer sender, int x, int y)
+		protected override void MouseUp(GridLayer<bool> sender, int x, int y)
 		{
 			/* Nothing */
 		}
 
-		private void BrushMap(TableLayer sender, int x, int y)
+		private void BrushMap(Layer sender, int x, int y)
 		{
 			if (Brush != null)
 			{
@@ -43,12 +43,12 @@ namespace CoreMono.TableTop.Grid.Command
 				{
 					if (_lg.Contains(p))
 					{
-						_lg.Map[p.X, p.Y] = _ft;
+						_lg.Grid[p.X, p.Y] = _ft;
 					}
 				}
 			}
 			else
-				_lg.Map[x, y] = _ft;
+				_lg.Grid[x, y] = _ft;
 		}
 	}
 }

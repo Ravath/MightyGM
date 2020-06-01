@@ -9,7 +9,7 @@ using CoreMono.UI;
 
 namespace CoreMono.TableTop.Token
 {
-	public class TokenLayer : TableLayer
+	public class TokenLayer : Layer
 	{
 		private List<Token> _tokens = new List<Token>();
 
@@ -28,6 +28,11 @@ namespace CoreMono.TableTop.Token
 		{
 			displayer.ClearChildren();
 			displayer.AddChild(new MgHeader("Token Layer"));
+		}
+
+		public override void Resize(int col, int row)
+		{
+			/* Nothing to do */
 		}
 	}
 }

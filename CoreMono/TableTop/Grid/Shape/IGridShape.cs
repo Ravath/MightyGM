@@ -9,11 +9,11 @@ namespace CoreMono.TableTop.Grid.Shape
 {
 	public enum GridShapeE
 	{
-		Tint, Sprite, ComputedSprite
+		Tint, Sprite, ComputedSprite, Grid
 	}
 
-	public interface IGridShape
+	public interface IGridShape<T>
 	{
-		void Draw(SpriteBatch batch, GridLayer grid);
+		void Draw(SpriteBatch batch, GridLayer<T> grid);
 	}
 }

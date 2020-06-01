@@ -12,7 +12,7 @@ namespace CoreMono.TableTop.Grid.Command
 	/// A Mouse command implementing a hold left button behaviour, 
 	/// but will call the templated functions only when changing Grid.
 	/// </summary>
-	public abstract class MouseGridCmd : IMouseLayerCommand
+	public abstract class MouseGridCmd<T> : IMouseLayerCommand
 	{
 		private int _prevX = -1, _prevY = -1;
 
@@ -24,31 +24,31 @@ namespace CoreMono.TableTop.Grid.Command
 			return ret;
 		}
 
-		public void MouseDown(TableMap sender, MouseState ms)
+		public void MouseDown(Map sender, MouseState ms)
 		{
-			if (sender.GetActiveLayer<GridLayer>().GetCoordinate(ms.Position, out int x, out int y))
+			if (sender.GetActiveLayer<GridLayer<T>>().GetCoordinate(ms.Position, out int x, out int y))
 			{
-				MouseDown(sender.GetActiveLayer<GridLayer>(), x, y);
+				MouseDown(sender.GetActiveLayer<GridLayer<T>>(), x, y);
 				_prevX = x;
 				_prevY = y;
 			}
 		}
-		public void MouseHold(TableMap sender, MouseState ms)
+		public void MouseHold(Map sender, MouseState ms)
 		{
-			if (sender.GetActiveLayer<GridLayer>().GetCoordinate(ms.Position, out int x, out int y) && CheckPrevCoordinates(x, y))
+			if (sender.GetActiveLayer<GridLayer<T>>().GetCoordinate(ms.Position, out int x, out int y) && CheckPrevCoordinates(x, y))
 			{
-				MouseHold(sender.GetActiveLayer<GridLayer>(), x, y);
+				MouseHold(sender.GetActiveLayer<GridLayer<T>>(), x, y);
 			}
 		}
-		public void MouseUp(TableMap sender, MouseState ms)
+		public void MouseUp(Map sender, MouseState ms)
 		{
-			if (sender.GetActiveLayer<GridLayer>().GetCoordinate(ms.Position, out int x, out int y) && CheckPrevCoordinates(x, y))
+			if (sender.GetActiveLayer<GridLayer<T>>().GetCoordinate(ms.Position, out int x, out int y) && CheckPrevCoordinates(x, y))
 			{
-				MouseUp(sender.GetActiveLayer<GridLayer>(), x, y);
+				MouseUp(sender.GetActiveLayer<GridLayer<T>>(), x, y);
 			}
 		}
-		protected abstract void MouseDown(GridLayer sender, int x, int y);
-		protected abstract void MouseHold(GridLayer sender, int x, int y);
-		protected abstract void MouseUp(GridLayer sender, int x, int y);
+		protected abstract void MouseDown(GridLayer<T> sender, int x, int y);
+		protected abstract void MouseHold(GridLayer<T> sender, int x, int y);
+		protected abstract void MouseUp(GridLayer<T> sender, int x, int y);
 	}
 }

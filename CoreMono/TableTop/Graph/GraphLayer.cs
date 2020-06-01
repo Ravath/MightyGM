@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace CoreMono.TableTop.Graph
 {
-	public class GraphLayer : TableLayer
+	public class GraphLayer : Layer
 	{
 		public TokenLayer Nodes { get; private set; }
 		public EdgeLayer Edges { get; private set; }
@@ -50,6 +50,11 @@ namespace CoreMono.TableTop.Graph
 			displayer.AddObject(DefaultEdgeShape);
 			displayer.AddChild(new MgHeader("Default Node"));
 			displayer.AddObject(DefaultNodeShape);
+		}
+
+		public override void Resize(int col, int row)
+		{
+			/* Nothing to do */
 		}
 	}
 }

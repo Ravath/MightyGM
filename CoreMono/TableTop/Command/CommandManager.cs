@@ -10,31 +10,61 @@ using System.Threading.Tasks;
 namespace CoreMono.TableTop.Command
 {
 	public interface IMouseLayerCommand {
-		void MouseDown(TableMap sender, MouseState e);
-		void MouseHold(TableMap sender, MouseState e);
-		void MouseUp(TableMap sender, MouseState e);
+		void MouseDown(Map sender, MouseState e);
+		void MouseHold(Map sender, MouseState e);
+		void MouseUp(Map sender, MouseState e);
 	}
 
 	public class CommandManager
 	{
+		private MapDragCommand _dragMapCommand;
+
 		private Dictionary<Type, IMouseLayerCommand> _mouseEvents = new Dictionary<Type, IMouseLayerCommand>();
+
+		private Boolean _leftDown;
+		private Boolean _middleDown;
+		public double ZoomSensibility { get; set; } = 0.1;
 
 		public CommandManager()
 		{
-			_mouseEvents.Add(typeof(GridLayer), new GridDrawCmd());
+			_dragMapCommand = new MapDragCommand();
+			_mouseEvents.Add(typeof(GridLayer<bool>), new GridBooleanSwapDrawCmd());
 		}
 
-		private Boolean _msDown;
-		public void MouseCommand(TableMap sender)
+		public void MouseCommand(Map sender)
 		{
 			if (sender.LayerCount <= 0) { return; }
 
 			MouseState e = Mouse.GetState();
-			if (_mouseEvents.TryGetValue(sender.GetActiveLayer<TableLayer>().GetType(), out IMouseLayerCommand command))
+
+			/* Override command : drag the map */
+			if (e.MiddleButton == ButtonState.Pressed)
+			{
+				if (_middleDown)
+				{
+					_dragMapCommand.MouseHold(sender, e);
+				}
+				else
+				{
+					_dragMapCommand.MouseDown(sender, e);
+				}
+				_middleDown = true;
+			}
+			else
+			{
+				if (_middleDown == true)
+				{
+					_dragMapCommand.MouseUp(sender, e);
+				}
+				_middleDown = false;
+			}
+
+			/* Layer specific commands */
+			if (_mouseEvents.TryGetValue(sender.GetActiveLayer<Layer>().GetType(), out IMouseLayerCommand command))
 			{
 				if (e.LeftButton == ButtonState.Pressed)
 				{
-					if (_msDown)
+					if (_leftDown)
 					{
 						command.MouseHold(sender, e);
 					}
@@ -42,17 +72,22 @@ namespace CoreMono.TableTop.Command
 					{
 						command.MouseDown(sender, e);
 					}
-					_msDown = true;
+					_leftDown = true;
 				}
 				else
 				{
-					if (_msDown == true)
+					if (_leftDown == true)
 					{
 						command.MouseUp(sender, e);
 					}
-					_msDown = false;
+					_leftDown = false;
 				}
 			}
+		}
+
+		internal void WheelCommand(Map map, int mouseWheelChange)
+		{
+			map.MapScale.RelativeZoom += mouseWheelChange * ZoomSensibility;
 		}
 	}
 }
