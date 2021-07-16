@@ -4,9 +4,9 @@
 
 // GPPG version 1.5.2
 // Machine:  EHLION-GTX
-// DateTime: 03/10/2018 00:59:10
+// DateTime: 16/07/2021 17:43:16
 // UserName: Ehlion
-// Input file <RollParser.y - 03/10/2018 00:59:02>
+// Input file <../RollParser.y - 16/07/2021 17:30:53>
 
 // options: lines
 
@@ -20,293 +20,319 @@ using Core.Engine;
 
 namespace Core.Dice.Parser
 {
-internal enum Tokens {error=116,EOF=117,DIGIT=118};
+    internal enum Tokens { error = 116, EOF = 117, DIGIT = 118 };
 
-internal partial struct ValueType
-#line 19 "RollParser.y"
-       {
-	public int iVal;
-	public IRoll iRoll;
-}
+    internal partial struct ValueType
+#line 19 "../RollParser.y"
+    {
+        public int iVal;
+        public IRoll iRoll;
+    }
 #line default
-[GeneratedCodeAttribute( "Gardens Point Parser Generator", "1.5.2")]
-internal partial class Parser: ShiftReduceParser<ValueType, LexLocation>
-{
-  // Verbatim content from RollParser.y - 03/10/2018 00:59:02
-#line 10 "RollParser.y"
-	public IRoll result;
+    [GeneratedCodeAttribute("Gardens Point Parser Generator", "1.5.2")]
+    internal partial class Parser : ShiftReduceParser<ValueType, LexLocation>
+    {
+        // Verbatim content from ../RollParser.y - 16/07/2021 17:30:53
+#line 10 "../RollParser.y"
+        public IRoll result;
 #line default
-  // End verbatim content from RollParser.y - 03/10/2018 00:59:02
+        // End verbatim content from ../RollParser.y - 16/07/2021 17:30:53
 
 #pragma warning disable 649
-  private static Dictionary<int, string> aliases;
+        private static Dictionary<int, string> aliases;
 #pragma warning restore 649
-  private static Rule[] rules = new Rule[31];
-  private static State[] states = new State[60];
-  private static string[] nonTerms = new string[] {
+        private static Rule[] rules = new Rule[34];
+        private static State[] states = new State[66];
+        private static string[] nonTerms = new string[] {
       "MAIN", "NUMBER", "OPERATION", "$accept", };
 
-  static Parser() {
-    states[0] = new State(new int[]{118,10,117,-2,116,-2},new int[]{-1,1,-3,5,-2,55});
-    states[1] = new State(new int[]{117,2,116,3});
-    states[2] = new State(-1);
-    states[3] = new State(new int[]{10,4});
-    states[4] = new State(-4);
-    states[5] = new State(new int[]{62,6,60,12,43,16,45,18,104,20,108,22,97,24,65,29,114,34,82,39,101,44,69,49,99,54,117,-3,116,-3});
-    states[6] = new State(new int[]{61,7,118,10},new int[]{-2,11});
-    states[7] = new State(new int[]{118,10},new int[]{-2,8});
-    states[8] = new State(new int[]{118,9,62,-10,60,-10,43,-10,45,-10,104,-10,108,-10,97,-10,65,-10,114,-10,82,-10,101,-10,69,-10,99,-10,117,-10,116,-10});
-    states[9] = new State(-6);
-    states[10] = new State(-5);
-    states[11] = new State(new int[]{118,9,62,-12,60,-12,43,-12,45,-12,104,-12,108,-12,97,-12,65,-12,114,-12,82,-12,101,-12,69,-12,99,-12,117,-12,116,-12});
-    states[12] = new State(new int[]{61,13,118,10},new int[]{-2,15});
-    states[13] = new State(new int[]{118,10},new int[]{-2,14});
-    states[14] = new State(new int[]{118,9,62,-11,60,-11,43,-11,45,-11,104,-11,108,-11,97,-11,65,-11,114,-11,82,-11,101,-11,69,-11,99,-11,117,-11,116,-11});
-    states[15] = new State(new int[]{118,9,62,-13,60,-13,43,-13,45,-13,104,-13,108,-13,97,-13,65,-13,114,-13,82,-13,101,-13,69,-13,99,-13,117,-13,116,-13});
-    states[16] = new State(new int[]{118,10},new int[]{-2,17});
-    states[17] = new State(new int[]{118,9,62,-14,60,-14,43,-14,45,-14,104,-14,108,-14,97,-14,65,-14,114,-14,82,-14,101,-14,69,-14,99,-14,117,-14,116,-14});
-    states[18] = new State(new int[]{118,10},new int[]{-2,19});
-    states[19] = new State(new int[]{118,9,62,-15,60,-15,43,-15,45,-15,104,-15,108,-15,97,-15,65,-15,114,-15,82,-15,101,-15,69,-15,99,-15,117,-15,116,-15});
-    states[20] = new State(new int[]{118,10},new int[]{-2,21});
-    states[21] = new State(new int[]{118,9,62,-16,60,-16,43,-16,45,-16,104,-16,108,-16,97,-16,65,-16,114,-16,82,-16,101,-16,69,-16,99,-16,117,-16,116,-16});
-    states[22] = new State(new int[]{118,10},new int[]{-2,23});
-    states[23] = new State(new int[]{118,9,62,-17,60,-17,43,-17,45,-17,104,-17,108,-17,97,-17,65,-17,114,-17,82,-17,101,-17,69,-17,99,-17,117,-17,116,-17});
-    states[24] = new State(new int[]{104,25,108,27});
-    states[25] = new State(new int[]{118,10},new int[]{-2,26});
-    states[26] = new State(new int[]{118,9,62,-18,60,-18,43,-18,45,-18,104,-18,108,-18,97,-18,65,-18,114,-18,82,-18,101,-18,69,-18,99,-18,117,-18,116,-18});
-    states[27] = new State(new int[]{118,10},new int[]{-2,28});
-    states[28] = new State(new int[]{118,9,62,-19,60,-19,43,-19,45,-19,104,-19,108,-19,97,-19,65,-19,114,-19,82,-19,101,-19,69,-19,99,-19,117,-19,116,-19});
-    states[29] = new State(new int[]{104,30,108,32});
-    states[30] = new State(new int[]{118,10},new int[]{-2,31});
-    states[31] = new State(new int[]{118,9,62,-20,60,-20,43,-20,45,-20,104,-20,108,-20,97,-20,65,-20,114,-20,82,-20,101,-20,69,-20,99,-20,117,-20,116,-20});
-    states[32] = new State(new int[]{118,10},new int[]{-2,33});
-    states[33] = new State(new int[]{118,9,62,-21,60,-21,43,-21,45,-21,104,-21,108,-21,97,-21,65,-21,114,-21,82,-21,101,-21,69,-21,99,-21,117,-21,116,-21});
-    states[34] = new State(new int[]{104,35,108,37});
-    states[35] = new State(new int[]{118,10},new int[]{-2,36});
-    states[36] = new State(new int[]{118,9,62,-22,60,-22,43,-22,45,-22,104,-22,108,-22,97,-22,65,-22,114,-22,82,-22,101,-22,69,-22,99,-22,117,-22,116,-22});
-    states[37] = new State(new int[]{118,10},new int[]{-2,38});
-    states[38] = new State(new int[]{118,9,62,-23,60,-23,43,-23,45,-23,104,-23,108,-23,97,-23,65,-23,114,-23,82,-23,101,-23,69,-23,99,-23,117,-23,116,-23});
-    states[39] = new State(new int[]{104,40,108,42});
-    states[40] = new State(new int[]{118,10},new int[]{-2,41});
-    states[41] = new State(new int[]{118,9,62,-24,60,-24,43,-24,45,-24,104,-24,108,-24,97,-24,65,-24,114,-24,82,-24,101,-24,69,-24,99,-24,117,-24,116,-24});
-    states[42] = new State(new int[]{118,10},new int[]{-2,43});
-    states[43] = new State(new int[]{118,9,62,-25,60,-25,43,-25,45,-25,104,-25,108,-25,97,-25,65,-25,114,-25,82,-25,101,-25,69,-25,99,-25,117,-25,116,-25});
-    states[44] = new State(new int[]{104,45,108,47});
-    states[45] = new State(new int[]{118,10},new int[]{-2,46});
-    states[46] = new State(new int[]{118,9,62,-26,60,-26,43,-26,45,-26,104,-26,108,-26,97,-26,65,-26,114,-26,82,-26,101,-26,69,-26,99,-26,117,-26,116,-26});
-    states[47] = new State(new int[]{118,10},new int[]{-2,48});
-    states[48] = new State(new int[]{118,9,62,-27,60,-27,43,-27,45,-27,104,-27,108,-27,97,-27,65,-27,114,-27,82,-27,101,-27,69,-27,99,-27,117,-27,116,-27});
-    states[49] = new State(new int[]{104,50,108,52});
-    states[50] = new State(new int[]{118,10},new int[]{-2,51});
-    states[51] = new State(new int[]{118,9,62,-28,60,-28,43,-28,45,-28,104,-28,108,-28,97,-28,65,-28,114,-28,82,-28,101,-28,69,-28,99,-28,117,-28,116,-28});
-    states[52] = new State(new int[]{118,10},new int[]{-2,53});
-    states[53] = new State(new int[]{118,9,62,-29,60,-29,43,-29,45,-29,104,-29,108,-29,97,-29,65,-29,114,-29,82,-29,101,-29,69,-29,99,-29,117,-29,116,-29});
-    states[54] = new State(-30);
-    states[55] = new State(new int[]{118,9,58,56,100,58,62,-7,60,-7,43,-7,45,-7,104,-7,108,-7,97,-7,65,-7,114,-7,82,-7,101,-7,69,-7,99,-7,117,-7,116,-7});
-    states[56] = new State(new int[]{118,10},new int[]{-2,57});
-    states[57] = new State(new int[]{118,9,62,-8,60,-8,43,-8,45,-8,104,-8,108,-8,97,-8,65,-8,114,-8,82,-8,101,-8,69,-8,99,-8,117,-8,116,-8});
-    states[58] = new State(new int[]{118,10},new int[]{-2,59});
-    states[59] = new State(new int[]{118,9,62,-9,60,-9,43,-9,45,-9,104,-9,108,-9,97,-9,65,-9,114,-9,82,-9,101,-9,69,-9,99,-9,117,-9,116,-9});
+        static Parser()
+        {
+            states[0] = new State(new int[] { 118, 10, 117, -2, 116, -2 }, new int[] { -1, 1, -3, 5, -2, 61 });
+            states[1] = new State(new int[] { 117, 2, 116, 3 });
+            states[2] = new State(-1);
+            states[3] = new State(new int[] { 10, 4 });
+            states[4] = new State(-4);
+            states[5] = new State(new int[] { 62, 6, 60, 12, 43, 16, 45, 18, 42, 20, 47, 22, 37, 24, 104, 26, 108, 28, 97, 30, 65, 35, 114, 40, 82, 45, 101, 50, 69, 55, 99, 60, 117, -3, 116, -3 });
+            states[6] = new State(new int[] { 61, 7, 118, 10 }, new int[] { -2, 11 });
+            states[7] = new State(new int[] { 118, 10 }, new int[] { -2, 8 });
+            states[8] = new State(new int[] { 118, 9, 62, -10, 60, -10, 43, -10, 45, -10, 42, -10, 47, -10, 37, -10, 104, -10, 108, -10, 97, -10, 65, -10, 114, -10, 82, -10, 101, -10, 69, -10, 99, -10, 117, -10, 116, -10 });
+            states[9] = new State(-6);
+            states[10] = new State(-5);
+            states[11] = new State(new int[] { 118, 9, 62, -12, 60, -12, 43, -12, 45, -12, 42, -12, 47, -12, 37, -12, 104, -12, 108, -12, 97, -12, 65, -12, 114, -12, 82, -12, 101, -12, 69, -12, 99, -12, 117, -12, 116, -12 });
+            states[12] = new State(new int[] { 61, 13, 118, 10 }, new int[] { -2, 15 });
+            states[13] = new State(new int[] { 118, 10 }, new int[] { -2, 14 });
+            states[14] = new State(new int[] { 118, 9, 62, -11, 60, -11, 43, -11, 45, -11, 42, -11, 47, -11, 37, -11, 104, -11, 108, -11, 97, -11, 65, -11, 114, -11, 82, -11, 101, -11, 69, -11, 99, -11, 117, -11, 116, -11 });
+            states[15] = new State(new int[] { 118, 9, 62, -13, 60, -13, 43, -13, 45, -13, 42, -13, 47, -13, 37, -13, 104, -13, 108, -13, 97, -13, 65, -13, 114, -13, 82, -13, 101, -13, 69, -13, 99, -13, 117, -13, 116, -13 });
+            states[16] = new State(new int[] { 118, 10 }, new int[] { -2, 17 });
+            states[17] = new State(new int[] { 118, 9, 62, -14, 60, -14, 43, -14, 45, -14, 42, -14, 47, -14, 37, -14, 104, -14, 108, -14, 97, -14, 65, -14, 114, -14, 82, -14, 101, -14, 69, -14, 99, -14, 117, -14, 116, -14 });
+            states[18] = new State(new int[] { 118, 10 }, new int[] { -2, 19 });
+            states[19] = new State(new int[] { 118, 9, 62, -15, 60, -15, 43, -15, 45, -15, 42, -15, 47, -15, 37, -15, 104, -15, 108, -15, 97, -15, 65, -15, 114, -15, 82, -15, 101, -15, 69, -15, 99, -15, 117, -15, 116, -15 });
+            states[20] = new State(new int[] { 118, 10 }, new int[] { -2, 21 });
+            states[21] = new State(new int[] { 118, 9, 62, -16, 60, -16, 43, -16, 45, -16, 42, -16, 47, -16, 37, -16, 104, -16, 108, -16, 97, -16, 65, -16, 114, -16, 82, -16, 101, -16, 69, -16, 99, -16, 117, -16, 116, -16 });
+            states[22] = new State(new int[] { 118, 10 }, new int[] { -2, 23 });
+            states[23] = new State(new int[] { 118, 9, 62, -17, 60, -17, 43, -17, 45, -17, 42, -17, 47, -17, 37, -17, 104, -17, 108, -17, 97, -17, 65, -17, 114, -17, 82, -17, 101, -17, 69, -17, 99, -17, 117, -17, 116, -17 });
+            states[24] = new State(new int[] { 118, 10 }, new int[] { -2, 25 });
+            states[25] = new State(new int[] { 118, 9, 62, -18, 60, -18, 43, -18, 45, -18, 42, -18, 47, -18, 37, -18, 104, -18, 108, -18, 97, -18, 65, -18, 114, -18, 82, -18, 101, -18, 69, -18, 99, -18, 117, -18, 116, -18 });
+            states[26] = new State(new int[] { 118, 10 }, new int[] { -2, 27 });
+            states[27] = new State(new int[] { 118, 9, 62, -19, 60, -19, 43, -19, 45, -19, 42, -19, 47, -19, 37, -19, 104, -19, 108, -19, 97, -19, 65, -19, 114, -19, 82, -19, 101, -19, 69, -19, 99, -19, 117, -19, 116, -19 });
+            states[28] = new State(new int[] { 118, 10 }, new int[] { -2, 29 });
+            states[29] = new State(new int[] { 118, 9, 62, -20, 60, -20, 43, -20, 45, -20, 42, -20, 47, -20, 37, -20, 104, -20, 108, -20, 97, -20, 65, -20, 114, -20, 82, -20, 101, -20, 69, -20, 99, -20, 117, -20, 116, -20 });
+            states[30] = new State(new int[] { 104, 31, 108, 33 });
+            states[31] = new State(new int[] { 118, 10 }, new int[] { -2, 32 });
+            states[32] = new State(new int[] { 118, 9, 62, -21, 60, -21, 43, -21, 45, -21, 42, -21, 47, -21, 37, -21, 104, -21, 108, -21, 97, -21, 65, -21, 114, -21, 82, -21, 101, -21, 69, -21, 99, -21, 117, -21, 116, -21 });
+            states[33] = new State(new int[] { 118, 10 }, new int[] { -2, 34 });
+            states[34] = new State(new int[] { 118, 9, 62, -22, 60, -22, 43, -22, 45, -22, 42, -22, 47, -22, 37, -22, 104, -22, 108, -22, 97, -22, 65, -22, 114, -22, 82, -22, 101, -22, 69, -22, 99, -22, 117, -22, 116, -22 });
+            states[35] = new State(new int[] { 104, 36, 108, 38 });
+            states[36] = new State(new int[] { 118, 10 }, new int[] { -2, 37 });
+            states[37] = new State(new int[] { 118, 9, 62, -23, 60, -23, 43, -23, 45, -23, 42, -23, 47, -23, 37, -23, 104, -23, 108, -23, 97, -23, 65, -23, 114, -23, 82, -23, 101, -23, 69, -23, 99, -23, 117, -23, 116, -23 });
+            states[38] = new State(new int[] { 118, 10 }, new int[] { -2, 39 });
+            states[39] = new State(new int[] { 118, 9, 62, -24, 60, -24, 43, -24, 45, -24, 42, -24, 47, -24, 37, -24, 104, -24, 108, -24, 97, -24, 65, -24, 114, -24, 82, -24, 101, -24, 69, -24, 99, -24, 117, -24, 116, -24 });
+            states[40] = new State(new int[] { 104, 41, 108, 43 });
+            states[41] = new State(new int[] { 118, 10 }, new int[] { -2, 42 });
+            states[42] = new State(new int[] { 118, 9, 62, -25, 60, -25, 43, -25, 45, -25, 42, -25, 47, -25, 37, -25, 104, -25, 108, -25, 97, -25, 65, -25, 114, -25, 82, -25, 101, -25, 69, -25, 99, -25, 117, -25, 116, -25 });
+            states[43] = new State(new int[] { 118, 10 }, new int[] { -2, 44 });
+            states[44] = new State(new int[] { 118, 9, 62, -26, 60, -26, 43, -26, 45, -26, 42, -26, 47, -26, 37, -26, 104, -26, 108, -26, 97, -26, 65, -26, 114, -26, 82, -26, 101, -26, 69, -26, 99, -26, 117, -26, 116, -26 });
+            states[45] = new State(new int[] { 104, 46, 108, 48 });
+            states[46] = new State(new int[] { 118, 10 }, new int[] { -2, 47 });
+            states[47] = new State(new int[] { 118, 9, 62, -27, 60, -27, 43, -27, 45, -27, 42, -27, 47, -27, 37, -27, 104, -27, 108, -27, 97, -27, 65, -27, 114, -27, 82, -27, 101, -27, 69, -27, 99, -27, 117, -27, 116, -27 });
+            states[48] = new State(new int[] { 118, 10 }, new int[] { -2, 49 });
+            states[49] = new State(new int[] { 118, 9, 62, -28, 60, -28, 43, -28, 45, -28, 42, -28, 47, -28, 37, -28, 104, -28, 108, -28, 97, -28, 65, -28, 114, -28, 82, -28, 101, -28, 69, -28, 99, -28, 117, -28, 116, -28 });
+            states[50] = new State(new int[] { 104, 51, 108, 53 });
+            states[51] = new State(new int[] { 118, 10 }, new int[] { -2, 52 });
+            states[52] = new State(new int[] { 118, 9, 62, -29, 60, -29, 43, -29, 45, -29, 42, -29, 47, -29, 37, -29, 104, -29, 108, -29, 97, -29, 65, -29, 114, -29, 82, -29, 101, -29, 69, -29, 99, -29, 117, -29, 116, -29 });
+            states[53] = new State(new int[] { 118, 10 }, new int[] { -2, 54 });
+            states[54] = new State(new int[] { 118, 9, 62, -30, 60, -30, 43, -30, 45, -30, 42, -30, 47, -30, 37, -30, 104, -30, 108, -30, 97, -30, 65, -30, 114, -30, 82, -30, 101, -30, 69, -30, 99, -30, 117, -30, 116, -30 });
+            states[55] = new State(new int[] { 104, 56, 108, 58 });
+            states[56] = new State(new int[] { 118, 10 }, new int[] { -2, 57 });
+            states[57] = new State(new int[] { 118, 9, 62, -31, 60, -31, 43, -31, 45, -31, 42, -31, 47, -31, 37, -31, 104, -31, 108, -31, 97, -31, 65, -31, 114, -31, 82, -31, 101, -31, 69, -31, 99, -31, 117, -31, 116, -31 });
+            states[58] = new State(new int[] { 118, 10 }, new int[] { -2, 59 });
+            states[59] = new State(new int[] { 118, 9, 62, -32, 60, -32, 43, -32, 45, -32, 42, -32, 47, -32, 37, -32, 104, -32, 108, -32, 97, -32, 65, -32, 114, -32, 82, -32, 101, -32, 69, -32, 99, -32, 117, -32, 116, -32 });
+            states[60] = new State(-33);
+            states[61] = new State(new int[] { 118, 9, 58, 62, 100, 64, 62, -7, 60, -7, 43, -7, 45, -7, 42, -7, 47, -7, 37, -7, 104, -7, 108, -7, 97, -7, 65, -7, 114, -7, 82, -7, 101, -7, 69, -7, 99, -7, 117, -7, 116, -7 });
+            states[62] = new State(new int[] { 118, 10 }, new int[] { -2, 63 });
+            states[63] = new State(new int[] { 118, 9, 62, -8, 60, -8, 43, -8, 45, -8, 42, -8, 47, -8, 37, -8, 104, -8, 108, -8, 97, -8, 65, -8, 114, -8, 82, -8, 101, -8, 69, -8, 99, -8, 117, -8, 116, -8 });
+            states[64] = new State(new int[] { 118, 10 }, new int[] { -2, 65 });
+            states[65] = new State(new int[] { 118, 9, 62, -9, 60, -9, 43, -9, 45, -9, 42, -9, 47, -9, 37, -9, 104, -9, 108, -9, 97, -9, 65, -9, 114, -9, 82, -9, 101, -9, 69, -9, 99, -9, 117, -9, 116, -9 });
 
-    for (int sNo = 0; sNo < states.Length; sNo++) states[sNo].number = sNo;
+            for (int sNo = 0; sNo < states.Length; sNo++) states[sNo].number = sNo;
 
-    rules[1] = new Rule(-4, new int[]{-1,117});
-    rules[2] = new Rule(-1, new int[]{});
-    rules[3] = new Rule(-1, new int[]{-3});
-    rules[4] = new Rule(-1, new int[]{-1,116,10});
-    rules[5] = new Rule(-2, new int[]{118});
-    rules[6] = new Rule(-2, new int[]{-2,118});
-    rules[7] = new Rule(-3, new int[]{-2});
-    rules[8] = new Rule(-3, new int[]{-2,58,-2});
-    rules[9] = new Rule(-3, new int[]{-2,100,-2});
-    rules[10] = new Rule(-3, new int[]{-3,62,61,-2});
-    rules[11] = new Rule(-3, new int[]{-3,60,61,-2});
-    rules[12] = new Rule(-3, new int[]{-3,62,-2});
-    rules[13] = new Rule(-3, new int[]{-3,60,-2});
-    rules[14] = new Rule(-3, new int[]{-3,43,-2});
-    rules[15] = new Rule(-3, new int[]{-3,45,-2});
-    rules[16] = new Rule(-3, new int[]{-3,104,-2});
-    rules[17] = new Rule(-3, new int[]{-3,108,-2});
-    rules[18] = new Rule(-3, new int[]{-3,97,104,-2});
-    rules[19] = new Rule(-3, new int[]{-3,97,108,-2});
-    rules[20] = new Rule(-3, new int[]{-3,65,104,-2});
-    rules[21] = new Rule(-3, new int[]{-3,65,108,-2});
-    rules[22] = new Rule(-3, new int[]{-3,114,104,-2});
-    rules[23] = new Rule(-3, new int[]{-3,114,108,-2});
-    rules[24] = new Rule(-3, new int[]{-3,82,104,-2});
-    rules[25] = new Rule(-3, new int[]{-3,82,108,-2});
-    rules[26] = new Rule(-3, new int[]{-3,101,104,-2});
-    rules[27] = new Rule(-3, new int[]{-3,101,108,-2});
-    rules[28] = new Rule(-3, new int[]{-3,69,104,-2});
-    rules[29] = new Rule(-3, new int[]{-3,69,108,-2});
-    rules[30] = new Rule(-3, new int[]{-3,99});
-  }
+            rules[1] = new Rule(-4, new int[] { -1, 117 });
+            rules[2] = new Rule(-1, new int[] { });
+            rules[3] = new Rule(-1, new int[] { -3 });
+            rules[4] = new Rule(-1, new int[] { -1, 116, 10 });
+            rules[5] = new Rule(-2, new int[] { 118 });
+            rules[6] = new Rule(-2, new int[] { -2, 118 });
+            rules[7] = new Rule(-3, new int[] { -2 });
+            rules[8] = new Rule(-3, new int[] { -2, 58, -2 });
+            rules[9] = new Rule(-3, new int[] { -2, 100, -2 });
+            rules[10] = new Rule(-3, new int[] { -3, 62, 61, -2 });
+            rules[11] = new Rule(-3, new int[] { -3, 60, 61, -2 });
+            rules[12] = new Rule(-3, new int[] { -3, 62, -2 });
+            rules[13] = new Rule(-3, new int[] { -3, 60, -2 });
+            rules[14] = new Rule(-3, new int[] { -3, 43, -2 });
+            rules[15] = new Rule(-3, new int[] { -3, 45, -2 });
+            rules[16] = new Rule(-3, new int[] { -3, 42, -2 });
+            rules[17] = new Rule(-3, new int[] { -3, 47, -2 });
+            rules[18] = new Rule(-3, new int[] { -3, 37, -2 });
+            rules[19] = new Rule(-3, new int[] { -3, 104, -2 });
+            rules[20] = new Rule(-3, new int[] { -3, 108, -2 });
+            rules[21] = new Rule(-3, new int[] { -3, 97, 104, -2 });
+            rules[22] = new Rule(-3, new int[] { -3, 97, 108, -2 });
+            rules[23] = new Rule(-3, new int[] { -3, 65, 104, -2 });
+            rules[24] = new Rule(-3, new int[] { -3, 65, 108, -2 });
+            rules[25] = new Rule(-3, new int[] { -3, 114, 104, -2 });
+            rules[26] = new Rule(-3, new int[] { -3, 114, 108, -2 });
+            rules[27] = new Rule(-3, new int[] { -3, 82, 104, -2 });
+            rules[28] = new Rule(-3, new int[] { -3, 82, 108, -2 });
+            rules[29] = new Rule(-3, new int[] { -3, 101, 104, -2 });
+            rules[30] = new Rule(-3, new int[] { -3, 101, 108, -2 });
+            rules[31] = new Rule(-3, new int[] { -3, 69, 104, -2 });
+            rules[32] = new Rule(-3, new int[] { -3, 69, 108, -2 });
+            rules[33] = new Rule(-3, new int[] { -3, 99 });
+        }
 
-  protected override void Initialize() {
-    this.InitSpecialTokens((int)Tokens.error, (int)Tokens.EOF);
-    this.InitStates(states);
-    this.InitRules(rules);
-    this.InitNonTerminals(nonTerms);
-  }
+        protected override void Initialize()
+        {
+            this.InitSpecialTokens((int)Tokens.error, (int)Tokens.EOF);
+            this.InitStates(states);
+            this.InitRules(rules);
+            this.InitNonTerminals(nonTerms);
+        }
 
-  protected override void DoAction(int action)
-  {
+        protected override void DoAction(int action)
+        {
 #pragma warning disable 162, 1522
-    switch (action)
-    {
-      case 3: // MAIN -> OPERATION
-#line 32 "RollParser.y"
-               { result = ValueStack[ValueStack.Depth-1].iRoll; ValueStack[ValueStack.Depth-1].iRoll.Roll(); }
+            switch (action)
+            {
+                case 3: // MAIN -> OPERATION
+#line 32 "../RollParser.y"
+                    { result = ValueStack[ValueStack.Depth - 1].iRoll; ValueStack[ValueStack.Depth - 1].iRoll.Roll(); }
 #line default
-        break;
-      case 4: // MAIN -> MAIN, error, '\n'
-#line 33 "RollParser.y"
-                     { yyerrok(); }
+                    break;
+                case 4: // MAIN -> MAIN, error, '\n'
+#line 33 "../RollParser.y"
+                    { yyerrok(); }
 #line default
-        break;
-      case 5: // NUMBER -> DIGIT
-#line 37 "RollParser.y"
-         { CurrentSemanticValue.iVal = ValueStack[ValueStack.Depth-1].iVal; }
+                    break;
+                case 5: // NUMBER -> DIGIT
+#line 37 "../RollParser.y"
+                    { CurrentSemanticValue.iVal = ValueStack[ValueStack.Depth - 1].iVal; }
 #line default
-        break;
-      case 6: // NUMBER -> NUMBER, DIGIT
-#line 38 "RollParser.y"
-                { CurrentSemanticValue.iVal = ValueStack[ValueStack.Depth-2].iVal * 10 + ValueStack[ValueStack.Depth-1].iVal; }
+                    break;
+                case 6: // NUMBER -> NUMBER, DIGIT
+#line 38 "../RollParser.y"
+                    { CurrentSemanticValue.iVal = ValueStack[ValueStack.Depth - 2].iVal * 10 + ValueStack[ValueStack.Depth - 1].iVal; }
 #line default
-        break;
-      case 7: // OPERATION -> NUMBER
-#line 41 "RollParser.y"
-          { CurrentSemanticValue.iRoll = new Intervalle(ValueStack[ValueStack.Depth-1].iVal, ValueStack[ValueStack.Depth-1].iVal); }
+                    break;
+                case 7: // OPERATION -> NUMBER
+#line 41 "../RollParser.y"
+                    { CurrentSemanticValue.iRoll = new Intervalle(ValueStack[ValueStack.Depth - 1].iVal, ValueStack[ValueStack.Depth - 1].iVal); }
 #line default
-        break;
-      case 8: // OPERATION -> NUMBER, ':', NUMBER
-#line 42 "RollParser.y"
-                     { CurrentSemanticValue.iRoll = new Intervalle(new Value(ValueStack[ValueStack.Depth-3].iVal), new Value(ValueStack[ValueStack.Depth-1].iVal)); }
+                    break;
+                case 8: // OPERATION -> NUMBER, ':', NUMBER
+#line 42 "../RollParser.y"
+                    { CurrentSemanticValue.iRoll = new Intervalle(new Value(ValueStack[ValueStack.Depth - 3].iVal), new Value(ValueStack[ValueStack.Depth - 1].iVal)); }
 #line default
-        break;
-      case 9: // OPERATION -> NUMBER, 'd', NUMBER
-#line 43 "RollParser.y"
-                     { CurrentSemanticValue.iRoll = new Pool(new Value(ValueStack[ValueStack.Depth-3].iVal), ValueStack[ValueStack.Depth-1].iVal); }
+                    break;
+                case 9: // OPERATION -> NUMBER, 'd', NUMBER
+#line 43 "../RollParser.y"
+                    { CurrentSemanticValue.iRoll = new Pool(new Value(ValueStack[ValueStack.Depth - 3].iVal), ValueStack[ValueStack.Depth - 1].iVal); }
 #line default
-        break;
-      case 10: // OPERATION -> OPERATION, '>', '=', NUMBER
-#line 44 "RollParser.y"
-                            { CurrentSemanticValue.iRoll = new KeepHigherThan(ValueStack[ValueStack.Depth-4].iRoll, ValueStack[ValueStack.Depth-1].iVal); }
+                    break;
+                case 10: // OPERATION -> OPERATION, '>', '=', NUMBER
+#line 44 "../RollParser.y"
+                    { CurrentSemanticValue.iRoll = new KeepHigherThan(ValueStack[ValueStack.Depth - 4].iRoll, ValueStack[ValueStack.Depth - 1].iVal); }
 #line default
-        break;
-      case 11: // OPERATION -> OPERATION, '<', '=', NUMBER
-#line 45 "RollParser.y"
-                            { CurrentSemanticValue.iRoll = new KeepLowerThan(ValueStack[ValueStack.Depth-4].iRoll, ValueStack[ValueStack.Depth-1].iVal); }
+                    break;
+                case 11: // OPERATION -> OPERATION, '<', '=', NUMBER
+#line 45 "../RollParser.y"
+                    { CurrentSemanticValue.iRoll = new KeepLowerThan(ValueStack[ValueStack.Depth - 4].iRoll, ValueStack[ValueStack.Depth - 1].iVal); }
 #line default
-        break;
-      case 12: // OPERATION -> OPERATION, '>', NUMBER
-#line 46 "RollParser.y"
-                        { CurrentSemanticValue.iRoll = new KeepHigherThan(ValueStack[ValueStack.Depth-3].iRoll, ValueStack[ValueStack.Depth-1].iVal+1); }
+                    break;
+                case 12: // OPERATION -> OPERATION, '>', NUMBER
+#line 46 "../RollParser.y"
+                    { CurrentSemanticValue.iRoll = new KeepHigherThan(ValueStack[ValueStack.Depth - 3].iRoll, ValueStack[ValueStack.Depth - 1].iVal + 1); }
 #line default
-        break;
-      case 13: // OPERATION -> OPERATION, '<', NUMBER
-#line 47 "RollParser.y"
-                        { CurrentSemanticValue.iRoll = new KeepLowerThan(ValueStack[ValueStack.Depth-3].iRoll, ValueStack[ValueStack.Depth-1].iVal-1); }
+                    break;
+                case 13: // OPERATION -> OPERATION, '<', NUMBER
+#line 47 "../RollParser.y"
+                    { CurrentSemanticValue.iRoll = new KeepLowerThan(ValueStack[ValueStack.Depth - 3].iRoll, ValueStack[ValueStack.Depth - 1].iVal - 1); }
 #line default
-        break;
-      case 14: // OPERATION -> OPERATION, '+', NUMBER
-#line 48 "RollParser.y"
-                        { CurrentSemanticValue.iRoll = new AddOp(ValueStack[ValueStack.Depth-3].iRoll, ValueStack[ValueStack.Depth-1].iVal); }
+                    break;
+                case 14: // OPERATION -> OPERATION, '+', NUMBER
+#line 48 "../RollParser.y"
+                    { CurrentSemanticValue.iRoll = new AddOp(ValueStack[ValueStack.Depth - 3].iRoll, ValueStack[ValueStack.Depth - 1].iVal); }
 #line default
-        break;
-      case 15: // OPERATION -> OPERATION, '-', NUMBER
-#line 49 "RollParser.y"
-                        { CurrentSemanticValue.iRoll = new AddOp(ValueStack[ValueStack.Depth-3].iRoll, -ValueStack[ValueStack.Depth-1].iVal); }
+                    break;
+                case 15: // OPERATION -> OPERATION, '-', NUMBER
+#line 49 "../RollParser.y"
+                    { CurrentSemanticValue.iRoll = new AddOp(ValueStack[ValueStack.Depth - 3].iRoll, -ValueStack[ValueStack.Depth - 1].iVal); }
 #line default
-        break;
-      case 16: // OPERATION -> OPERATION, 'h', NUMBER
-#line 50 "RollParser.y"
-                        { CurrentSemanticValue.iRoll = new KeepHighestDice(ValueStack[ValueStack.Depth-3].iRoll, ValueStack[ValueStack.Depth-1].iVal); }
+                    break;
+                case 16: // OPERATION -> OPERATION, '*', NUMBER
+#line 50 "../RollParser.y"
+                    { CurrentSemanticValue.iRoll = new MulOp(ValueStack[ValueStack.Depth - 3].iRoll, ValueStack[ValueStack.Depth - 1].iVal); }
 #line default
-        break;
-      case 17: // OPERATION -> OPERATION, 'l', NUMBER
-#line 51 "RollParser.y"
-                        { CurrentSemanticValue.iRoll = new KeepLowestDice(ValueStack[ValueStack.Depth-3].iRoll, ValueStack[ValueStack.Depth-1].iVal); }
+                    break;
+                case 17: // OPERATION -> OPERATION, '/', NUMBER
+#line 51 "../RollParser.y"
+                    { CurrentSemanticValue.iRoll = new DivOp(ValueStack[ValueStack.Depth - 3].iRoll, ValueStack[ValueStack.Depth - 1].iVal); }
 #line default
-        break;
-      case 18: // OPERATION -> OPERATION, 'a', 'h', NUMBER
-#line 52 "RollParser.y"
-                            { CurrentSemanticValue.iRoll = new RerollHigherThan(ValueStack[ValueStack.Depth-4].iRoll, ValueStack[ValueStack.Depth-1].iVal){RerollOnce = true, DiscardPrevious = false}; }
+                    break;
+                case 18: // OPERATION -> OPERATION, '%', NUMBER
+#line 52 "../RollParser.y"
+                    { CurrentSemanticValue.iRoll = new ModuloOp(ValueStack[ValueStack.Depth - 3].iRoll, ValueStack[ValueStack.Depth - 1].iVal); }
 #line default
-        break;
-      case 19: // OPERATION -> OPERATION, 'a', 'l', NUMBER
-#line 53 "RollParser.y"
-                            { CurrentSemanticValue.iRoll = new RerollLowerThan(ValueStack[ValueStack.Depth-4].iRoll, ValueStack[ValueStack.Depth-1].iVal){RerollOnce = true, DiscardPrevious = false}; }
+                    break;
+                case 19: // OPERATION -> OPERATION, 'h', NUMBER
+#line 53 "../RollParser.y"
+                    { CurrentSemanticValue.iRoll = new KeepHighestDice(ValueStack[ValueStack.Depth - 3].iRoll, ValueStack[ValueStack.Depth - 1].iVal); }
 #line default
-        break;
-      case 20: // OPERATION -> OPERATION, 'A', 'h', NUMBER
-#line 54 "RollParser.y"
-                            { CurrentSemanticValue.iRoll = new RerollHigherThan(ValueStack[ValueStack.Depth-4].iRoll, ValueStack[ValueStack.Depth-1].iVal){DiscardPrevious = false}; }
+                    break;
+                case 20: // OPERATION -> OPERATION, 'l', NUMBER
+#line 54 "../RollParser.y"
+                    { CurrentSemanticValue.iRoll = new KeepLowestDice(ValueStack[ValueStack.Depth - 3].iRoll, ValueStack[ValueStack.Depth - 1].iVal); }
 #line default
-        break;
-      case 21: // OPERATION -> OPERATION, 'A', 'l', NUMBER
-#line 55 "RollParser.y"
-                            { CurrentSemanticValue.iRoll = new RerollLowerThan(ValueStack[ValueStack.Depth-4].iRoll, ValueStack[ValueStack.Depth-1].iVal){DiscardPrevious = false}; }
+                    break;
+                case 21: // OPERATION -> OPERATION, 'a', 'h', NUMBER
+#line 55 "../RollParser.y"
+                    { CurrentSemanticValue.iRoll = new RerollHigherThan(ValueStack[ValueStack.Depth - 4].iRoll, ValueStack[ValueStack.Depth - 1].iVal) { RerollOnce = true, DiscardPrevious = false }; }
 #line default
-        break;
-      case 22: // OPERATION -> OPERATION, 'r', 'h', NUMBER
-#line 56 "RollParser.y"
-                            { CurrentSemanticValue.iRoll = new RerollHigherThan(ValueStack[ValueStack.Depth-4].iRoll, ValueStack[ValueStack.Depth-1].iVal){RerollOnce = true}; }
+                    break;
+                case 22: // OPERATION -> OPERATION, 'a', 'l', NUMBER
+#line 56 "../RollParser.y"
+                    { CurrentSemanticValue.iRoll = new RerollLowerThan(ValueStack[ValueStack.Depth - 4].iRoll, ValueStack[ValueStack.Depth - 1].iVal) { RerollOnce = true, DiscardPrevious = false }; }
 #line default
-        break;
-      case 23: // OPERATION -> OPERATION, 'r', 'l', NUMBER
-#line 57 "RollParser.y"
-                            { CurrentSemanticValue.iRoll = new RerollLowerThan(ValueStack[ValueStack.Depth-4].iRoll, ValueStack[ValueStack.Depth-1].iVal){RerollOnce = true}; }
+                    break;
+                case 23: // OPERATION -> OPERATION, 'A', 'h', NUMBER
+#line 57 "../RollParser.y"
+                    { CurrentSemanticValue.iRoll = new RerollHigherThan(ValueStack[ValueStack.Depth - 4].iRoll, ValueStack[ValueStack.Depth - 1].iVal) { DiscardPrevious = false }; }
 #line default
-        break;
-      case 24: // OPERATION -> OPERATION, 'R', 'h', NUMBER
-#line 58 "RollParser.y"
-                            { CurrentSemanticValue.iRoll = new RerollHigherThan(ValueStack[ValueStack.Depth-4].iRoll, ValueStack[ValueStack.Depth-1].iVal); }
+                    break;
+                case 24: // OPERATION -> OPERATION, 'A', 'l', NUMBER
+#line 58 "../RollParser.y"
+                    { CurrentSemanticValue.iRoll = new RerollLowerThan(ValueStack[ValueStack.Depth - 4].iRoll, ValueStack[ValueStack.Depth - 1].iVal) { DiscardPrevious = false }; }
 #line default
-        break;
-      case 25: // OPERATION -> OPERATION, 'R', 'l', NUMBER
-#line 59 "RollParser.y"
-                            { CurrentSemanticValue.iRoll = new RerollLowerThan(ValueStack[ValueStack.Depth-4].iRoll, ValueStack[ValueStack.Depth-1].iVal); }
+                    break;
+                case 25: // OPERATION -> OPERATION, 'r', 'h', NUMBER
+#line 59 "../RollParser.y"
+                    { CurrentSemanticValue.iRoll = new RerollHigherThan(ValueStack[ValueStack.Depth - 4].iRoll, ValueStack[ValueStack.Depth - 1].iVal) { RerollOnce = true }; }
 #line default
-        break;
-      case 26: // OPERATION -> OPERATION, 'e', 'h', NUMBER
-#line 60 "RollParser.y"
-                            { CurrentSemanticValue.iRoll = new ExplodeHigherThan(ValueStack[ValueStack.Depth-4].iRoll, ValueStack[ValueStack.Depth-1].iVal){RerollOnce = true}; }
+                    break;
+                case 26: // OPERATION -> OPERATION, 'r', 'l', NUMBER
+#line 60 "../RollParser.y"
+                    { CurrentSemanticValue.iRoll = new RerollLowerThan(ValueStack[ValueStack.Depth - 4].iRoll, ValueStack[ValueStack.Depth - 1].iVal) { RerollOnce = true }; }
 #line default
-        break;
-      case 27: // OPERATION -> OPERATION, 'e', 'l', NUMBER
-#line 61 "RollParser.y"
-                            { CurrentSemanticValue.iRoll = new ExplodeLowerThan(ValueStack[ValueStack.Depth-4].iRoll, ValueStack[ValueStack.Depth-1].iVal){RerollOnce = true}; }
+                    break;
+                case 27: // OPERATION -> OPERATION, 'R', 'h', NUMBER
+#line 61 "../RollParser.y"
+                    { CurrentSemanticValue.iRoll = new RerollHigherThan(ValueStack[ValueStack.Depth - 4].iRoll, ValueStack[ValueStack.Depth - 1].iVal); }
 #line default
-        break;
-      case 28: // OPERATION -> OPERATION, 'E', 'h', NUMBER
-#line 62 "RollParser.y"
-                            { CurrentSemanticValue.iRoll = new ExplodeHigherThan(ValueStack[ValueStack.Depth-4].iRoll, ValueStack[ValueStack.Depth-1].iVal); }
+                    break;
+                case 28: // OPERATION -> OPERATION, 'R', 'l', NUMBER
+#line 62 "../RollParser.y"
+                    { CurrentSemanticValue.iRoll = new RerollLowerThan(ValueStack[ValueStack.Depth - 4].iRoll, ValueStack[ValueStack.Depth - 1].iVal); }
 #line default
-        break;
-      case 29: // OPERATION -> OPERATION, 'E', 'l', NUMBER
-#line 63 "RollParser.y"
-                            { CurrentSemanticValue.iRoll = new ExplodeLowerThan(ValueStack[ValueStack.Depth-4].iRoll, ValueStack[ValueStack.Depth-1].iVal); }
+                    break;
+                case 29: // OPERATION -> OPERATION, 'e', 'h', NUMBER
+#line 63 "../RollParser.y"
+                    { CurrentSemanticValue.iRoll = new ExplodeHigherThan(ValueStack[ValueStack.Depth - 4].iRoll, ValueStack[ValueStack.Depth - 1].iVal) { RerollOnce = true }; }
 #line default
-        break;
-      case 30: // OPERATION -> OPERATION, 'c'
-#line 64 "RollParser.y"
-                 { CurrentSemanticValue.iRoll = new CountOp(ValueStack[ValueStack.Depth-2].iRoll); }
+                    break;
+                case 30: // OPERATION -> OPERATION, 'e', 'l', NUMBER
+#line 64 "../RollParser.y"
+                    { CurrentSemanticValue.iRoll = new ExplodeLowerThan(ValueStack[ValueStack.Depth - 4].iRoll, ValueStack[ValueStack.Depth - 1].iVal) { RerollOnce = true }; }
 #line default
-        break;
-    }
+                    break;
+                case 31: // OPERATION -> OPERATION, 'E', 'h', NUMBER
+#line 65 "../RollParser.y"
+                    { CurrentSemanticValue.iRoll = new ExplodeHigherThan(ValueStack[ValueStack.Depth - 4].iRoll, ValueStack[ValueStack.Depth - 1].iVal); }
+#line default
+                    break;
+                case 32: // OPERATION -> OPERATION, 'E', 'l', NUMBER
+#line 66 "../RollParser.y"
+                    { CurrentSemanticValue.iRoll = new ExplodeLowerThan(ValueStack[ValueStack.Depth - 4].iRoll, ValueStack[ValueStack.Depth - 1].iVal); }
+#line default
+                    break;
+                case 33: // OPERATION -> OPERATION, 'c'
+#line 67 "../RollParser.y"
+                    { CurrentSemanticValue.iRoll = new CountOp(ValueStack[ValueStack.Depth - 2].iRoll); }
+#line default
+                    break;
+            }
 #pragma warning restore 162, 1522
-  }
+        }
 
-  protected override string TerminalToString(int terminal)
-  {
-    if (aliases != null && aliases.ContainsKey(terminal))
-        return aliases[terminal];
-    else if (((Tokens)terminal).ToString() != terminal.ToString(CultureInfo.InvariantCulture))
-        return ((Tokens)terminal).ToString();
-    else
-        return CharToString((char)terminal);
-  }
+        protected override string TerminalToString(int terminal)
+        {
+            if (aliases != null && aliases.ContainsKey(terminal))
+                return aliases[terminal];
+            else if (((Tokens)terminal).ToString() != terminal.ToString(CultureInfo.InvariantCulture))
+                return ((Tokens)terminal).ToString();
+            else
+                return CharToString((char)terminal);
+        }
 
-}
+    }
 }

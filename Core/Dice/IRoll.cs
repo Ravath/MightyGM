@@ -196,9 +196,51 @@ namespace Core.Dice
 			else if (b<0) { return Prev.ToMacro() + "-" + (-b); }
 			else /* b==0 */ { return Prev.ToMacro(); }
 		}
-	}
+    }
 
-	public abstract class IndividualFilterOp : RollResult
+    public class MulOp : RollResult
+    {
+        public Value Bonus { get; set; }
+        public MulOp(IRoll prev, Value add) : base(prev) { Bonus = add; }
+        public MulOp(IRoll prev, int add) : this(prev, new Value(add)) { }
+        public override int NetResult { get { return Prev.NetResult * Bonus.TotalValue; } }
+
+        public override string ToMacro()
+        {
+            int b = Bonus.TotalValue;
+            return Prev.ToMacro() + "*" + b;
+        }
+    }
+
+    public class DivOp : RollResult
+    {
+        public Value Bonus { get; set; }
+        public DivOp(IRoll prev, Value add) : base(prev) { Bonus = add; }
+        public DivOp(IRoll prev, int add) : this(prev, new Value(add)) { }
+        public override int NetResult { get { return Prev.NetResult / Bonus.TotalValue; } }
+
+        public override string ToMacro()
+        {
+            int b = Bonus.TotalValue;
+            return Prev.ToMacro() + "/" + b;
+        }
+    }
+
+    public class ModuloOp : RollResult
+    {
+        public Value Bonus { get; set; }
+        public ModuloOp(IRoll prev, Value add) : base(prev) { Bonus = add; }
+        public ModuloOp(IRoll prev, int add) : this(prev, new Value(add)) { }
+        public override int NetResult { get { return Prev.NetResult % Bonus.TotalValue; } }
+
+        public override string ToMacro()
+        {
+            int b = Bonus.TotalValue;
+            return Prev.ToMacro() + "%" + b;
+        }
+    }
+
+    public abstract class IndividualFilterOp : RollResult
 	{
 		public IndividualFilterOp(IRoll prev) : base(prev){}
 

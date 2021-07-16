@@ -47,6 +47,9 @@ OPERATION
 	| OPERATION '<' NUMBER { $$ = new KeepLowerThan($1, $3-1); }
 	| OPERATION '+' NUMBER { $$ = new AddOp($1, $3); }
 	| OPERATION '-' NUMBER { $$ = new AddOp($1, -$3); }
+	| OPERATION '*' NUMBER { $$ = new MulOp($1, $3); }
+	| OPERATION '/' NUMBER { $$ = new DivOp($1, $3); }
+	| OPERATION '%' NUMBER { $$ = new ModuloOp($1, $3); }
 	| OPERATION 'h' NUMBER { $$ = new KeepHighestDice($1, $3); }
 	| OPERATION 'l' NUMBER { $$ = new KeepLowestDice($1, $3); }
 	| OPERATION 'a' 'h' NUMBER { $$ = new RerollHigherThan($1, $4){RerollOnce = true, DiscardPrevious = false}; }
