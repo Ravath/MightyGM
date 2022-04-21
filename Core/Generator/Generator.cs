@@ -45,10 +45,33 @@ namespace Core.Generator
 			Sequence.EndGeneration();
 
 			return _result;
-		}
+        }
 
-		#region XML Serialization
-		private static Encoding Encoding = Encoding.Unicode;
+        public GenerationResult Generate_Sub(GenerationResult prevResult)
+        {
+            _result.StartGeneration();
+
+            // Use Tags from caller
+            _result.CopyTags(prevResult);
+
+            Sequence.StartGeneration();
+            foreach (var item in Ressources)
+            {
+                item.StartGeneration();
+            }
+            Sequence.Generation(ref _result);
+            _result.EndGeneration();
+            foreach (var item in Ressources)
+            {
+                item.EndGeneration();
+            }
+            Sequence.EndGeneration();
+
+            return _result;
+        }
+
+        #region XML Serialization
+        private static Encoding Encoding = Encoding.Unicode;
 
 		public static Generator FromFile(string path)
 		{

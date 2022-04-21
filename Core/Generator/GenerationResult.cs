@@ -79,9 +79,17 @@ namespace Core.Generator
 				_tags.Add(tag, value);
 			else
 				_tags[tag] = value;
-		}
+        }
 
-		public bool ContainsTag(string tag)
+        public void CopyTags(GenerationResult prevRes)
+        {
+            foreach(var t in prevRes._tags)
+            {
+                this._tags.Add(t.Key, t.Value);
+            }
+        }
+
+        public bool ContainsTag(string tag)
 		{
 			return _tags.ContainsKey(tag);
 		}

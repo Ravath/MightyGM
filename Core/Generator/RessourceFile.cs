@@ -34,7 +34,7 @@ namespace Core.Generator
 			}
 			else
 			{
-				result.AddText(_generator.Generate().FinalText);
+                result.AddText(_generator.Generate_Sub(result).FinalText);
 			}
 		}
 	}
